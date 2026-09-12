@@ -1,10 +1,8 @@
 from __future__ import annotations
 
 import getpass
-import json
-from pathlib import Path
 
-import social_autopilot as sa
+import social_autopilot_runtime as sa
 
 
 def normalize_key(value: str) -> tuple[str, bool]:
@@ -27,7 +25,7 @@ def sanitize(message: str, secret: str) -> str:
 
 def main() -> None:
     config = sa.load_json(sa.CONFIG_FILE, sa.default_config())
-    print("VASTcode21 Social Autopilot v2.1 secure configuration")
+    print("VASTcode21 Social Autopilot v2.1.1 secure configuration")
     print("The Windsor API key stays local and is stored with Windows DPAPI encryption.")
     print("It will not be printed or committed to GitHub.\n")
 
