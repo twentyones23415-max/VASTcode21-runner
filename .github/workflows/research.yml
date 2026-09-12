@@ -64,6 +64,9 @@ jobs:
             python tools/decrypt_payload.py "$f" "work/core/cloud_inbox/${name}.json"
           done
 
+      - name: Validate context intelligence offline
+        run: python tools/context_intelligence_selftest.py
+
       - name: Collect and analyze external context
         shell: bash
         run: |
