@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 import time
 import urllib.error
 import urllib.parse
@@ -11,13 +12,17 @@ HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 import context_intelligence_ingest as ci
 
-VERSION = "1.1.1"
+VERSION = "1.1.2"
 _LAST_GDELT_CALL = 0.0
 _ORIGINAL_RELATIONSHIP_SCAN = ci.relationship_scan
-_ORIGINAL_INGEST_GDELT = ci.ingest_gdelt
 
 
-def robust_fetch_bytes(url: str, timeout: int = 25, attempts: int = 5) -> bytes:
+def robust_fetch_bytes(url: str, timeout: int = 20, attempts: int = 3) -> bytes:
+    """Bounded retry policy for ordinary public sources.
+
+    GDELT is handled by its own fast-fail wrapper below so it can never hold the
+    whole research cycle during rate limits, TLS stalls, or endpoint outages.
+    """
     last: Exception | None = None
     for attempt in range(attempts):
         try:
@@ -26,31 +31,27 @@ def robust_fetch_bytes(url: str, timeout: int = 25, attempts: int = 5) -> bytes:
                 return r.read()
         except urllib.error.HTTPError as exc:
             last = exc
-            # GDELT 429 means the public endpoint is rate-limiting us. Do not burn
-            # the cycle on repeated calls: hand control back immediately so the
-            # resilient GDELT wrapper can use the RSS fallback.
-            if exc.code == 429 and "gdeltproject.org" in url.lower():
+            if exc.code == 429:
                 break
-            if exc.code == 429 and attempt + 1 < attempts:
-                retry_after = (exc.headers or {}).get("Retry-After") if exc.headers else None
-                try:
-                    wait = float(retry_after) if retry_after else min(30.0, 4.0 * (2 ** attempt))
-                except Exception:
-                    wait = min(30.0, 4.0 * (2 ** attempt))
-                time.sleep(max(4.0, wait))
-                continue
             if attempt + 1 < attempts and exc.code >= 500:
-                time.sleep(min(20.0, 2.0 * (attempt + 1)))
+                time.sleep(min(6.0, 2.0 * (attempt + 1)))
                 continue
             break
         except Exception as exc:
             last = exc
             if attempt + 1 < attempts:
-                time.sleep(min(15.0, 2.0 * (attempt + 1)))
+                time.sleep(min(4.0, 1.5 * (attempt + 1)))
     raise RuntimeError(f"fetch failed: {last}")
 
 
-def google_news_fallback(db, item):
+def fast_fetch_bytes(url: str, timeout: int = 7) -> bytes:
+    """Single-attempt fetch for optional sources that have a fallback."""
+    req = urllib.request.Request(url, headers={"User-Agent": ci.UA, "Accept": "*/*"})
+    with urllib.request.urlopen(req, timeout=timeout) as r:
+        return r.read()
+
+
+def google_news_fallback(db, item, reason: str):
     params = {
         "q": str(item.get("query", "gold bitcoin")),
         "hl": "en-US",
@@ -58,7 +59,7 @@ def google_news_fallback(db, item):
         "ceid": "US:en",
     }
     url = "https://news.google.com/rss/search?" + urllib.parse.urlencode(params)
-    root = ci.ET.fromstring(ci.fetch_bytes(url))
+    root = ci.ET.fromstring(robust_fetch_bytes(url, timeout=12, attempts=2))
     entries = list(root.findall(".//item"))
     count = 0
     for entry in entries[: int(item.get("maxrecords", 100))]:
@@ -75,25 +76,50 @@ def google_news_fallback(db, item):
             link,
             "news.google.com",
             "en",
-            {"fallback_for": "gdelt_rate_limit"},
+            {"fallback_for": "gdelt", "fallback_reason": reason[:120]},
         )
-    return count, {"records_seen": len(entries), "fallback": "google_news_rss"}
+    return count, {"records_seen": len(entries), "fallback": "google_news_rss", "gdelt_degraded": True}
 
 
 def resilient_ingest_gdelt(db, item):
+    """Fast-fail GDELT and immediately fall back on any transport/API failure."""
     global _LAST_GDELT_CALL
     elapsed = time.monotonic() - _LAST_GDELT_CALL
-    if elapsed < 8.0:
-        time.sleep(8.0 - elapsed)
+    if elapsed < 2.0:
+        time.sleep(2.0 - elapsed)
+
+    params = {
+        "query": str(item["query"]),
+        "mode": "ArtList",
+        "maxrecords": str(int(item.get("maxrecords", 100))),
+        "format": "json",
+        "timespan": str(item.get("timespan", "6h")),
+        "sort": "HybridRel",
+    }
+    url = "https://api.gdeltproject.org/api/v2/doc/doc?" + urllib.parse.urlencode(params)
+
     try:
-        result = _ORIGINAL_INGEST_GDELT(db, item)
+        data = json.loads(fast_fetch_bytes(url, timeout=7).decode("utf-8", errors="replace"))
+        count = 0
+        articles = data.get("articles") or []
+        for art in articles:
+            dt = ci.parse_dt(art.get("seendate")) or ci.utcnow()
+            count += ci.add_news(
+                db,
+                f"gdelt:{item['name']}",
+                "global_news",
+                dt,
+                art.get("title") or "",
+                art.get("url") or "",
+                art.get("domain") or "",
+                art.get("language") or "",
+                {"sourcecountry": art.get("sourcecountry")},
+            )
         _LAST_GDELT_CALL = time.monotonic()
-        return result
+        return count, {"records_seen": len(articles), "fallback": None, "gdelt_degraded": False}
     except Exception as exc:
         _LAST_GDELT_CALL = time.monotonic()
-        if "429" not in str(exc):
-            raise
-        return google_news_fallback(db, item)
+        return google_news_fallback(db, item, f"{type(exc).__name__}: {exc}")
 
 
 def relationship_scan_with_gold_alias(db, target: str):
