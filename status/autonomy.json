@@ -1,0 +1,31 @@
+{
+  "updated_at": "2026-09-12T15:30:09.128953+00:00",
+  "version": "2.0.0",
+  "scope": [
+    "GOLD",
+    "BITCOIN"
+  ],
+  "live_trading": false,
+  "paid_services": false,
+  "mode": "autonomous_multistage_validation",
+  "mt5_pass_candidates_seen": 1,
+  "robustness_pending": 0,
+  "robustness_passed": 1,
+  "robustness_rejected": 0,
+  "robustness_errors": 0,
+  "forward_collecting": 1,
+  "forward_passed": 0,
+  "forward_rejected": 0,
+  "release_candidates": 0,
+  "candidates": [
+    {
+      "experiment_id": 38,
+      "asset": "GOLD",
+      "timeframe": "H1",
+      "mt5": "pass",
+      "robustness": "pass",
+      "forward": "collecting",
+      "release": "not_ready"
+    }
+  ]
+}
