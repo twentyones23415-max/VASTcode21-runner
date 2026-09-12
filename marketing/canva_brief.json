@@ -1,0 +1,21 @@
+{
+  "brand": "VASTcode21",
+  "visual_direction": "technological elegance",
+  "style_keywords": ["premium", "dark", "technical", "minimal", "quant", "cyber-finance"],
+  "visual_elements": ["abstract data grids", "MT5-style chart geometry", "gold texture accents", "Bitcoin network geometry", "validation gates", "encrypted-core motifs"],
+  "avoid": ["luxury cars", "cash stacks", "guaranteed-profit imagery", "fake broker screenshots", "unverified P&L", "casino aesthetics"],
+  "formats": {
+    "instagram_post": "1080x1350",
+    "instagram_reel": "1080x1920",
+    "story": "1080x1920",
+    "youtube_short": "1080x1920",
+    "x_post": "1600x900"
+  },
+  "layout_rules": [
+    "One strong headline per visual.",
+    "Keep VASTcode21 visible but not oversized.",
+    "Use large readable typography for mobile.",
+    "Use metrics only when approved by the compliance gate.",
+    "Prefer process/status visuals over profit imagery."
+  ]
+}
