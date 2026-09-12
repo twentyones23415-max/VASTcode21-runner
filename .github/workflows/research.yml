@@ -70,7 +70,7 @@ jobs:
       - name: Collect and analyze external context
         shell: bash
         run: |
-          python tools/context_intelligence_ingest.py \
+          python tools/context_intelligence_run.py \
             work/core \
             config/context_sources.json \
             status/context_intelligence.json || echo 'WARNING: context intelligence is degraded this cycle; core research continues.'
