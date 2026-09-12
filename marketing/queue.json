@@ -1,25 +1,68 @@
 {
-  "generated_at": "2026-09-12T15:12:00Z",
+  "generated_at": "2026-09-12T16:29:02.896097+00:00",
   "mode": "pre_release_organic",
   "paid_ads": false,
   "live_trading": false,
   "source_status": {
-    "experiments": 72,
+    "experiments": 84,
     "generation": 4,
     "mt5_validation_passed": 1,
     "mt5_validation_rejected": 1,
-    "robustness_passed": 0,
-    "forward_collecting": 0,
+    "robustness_passed": 1,
+    "forward_collecting": 1,
     "release_candidates": 0
   },
   "items": [
     {
+      "id": "milestone-forward",
+      "pillar": "verified_milestone",
+      "hook": "Now collecting forward evidence.",
+      "caption": "1 VASTcode21 candidate(s) are in shadow-forward observation. This stage is intentionally slow: time and new market data are part of the test.",
+      "creative_brief": "Calendar/time visual with forward-observation progress bar, no performance promises.",
+      "platforms": [
+        "Instagram",
+        "TikTok",
+        "YouTube Shorts",
+        "Facebook",
+        "X",
+        "Threads"
+      ],
+      "priority": 100,
+      "status": "ready_for_design",
+      "disclaimer": "Trading involves risk. Historical or backtested results do not guarantee future performance."
+    },
+    {
       "id": "milestone-mt5-pass",
       "pillar": "verified_milestone",
       "hook": "First real-tick MT5 validation milestone reached.",
-      "caption": "VASTcode21 has recorded 1 MT5 real-tick PASS and 1 MT5 real-tick REJECT result in the current research state. A PASS does not mean live-ready—it means the candidate is allowed to face stricter testing.",
+      "caption": "VASTcode21 has recorded 1 MT5 real-tick PASS and 1 MT5 real-tick REJECT result(s) in the current research state. A PASS does not mean live-ready—it means the candidate is allowed to face stricter testing.",
       "creative_brief": "Professional milestone card: MT5 REAL-TICK PASS. Small subtext: Next gate: robustness. Avoid P&L screenshots or money imagery.",
-      "platforms": ["Instagram", "TikTok", "YouTube Shorts", "Facebook", "X", "Threads"],
+      "platforms": [
+        "Instagram",
+        "TikTok",
+        "YouTube Shorts",
+        "Facebook",
+        "X",
+        "Threads"
+      ],
+      "priority": 100,
+      "status": "ready_for_design",
+      "disclaimer": "Trading involves risk. Historical or backtested results do not guarantee future performance."
+    },
+    {
+      "id": "milestone-robustness-pass",
+      "pillar": "verified_milestone",
+      "hook": "A candidate survived the robustness gate.",
+      "caption": "The autonomous VASTcode21 pipeline now shows 1 robustness PASS candidate(s). Next step: shadow-forward observation. No live-trading claim is being made.",
+      "creative_brief": "Validation ladder graphic highlighting Robustness PASS and Forward next.",
+      "platforms": [
+        "Instagram",
+        "TikTok",
+        "YouTube Shorts",
+        "Facebook",
+        "X",
+        "Threads"
+      ],
       "priority": 100,
       "status": "ready_for_design",
       "disclaimer": "Trading involves risk. Historical or backtested results do not guarantee future performance."
@@ -27,10 +70,17 @@
     {
       "id": "milestone-experiments",
       "pillar": "research_progress",
-      "hook": "72 research experiments and counting.",
-      "caption": "The VASTcode21 research engine has evaluated 72 experiments so far, reaching generation 4. Most candidates are expected to fail—because rejection is part of the validation process.",
+      "hook": "84 research experiments and counting.",
+      "caption": "The VASTcode21 research engine has evaluated 84 experiments so far, reaching generation 4. Most candidates are expected to fail—because rejection is part of the validation process.",
       "creative_brief": "Data-driven vertical graphic with large experiment count, generation number, and a funnel narrowing toward validation.",
-      "platforms": ["Instagram", "TikTok", "YouTube Shorts", "Facebook", "X", "Threads"],
+      "platforms": [
+        "Instagram",
+        "TikTok",
+        "YouTube Shorts",
+        "Facebook",
+        "X",
+        "Threads"
+      ],
       "priority": 95,
       "status": "ready_for_design",
       "disclaimer": "Trading involves risk. Historical or backtested results do not guarantee future performance."
@@ -41,7 +91,14 @@
       "hook": "A trading idea is not a product until it survives testing.",
       "caption": "VASTcode21 is being built as a validation-first MT5 research system focused only on GOLD and BITCOIN. Candidates move through research, real-tick MT5 testing, robustness checks and forward observation before they can become release candidates.",
       "creative_brief": "Dark technical vertical visual: four-stage pipeline Research → MT5 Real Ticks → Robustness → Forward. VASTcode21 logo, clean typography, no profit imagery.",
-      "platforms": ["Instagram", "TikTok", "YouTube Shorts", "Facebook", "X", "Threads"],
+      "platforms": [
+        "Instagram",
+        "TikTok",
+        "YouTube Shorts",
+        "Facebook",
+        "X",
+        "Threads"
+      ],
       "priority": 80,
       "status": "ready_for_design",
       "disclaimer": "Trading involves risk. Historical or backtested results do not guarantee future performance."
@@ -52,7 +109,14 @@
       "hook": "Backtest ≠ future guarantee.",
       "caption": "A backtest is evidence from historical data, not a promise about tomorrow. VASTcode21 treats every pass as permission for more testing—not permission for hype.",
       "creative_brief": "Bold typographic carousel: BACKTEST ≠ GUARANTEE. Second slide: PASS = MORE TESTING. Third slide: VASTcode21 validation stack.",
-      "platforms": ["Instagram", "TikTok", "YouTube Shorts", "Facebook", "X", "Threads"],
+      "platforms": [
+        "Instagram",
+        "TikTok",
+        "YouTube Shorts",
+        "Facebook",
+        "X",
+        "Threads"
+      ],
       "priority": 75,
       "status": "ready_for_design",
       "disclaimer": "Trading involves risk. Historical or backtested results do not guarantee future performance."
@@ -63,7 +127,14 @@
       "hook": "Why real ticks matter in MT5 testing.",
       "caption": "A strategy can look impressive on simplified data and fail when execution detail is introduced. VASTcode21 uses real-tick MT5 validation as a gate, not as a marketing screenshot generator.",
       "creative_brief": "15-second Reel/Short: animated tick stream entering an MT5 test gate, then PASS/REJECT split. Minimal futuristic style.",
-      "platforms": ["Instagram", "TikTok", "YouTube Shorts", "Facebook", "X", "Threads"],
+      "platforms": [
+        "Instagram",
+        "TikTok",
+        "YouTube Shorts",
+        "Facebook",
+        "X",
+        "Threads"
+      ],
       "priority": 70,
       "status": "ready_for_design",
       "disclaimer": "Trading involves risk. Historical or backtested results do not guarantee future performance."
@@ -74,7 +145,14 @@
       "hook": "Why only GOLD and BITCOIN?",
       "caption": "VASTcode21 deliberately stays narrow: GOLD and BITCOIN. The goal is deeper validation and cleaner product specialization rather than claiming to trade everything.",
       "creative_brief": "Split-screen vertical creative: gold texture on one side, abstract Bitcoin network on the other, centered VASTcode21 mark.",
-      "platforms": ["Instagram", "TikTok", "YouTube Shorts", "Facebook", "X", "Threads"],
+      "platforms": [
+        "Instagram",
+        "TikTok",
+        "YouTube Shorts",
+        "Facebook",
+        "X",
+        "Threads"
+      ],
       "priority": 65,
       "status": "ready_for_design",
       "disclaimer": "Trading involves risk. Historical or backtested results do not guarantee future performance."
@@ -85,7 +163,14 @@
       "hook": "Profit Factor is only one number.",
       "caption": "A serious validation process looks at more than one metric. Trade count, drawdown, recovery, Sharpe, regime behavior and forward evidence all matter before a candidate can advance.",
       "creative_brief": "Metric dashboard visual with PF, DD, Recovery, Sharpe, Trades—no actual unapproved performance values.",
-      "platforms": ["Instagram", "TikTok", "YouTube Shorts", "Facebook", "X", "Threads"],
+      "platforms": [
+        "Instagram",
+        "TikTok",
+        "YouTube Shorts",
+        "Facebook",
+        "X",
+        "Threads"
+      ],
       "priority": 65,
       "status": "ready_for_design",
       "disclaimer": "Trading involves risk. Historical or backtested results do not guarantee future performance."
@@ -96,7 +181,14 @@
       "hook": "What happens when a strategy fails?",
       "caption": "It gets rejected. VASTcode21 is designed to keep failures in the research process instead of turning them into marketing claims. Failed candidates can inform future generations, but they do not become products.",
       "creative_brief": "Red reject stamp over a generic strategy card, followed by mutation/exploration arrows toward new candidates.",
-      "platforms": ["Instagram", "TikTok", "YouTube Shorts", "Facebook", "X", "Threads"],
+      "platforms": [
+        "Instagram",
+        "TikTok",
+        "YouTube Shorts",
+        "Facebook",
+        "X",
+        "Threads"
+      ],
       "priority": 60,
       "status": "ready_for_design",
       "disclaimer": "Trading involves risk. Historical or backtested results do not guarantee future performance."
@@ -107,7 +199,14 @@
       "hook": "VASTcode21 is building in public—without exposing the core IP.",
       "caption": "The research logic and strategy parameters remain private. Public updates focus on process, validation stages and verified milestones.",
       "creative_brief": "Encrypted core icon in center, public status ring around it; sleek cybersecurity + quant aesthetic.",
-      "platforms": ["Instagram", "TikTok", "YouTube Shorts", "Facebook", "X", "Threads"],
+      "platforms": [
+        "Instagram",
+        "TikTok",
+        "YouTube Shorts",
+        "Facebook",
+        "X",
+        "Threads"
+      ],
       "priority": 60,
       "status": "ready_for_design",
       "disclaimer": "Trading involves risk. Historical or backtested results do not guarantee future performance."
