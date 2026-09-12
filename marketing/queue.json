@@ -1,0 +1,116 @@
+{
+  "generated_at": "2026-09-12T15:12:00Z",
+  "mode": "pre_release_organic",
+  "paid_ads": false,
+  "live_trading": false,
+  "source_status": {
+    "experiments": 72,
+    "generation": 4,
+    "mt5_validation_passed": 1,
+    "mt5_validation_rejected": 1,
+    "robustness_passed": 0,
+    "forward_collecting": 0,
+    "release_candidates": 0
+  },
+  "items": [
+    {
+      "id": "milestone-mt5-pass",
+      "pillar": "verified_milestone",
+      "hook": "First real-tick MT5 validation milestone reached.",
+      "caption": "VASTcode21 has recorded 1 MT5 real-tick PASS and 1 MT5 real-tick REJECT result in the current research state. A PASS does not mean live-ready—it means the candidate is allowed to face stricter testing.",
+      "creative_brief": "Professional milestone card: MT5 REAL-TICK PASS. Small subtext: Next gate: robustness. Avoid P&L screenshots or money imagery.",
+      "platforms": ["Instagram", "TikTok", "YouTube Shorts", "Facebook", "X", "Threads"],
+      "priority": 100,
+      "status": "ready_for_design",
+      "disclaimer": "Trading involves risk. Historical or backtested results do not guarantee future performance."
+    },
+    {
+      "id": "milestone-experiments",
+      "pillar": "research_progress",
+      "hook": "72 research experiments and counting.",
+      "caption": "The VASTcode21 research engine has evaluated 72 experiments so far, reaching generation 4. Most candidates are expected to fail—because rejection is part of the validation process.",
+      "creative_brief": "Data-driven vertical graphic with large experiment count, generation number, and a funnel narrowing toward validation.",
+      "platforms": ["Instagram", "TikTok", "YouTube Shorts", "Facebook", "X", "Threads"],
+      "priority": 95,
+      "status": "ready_for_design",
+      "disclaimer": "Trading involves risk. Historical or backtested results do not guarantee future performance."
+    },
+    {
+      "id": "evergreen-001",
+      "pillar": "engineering",
+      "hook": "A trading idea is not a product until it survives testing.",
+      "caption": "VASTcode21 is being built as a validation-first MT5 research system focused only on GOLD and BITCOIN. Candidates move through research, real-tick MT5 testing, robustness checks and forward observation before they can become release candidates.",
+      "creative_brief": "Dark technical vertical visual: four-stage pipeline Research → MT5 Real Ticks → Robustness → Forward. VASTcode21 logo, clean typography, no profit imagery.",
+      "platforms": ["Instagram", "TikTok", "YouTube Shorts", "Facebook", "X", "Threads"],
+      "priority": 80,
+      "status": "ready_for_design",
+      "disclaimer": "Trading involves risk. Historical or backtested results do not guarantee future performance."
+    },
+    {
+      "id": "evergreen-004",
+      "pillar": "education",
+      "hook": "Backtest ≠ future guarantee.",
+      "caption": "A backtest is evidence from historical data, not a promise about tomorrow. VASTcode21 treats every pass as permission for more testing—not permission for hype.",
+      "creative_brief": "Bold typographic carousel: BACKTEST ≠ GUARANTEE. Second slide: PASS = MORE TESTING. Third slide: VASTcode21 validation stack.",
+      "platforms": ["Instagram", "TikTok", "YouTube Shorts", "Facebook", "X", "Threads"],
+      "priority": 75,
+      "status": "ready_for_design",
+      "disclaimer": "Trading involves risk. Historical or backtested results do not guarantee future performance."
+    },
+    {
+      "id": "evergreen-002",
+      "pillar": "education",
+      "hook": "Why real ticks matter in MT5 testing.",
+      "caption": "A strategy can look impressive on simplified data and fail when execution detail is introduced. VASTcode21 uses real-tick MT5 validation as a gate, not as a marketing screenshot generator.",
+      "creative_brief": "15-second Reel/Short: animated tick stream entering an MT5 test gate, then PASS/REJECT split. Minimal futuristic style.",
+      "platforms": ["Instagram", "TikTok", "YouTube Shorts", "Facebook", "X", "Threads"],
+      "priority": 70,
+      "status": "ready_for_design",
+      "disclaimer": "Trading involves risk. Historical or backtested results do not guarantee future performance."
+    },
+    {
+      "id": "evergreen-003",
+      "pillar": "scope",
+      "hook": "Why only GOLD and BITCOIN?",
+      "caption": "VASTcode21 deliberately stays narrow: GOLD and BITCOIN. The goal is deeper validation and cleaner product specialization rather than claiming to trade everything.",
+      "creative_brief": "Split-screen vertical creative: gold texture on one side, abstract Bitcoin network on the other, centered VASTcode21 mark.",
+      "platforms": ["Instagram", "TikTok", "YouTube Shorts", "Facebook", "X", "Threads"],
+      "priority": 65,
+      "status": "ready_for_design",
+      "disclaimer": "Trading involves risk. Historical or backtested results do not guarantee future performance."
+    },
+    {
+      "id": "evergreen-006",
+      "pillar": "education",
+      "hook": "Profit Factor is only one number.",
+      "caption": "A serious validation process looks at more than one metric. Trade count, drawdown, recovery, Sharpe, regime behavior and forward evidence all matter before a candidate can advance.",
+      "creative_brief": "Metric dashboard visual with PF, DD, Recovery, Sharpe, Trades—no actual unapproved performance values.",
+      "platforms": ["Instagram", "TikTok", "YouTube Shorts", "Facebook", "X", "Threads"],
+      "priority": 65,
+      "status": "ready_for_design",
+      "disclaimer": "Trading involves risk. Historical or backtested results do not guarantee future performance."
+    },
+    {
+      "id": "evergreen-005",
+      "pillar": "engineering",
+      "hook": "What happens when a strategy fails?",
+      "caption": "It gets rejected. VASTcode21 is designed to keep failures in the research process instead of turning them into marketing claims. Failed candidates can inform future generations, but they do not become products.",
+      "creative_brief": "Red reject stamp over a generic strategy card, followed by mutation/exploration arrows toward new candidates.",
+      "platforms": ["Instagram", "TikTok", "YouTube Shorts", "Facebook", "X", "Threads"],
+      "priority": 60,
+      "status": "ready_for_design",
+      "disclaimer": "Trading involves risk. Historical or backtested results do not guarantee future performance."
+    },
+    {
+      "id": "evergreen-007",
+      "pillar": "brand",
+      "hook": "VASTcode21 is building in public—without exposing the core IP.",
+      "caption": "The research logic and strategy parameters remain private. Public updates focus on process, validation stages and verified milestones.",
+      "creative_brief": "Encrypted core icon in center, public status ring around it; sleek cybersecurity + quant aesthetic.",
+      "platforms": ["Instagram", "TikTok", "YouTube Shorts", "Facebook", "X", "Threads"],
+      "priority": 60,
+      "status": "ready_for_design",
+      "disclaimer": "Trading involves risk. Historical or backtested results do not guarantee future performance."
+    }
+  ]
+}
