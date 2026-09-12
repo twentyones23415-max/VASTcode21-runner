@@ -1,12 +1,14 @@
 {
-  "version": "3.0.0",
+  "version": "3.1.0",
   "mode": "pre_release_zero_cost",
   "auto_reply_comments": true,
   "auto_hide_spam": false,
-  "auto_dm": false,
+  "auto_dm": true,
   "max_comment_replies_per_cycle": 5,
   "max_comment_replies_per_day": 20,
   "comment_lookback_days": 7,
+  "max_dm_replies_per_cycle": 3,
+  "max_dm_replies_per_day": 12,
   "paid_ads": false,
   "live_trading": false,
   "sales_enabled": false,
@@ -17,21 +19,101 @@
     "product": "VASTcode21 is a validation-first MT5 research project focused on GOLD and BITCOIN. We publish verified development milestones as the system advances through testing.",
     "thanks": "Thank you. We are building VASTcode21 validation-first and will keep sharing verified progress here."
   },
+  "dm_reply_templates": {
+    "interest": "Thanks for reaching out. VASTcode21 is still in validation and pre-release, so it is not available for purchase yet. We will share verified release updates on @vast.code21.",
+    "risk": "VASTcode21 does not guarantee profits or remove trading risk. It is still in validation, and historical or backtested results do not guarantee future performance.",
+    "product": "VASTcode21 is a validation-first MT5 research project focused only on GOLD and BITCOIN. We are currently validating the system before any commercial release.",
+    "thanks": "Thank you for reaching out. We are building VASTcode21 validation-first and will keep sharing verified progress on @vast.code21."
+  },
   "escalation_keywords": [
-    "refund", "chargeback", "lawyer", "legal", "lawsuit", "complaint", "scam", "fraud",
-    "lost money", "losses", "broker problem", "payment problem", "tax", "financial advice",
-    "account hacked", "password", "security issue"
+    "refund",
+    "chargeback",
+    "lawyer",
+    "legal",
+    "lawsuit",
+    "complaint",
+    "scam",
+    "fraud",
+    "lost money",
+    "losses",
+    "broker problem",
+    "payment problem",
+    "tax",
+    "financial advice",
+    "account hacked",
+    "password",
+    "security issue"
+  ],
+  "dm_escalation_keywords": [
+    "refund",
+    "chargeback",
+    "lawyer",
+    "legal",
+    "lawsuit",
+    "complaint",
+    "scam",
+    "fraud",
+    "lost money",
+    "losses",
+    "broker problem",
+    "payment problem",
+    "payment",
+    "invoice",
+    "tax",
+    "financial advice",
+    "account hacked",
+    "hacked",
+    "password",
+    "security issue",
+    "security",
+    "unauthorized",
+    "performance claim",
+    "proof of profit"
   ],
   "interest_keywords": [
-    "price", "cost", "buy", "purchase", "available", "release", "when", "waitlist", "subscribe", "subscription"
+    "price",
+    "cost",
+    "buy",
+    "purchase",
+    "available",
+    "release",
+    "when",
+    "waitlist",
+    "subscribe",
+    "subscription"
   ],
   "risk_keywords": [
-    "guarantee", "guaranteed", "profit", "returns", "win rate", "winrate", "risk free", "safe profit", "how much can i make"
+    "guarantee",
+    "guaranteed",
+    "profit",
+    "returns",
+    "win rate",
+    "winrate",
+    "risk free",
+    "safe profit",
+    "how much can i make"
   ],
   "product_keywords": [
-    "how does it work", "how it works", "mt5", "gold", "bitcoin", "btc", "xauusd", "indicator", "ea", "expert advisor"
+    "how does it work",
+    "how it works",
+    "mt5",
+    "gold",
+    "bitcoin",
+    "btc",
+    "xauusd",
+    "indicator",
+    "ea",
+    "expert advisor"
   ],
   "positive_keywords": [
-    "great", "nice", "amazing", "good job", "love it", "interesting", "cool", "bravo", "well done"
+    "great",
+    "nice",
+    "amazing",
+    "good job",
+    "love it",
+    "interesting",
+    "cool",
+    "bravo",
+    "well done"
   ]
 }
