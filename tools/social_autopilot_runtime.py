@@ -4,6 +4,7 @@ import json
 import urllib.error
 import urllib.parse
 import urllib.request
+from datetime import datetime, timedelta
 from typing import Any
 
 import social_autopilot as core
@@ -11,7 +12,7 @@ import social_autopilot as core
 # Re-export the stable pieces used by the secure configurator.
 CONFIG_FILE = core.CONFIG_FILE
 STATE_FILE = core.STATE_FILE
-VERSION = "2.1.2"
+VERSION = "2.1.3"
 load_json = core.load_json
 save_json = core.save_json
 store_key = core.store_key
@@ -19,6 +20,7 @@ iso_now = core.iso_now
 default_config = core.default_config
 
 _ORIGINAL_REQUEST_JSON = core.request_json
+_ORIGINAL_POST_IMAGE = core.post_image
 
 
 def _redact(text: str, secret: str) -> str:
@@ -61,7 +63,7 @@ def _probe_configured_accounts(api_key: str) -> list[dict[str, str]]:
     url = "https://connectors.windsor.ai/instagram?" + urllib.parse.urlencode(params)
     req = urllib.request.Request(
         url,
-        headers={"User-Agent": "VASTcode21-Social-Autopilot/2.1.2"},
+        headers={"User-Agent": "VASTcode21-Social-Autopilot/2.1.3"},
         method="GET",
     )
     try:
@@ -100,7 +102,7 @@ def _connected_accounts_legacy(api_key: str) -> list[dict[str, str]]:
         "https://onboard.windsor.ai/api/ds/accounts/instagram?"
         + urllib.parse.urlencode({"api_key": api_key})
     )
-    req = urllib.request.Request(url, headers={"User-Agent": "VASTcode21-Social-Autopilot/2.1.2"})
+    req = urllib.request.Request(url, headers={"User-Agent": "VASTcode21-Social-Autopilot/2.1.3"})
     try:
         with urllib.request.urlopen(req, timeout=45) as resp:
             payload = json.loads(resp.read().decode("utf-8", errors="replace"))
@@ -187,9 +189,78 @@ def validate_configuration(api_key: str, config: dict[str, Any]) -> dict[str, An
     return {"connector": connector, "account": account, "actions": sorted(action_ids)}
 
 
-# Patch the original engine so dry-run, analytics and publishing all use the
-# authoritative Windsor connected-account selector.
+def hard_due_now(state: dict[str, Any], config: dict[str, Any], force: bool) -> tuple[bool, str]:
+    """Hard posting safety gate.
+
+    --force may bypass only the preferred publication hour. It can never bypass
+    the minimum interval or the one-post-per-day limit.
+    """
+    now = core.now_local()
+    publish_hour = int(config.get("publish_hour_local", 19))
+    if not force and now.hour < publish_hour:
+        return False, f"before publish hour {publish_hour:02d}:00"
+
+    last = state.get("last_posted_at")
+    if last:
+        try:
+            last_dt = datetime.fromisoformat(str(last))
+            if last_dt.tzinfo is None:
+                last_dt = last_dt.astimezone()
+            last_local = last_dt.astimezone()
+            elapsed = now - last_local
+            min_hours = int(config.get("min_hours_between_posts", 20))
+            if elapsed < timedelta(hours=min_hours):
+                return False, f"minimum interval not reached ({elapsed.total_seconds()/3600:.1f}h)"
+            if last_local.date() == now.date() and int(config.get("max_posts_per_day", 1)) <= 1:
+                return False, "daily post limit reached"
+        except Exception:
+            return False, "posting state timestamp is invalid; fail-safe block"
+
+    return True, "forced_schedule_only" if force else "due"
+
+
+def _remote_recent_media(api_key: str, account_id: str) -> list[dict[str, Any]]:
+    """Read Instagram itself before every write and return recent real media rows."""
+    payload = core.request_json(
+        "GET",
+        "instagram",
+        api_key,
+        query={
+            "date_preset": "last_1d",
+            "fields": "date,media_id,media_permalink",
+            "select_accounts": account_id,
+            "_max_rows": "20",
+        },
+    )
+    rows = payload.get("data", payload if isinstance(payload, list) else [])
+    if not isinstance(rows, list):
+        return []
+    return [
+        row for row in rows
+        if isinstance(row, dict) and str(row.get("media_id") or "").strip()
+    ]
+
+
+def guarded_post_image(api_key: str, connector: str, account_id: str,
+                       item: dict[str, Any], config: dict[str, Any]) -> Any:
+    """Fail closed if Instagram already shows a post in the recent window."""
+    recent = _remote_recent_media(api_key, account_id)
+    if recent:
+        newest = recent[0]
+        media_id = str(newest.get("media_id") or "unknown")
+        date = str(newest.get("date") or "recent")
+        raise RuntimeError(
+            f"REMOTE SAFETY BLOCK: Instagram already has recent media ({media_id}, {date}); "
+            "no additional organic post created"
+        )
+    return _ORIGINAL_POST_IMAGE(api_key, connector, account_id, item, config)
+
+
+# Patch the original engine so every runtime path uses the authoritative
+# account selector and non-bypassable posting safety rules.
 core.validate_configuration = validate_configuration
+core.due_now = hard_due_now
+core.post_image = guarded_post_image
 core.VERSION = VERSION
 
 
