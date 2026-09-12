@@ -6,16 +6,24 @@ import time
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
-SCRIPT = REPO / "tools" / "social_autopilot_runtime.py"
+SOCIAL = REPO / "tools" / "social_autopilot_runtime.py"
+BUSINESS = REPO / "tools" / "business_autopilot.py"
 INTERVAL = 30 * 60
+
+
+def run(script: Path, timeout: int) -> None:
+    if not script.exists():
+        return
+    try:
+        subprocess.run([sys.executable, str(script)], cwd=str(REPO), check=False, timeout=timeout)
+    except Exception:
+        pass
 
 
 def main() -> None:
     while True:
-        try:
-            subprocess.run([sys.executable, str(SCRIPT)], cwd=str(REPO), check=False, timeout=5 * 60)
-        except Exception:
-            pass
+        run(SOCIAL, 5 * 60)
+        run(BUSINESS, 5 * 60)
         time.sleep(INTERVAL)
 
 
