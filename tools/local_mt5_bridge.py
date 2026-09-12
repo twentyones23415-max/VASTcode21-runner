@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import argparse
+import csv
+import io
 import json
 import os
 import shutil
@@ -54,6 +56,26 @@ def ensure_mt5_env():
             os.environ["METAEDITOR_PATH"] = str(p)
 
 
+def mt5_terminal_pids() -> set[int]:
+    """Return PIDs for running terminal64.exe processes on Windows."""
+    try:
+        p = subprocess.run(
+            ["tasklist", "/FI", "IMAGENAME eq terminal64.exe", "/FO", "CSV", "/NH"],
+            text=True, capture_output=True, timeout=10, check=False,
+        )
+        pids: set[int] = set()
+        for row in csv.reader(io.StringIO(p.stdout or "")):
+            if len(row) < 2 or row[0].strip().lower() != "terminal64.exe":
+                continue
+            try:
+                pids.add(int(row[1].strip()))
+            except ValueError:
+                continue
+        return pids
+    except Exception:
+        return set()
+
+
 def mt5_terminal_is_running() -> bool:
     """Return True when a terminal64.exe instance already exists.
 
@@ -61,15 +83,55 @@ def mt5_terminal_is_running() -> bool:
     terminal installation is already open interactively.  We never kill a user
     terminal automatically; the bridge safely defers and retries later.
     """
-    try:
-        p = subprocess.run(
-            ["tasklist", "/FI", "IMAGENAME eq terminal64.exe", "/FO", "CSV", "/NH"],
+    return bool(mt5_terminal_pids())
+
+
+def close_bridge_spawned_terminals(before: set[int]) -> None:
+    """Close only terminal processes created by this bridge operation.
+
+    The bridge calls MetaTrader5.initialize() briefly to resolve broker symbols.
+    That API can launch terminal64.exe and mt5.shutdown() disconnects the Python
+    API without necessarily closing the terminal.  A leftover terminal causes
+    the subsequent /config Strategy Tester launch to be ignored.
+
+    We therefore snapshot PIDs before symbol discovery and close only PIDs that
+    appeared afterwards.  Pre-existing user terminals are never touched.
+    """
+    # Give MT5 a moment to exit naturally after mt5.shutdown().
+    time.sleep(0.75)
+    owned = sorted(mt5_terminal_pids() - before)
+    if not owned:
+        return
+
+    for pid in owned:
+        subprocess.run(
+            ["taskkill", "/PID", str(pid), "/T"],
             text=True, capture_output=True, timeout=10, check=False,
         )
-        out = (p.stdout or "").strip().lower()
-        return "terminal64.exe" in out
-    except Exception:
-        return False
+
+    deadline = time.time() + 8
+    while time.time() < deadline:
+        remaining = mt5_terminal_pids().intersection(owned)
+        if not remaining:
+            return
+        time.sleep(0.5)
+
+    # These are still bridge-owned PIDs (they did not exist before discovery).
+    # Force-close only those exact PIDs so the tester can start with /config.
+    remaining = sorted(mt5_terminal_pids().intersection(owned))
+    for pid in remaining:
+        subprocess.run(
+            ["taskkill", "/F", "/PID", str(pid), "/T"],
+            text=True, capture_output=True, timeout=10, check=False,
+        )
+
+    time.sleep(0.75)
+    remaining = sorted(mt5_terminal_pids().intersection(owned))
+    if remaining:
+        raise RuntimeError(
+            "MT5 terminal spawned for symbol discovery could not be closed; "
+            "validation stopped safely before Strategy Tester launch"
+        )
 
 
 def pull_repo(repo: Path):
@@ -114,17 +176,40 @@ def resolve_symbol(asset: str, local_core: Path) -> str:
     sys.path.insert(0, str(local_core))
     import MetaTrader5 as mt5
     from vastcode21.trading.symbol_resolver import resolve_mt5
+
+    # main() already defers when an interactive MT5 exists. Snapshot again here
+    # to avoid ever closing a terminal that predates this symbol lookup.
+    before = mt5_terminal_pids()
+    if before:
+        raise RuntimeError(
+            "MT5 terminal appeared before symbol discovery; validation deferred safely"
+        )
+
     terminal = os.getenv("MT5_TERMINAL_PATH", "").strip()
     kwargs = {"path": terminal} if terminal else {}
-    if not mt5.initialize(**kwargs):
-        raise RuntimeError(f"MT5 initialize failed: {mt5.last_error()}")
+    initialized = False
     try:
+        if not mt5.initialize(**kwargs):
+            raise RuntimeError(f"MT5 initialize failed: {mt5.last_error()}")
+        initialized = True
+
+        # Persist the data path so MT5Tester does not call mt5.initialize() a
+        # second time immediately before launching terminal64.exe /config:...
+        ti = mt5.terminal_info()
+        data_path = Path(str(getattr(ti, "data_path", "") or "")) if ti else Path()
+        if data_path.exists():
+            os.environ["MT5_DATA_PATH"] = str(data_path)
+
         found = resolve_mt5(mt5, assets=(asset,), min_score=60)
         if asset not in found:
             raise RuntimeError(f"Could not resolve broker symbol for {asset}")
         return found[asset].symbol
     finally:
-        mt5.shutdown()
+        if initialized:
+            mt5.shutdown()
+        # MetaTrader5.shutdown() disconnects the API but often leaves the GUI
+        # terminal running. Close only the process(es) spawned by this lookup.
+        close_bridge_spawned_terminals(before)
 
 
 def validate_one(item: dict, repo: Path, local_core: Path) -> dict:
