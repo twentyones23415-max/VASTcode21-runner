@@ -9,7 +9,7 @@ REPO = Path(__file__).resolve().parents[1]
 
 
 def main() -> None:
-    print("VASTcode21 BUSINESS AUTOPILOT v3.1")
+    print("VASTcode21 BUSINESS AUTOPILOT v3.1.1")
     print("Organic social + official Meta Instagram DM operations")
     print("Cold DMs OFF | Paid ads OFF | Live trading OFF | Sales OFF\n")
 
@@ -19,6 +19,7 @@ def main() -> None:
         ("social", REPO / "tools" / "social_autopilot_runtime.py", ["--dry-run"]),
         ("business", REPO / "tools" / "business_autopilot.py", []),
         ("meta-dm", REPO / "tools" / "meta_dm_autopilot.py", ["--check"]),
+        ("meta-dm-selftest", REPO / "tools" / "meta_dm_selftest.py", []),
     ]
     for name, script, args in checks:
         p = subprocess.run([str(py), str(script), *args], cwd=str(REPO), check=False)
@@ -46,11 +47,13 @@ def main() -> None:
         creationflags=0x00000008 | 0x00000200,
     )
 
-    print("\nSUCCESS: VASTcode21 Business Autopilot v3.1 is active.")
+    print("\nSUCCESS: VASTcode21 Business Autopilot v3.1.1 is active.")
     print("Auto posting: ON")
     print("Safe public comment replies: ON")
     print("Official Meta Instagram DM ingestion: ON")
     print("Safe replies to user-initiated DMs: ON")
+    print("Meta DM inbox scan: every 5 minutes")
+    print("Social + business cycle: every 30 minutes")
     print("Lead capture + escalation: ON")
     print("Cold DMs: OFF")
     print("Paid ads: OFF | Live trading: OFF | Sales: OFF")
