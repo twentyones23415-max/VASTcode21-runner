@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
   "policy": "zero_cost_public_or_existing_sources_only",
   "trade_scope": ["XAUUSD", "BTCUSD"],
   "news": {
@@ -36,7 +36,7 @@
     {"id": "DCOILWTICO", "category": "commodities", "description": "WTI crude oil"},
     {"id": "BAMLH0A0HYM2", "category": "credit", "description": "US high-yield option-adjusted spread"},
     {"id": "WALCL", "category": "liquidity", "description": "Federal Reserve total assets"},
-    {"id": "GOLDAMGBD228NLBM", "category": "gold", "description": "LBMA gold price AM USD"}
+    {"id": "NASDAQQGLDI", "category": "gold", "description": "Credit Suisse NASDAQ Gold FLOWS103 Price Index"}
   ],
   "binance": {
     "spot_symbol": "BTCUSDT",
