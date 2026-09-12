@@ -1,0 +1,23 @@
+{
+  "timezone": "Europe/Athens",
+  "mode": "pre_release_organic",
+  "paid_ads": false,
+  "default_frequency": {
+    "Instagram": "1 post or reel per day",
+    "TikTok": "1 short-form post per day",
+    "YouTube Shorts": "4 per week",
+    "Facebook": "4 per week",
+    "X": "1 to 2 posts per day",
+    "Threads": "1 post per day"
+  },
+  "publishing_rules": [
+    "Prefer verified milestone posts when a new pipeline event exists.",
+    "Otherwise rotate engineering, education, scope and brand evergreen content.",
+    "Do not repeat the same hook within 14 days.",
+    "Do not publish performance numbers unless explicitly approved for public use.",
+    "Always include the risk disclaimer on performance-related content.",
+    "No paid promotion until explicitly approved."
+  ],
+  "creative_formats": ["Reel/Short", "single image", "carousel", "text-led technical graphic"],
+  "approval_mode": "auto-schedule only after connected-account automation is enabled"
+}
