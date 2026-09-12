@@ -37,7 +37,7 @@ def main() -> None:
     p = subprocess.run([git_exe, "pull", "--rebase", "origin", "main"], cwd=str(REPO), text=True)
     if p.returncode != 0:
         raise SystemExit("ERROR: git pull --rebase failed. No reset or force-push was attempted.")
-    rc = subprocess.run([str(py), str(REPO / "tools" / "social_autopilot.py"), "--configure"], cwd=str(REPO)).returncode
+    rc = subprocess.run([str(py), str(REPO / "tools" / "social_configure_safe.py")], cwd=str(REPO)).returncode
     if rc != 0:
         raise SystemExit(rc)
     STARTUP.mkdir(parents=True, exist_ok=True)
