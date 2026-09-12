@@ -1,0 +1,57 @@
+{
+  "version": "1.0.0",
+  "principle": "Only the tradable-asset scope is hard-limited. The research and information search space must remain open-ended.",
+  "tradable_assets": [
+    "XAUUSD",
+    "BTCUSD"
+  ],
+  "asset_aliases": {
+    "XAUUSD": ["GOLD"],
+    "BTCUSD": ["BITCOIN", "BTC"]
+  },
+  "information_scope": "unbounded_relevant",
+  "context_assets": "unrestricted",
+  "timeframes": "unrestricted",
+  "research_methods": "unrestricted",
+  "feature_construction": "unrestricted",
+  "mathematical_forms": "unrestricted",
+  "entry_exit_logic": "unrestricted",
+  "risk_models": "unrestricted",
+  "regime_models": "unrestricted",
+  "external_context": "unrestricted_if_relevance_can_be_tested",
+  "examples_not_whitelist": [
+    "raw price and volume structure",
+    "cross-asset relationships",
+    "macro and rates",
+    "news and event streams",
+    "market microstructure",
+    "derivatives positioning",
+    "crypto on-chain and exchange flows",
+    "statistical and machine-learning transforms",
+    "novel mathematical state variables and formulas"
+  ],
+  "forbidden_research_cages": [
+    "mandatory classical-indicator family",
+    "fixed strategy-family whitelist",
+    "fixed parameter-name whitelist",
+    "fixed timeframe whitelist",
+    "requirement to reuse known indicators",
+    "hardcoded assumption that one external market or news category is always relevant",
+    "optimization solely for in-sample win rate"
+  ],
+  "validation_is_not_a_search_constraint": true,
+  "validation_principle": "Candidates may be invented freely but must survive out-of-sample, MT5 real-tick, robustness and forward gates before release candidacy.",
+  "data_integrity": {
+    "no_lookahead": true,
+    "event_time_required": true,
+    "source_provenance_required": true,
+    "revision_aware_when_applicable": true,
+    "publication_lag_aware": true
+  },
+  "safety": {
+    "live_trading": false,
+    "paid_services": false,
+    "paid_data": false,
+    "automatic_commercial_release": false
+  }
+}
