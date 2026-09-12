@@ -11,7 +11,7 @@ HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 import context_intelligence_ingest as ci
 
-VERSION = "1.1.0"
+VERSION = "1.1.1"
 _LAST_GDELT_CALL = 0.0
 _ORIGINAL_RELATIONSHIP_SCAN = ci.relationship_scan
 _ORIGINAL_INGEST_GDELT = ci.ingest_gdelt
@@ -26,6 +26,11 @@ def robust_fetch_bytes(url: str, timeout: int = 25, attempts: int = 5) -> bytes:
                 return r.read()
         except urllib.error.HTTPError as exc:
             last = exc
+            # GDELT 429 means the public endpoint is rate-limiting us. Do not burn
+            # the cycle on repeated calls: hand control back immediately so the
+            # resilient GDELT wrapper can use the RSS fallback.
+            if exc.code == 429 and "gdeltproject.org" in url.lower():
+                break
             if exc.code == 429 and attempt + 1 < attempts:
                 retry_after = (exc.headers or {}).get("Retry-After") if exc.headers else None
                 try:
@@ -103,5 +108,5 @@ ci.relationship_scan = relationship_scan_with_gold_alias
 
 
 if __name__ == "__main__":
-    print(f"VASTcode21 CONTEXT INTELLIGENCE RUNNER v{VERSION}")
+    print(f"VASTcode21 CONTEXT INTELLIGENCE RUNNER v{VERSION}", flush=True)
     raise SystemExit(ci.main())
