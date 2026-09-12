@@ -8,6 +8,7 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parents[1]
 SOCIAL = REPO / "tools" / "social_autopilot_runtime.py"
 BUSINESS = REPO / "tools" / "business_autopilot.py"
+META_DM = REPO / "tools" / "meta_dm_autopilot.py"
 INTERVAL = 30 * 60
 
 
@@ -24,6 +25,7 @@ def main() -> None:
     while True:
         run(SOCIAL, 5 * 60)
         run(BUSINESS, 5 * 60)
+        run(META_DM, 5 * 60)
         time.sleep(INTERVAL)
 
 
