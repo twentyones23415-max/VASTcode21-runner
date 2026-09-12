@@ -1,0 +1,30 @@
+{
+  "hard_rules": [
+    "Never claim guaranteed profit, guaranteed win rate, risk-free trading, or guaranteed income.",
+    "Never present backtest results as future performance.",
+    "Never publish private strategy parameters, encrypted-core contents, broker credentials, account identifiers, or secrets.",
+    "Never state that a product is live-ready or commercially released unless the release gate explicitly says so.",
+    "Never auto-enable live trading or paid advertising.",
+    "Only cite performance numbers when they are verified by the validation pipeline and explicitly approved for public use."
+  ],
+  "default_disclaimer": "Trading involves risk. Historical or backtested results do not guarantee future performance.",
+  "pre_release_allowed": [
+    "development milestones",
+    "validation-stage progress",
+    "feature explanations",
+    "educational content",
+    "engineering/process content",
+    "waitlist or follow CTA"
+  ],
+  "pre_release_forbidden": [
+    "profit promises",
+    "income promises",
+    "guaranteed returns",
+    "unverified performance screenshots",
+    "claims that a candidate is ready for live trading"
+  ],
+  "paid_ads": {
+    "enabled": false,
+    "activation_requires": "explicit user approval after revenue exists"
+  }
+}
