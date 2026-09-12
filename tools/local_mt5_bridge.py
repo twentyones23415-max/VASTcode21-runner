@@ -54,6 +54,24 @@ def ensure_mt5_env():
             os.environ["METAEDITOR_PATH"] = str(p)
 
 
+def mt5_terminal_is_running() -> bool:
+    """Return True when a terminal64.exe instance already exists.
+
+    MT5 command-line Strategy Tester configuration is unreliable when the same
+    terminal installation is already open interactively.  We never kill a user
+    terminal automatically; the bridge safely defers and retries later.
+    """
+    try:
+        p = subprocess.run(
+            ["tasklist", "/FI", "IMAGENAME eq terminal64.exe", "/FO", "CSV", "/NH"],
+            text=True, capture_output=True, timeout=10, check=False,
+        )
+        out = (p.stdout or "").strip().lower()
+        return "terminal64.exe" in out
+    except Exception:
+        return False
+
+
 def pull_repo(repo: Path):
     g = git_exe()
     run([g, "pull", "--rebase", "origin", "main"], repo)
@@ -82,7 +100,10 @@ def load_queue(repo: Path, key: str) -> list[dict]:
         out.mkdir()
         decrypt_file(state, tar_path, key)
         with tarfile.open(tar_path, "r:gz") as tf:
-            tf.extractall(out)
+            try:
+                tf.extractall(out, filter="data")
+            except TypeError:
+                tf.extractall(out)
         q = out / "cloud_out" / "mt5_validation_queue.json"
         if not q.exists():
             return []
@@ -200,6 +221,12 @@ def main():
     queue = load_queue(repo, key)
     if not queue:
         print("[VASTcode21 MT5 bridge] no pending candidates")
+        return
+
+    if mt5_terminal_is_running():
+        print("[VASTcode21 MT5 bridge] MT5 terminal is already open; validation safely deferred")
+        print("[VASTcode21 MT5 bridge] no terminal was closed and no candidate was consumed")
+        print("[VASTcode21 MT5 bridge] daemon will retry automatically on the next cycle")
         return
 
     selected = queue[: max(1, int(args.max))]
