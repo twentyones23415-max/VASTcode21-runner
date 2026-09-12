@@ -62,6 +62,7 @@ jobs:
         working-directory: work/core
         env:
           VASTCODE21_CLOUD_DB: data/cloud/vastcode21_cloud.db
+          PYTHONPATH: ${{ github.workspace }}/work/core
         run: python scripts/cloud_worker.py --once
 
       - name: Encrypt persistent state
