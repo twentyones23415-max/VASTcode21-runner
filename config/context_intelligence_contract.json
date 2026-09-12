@@ -1,0 +1,49 @@
+{
+  "version": "1.0.0",
+  "purpose": "Allow VASTcode21 to observe any external information that may affect XAUUSD or BTCUSD while keeping execution restricted to those two assets.",
+  "execution_scope": ["XAUUSD", "BTCUSD"],
+  "observation_scope": "unbounded_relevant",
+  "source_policy": "zero_cost_public_or_existing_sources_only_until_revenue",
+  "discovery_rule": "Do not assume a source, market or event is relevant. Measure whether it adds stable out-of-sample information for XAUUSD or BTCUSD, by regime and lag.",
+  "candidate_context_families": [
+    "breaking and scheduled macroeconomic news",
+    "central-bank communications and policy decisions",
+    "inflation employment growth and liquidity data",
+    "interest rates nominal yields real yields and yield curves",
+    "USD and global FX markets",
+    "equity indices volatility and broad risk sentiment",
+    "commodities energy and related inflation-sensitive markets",
+    "geopolitical and systemic-risk events",
+    "gold physical flows ETF flows central-bank activity and positioning",
+    "BTC spot ETF flows and institutional flow proxies",
+    "crypto spot futures perpetuals options basis funding open interest liquidations and volatility",
+    "on-chain exchange miner whale and stablecoin flow data",
+    "crypto regulation exchange outages hacks insolvencies and protocol events",
+    "market liquidity spreads depth volume and session structure",
+    "cross-asset lead-lag correlation causality and regime shifts",
+    "news sentiment topic intensity surprise magnitude and persistence"
+  ],
+  "families_are_examples_not_whitelist": true,
+  "relevance_engine": {
+    "asset_specific": true,
+    "regime_specific": true,
+    "lag_specific": true,
+    "direction_may_change_over_time": true,
+    "must_test_incremental_value": true,
+    "must_reject_unstable_relationships": true
+  },
+  "news_integrity": {
+    "use_publication_time_not_article_date_when_available": true,
+    "prevent_future_information_leakage": true,
+    "separate_scheduled_from_unscheduled_events": true,
+    "handle_data_revisions_when_possible": true,
+    "deduplicate_republished_news": true,
+    "score_source_reliability": true
+  },
+  "safety": {
+    "live_trading": false,
+    "paid_data": false,
+    "paid_services": false,
+    "sales_enabled": false
+  }
+}
