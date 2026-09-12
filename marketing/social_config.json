@@ -1,0 +1,19 @@
+{
+  "version": "2.1.0",
+  "enabled": true,
+  "account_name": "vast.code21",
+  "publish_hour_local": 19,
+  "max_posts_per_day": 1,
+  "min_hours_between_posts": 20,
+  "image_action": "create_image_post",
+  "raw_asset_base": "https://raw.githubusercontent.com/twentyones23415-max/VASTcode21-runner/main/marketing/assets",
+  "hashtags": [
+    "#VASTcode21",
+    "#MT5",
+    "#AlgorithmicTrading",
+    "#GoldTrading",
+    "#BitcoinTrading"
+  ],
+  "paid_ads": false,
+  "live_trading": false
+}
