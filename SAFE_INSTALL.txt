@@ -1,0 +1,8 @@
+VASTcode21 v0.8 safety notes
+
+- Do NOT disable Windows Defender/SmartScreen.
+- Do NOT upload broker passwords or account credentials to GitHub.
+- Do NOT commit LOCAL_ONLY/VC21_CORE_KEY.txt.
+- Repository must be public for unlimited standard GitHub-hosted runner minutes under current GitHub policy.
+- The research core, seed dataset and persistent research state are encrypted before being committed.
+- Live trading is OFF. This package does not place broker orders.

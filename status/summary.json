@@ -1,0 +1,6 @@
+{
+  "status": "waiting_for_first_run",
+  "scope": ["GOLD", "BITCOIN"],
+  "live_trading": false,
+  "paid_services": false
+}

@@ -1,0 +1,6 @@
+LOCAL_ONLY/
+work/
+*.key
+*.tar.gz
+__pycache__/
+.pytest_cache/
