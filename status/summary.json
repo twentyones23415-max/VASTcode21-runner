@@ -1,6 +1,12 @@
 {
-  "status": "waiting_for_first_run",
-  "scope": ["GOLD", "BITCOIN"],
+  "updated_at": "2026-09-12T13:37:37.087091+00:00",
+  "scope": [
+    "GOLD",
+    "BITCOIN"
+  ],
   "live_trading": false,
-  "paid_services": false
+  "paid_services": false,
+  "experiments": 12,
+  "cloud_pass": 1,
+  "rejected": 11
 }
