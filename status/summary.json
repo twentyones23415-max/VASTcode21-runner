@@ -1,12 +1,21 @@
 {
-  "updated_at": "2026-09-12T13:37:37.087091+00:00",
+  "updated_at": "2026-09-12T13:49:37.478678+00:00",
   "scope": [
     "GOLD",
     "BITCOIN"
   ],
   "live_trading": false,
   "paid_services": false,
-  "experiments": 12,
+  "mode": "persistent_evolution",
+  "experiments": 24,
   "cloud_pass": 1,
-  "rejected": 11
+  "rejected": 23,
+  "pending_mt5_validation": 0,
+  "max_generation": 1,
+  "origins": {
+    "legacy": 12,
+    "mutation": 6,
+    "exploration": 5,
+    "crossover": 1
+  }
 }
