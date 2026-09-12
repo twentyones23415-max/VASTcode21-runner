@@ -1,0 +1,37 @@
+{
+  "version": "3.0.0",
+  "mode": "pre_release_zero_cost",
+  "auto_reply_comments": true,
+  "auto_hide_spam": false,
+  "auto_dm": false,
+  "max_comment_replies_per_cycle": 5,
+  "max_comment_replies_per_day": 20,
+  "comment_lookback_days": 7,
+  "paid_ads": false,
+  "live_trading": false,
+  "sales_enabled": false,
+  "product_status": "validation_pre_release",
+  "reply_templates": {
+    "interest": "Thanks for your interest. VASTcode21 is still in validation and pre-release, so it is not being sold yet. Follow for verified release updates.",
+    "risk": "No trading system can guarantee profit or remove risk. VASTcode21 is still in validation. Historical or backtested results do not guarantee future performance.",
+    "product": "VASTcode21 is a validation-first MT5 research project focused on GOLD and BITCOIN. We publish verified development milestones as the system advances through testing.",
+    "thanks": "Thank you. We are building VASTcode21 validation-first and will keep sharing verified progress here."
+  },
+  "escalation_keywords": [
+    "refund", "chargeback", "lawyer", "legal", "lawsuit", "complaint", "scam", "fraud",
+    "lost money", "losses", "broker problem", "payment problem", "tax", "financial advice",
+    "account hacked", "password", "security issue"
+  ],
+  "interest_keywords": [
+    "price", "cost", "buy", "purchase", "available", "release", "when", "waitlist", "subscribe", "subscription"
+  ],
+  "risk_keywords": [
+    "guarantee", "guaranteed", "profit", "returns", "win rate", "winrate", "risk free", "safe profit", "how much can i make"
+  ],
+  "product_keywords": [
+    "how does it work", "how it works", "mt5", "gold", "bitcoin", "btc", "xauusd", "indicator", "ea", "expert advisor"
+  ],
+  "positive_keywords": [
+    "great", "nice", "amazing", "good job", "love it", "interesting", "cool", "bravo", "well done"
+  ]
+}
