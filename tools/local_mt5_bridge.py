@@ -61,7 +61,10 @@ def mt5_terminal_pids() -> set[int]:
     try:
         p = subprocess.run(
             ["tasklist", "/FI", "IMAGENAME eq terminal64.exe", "/FO", "CSV", "/NH"],
-            text=True, capture_output=True, timeout=10, check=False,
+            text=True,
+            capture_output=True,
+            timeout=10,
+            check=False,
         )
         pids: set[int] = set()
         for row in csv.reader(io.StringIO(p.stdout or "")):
@@ -80,24 +83,14 @@ def mt5_terminal_is_running() -> bool:
     """Return True when a terminal64.exe instance already exists.
 
     MT5 command-line Strategy Tester configuration is unreliable when the same
-    terminal installation is already open interactively.  We never kill a user
+    terminal installation is already open interactively. We never kill a user
     terminal automatically; the bridge safely defers and retries later.
     """
     return bool(mt5_terminal_pids())
 
 
 def close_bridge_spawned_terminals(before: set[int]) -> None:
-    """Close only terminal processes created by this bridge operation.
-
-    The bridge calls MetaTrader5.initialize() briefly to resolve broker symbols.
-    That API can launch terminal64.exe and mt5.shutdown() disconnects the Python
-    API without necessarily closing the terminal.  A leftover terminal causes
-    the subsequent /config Strategy Tester launch to be ignored.
-
-    We therefore snapshot PIDs before symbol discovery and close only PIDs that
-    appeared afterwards.  Pre-existing user terminals are never touched.
-    """
-    # Give MT5 a moment to exit naturally after mt5.shutdown().
+    """Close only terminal processes created by this bridge operation."""
     time.sleep(0.75)
     owned = sorted(mt5_terminal_pids() - before)
     if not owned:
@@ -106,7 +99,10 @@ def close_bridge_spawned_terminals(before: set[int]) -> None:
     for pid in owned:
         subprocess.run(
             ["taskkill", "/PID", str(pid), "/T"],
-            text=True, capture_output=True, timeout=10, check=False,
+            text=True,
+            capture_output=True,
+            timeout=10,
+            check=False,
         )
 
     deadline = time.time() + 8
@@ -116,13 +112,14 @@ def close_bridge_spawned_terminals(before: set[int]) -> None:
             return
         time.sleep(0.5)
 
-    # These are still bridge-owned PIDs (they did not exist before discovery).
-    # Force-close only those exact PIDs so the tester can start with /config.
     remaining = sorted(mt5_terminal_pids().intersection(owned))
     for pid in remaining:
         subprocess.run(
             ["taskkill", "/F", "/PID", str(pid), "/T"],
-            text=True, capture_output=True, timeout=10, check=False,
+            text=True,
+            capture_output=True,
+            timeout=10,
+            check=False,
         )
 
     time.sleep(0.75)
@@ -152,9 +149,11 @@ def read_key(repo: Path) -> str:
 def load_queue(repo: Path, key: str) -> list[dict]:
     sys.path.insert(0, str(repo / "tools"))
     from crypto_utils import decrypt_file
+
     state = repo / "state" / "state.enc"
     if not state.exists():
         return []
+
     with tempfile.TemporaryDirectory(prefix="vc21_state_") as td:
         td = Path(td)
         tar_path = td / "state.tar.gz"
@@ -177,8 +176,6 @@ def resolve_symbol(asset: str, local_core: Path) -> str:
     import MetaTrader5 as mt5
     from vastcode21.trading.symbol_resolver import resolve_mt5
 
-    # main() already defers when an interactive MT5 exists. Snapshot again here
-    # to avoid ever closing a terminal that predates this symbol lookup.
     before = mt5_terminal_pids()
     if before:
         raise RuntimeError(
@@ -188,13 +185,12 @@ def resolve_symbol(asset: str, local_core: Path) -> str:
     terminal = os.getenv("MT5_TERMINAL_PATH", "").strip()
     kwargs = {"path": terminal} if terminal else {}
     initialized = False
+
     try:
         if not mt5.initialize(**kwargs):
             raise RuntimeError(f"MT5 initialize failed: {mt5.last_error()}")
         initialized = True
 
-        # Persist the data path so MT5Tester does not call mt5.initialize() a
-        # second time immediately before launching terminal64.exe /config:...
         ti = mt5.terminal_info()
         data_path = Path(str(getattr(ti, "data_path", "") or "")) if ti else Path()
         if data_path.exists():
@@ -207,8 +203,6 @@ def resolve_symbol(asset: str, local_core: Path) -> str:
     finally:
         if initialized:
             mt5.shutdown()
-        # MetaTrader5.shutdown() disconnects the API but often leaves the GUI
-        # terminal running. Close only the process(es) spawned by this lookup.
         close_bridge_spawned_terminals(before)
 
 
@@ -226,7 +220,6 @@ def validate_one(item: dict, repo: Path, local_core: Path) -> dict:
 
     gen = repo / "LOCAL_ONLY" / "mt5_bridge" / "generated"
     gen.mkdir(parents=True, exist_ok=True)
-    # Keep a deterministic local filename tied to the cloud experiment.
     spec["name"] = f"VC21_CLOUD_{asset}_{timeframe}_{exp_id:06d}"
     ea = write_ea(spec, gen)
 
@@ -241,7 +234,8 @@ def validate_one(item: dict, repo: Path, local_core: Path) -> dict:
 
     metrics = dict(result.get("metrics") or {})
     metrics.pop("report_path", None)
-    return {
+
+    payload = {
         "schema_version": 1,
         "experiment_id": exp_id,
         "asset": asset,
@@ -254,41 +248,96 @@ def validate_one(item: dict, repo: Path, local_core: Path) -> dict:
         "tested_at": utcnow(),
     }
 
+    manifests = repo / "LOCAL_ONLY" / "mt5_bridge" / "candidates"
+    manifests.mkdir(parents=True, exist_ok=True)
+    manifest = {
+        "schema_version": 1,
+        "experiment_id": exp_id,
+        "asset": asset,
+        "timeframe": timeframe,
+        "strategy_name": payload["strategy_name"],
+        "broker_symbol": broker_symbol,
+        "decision": payload["decision"],
+        "metrics": metrics,
+        "spec": spec,
+        "ea_source": str(ea),
+        "tested_at": payload["tested_at"],
+    }
+    (manifests / f"experiment_{exp_id}.json").write_text(
+        json.dumps(manifest, indent=2), encoding="utf-8"
+    )
+    return payload
+
 
 def encrypt_result(repo: Path, key: str, payload: dict) -> Path:
     sys.path.insert(0, str(repo / "tools"))
     from crypto_utils import encrypt_file
+
     inbox = repo / "handoff" / "inbox"
     inbox.mkdir(parents=True, exist_ok=True)
     stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     exp_id = int(payload["experiment_id"])
+
     plain = repo / "LOCAL_ONLY" / "mt5_bridge" / f"result_{exp_id}_{stamp}.json"
     plain.parent.mkdir(parents=True, exist_ok=True)
     plain.write_text(json.dumps(payload, indent=2), encoding="utf-8")
+
     enc = inbox / f"mt5_{exp_id}_{stamp}.enc"
     encrypt_file(plain, enc, key)
     return enc
 
 
+def pending_envelope_exists(repo: Path, exp_id: int) -> bool:
+    inbox = repo / "handoff" / "inbox"
+    return any(inbox.glob(f"mt5_{exp_id}_*.enc")) if inbox.exists() else False
+
+
 def push_results(repo: Path, files: list[Path]):
     if not files:
         return
+
     g = git_exe()
     rels = [str(p.relative_to(repo)).replace("\\", "/") for p in files]
     run([g, "add", *rels], repo)
+
     ids = ",".join(p.stem.split("_")[1] for p in files)
-    c = subprocess.run([g, "commit", "-m", f"mt5: validation envelopes {ids}"], cwd=str(repo), text=True)
+    c = subprocess.run(
+        [g, "commit", "-m", f"mt5: validation envelopes {ids}"],
+        cwd=str(repo), text=True
+    )
     if c.returncode not in (0, 1):
         raise RuntimeError("git commit failed")
-    # Cloud can commit at any time. Rebase immediately before push; retry once.
-    for attempt in range(2):
+
+    for attempt in range(3):
         run([g, "pull", "--rebase", "origin", "main"], repo)
         p = subprocess.run([g, "push"], cwd=str(repo), text=True)
         if p.returncode == 0:
             return
-        if attempt == 0:
+        if attempt < 2:
             time.sleep(3)
     raise RuntimeError("Could not push MT5 validation envelopes")
+
+
+def run_autonomy_pipeline(repo: Path, local_core: Path) -> None:
+    pipeline = repo / "tools" / "autonomy_pipeline.py"
+    if not pipeline.exists():
+        return
+
+    p = subprocess.run(
+        [sys.executable, str(pipeline), "--once", "--local-core", str(local_core)],
+        cwd=str(repo),
+        text=True,
+        capture_output=False,
+        check=False,
+        timeout=90 * 60,
+        env=os.environ.copy(),
+    )
+    if p.returncode != 0:
+        print(
+            f"[VASTcode21 MT5 bridge] autonomy pipeline exit={p.returncode}; "
+            "will retry safely on a future cycle",
+            flush=True,
+        )
 
 
 def main():
@@ -303,21 +352,35 @@ def main():
     ensure_mt5_env()
     key = read_key(repo)
     pull_repo(repo)
+
     queue = load_queue(repo, key)
+
     if not queue:
-        print("[VASTcode21 MT5 bridge] no pending candidates")
+        print("[VASTcode21 MT5 bridge] no pending MT5 candidates")
+        run_autonomy_pipeline(repo, local_core)
         return
 
     if mt5_terminal_is_running():
         print("[VASTcode21 MT5 bridge] MT5 terminal is already open; validation safely deferred")
         print("[VASTcode21 MT5 bridge] no terminal was closed and no candidate was consumed")
         print("[VASTcode21 MT5 bridge] daemon will retry automatically on the next cycle")
+        run_autonomy_pipeline(repo, local_core)
         return
 
-    selected = queue[: max(1, int(args.max))]
+    selected = [
+        item for item in queue
+        if not pending_envelope_exists(repo, int(item["id"]))
+    ][: max(1, int(args.max))]
+
+    if not selected:
+        print("[VASTcode21 MT5 bridge] pending queue is already represented by encrypted inbox envelopes")
+        run_autonomy_pipeline(repo, local_core)
+        return
+
     encrypted: list[Path] = []
     print(f"[VASTcode21 MT5 bridge] validating {len(selected)} candidate(s) with MT5 real ticks")
     print("[VASTcode21 MT5 bridge] live trading OFF; paid services OFF")
+
     for item in selected:
         exp_id = int(item["id"])
         try:
@@ -327,15 +390,17 @@ def main():
             m = payload["metrics"]
             print(
                 f"experiment={exp_id} asset={payload['asset']} symbol={payload['broker_symbol']} "
-                f"decision={payload['decision']} PF={m.get('profit_factor')} DD={m.get('equity_drawdown_maximal_pct')} "
-                f"trades={m.get('trades')}",
+                f"decision={payload['decision']} PF={m.get('profit_factor')} "
+                f"DD={m.get('equity_drawdown_maximal_pct')} trades={m.get('trades')}",
                 flush=True,
             )
         except Exception as exc:
             print(f"experiment={exp_id} ERROR: {exc}", flush=True)
+
     push_results(repo, encrypted)
     print(f"[VASTcode21 MT5 bridge] uploaded {len(encrypted)} encrypted validation envelope(s)")
     print("[VASTcode21 MT5 bridge] cloud will ingest them on the next research run")
+    run_autonomy_pipeline(repo, local_core)
 
 
 if __name__ == "__main__":
