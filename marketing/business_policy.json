@@ -1,5 +1,5 @@
 {
-  "version": "3.1.0",
+  "version": "3.1.1",
   "mode": "pre_release_zero_cost",
   "auto_reply_comments": true,
   "auto_hide_spam": false,
@@ -102,7 +102,6 @@
     "btc",
     "xauusd",
     "indicator",
-    "ea",
     "expert advisor"
   ],
   "positive_keywords": [
