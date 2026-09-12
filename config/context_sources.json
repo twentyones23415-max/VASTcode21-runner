@@ -1,26 +1,15 @@
 {
-  "version": "1.1.0",
+  "version": "1.2.0",
   "policy": "zero_cost_public_or_existing_sources_only",
   "trade_scope": ["XAUUSD", "BTCUSD"],
   "news": {
-    "gdelt": [
-      {
-        "name": "gold_global_news",
-        "query": "(gold OR bullion OR XAU OR \"Federal Reserve\" OR inflation OR \"real yields\" OR dollar OR geopolitical)",
-        "timespan": "6h",
-        "maxrecords": 100
-      },
-      {
-        "name": "bitcoin_global_news",
-        "query": "(bitcoin OR BTC OR \"spot ETF\" OR crypto OR stablecoin OR exchange OR hack OR regulation)",
-        "timespan": "6h",
-        "maxrecords": 100
-      }
-    ],
+    "gdelt": [],
     "rss": [
-      {"name": "fed_press_all", "url": "https://www.federalreserve.gov/feeds/press_all.xml", "category": "macro_news"},
-      {"name": "fed_monetary", "url": "https://www.federalreserve.gov/feeds/press_monetary.xml", "category": "macro_news"},
-      {"name": "fed_speeches", "url": "https://www.federalreserve.gov/feeds/speeches.xml", "category": "macro_news"}
+      {"name": "gold_global_news", "url": "https://news.google.com/rss/search?q=gold+OR+bullion+OR+XAU+OR+%22Federal+Reserve%22+OR+inflation+OR+%22real+yields%22+OR+dollar+OR+geopolitical&hl=en-US&gl=US&ceid=US:en", "category": "global_news", "domain": "news.google.com"},
+      {"name": "bitcoin_global_news", "url": "https://news.google.com/rss/search?q=bitcoin+OR+BTC+OR+%22spot+ETF%22+OR+crypto+OR+stablecoin+OR+exchange+OR+hack+OR+regulation&hl=en-US&gl=US&ceid=US:en", "category": "global_news", "domain": "news.google.com"},
+      {"name": "fed_press_all", "url": "https://www.federalreserve.gov/feeds/press_all.xml", "category": "macro_news", "domain": "federalreserve.gov"},
+      {"name": "fed_monetary", "url": "https://www.federalreserve.gov/feeds/press_monetary.xml", "category": "macro_news", "domain": "federalreserve.gov"},
+      {"name": "fed_speeches", "url": "https://www.federalreserve.gov/feeds/speeches.xml", "category": "macro_news", "domain": "federalreserve.gov"}
     ]
   },
   "fred_graph_series": [
