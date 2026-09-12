@@ -30,6 +30,7 @@ if db.exists():
     try:
         summary['best_score']=round(scalar('select max(score) from experiments where score is not null'),4)
         summary['best_cloud_pass_score']=round(scalar("select max(score) from experiments where status='cloud_pass'"),4)
+        summary['best_mt5_pass_score']=round(scalar("select max(score) from experiments where status='mt5_pass'"),4)
         rows=con.execute("""select e.symbol,count(*) n from validation_queue q join experiments e on e.id=q.experiment_id
                             where q.status='pending' group by e.symbol order by e.symbol""").fetchall()
         summary['pending_mt5_by_asset']={str(r['symbol']):int(r['n']) for r in rows}

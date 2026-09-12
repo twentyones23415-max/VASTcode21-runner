@@ -54,6 +54,16 @@ jobs:
             python tools/unpack_tar.py work/state.tar.gz work/core
           fi
 
+      - name: Decrypt MT5 validation inbox
+        shell: bash
+        run: |
+          mkdir -p work/core/cloud_inbox
+          shopt -s nullglob
+          for f in handoff/inbox/*.enc; do
+            name="$(basename "$f" .enc)"
+            python tools/decrypt_payload.py "$f" "work/core/cloud_inbox/${name}.json"
+          done
+
       - name: Install research dependencies
         working-directory: work/core
         run: python -m pip install --disable-pip-version-check -r requirements-cloud.txt
@@ -71,12 +81,17 @@ jobs:
           python tools/encrypt_payload.py work/state.tar.gz state/state.enc
           python tools/public_summary.py work/core/data/cloud/vastcode21_cloud.db status/summary.json
 
-      - name: Commit encrypted state and public counters
+      - name: Commit encrypted state, counters, and consume MT5 inbox
         shell: bash
         run: |
           git config user.name 'VASTcode21 Research Bot'
           git config user.email 'vastcode21-bot@users.noreply.github.com'
           git add state/state.enc status/summary.json
+          shopt -s nullglob
+          inbox=(handoff/inbox/*.enc)
+          if [ ${#inbox[@]} -gt 0 ]; then
+            git rm -f -- "${inbox[@]}"
+          fi
           if git diff --cached --quiet; then
             echo 'No state change.'
           else
