@@ -19,9 +19,9 @@ jobs:
     env:
       VC21_CORE_KEY: ${{ secrets.VC21_CORE_KEY }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v7
         with:
           python-version: '3.12'
 
@@ -96,5 +96,12 @@ jobs:
             echo 'No state change.'
           else
             git commit -m 'chore: autonomous research state update'
-            git push
+            for attempt in 1 2 3; do
+              git pull --rebase origin main && git push && break
+              if [ "$attempt" -eq 3 ]; then
+                echo 'Could not publish autonomous state after retries' >&2
+                exit 1
+              fi
+              sleep 3
+            done
           fi
