@@ -29,7 +29,7 @@ def stop_existing_daemon() -> None:
 
 
 def main() -> None:
-    print("VASTcode21 SOCIAL AUTOPILOT v2.1")
+    print("VASTcode21 SOCIAL AUTOPILOT v2.1.1")
     print("Organic Instagram automation | Paid ads OFF | Live trading OFF\n")
     py, pyw = locate_python()
     git = Path(r"C:\Program Files\Git\cmd\git.exe")
@@ -52,10 +52,10 @@ def main() -> None:
         cwd=str(REPO),
         creationflags=0x00000008 | 0x00000200,
     )
-    dry = subprocess.run([str(py), str(REPO / "tools" / "social_autopilot.py"), "--dry-run"], cwd=str(REPO)).returncode
+    dry = subprocess.run([str(py), str(REPO / "tools" / "social_autopilot_runtime.py"), "--dry-run"], cwd=str(REPO)).returncode
     if dry != 0:
         print("WARNING: setup succeeded but dry-run validation reported an issue. Check LOCAL_ONLY\\social\\social.log")
-    print("\nSUCCESS: VASTcode21 Social Autopilot v2.1 is installed.")
+    print("\nSUCCESS: VASTcode21 Social Autopilot v2.1.1 is installed.")
     print(f"Startup entry: {STARTUP_FILE}")
     print(f"Local log: {REPO / 'LOCAL_ONLY' / 'social' / 'social.log'}")
     print("Maximum organic posting rate: 1 post/day")

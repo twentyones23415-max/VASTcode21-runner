@@ -2,6 +2,16 @@ name: VASTcode21 marketing planner
 
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'status/summary.json'
+      - 'status/autonomy.json'
+      - 'marketing/brand.json'
+      - 'marketing/social_config.json'
+      - 'tools/marketing_planner.py'
+      - 'tools/marketing_asset_builder.py'
+      - '.github/workflows/marketing.yml'
   schedule:
     - cron: '25 6 * * *'
 
