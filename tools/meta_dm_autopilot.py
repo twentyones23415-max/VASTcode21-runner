@@ -382,8 +382,18 @@ def run_cycle() -> int:
         append_jsonl(INBOX_FILE, record)
         observed += 1
 
-        # Never auto-reply to historical inbox content from before secure Meta DM activation.
-        if created_at and created_at < activation_at:
+        # Never auto-reply when message time is missing or to historical inbox content
+        # from before secure Meta DM activation.
+        if created_at is None:
+            add_business_record(
+                business.ESCALATIONS_FILE,
+                {**record, "category": "escalate", "status": "needs_review_missing_timestamp"},
+            )
+            handled.add(message_id)
+            escalated += 1
+            continue
+
+        if created_at < activation_at:
             handled.add(message_id)
             skipped_history += 1
             continue
