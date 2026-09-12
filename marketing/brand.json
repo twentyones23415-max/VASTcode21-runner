@@ -1,0 +1,18 @@
+{
+  "brand": "VASTcode21",
+  "positioning": "Research-driven MT5 technology for GOLD and BITCOIN",
+  "voice": ["clean", "technical", "credible", "concise"],
+  "primary_audience": ["MT5 traders", "algorithmic-trading users", "GOLD traders", "BITCOIN traders"],
+  "platforms": ["Instagram", "TikTok", "YouTube Shorts", "Facebook", "X", "Threads"],
+  "content_pillars": [
+    "research progress",
+    "how VASTcode21 validation works",
+    "GOLD/BITCOIN market education",
+    "MT5 automation education",
+    "verified product milestones",
+    "behind-the-scenes engineering"
+  ],
+  "cta_pre_release": "Follow VASTcode21 for verified development updates.",
+  "cta_release": "Join the VASTcode21 waitlist for release information.",
+  "language_policy": "English-first social copy; Greek translation may be generated as a secondary version."
+}
