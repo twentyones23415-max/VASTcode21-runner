@@ -1,0 +1,54 @@
+{
+  "version": "1.0.0",
+  "policy": "zero_cost_public_or_existing_sources_only",
+  "trade_scope": ["XAUUSD", "BTCUSD"],
+  "news": {
+    "gdelt": [
+      {
+        "name": "gold_global_news",
+        "query": "(gold OR bullion OR XAU OR \"Federal Reserve\" OR inflation OR \"real yields\" OR dollar OR geopolitical)",
+        "timespan": "6h",
+        "maxrecords": 100
+      },
+      {
+        "name": "bitcoin_global_news",
+        "query": "(bitcoin OR BTC OR \"spot ETF\" OR crypto OR stablecoin OR exchange OR hack OR regulation)",
+        "timespan": "6h",
+        "maxrecords": 100
+      }
+    ],
+    "rss": [
+      {"name": "fed_press_all", "url": "https://www.federalreserve.gov/feeds/press_all.xml", "category": "macro_news"},
+      {"name": "fed_monetary", "url": "https://www.federalreserve.gov/feeds/press_monetary.xml", "category": "macro_news"},
+      {"name": "fed_speeches", "url": "https://www.federalreserve.gov/feeds/speeches.xml", "category": "macro_news"}
+    ]
+  },
+  "fred_graph_series": [
+    {"id": "DFF", "category": "rates", "description": "Effective federal funds rate"},
+    {"id": "DGS2", "category": "rates", "description": "US 2-year Treasury yield"},
+    {"id": "DGS10", "category": "rates", "description": "US 10-year Treasury yield"},
+    {"id": "DFII10", "category": "real_yields", "description": "US 10-year real yield"},
+    {"id": "T10Y2Y", "category": "rates_curve", "description": "US 10y minus 2y curve"},
+    {"id": "DTWEXBGS", "category": "fx", "description": "Trade-weighted US dollar index"},
+    {"id": "VIXCLS", "category": "risk", "description": "CBOE VIX"},
+    {"id": "SP500", "category": "equities", "description": "S&P 500"},
+    {"id": "NASDAQCOM", "category": "equities", "description": "NASDAQ Composite"},
+    {"id": "DCOILWTICO", "category": "commodities", "description": "WTI crude oil"},
+    {"id": "BAMLH0A0HYM2", "category": "credit", "description": "US high-yield option-adjusted spread"},
+    {"id": "WALCL", "category": "liquidity", "description": "Federal Reserve total assets"},
+    {"id": "GOLDAMGBD228NLBM", "category": "gold", "description": "LBMA gold price AM USD"}
+  ],
+  "binance": {
+    "spot_symbol": "BTCUSDT",
+    "futures_symbol": "BTCUSDT",
+    "spot_kline_interval": "1h",
+    "spot_kline_limit": 1000,
+    "futures_kline_interval": "1h",
+    "futures_kline_limit": 1000,
+    "funding_limit": 100
+  },
+  "retention": {
+    "news_days": 365,
+    "market_days": 3650
+  }
+}
