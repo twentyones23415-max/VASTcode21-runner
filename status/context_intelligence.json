@@ -1,0 +1,80 @@
+{
+  "execution_scope": [
+    "XAUUSD",
+    "BTCUSD"
+  ],
+  "information_scope": "unbounded_relevant",
+  "live_trading": false,
+  "mode": "persistent_zero_cost_context_intelligence",
+  "news_rows_persistent": 150,
+  "observation_rows_persistent": 27491,
+  "paid_data": false,
+  "paid_services": false,
+  "private_context_history": true,
+  "rows_written_this_cycle": 116992,
+  "series_count": 12,
+  "source_health": {
+    "binance": {
+      "ok": false
+    },
+    "fred:BAMLH0A0HYM2": {
+      "ok": true
+    },
+    "fred:DCOILWTICO": {
+      "ok": true
+    },
+    "fred:DFF": {
+      "ok": true
+    },
+    "fred:DFII10": {
+      "ok": true
+    },
+    "fred:DGS10": {
+      "ok": true
+    },
+    "fred:DGS2": {
+      "ok": true
+    },
+    "fred:DTWEXBGS": {
+      "ok": true
+    },
+    "fred:GOLDAMGBD228NLBM": {
+      "ok": false
+    },
+    "fred:NASDAQCOM": {
+      "ok": true
+    },
+    "fred:SP500": {
+      "ok": true
+    },
+    "fred:T10Y2Y": {
+      "ok": true
+    },
+    "fred:VIXCLS": {
+      "ok": true
+    },
+    "fred:WALCL": {
+      "ok": true
+    },
+    "gdelt:bitcoin_global_news": {
+      "ok": true
+    },
+    "gdelt:gold_global_news": {
+      "ok": false
+    },
+    "rss:fed_monetary": {
+      "ok": true
+    },
+    "rss:fed_press_all": {
+      "ok": true
+    },
+    "rss:fed_speeches": {
+      "ok": true
+    }
+  },
+  "sources_attempted": 19,
+  "sources_failed": 3,
+  "sources_succeeded": 16,
+  "updated_at": "2026-09-12T18:29:38.063753+00:00",
+  "version": "1.0.0"
+}

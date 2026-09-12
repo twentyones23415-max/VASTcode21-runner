@@ -1,0 +1,31 @@
+{
+  "classical_indicator_families_referenced": [
+    "atr",
+    "ema",
+    "rsi"
+  ],
+  "classical_indicator_reference_count": 10,
+  "context_families_detected": [
+    "derivatives",
+    "geopolitics",
+    "microstructure",
+    "rates_fx"
+  ],
+  "context_intelligence_status": "signals_detected",
+  "context_signal_count": 87,
+  "explicit_restriction_signal_count": 4,
+  "freedom_status": "review_required",
+  "information_scope": "unbounded_relevant",
+  "note": "Classical-indicator references are not automatically a violation. Explicit whitelists/fixed search cages require review. Context families are examples, never a whitelist.",
+  "privacy": "aggregate_only_no_private_paths_or_source_snippets",
+  "restriction_signal_kinds": [
+    "fixed_timeframe_list"
+  ],
+  "scanned_text_files": 35,
+  "scope_contract_ok": true,
+  "tradable_assets": [
+    "XAUUSD",
+    "BTCUSD"
+  ],
+  "version": "1.0.0"
+}
