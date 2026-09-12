@@ -5,6 +5,8 @@ import ctypes
 import getpass
 import json
 import os
+import sys
+import time
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -18,6 +20,7 @@ LOCAL = REPO / "LOCAL_ONLY" / "social"
 SECRET_FILE = LOCAL / "windsor_key.dpapi"
 STATE_FILE = LOCAL / "state.json"
 LOG_FILE = LOCAL / "social.log"
+ANALYTICS_FILE = LOCAL / "analytics.json"
 CONFIG_FILE = REPO / "marketing" / "social_config.json"
 QUEUE_FILE = REPO / "marketing" / "queue.json"
 ASSET_DIR = REPO / "marketing" / "assets"
@@ -269,6 +272,49 @@ def configure() -> int:
     return 0
 
 
+def refresh_analytics(api_key: str, account_id: str, state: dict[str, Any]) -> None:
+    last = state.get("analytics_last_refreshed_at")
+    if last:
+        try:
+            dt = datetime.fromisoformat(str(last))
+            if dt.tzinfo is None:
+                dt = dt.astimezone()
+            if now_local() - dt.astimezone() < timedelta(hours=6):
+                return
+        except Exception:
+            pass
+    profile = request_json(
+        "GET",
+        "instagram",
+        api_key,
+        query={
+            "fields": "account_id,account_name,followers_count,media_count",
+            "select_accounts": account_id,
+            "_max_rows": "10",
+        },
+    )
+    media = request_json(
+        "GET",
+        "instagram",
+        api_key,
+        query={
+            "date_preset": "last_30d",
+            "fields": "date,media_id,media_caption,media_type,media_engagement,media_reach,media_like_count,media_comments_count,media_saved,media_shares,media_permalink",
+            "select_accounts": account_id,
+            "_max_rows": "100",
+        },
+    )
+    payload = {
+        "updated_at": iso_now(),
+        "account_id": account_id,
+        "profile": profile.get("data", profile if isinstance(profile, list) else []),
+        "media": media.get("data", media if isinstance(media, list) else []),
+    }
+    save_json(ANALYTICS_FILE, payload)
+    state["analytics_last_refreshed_at"] = payload["updated_at"]
+    save_json(STATE_FILE, state)
+
+
 def is_safe_text(text: str) -> tuple[bool, str | None]:
     lower = text.casefold()
     for phrase in FORBIDDEN_PHRASES:
@@ -363,6 +409,12 @@ def run_once(force: bool = False, dry_run: bool = False) -> int:
         return 0
     state = load_json(STATE_FILE, {"posted_ids": []})
     state.setdefault("posted_ids", [])
+    stored_account_id = str(state.get("account_id") or "").strip()
+    if stored_account_id:
+        try:
+            refresh_analytics(api_key, stored_account_id, state)
+        except Exception as exc:
+            log(f"analytics refresh deferred: {exc}")
     due, reason = due_now(state, config, force)
     if not due:
         log(f"idle: {reason}")
