@@ -6,7 +6,7 @@ import time
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
-SCRIPT = REPO / "tools" / "social_autopilot.py"
+SCRIPT = REPO / "tools" / "social_autopilot_runtime.py"
 INTERVAL = 30 * 60
 
 
