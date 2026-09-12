@@ -1,0 +1,50 @@
+{
+  "funnel_name": "VASTcode21 Early Access",
+  "current_stage": "pre_release",
+  "traffic_sources": ["Instagram", "TikTok", "YouTube Shorts", "Facebook", "X", "Threads"],
+  "landing_page": {
+    "headline": "VASTcode21 — Research-Driven MT5 Automation for GOLD & BITCOIN",
+    "subheadline": "Follow the development and validation process of proprietary MT5 trading technology built for GOLD and BITCOIN.",
+    "primary_cta": "Join the Early Access List",
+    "sections": [
+      "What VASTcode21 is",
+      "How validation works",
+      "GOLD and BITCOIN focus",
+      "Development milestones",
+      "Risk disclosure",
+      "Early access form"
+    ]
+  },
+  "lead_fields": ["email", "first_name"],
+  "email_sequence": [
+    {
+      "delay_days": 0,
+      "subject": "Welcome to VASTcode21 Early Access",
+      "purpose": "Set expectations and explain the research-first approach."
+    },
+    {
+      "delay_days": 2,
+      "subject": "How VASTcode21 validates a strategy",
+      "purpose": "Explain cloud research, MT5 real-tick validation, robustness and forward gates."
+    },
+    {
+      "delay_days": 5,
+      "subject": "Why VASTcode21 focuses only on GOLD and BITCOIN",
+      "purpose": "Explain product scope and disciplined specialization."
+    },
+    {
+      "delay_days": 9,
+      "subject": "Development update",
+      "purpose": "Share only verified milestone progress from the public status files."
+    }
+  ],
+  "sales_activation": {
+    "enabled": false,
+    "requires": [
+      "release candidate exists",
+      "forward validation gate passed",
+      "explicit user approval",
+      "final pricing and licensing approval"
+    ]
+  }
+}
