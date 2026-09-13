@@ -7,6 +7,7 @@ on:
     paths:
       - 'status/summary.json'
       - 'status/autonomy.json'
+      - 'site/data/event_risk.json'
       - 'marketing/brand.json'
       - 'marketing/social_config.json'
       - 'tools/marketing_planner.py'
@@ -15,7 +16,7 @@ on:
       - 'tools/instagram_growth_analytics.py'
       - '.github/workflows/marketing.yml'
   schedule:
-    - cron: '25 6 * * *'
+    - cron: '25 */6 * * *'
 
 permissions:
   contents: write
@@ -70,11 +71,14 @@ jobs:
           else
             git commit -m 'chore: refresh organic growth content and metrics'
             for attempt in 1 2 3; do
-              git pull --rebase origin main && git push && break
+              if git pull --rebase origin main && git push; then
+                break
+              fi
               if [ "$attempt" -eq 3 ]; then
                 echo 'Could not publish growth assets after retries' >&2
                 exit 1
               fi
+              git rebase --abort >/dev/null 2>&1 || true
               sleep 3
             done
           fi
