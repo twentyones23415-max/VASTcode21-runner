@@ -1,6 +1,8 @@
 (()=>{
   const CONFIG='data/tutor_runtime.json';
   const SESSION_KEY='vast_tutor_supabase_session_v1';
+  const MAX_IMAGE_BYTES=8*1024*1024;
+  const ALLOWED_IMAGE_TYPES=new Set(['image/png','image/jpeg','image/webp']);
   const q=(s,r=document)=>r.querySelector(s);
   const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   let runtime=null;
@@ -134,6 +136,25 @@
 
   function list(items){return `<ul>${(items||[]).map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`}
 
+  function fmtContextTime(value){
+    if(!value)return 'time unavailable';
+    try{return new Date(value).toLocaleString()}catch{return 'time unavailable'}
+  }
+
+  function verifiedContext(ctx){
+    const event=ctx?.event_risk||{};
+    const intel=ctx?.market_intelligence||{};
+    const nearest=event.status==='verified' && event.nearest && typeof event.nearest==='object'?event.nearest:null;
+    const items=intel.status==='verified' && Array.isArray(intel.items)?intel.items.slice(0,3):[];
+    const eventHtml=nearest
+      ? `<div style="margin-top:7px"><b>Nearest verified event</b><div style="color:#b8c4d2;margin-top:3px">${esc(nearest.title||'Scheduled event')} · ${esc(nearest.countdown||fmtContextTime(nearest.scheduled_at))}${nearest.source?` · ${esc(nearest.source)}`:''}</div></div>`
+      : `<div style="margin-top:7px;color:#8294a8">Event feed: ${event.status==='verified'?'verified; no qualifying nearby event':'unavailable or stale'}</div>`;
+    const newsHtml=items.length
+      ? `<div style="margin-top:10px"><b>Fresh verified context</b><div style="display:grid;gap:6px;margin-top:6px">${items.map(x=>`<div style="padding:7px 9px;border:1px solid #20394d;border-radius:8px;background:#08131f"><div style="color:#c9d6df">${esc(x.title||'Context item')}</div><div style="color:#6f8798;font-size:10px;margin-top:2px">${esc(x.source||'source unavailable')}${x.published_at?` · ${esc(fmtContextTime(x.published_at))}`:''}</div></div>`).join('')}</div></div>`
+      : `<div style="margin-top:10px;color:#8294a8">News/context feed: ${intel.status==='verified'?'verified; no current items':'unavailable or stale'}</div>`;
+    return `<div style="margin-top:14px;padding:12px;border:1px solid #20394d;border-radius:10px;background:#091521"><div style="font-size:11px;font-weight:900;letter-spacing:.08em;color:#72d9ed">VERIFIED CONTEXT USED FOR THIS REVIEW</div>${eventHtml}${newsHtml}<div style="margin-top:9px;color:#6f8798;font-size:10px">Market prices remain ${esc(ctx?.market?.status||'unknown')}; contextual headlines are never treated as live prices or proof of direction.</div></div>`;
+  }
+
   function render(payload){
     const host=ensureResultHost(); if(!host) return;
     const a=payload?.analysis||{}, ctx=payload?.context||{}, scenarios=a.scenarios||{};
@@ -146,14 +167,24 @@
       ${scenario('bullish')}${scenario('bearish')}${scenario('neutral')}
       <p><strong>Uncertainty</strong><br>${esc(a.uncertainty||'unknown')}</p>
       <p><strong>Educational takeaway</strong><br>${esc(a.educational_takeaway||'')}</p>
+      ${verifiedContext(ctx)}
       <div style="margin-top:14px;padding-top:12px;border-top:1px solid #26364d;color:#9fb0c4;font-size:13px">Event risk: ${esc(ctx.event_risk?.status||'unknown')} · Market prices: ${esc(ctx.market?.status||'unknown')} · News context: ${esc(ctx.market_intelligence?.status||'unknown')}<br>Privacy: ${payload?.privacy?.screenshot_stored===false?'screenshot not stored':'unknown'} · Analysis history: ${payload?.privacy?.analysis_saved?'saved securely':'not saved'} · Usage today: ${esc(usage.today??'—')}/${esc(usage.daily_limit??'—')}<br>${esc(payload?.notice||'Educational use only.')}</div>`;
   }
 
   function fileToDataUrl(file){return new Promise((resolve,reject)=>{const r=new FileReader();r.onload=()=>resolve(r.result);r.onerror=()=>reject(new Error('Could not read screenshot'));r.readAsDataURL(file)})}
 
+  function validateClientFile(file){
+    if(!ALLOWED_IMAGE_TYPES.has(file.type))return 'Use a PNG, JPEG or WEBP chart screenshot.';
+    if(!Number.isFinite(file.size)||file.size<=0)return 'The selected screenshot is empty or unreadable.';
+    if(file.size>MAX_IMAGE_BYTES)return 'Screenshot exceeds the secure 8 MB beta limit. Export a smaller PNG, JPEG or WEBP image.';
+    return '';
+  }
+
   async function analyze(){
     const input=q('#vision-file'), btn=q('#vision-analyze'), file=input?.files?.[0];
     if(!file){status('Choose a chart screenshot first.','error');return}
+    const fileError=validateClientFile(file);
+    if(fileError){status(fileError,'error');return}
     if(!runtime?.fn){status('Secure Vision backend is not connected.','error');return}
     btn.disabled=true;btn.textContent='Analyzing securely…';
     try{
