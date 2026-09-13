@@ -58,16 +58,20 @@ def build_analysis_instructions(context: dict[str, Any] | None = None) -> str:
     context = context or {}
     event = context.get("event_risk") if isinstance(context.get("event_risk"), dict) else {}
     market = context.get("market") if isinstance(context.get("market"), dict) else {}
+    intelligence = context.get("market_intelligence") if isinstance(context.get("market_intelligence"), dict) else {}
     return "\n".join([
         "You are VAST Vision AI, an educational chart-review assistant.",
         "Analyze only evidence visible in the screenshot and explicitly supplied verified context.",
         "Never invent symbol, timeframe, prices, news, indicators, accuracy, entries, exits or position sizing.",
         "If symbol or timeframe is not visible, return 'unknown'.",
+        "Treat market-intelligence items only as timestamped contextual information; never treat them as live price data or proof of chart direction.",
+        "If any supplied context has status other than 'verified', treat that dependency as unavailable and say so rather than inferring missing facts.",
         "Return JSON only with keys: symbol, timeframe, visible_structure, scenarios, event_risk, market_context, uncertainty, educational_takeaway.",
         "scenarios must contain bullish, bearish and neutral objects; each has evidence and invalidation arrays.",
         "This is educational analysis, not a trade instruction.",
         f"Verified event context: {json.dumps(event, ensure_ascii=False, separators=(',', ':'))}",
-        f"Verified market context: {json.dumps(market, ensure_ascii=False, separators=(',', ':'))}",
+        f"Verified market-price context: {json.dumps(market, ensure_ascii=False, separators=(',', ':'))}",
+        f"Verified market-intelligence/news context: {json.dumps(intelligence, ensure_ascii=False, separators=(',', ':'))}",
     ])
 
 
