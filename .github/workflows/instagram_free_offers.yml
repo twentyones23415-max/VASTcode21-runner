@@ -1,16 +1,10 @@
 name: VASTcode21 service-offer publisher
 
+# Manual emergency/validation path only.
+# Organic scheduled publishing is owned exclusively by instagram_publish.yml so
+# every post shares one cadence/state gate and parallel publishers cannot race.
 on:
   workflow_dispatch:
-  push:
-    branches: [main]
-    paths:
-      - 'tools/instagram_free_offer_publisher.py'
-      - '.github/workflows/instagram_free_offers.yml'
-      - 'marketing/queue.json'
-      - 'marketing/assets/offers-ready-*.jpg'
-  schedule:
-    - cron: '12 * * * *'
 
 permissions:
   contents: write
