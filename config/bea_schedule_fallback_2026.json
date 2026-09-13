@@ -1,0 +1,20 @@
+{
+  "version": "1.0",
+  "checked_at": "2026-09-13",
+  "source_url": "https://www.bea.gov/news/schedule/full",
+  "timezone": "America/New_York",
+  "events": [
+    {"local": "2026-09-24T08:30:00", "title": "U.S. International Transactions and Investment Position, 2nd Quarter 2026", "impact": "medium"},
+    {"local": "2026-09-30T08:30:00", "title": "GDP (Third Estimate), Industries, Corporate Profits, State GDP, and State Personal Income, 2nd Quarter 2026; State PCE, 2025", "impact": "high"},
+    {"local": "2026-09-30T08:30:00", "title": "Personal Income and Outlays, August 2026", "impact": "high"},
+    {"local": "2026-10-06T08:30:00", "title": "U.S. International Trade in Goods and Services, August 2026", "impact": "medium"},
+    {"local": "2026-10-29T08:30:00", "title": "GDP (Advance Estimate), 3rd Quarter 2026", "impact": "high"},
+    {"local": "2026-10-29T08:30:00", "title": "Personal Income and Outlays, September 2026", "impact": "high"},
+    {"local": "2026-11-04T08:30:00", "title": "U.S. International Trade in Goods and Services, September 2026", "impact": "medium"},
+    {"local": "2026-11-25T08:30:00", "title": "GDP (Second Estimate) and Corporate Profits, 3rd Quarter 2026", "impact": "high"},
+    {"local": "2026-11-25T08:30:00", "title": "Personal Income and Outlays, October 2026", "impact": "high"},
+    {"local": "2026-12-08T08:30:00", "title": "U.S. International Trade in Goods and Services, October 2026", "impact": "medium"},
+    {"local": "2026-12-23T08:30:00", "title": "GDP (Third Estimate), Industries, Corporate Profits, State GDP, and State Personal Income, 3rd Quarter 2026", "impact": "high"},
+    {"local": "2026-12-23T08:30:00", "title": "Personal Income and Outlays, November 2026", "impact": "high"}
+  ]
+}
