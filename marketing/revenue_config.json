@@ -1,5 +1,5 @@
 {
-  "version": "1.0.2",
+  "version": "1.0.3",
   "currency": "EUR",
   "mode": "stripe_live_connected",
   "daily_revenue_goal_note": "Revenue is a target, not a guarantee.",
@@ -16,6 +16,7 @@
   "connections": {
     "stripe": true,
     "calendly": false,
+    "calcom": true,
     "resend": false
   },
   "offers": [
@@ -27,7 +28,7 @@
       "billing": "one_time",
       "enabled": true,
       "checkout_url": "https://book.stripe.com/bJedRaaIVaZG6L55S6cEw00",
-      "booking_url": "",
+      "booking_url": "https://cal.com/vastcode21/mt5-setup-audit",
       "booking_provider": "cal.com",
       "headline": "Get your MT5 setup reviewed and automation-ready.",
       "deliverable": "45-minute technical MT5 setup session covering installation, templates, EA/indicator setup, VPS/terminal hygiene and automation troubleshooting.",
@@ -63,7 +64,8 @@
   ],
   "launch_requirements": {
     "mt5-setup-audit": [
-      "stripe"
+      "stripe",
+      "calcom"
     ],
     "research-brief": [
       "stripe",
