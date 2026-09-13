@@ -108,7 +108,9 @@
 
   function mount(){
     if(q('#outcome-lab-local')) return;
-    const learning=q('#tutor-learning-path')||q('#tutor-ai-lab'); if(!learning) return;
+    const slot=q('#outcome-slot');
+    const learning=q('#tutor-learning-path')||q('#tutor-ai-lab');
+    if(!slot && !learning) return;
     const s=document.createElement('section'); s.id='outcome-lab-local'; s.className='outcome-lab';
     s.innerHTML=`<div class="shell"><div class="outcome-shell">
       <div class="outcome-head"><div><div class="eyebrow">VAST Outcome Lab · local beta</div><h2>Record the idea before you know the answer.</h2><p>Capture a scenario, its invalidation and the currently verified Event Risk context. Return later and review what actually happened. All records stay in this browser during prelaunch.</p></div><div class="outcome-count" id="outcome-count">0 captured</div></div>
@@ -125,7 +127,12 @@
       <div class="outcome-list" id="outcome-list"></div>
       <div class="outcome-privacy"><strong>Prelaunch privacy:</strong> records are stored only in browser localStorage. Clearing site data removes them. This is an educational review journal, not a signal or execution tool.</div>
     </div></div>`;
-    learning.insertAdjacentElement('afterend',s);
+    if(slot){
+      slot.querySelectorAll('.module-empty').forEach(n=>n.remove());
+      slot.appendChild(s);
+    }else{
+      learning.insertAdjacentElement('afterend',s);
+    }
     q('#outcome-form')?.addEventListener('submit',submit);
     renderList(); updateCount();
   }
