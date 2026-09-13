@@ -1,0 +1,57 @@
+name: VASTcode21 Research Brief subscriber sync
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'tools/stripe_mailchimp_sync.py'
+      - '.github/workflows/subscriber_sync.yml'
+  schedule:
+    - cron: '37 * * * *'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: vastcode21-subscriber-sync
+  cancel-in-progress: true
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+
+      - name: Sync active Stripe Research Brief subscribers to Mailchimp
+        env:
+          STRIPE_RESTRICTED_KEY: ${{ secrets.STRIPE_RESTRICTED_KEY }}
+          MAILCHIMP_API_KEY: ${{ secrets.MAILCHIMP_API_KEY }}
+        run: python tools/stripe_mailchimp_sync.py
+
+      - name: Refresh revenue readiness and landing page
+        run: python tools/revenue_engine.py
+
+      - name: Persist subscriber sync state
+        shell: bash
+        run: |
+          git config user.name 'VASTcode21 Revenue Bot'
+          git config user.email 'vastcode21-bot@users.noreply.github.com'
+          git add marketing/revenue_config.json marketing/revenue_status.json marketing/subscriber_sync_state.json site/index.html
+          if git diff --cached --quiet; then
+            echo 'No subscriber sync change.'
+          else
+            git commit -m 'chore: refresh Research Brief subscriber sync state'
+            for attempt in 1 2 3; do
+              git pull --rebase origin main && git push && break
+              if [ "$attempt" -eq 3 ]; then
+                echo 'Could not persist subscriber sync state' >&2
+                exit 1
+              fi
+              sleep 3
+            done
+          fi
