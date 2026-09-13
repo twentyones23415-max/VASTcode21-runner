@@ -1,9 +1,9 @@
 {
-  "version": "3.1.1",
+  "version": "3.1.2",
   "mode": "pre_release_zero_cost",
   "auto_reply_comments": true,
   "auto_hide_spam": false,
-  "auto_dm": true,
+  "auto_dm": false,
   "max_comment_replies_per_cycle": 5,
   "max_comment_replies_per_day": 20,
   "comment_lookback_days": 7,
