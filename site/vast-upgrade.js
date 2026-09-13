@@ -8,7 +8,7 @@
   function fixBrand(){
     const brand=q('.brand');
     const mark=q('.brand .mark');
-    if(mark) mark.innerHTML='<img src="logo-mark.svg" alt="" width="34" height="34">';
+    if(mark) mark.innerHTML='<img src="logo-original.webp" alt="VASTcode21 logo" width="34" height="34">';
     if(brand) brand.title='VASTcode21';
   }
 
