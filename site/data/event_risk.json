@@ -1,7 +1,7 @@
 {
   "version": "1.2",
   "status": "active",
-  "updated_at": "2026-09-13T12:35:24.294193+00:00",
+  "updated_at": "2026-09-13T13:29:20.479106+00:00",
   "horizon_days": 14,
   "sources": [
     "U.S. Bureau of Labor Statistics",
@@ -23,7 +23,7 @@
       "XAUUSD",
       "BTCUSD"
     ],
-    "minutes_from_now": 4314,
+    "minutes_from_now": 4260,
     "risk_state": "SCHEDULED",
     "countdown": "2d 23h"
   },
@@ -39,7 +39,7 @@
         "XAUUSD",
         "BTCUSD"
       ],
-      "minutes_from_now": 4314,
+      "minutes_from_now": 4260,
       "risk_state": "SCHEDULED",
       "countdown": "2d 23h"
     },
@@ -54,9 +54,9 @@
         "XAUUSD",
         "BTCUSD"
       ],
-      "minutes_from_now": 4644,
+      "minutes_from_now": 4590,
       "risk_state": "SCHEDULED",
-      "countdown": "3d 5h"
+      "countdown": "3d 4h"
     },
     {
       "title": "FOMC Press Conference",
@@ -69,7 +69,7 @@
         "XAUUSD",
         "BTCUSD"
       ],
-      "minutes_from_now": 4674,
+      "minutes_from_now": 4620,
       "risk_state": "SCHEDULED",
       "countdown": "3d 5h"
     },
@@ -84,16 +84,11 @@
         "XAUUSD",
         "BTCUSD"
       ],
-      "minutes_from_now": 7254,
+      "minutes_from_now": 7200,
       "risk_state": "SCHEDULED",
       "countdown": "5d 0h"
     }
   ],
-  "source_errors": [
-    {
-      "source": "BEA",
-      "error": "HTTP Error 403: Forbidden"
-    }
-  ],
+  "source_errors": [],
   "notice": "Event risk is contextual information, not a trading instruction. Times can change at the source; verify critical releases with the linked official source."
 }
