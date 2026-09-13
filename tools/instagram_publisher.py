@@ -5,6 +5,11 @@ Reads marketing/queue.json and marketing/social_config.json, enforces daily/rate
 limits, verifies the token belongs to the configured account, publishes the
 highest-priority eligible image post, and records the result in
 marketing/publish_state.json.
+
+Duplicate protection is conservative: before creating a new media container,
+the publisher checks recent remote Instagram media for an identical caption.
+If a matching post already exists, it records/reconciles that remote post
+locally and skips publishing.
 """
 
 from __future__ import annotations
@@ -40,7 +45,7 @@ def api(method: str, path: str, token: str, params: dict | None = None):
     params["access_token"] = token
     url = f"{API_BASE}{path}"
     body = None
-    headers = {"User-Agent": "VASTcode21-InstagramPublisher/1.0"}
+    headers = {"User-Agent": "VASTcode21-InstagramPublisher/1.1"}
     if method == "GET":
         url += "?" + urllib.parse.urlencode(params)
     else:
@@ -61,6 +66,23 @@ def parse_dt(value: str | None):
     return datetime.fromisoformat(value.replace("Z", "+00:00"))
 
 
+def normalize_caption(value: str | None) -> str:
+    return "\n".join(line.rstrip() for line in (value or "").strip().splitlines())
+
+
+def find_remote_duplicate(token: str, caption: str, now_utc: datetime, window_hours: int = 168):
+    response = api("GET", "/me/media", token, {"fields": "id,caption,timestamp", "limit": 50})
+    target = normalize_caption(caption)
+    cutoff = now_utc - timedelta(hours=window_hours)
+    for media in response.get("data", []):
+        ts = parse_dt(media.get("timestamp"))
+        if ts and ts.astimezone(timezone.utc) < cutoff:
+            continue
+        if normalize_caption(media.get("caption")) == target:
+            return media
+    return None
+
+
 def main() -> int:
     token = os.environ.get("INSTAGRAM_ACCESS_TOKEN", "").strip()
     if not token:
@@ -72,7 +94,7 @@ def main() -> int:
 
     config = load_json(CONFIG_PATH)
     queue = load_json(QUEUE_PATH)
-    state = load_json(STATE_PATH) if STATE_PATH.exists() else {"version": "1.0.0", "last_publish_at": None, "published": []}
+    state = load_json(STATE_PATH) if STATE_PATH.exists() else {"version": "1.1.0", "last_publish_at": None, "published": []}
 
     if not config.get("enabled", False):
         print("Instagram publishing disabled in social_config.json")
@@ -140,13 +162,31 @@ def main() -> int:
     caption_parts = [item.get("hook", "").strip(), item.get("caption", "").strip(), item.get("disclaimer", "").strip(), hashtags]
     caption = "\n\n".join(x for x in caption_parts if x)
 
+    # Remote idempotency check: do not trust local state alone.
+    remote_duplicate = find_remote_duplicate(token, caption, now_utc)
+    if remote_duplicate:
+        media_id = remote_duplicate.get("id")
+        published_at = remote_duplicate.get("timestamp") or now_utc.isoformat()
+        print(f"Remote duplicate detected for {queue_id}; media {media_id}. Skipping publish.")
+        if queue_id not in published_ids:
+            state["last_publish_at"] = published_at
+            state.setdefault("published", []).append({
+                "queue_id": queue_id,
+                "media_id": media_id,
+                "published_at": published_at,
+                "account": username,
+                "image_url": image_url,
+                "reconciled": True,
+            })
+            save_json(STATE_PATH, state)
+        return 0
+
     print(f"Preparing @{username} post: {queue_id}")
     container = api("POST", f"/{ig_user_id}/media", token, {"image_url": image_url, "caption": caption})
     creation_id = container.get("id")
     if not creation_id:
         raise RuntimeError(f"No creation id returned: {container}")
 
-    # Image containers are normally quick, but wait for Meta to report readiness.
     for _ in range(12):
         status = api("GET", f"/{creation_id}", token, {"fields": "status_code,status"})
         code = status.get("status_code")
@@ -157,6 +197,24 @@ def main() -> int:
         time.sleep(5)
     else:
         raise RuntimeError("Media container did not become ready within 60 seconds.")
+
+    # Re-check immediately before publish in case another run published the same caption.
+    remote_duplicate = find_remote_duplicate(token, caption, datetime.now(timezone.utc), window_hours=2)
+    if remote_duplicate:
+        media_id = remote_duplicate.get("id")
+        published_at = remote_duplicate.get("timestamp") or datetime.now(timezone.utc).isoformat()
+        print(f"Duplicate appeared before media_publish; media {media_id}. Skipping publish.")
+        state["last_publish_at"] = published_at
+        state.setdefault("published", []).append({
+            "queue_id": queue_id,
+            "media_id": media_id,
+            "published_at": published_at,
+            "account": username,
+            "image_url": image_url,
+            "reconciled": True,
+        })
+        save_json(STATE_PATH, state)
+        return 0
 
     result = api("POST", f"/{ig_user_id}/media_publish", token, {"creation_id": creation_id})
     media_id = result.get("id")
