@@ -1,5 +1,6 @@
 (()=>{
   const EARLY='https://eepurl.com/cN6dWhHhtP';
+  const MENTOR_DM='https://ig.me/m/vast.code21';
   const NEWS_FEED='https://raw.githubusercontent.com/twentyones23415-max/VASTcode21-runner/main/site/data/market_intelligence.json';
   const progress=42;
   const q=(s,r=document)=>r.querySelector(s);
@@ -43,6 +44,70 @@
     const steps=q('.steps',p); p.insertBefore(box,steps);
   }
 
+  function mentorSection(){
+    if(q('#mentor')) return;
+    const services=q('#services'); if(!services) return;
+    const s=document.createElement('section');
+    s.id='mentor'; s.className='mentor-section';
+    s.innerHTML=`<div class="shell">
+      <div class="mentor-hero">
+        <div class="mentor-copy">
+          <div class="eyebrow">VAST Mentor · Personal Trading Education</div>
+          <h2>Your own learning path.<br><span>One step at a time.</span></h2>
+          <p>Private, structured education for traders who want to understand MT5, market context, risk discipline and the VAST workflow without depending on signals. The goal is to make you more independent, not more dependent.</p>
+          <div class="mentor-chips"><span>1-to-1 guidance</span><span>MT5 practice</span><span>XAUUSD / BTCUSD context</span><span>Progress tracking</span></div>
+          <a class="btn primary mentor-main-cta" href="${MENTOR_DM}" target="_blank" rel="noopener noreferrer">Apply for VAST Mentor ↗</a>
+          <div class="mentor-note">Educational coaching only · No account management · No personalized investment advice</div>
+        </div>
+        <div class="mentor-map">
+          <div class="mentor-map-head"><span>Your learning path</span><b>PERSONALIZED</b></div>
+          <div class="mentor-level active"><i>01</i><div><b>Foundation</b><span>MT5, order types, platform hygiene</span></div><em>START</em></div>
+          <div class="mentor-rail"><span style="width:38%"></span></div>
+          <div class="mentor-level"><i>02</i><div><b>Market structure</b><span>XAUUSD / BTCUSD context and volatility</span></div><em>NEXT</em></div>
+          <div class="mentor-level"><i>03</i><div><b>Risk discipline</b><span>Position sizing, limits and journaling</span></div><em>LOCKED</em></div>
+          <div class="mentor-level"><i>04</i><div><b>VAST workflow</b><span>Buy · Sell · Exit · Wait states</span></div><em>LOCKED</em></div>
+          <div class="mentor-level"><i>05</i><div><b>Independent review</b><span>Build your own repeatable routine</span></div><em>GOAL</em></div>
+          <div class="mentor-map-foot"><span>Progress is based on completed learning milestones, not trading P&amp;L.</span></div>
+        </div>
+      </div>
+
+      <div class="mentor-plans">
+        <article class="mentor-plan">
+          <div class="tag">Private session</div>
+          <h3>VAST Mentor 1:1</h3>
+          <div class="mentor-price">€79 <small>/ 50 min</small></div>
+          <p>A focused private lesson built around your current level and the specific skill you want to improve.</p>
+          <ul><li>Personal level check</li><li>Live MT5 walkthrough</li><li>One focused topic per session</li><li>Action notes for your next practice block</li></ul>
+          <a href="${MENTOR_DM}" target="_blank" rel="noopener noreferrer" class="btn secondary">Request a mentor session ↗</a>
+        </article>
+        <article class="mentor-plan featured">
+          <div class="tag">Structured program</div>
+          <h3>4-Week Mentorship</h3>
+          <div class="mentor-price">€249 <small>/ 4 weeks</small></div>
+          <p>A guided learning track for people who want structure, accountability and measurable educational progress.</p>
+          <ul><li>4 private mentor sessions</li><li>Personal learning roadmap</li><li>MT5 + risk + market-context curriculum</li><li>Weekly practice objectives</li><li>End-of-program review</li></ul>
+          <a href="${MENTOR_DM}" target="_blank" rel="noopener noreferrer" class="btn primary">Apply for 4-week track ↗</a>
+        </article>
+        <article class="mentor-plan planned">
+          <div class="tag">In development</div>
+          <h3>VAST Tutor AI</h3>
+          <div class="mentor-price">24/7 <small>study companion</small></div>
+          <p>A future on-site learning assistant for explanations, quizzes and guided practice. It is not being sold until the experience is genuinely functional.</p>
+          <ul><li>Concept explanations</li><li>Practice questions</li><li>Personal lesson checkpoints</li><li>Educational use only</li></ul>
+          <a href="${EARLY}" target="_blank" rel="noopener noreferrer" class="btn secondary">Join development updates ↗</a>
+        </article>
+      </div>
+    </div>`;
+    services.insertAdjacentElement('afterend',s);
+  }
+
+  function mentorFaq(){
+    const questions=q('#faq .questions'); if(!questions || q('[data-mentor-faq]',questions)) return;
+    const block=document.createElement('div'); block.setAttribute('data-mentor-faq','true');
+    block.innerHTML=`<details><summary>What is VAST Mentor?</summary><p>VAST Mentor is private trading education focused on MT5 skills, market context, risk discipline and a structured VAST workflow. It is coaching and education, not a signal service or investment-advisory relationship.</p></details><details><summary>Do I need to be an experienced trader?</summary><p>No. The learning path starts from your actual level. Beginners can start with platform and risk foundations; more experienced users can focus on systematic workflow, validation and execution discipline.</p></details><details><summary>Does mentorship tell me what to buy or sell?</summary><p>No. The service teaches process, tools and decision discipline. It does not provide personalized buy/sell instructions, manage accounts or promise trading outcomes.</p></details>`;
+    [...block.children].forEach(x=>questions.appendChild(x));
+  }
+
   function marketSection(){
     if(q('#markets')) return;
     const vast=q('#vast'); if(!vast) return;
@@ -80,11 +145,14 @@
 
   function addNavLinks(){
     const links=q('.navlinks'); if(!links) return;
+    const faq=q('a[href="#faq"]',links);
+    if(!q('a[href="#mentor"]',links)){
+      const a=document.createElement('a');a.href='#mentor';a.textContent='Mentor';links.insertBefore(a,faq||links.lastElementChild);
+    }
     if(!q('a[href="#markets"]',links)){
-      const a=document.createElement('a');a.href='#markets';a.textContent='Markets';
-      const faq=q('a[href="#faq"]',links);links.insertBefore(a,faq||links.lastElementChild);
+      const a=document.createElement('a');a.href='#markets';a.textContent='Markets';links.insertBefore(a,faq||links.lastElementChild);
     }
   }
 
-  document.addEventListener('DOMContentLoaded',()=>{fixBrand();fixEarlyAccess();cleanInternalStatus();addProgress();marketSection();addNavLinks();});
+  document.addEventListener('DOMContentLoaded',()=>{fixBrand();fixEarlyAccess();cleanInternalStatus();mentorSection();mentorFaq();addProgress();marketSection();addNavLinks();});
 })();
