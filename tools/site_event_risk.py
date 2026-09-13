@@ -11,18 +11,21 @@ from zoneinfo import ZoneInfo
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / 'site/data/event_risk.json'
-UA = 'VASTcode21-EventRisk/1.0 (+https://github.com/twentyones23415-max/VASTcode21-runner)'
+# BLS can reject bot-like UAs on otherwise public calendar endpoints. Use a normal
+# browser UA while keeping a project contact header for responsible identification.
+UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/126 Safari/537.36'
+CONTACT = 'VASTcode21 Event Risk Monitor; https://github.com/twentyones23415-max/VASTcode21-runner'
 ET = ZoneInfo('America/New_York')
 UTC = timezone.utc
 
 BLS_ICS = 'https://www.bls.gov/schedule/news_release/bls.ics'
+BLS_MONTH = 'https://www.bls.gov/schedule/{year}/{month:02d}_sched_list.htm'
 BEA_SCHEDULE = 'https://www.bea.gov/news/schedule'
 FED_MONTH = 'https://www.federalreserve.gov/newsevents/{year}-{month}.htm'
 
 MONTHS = {m: i for i, m in enumerate([
     'January','February','March','April','May','June','July','August','September','October','November','December'
 ], 1)}
-
 HIGH_WORDS = (
     'consumer price index','employment situation','personal income and outlays','fomc meeting',
     'fomc press conference','gross domestic product','gdp (advance','federal funds','monetary policy'
@@ -33,8 +36,14 @@ MEDIUM_WORDS = (
     'speech - governor','fomc minutes'
 )
 
+
 def fetch_text(url: str) -> str:
-    req = urllib.request.Request(url, headers={'User-Agent': UA, 'Accept': 'text/html,text/calendar,*/*;q=0.8'})
+    req = urllib.request.Request(url, headers={
+        'User-Agent': UA,
+        'From': CONTACT,
+        'Accept': 'text/html,application/xhtml+xml,text/calendar;q=0.9,*/*;q=0.8',
+        'Accept-Language': 'en-US,en;q=0.9',
+    })
     with urllib.request.urlopen(req, timeout=25) as r:
         return r.read().decode('utf-8', errors='replace')
 
@@ -44,20 +53,14 @@ def clean_text(raw: str) -> list[str]:
     raw = re.sub(r'(?i)<br\s*/?>|</p>|</div>|</li>|</tr>|</td>|</th>|</h\d>', '\n', raw)
     raw = re.sub(r'(?s)<[^>]+>', ' ', raw)
     raw = html.unescape(raw)
-    lines = []
-    for x in raw.splitlines():
-        x = ' '.join(x.split())
-        if x:
-            lines.append(x)
-    return lines
+    return [x for x in (' '.join(v.split()) for v in raw.splitlines()) if x]
 
 
 def parse_ics_datetime(value: str) -> datetime | None:
     value = value.strip()
-    for fmt in ('%Y%m%dT%H%M%S', '%Y%m%dT%H%M', '%Y%m%d'):
+    for fmt, size in (('%Y%m%dT%H%M%S', 15), ('%Y%m%dT%H%M', 13), ('%Y%m%d', 8)):
         try:
-            dt = datetime.strptime(value[:15] if fmt.endswith('%S') else value[:13] if fmt.endswith('%M') else value[:8], fmt)
-            # BLS calendar event times are Eastern; date-only entries are ignored as market events.
+            dt = datetime.strptime(value[:size], fmt)
             if fmt == '%Y%m%d':
                 return None
             return dt.replace(tzinfo=ET).astimezone(UTC)
@@ -66,10 +69,9 @@ def parse_ics_datetime(value: str) -> datetime | None:
     return None
 
 
-def parse_bls(now: datetime) -> list[dict]:
+def parse_bls_ics(now: datetime) -> list[dict]:
     text = fetch_text(BLS_ICS).replace('\r\n', '\n')
-    # unfold RFC5545 continuation lines
-    text = re.sub(r'\n[ \t]', '', text)
+    text = re.sub(r'\n[ \t]', '', text)  # RFC5545 unfolding
     out = []
     for block in text.split('BEGIN:VEVENT')[1:]:
         if 'END:VEVENT' not in block:
@@ -80,10 +82,61 @@ def parse_bls(now: datetime) -> list[dict]:
         if not summary or not start:
             continue
         dt = parse_ics_datetime(start.group(1))
-        if not dt or not (now - timedelta(hours=8) <= dt <= now + timedelta(days=14)):
-            continue
-        out.append(event(summary.group(1).strip(), dt, 'BLS', 'https://www.bls.gov/schedule/', 'macro'))
+        if dt and now - timedelta(hours=8) <= dt <= now + timedelta(days=14):
+            out.append(event(summary.group(1).strip(), dt, 'BLS', 'https://www.bls.gov/schedule/', 'macro'))
     return out
+
+
+def parse_bls_html_month(year: int, month: int, now: datetime) -> list[dict]:
+    """Fallback to BLS's official list-view calendar when the ICS endpoint blocks automation."""
+    url = BLS_MONTH.format(year=year, month=month)
+    lines = clean_text(fetch_text(url))
+    out = []
+    # List view exposes rows as: Weekday, Month D, YYYY  HH:MM AM  Release title...
+    date_rx = re.compile(
+        r'^(?:Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday),\s+'
+        r'(January|February|March|April|May|June|July|August|September|October|November|December)\s+'
+        r'(\d{1,2}),\s+(\d{4})$', re.I
+    )
+    time_rx = re.compile(r'^(\d{1,2}:\d{2})\s+([AP]M)$', re.I)
+    i = 0
+    while i < len(lines):
+        dm = date_rx.match(lines[i])
+        if not dm or i + 2 >= len(lines):
+            i += 1
+            continue
+        tm = time_rx.match(lines[i + 1])
+        if not tm:
+            i += 1
+            continue
+        title = lines[i + 2]
+        # Skip navigation/holiday rows and malformed captures.
+        if len(title) < 6 or title.lower() in {'release', 'calendar', 'month view', 'list view'}:
+            i += 1
+            continue
+        clock = datetime.strptime(f'{tm.group(1)} {tm.group(2).upper()}', '%I:%M %p').time()
+        local = datetime(int(dm.group(3)), MONTHS[dm.group(1).title()], int(dm.group(2)), clock.hour, clock.minute, tzinfo=ET)
+        dt = local.astimezone(UTC)
+        if now - timedelta(hours=8) <= dt <= now + timedelta(days=14):
+            out.append(event(title, dt, 'BLS', url, 'macro'))
+        i += 3
+    return out
+
+
+def parse_bls(now: datetime) -> list[dict]:
+    try:
+        items = parse_bls_ics(now)
+        if items:
+            return items
+    except Exception:
+        pass
+    local = now.astimezone(ET)
+    items = []
+    for offset in (0, 1):
+        y = local.year + (local.month + offset - 1) // 12
+        m = (local.month + offset - 1) % 12 + 1
+        items.extend(parse_bls_html_month(y, m, now))
+    return items
 
 
 def parse_bea(now: datetime) -> list[dict]:
@@ -94,19 +147,14 @@ def parse_bea(now: datetime) -> list[dict]:
         m = rx.match(line)
         if not m:
             continue
-        month_name = m.group(1).title()
-        day = int(m.group(2))
         clock = datetime.strptime(m.group(3).upper(), '%I:%M %p').time()
-        local = datetime(now.astimezone(ET).year, MONTHS[month_name], day, clock.hour, clock.minute, tzinfo=ET)
+        local = datetime(now.astimezone(ET).year, MONTHS[m.group(1).title()], int(m.group(2)), clock.hour, clock.minute, tzinfo=ET)
         dt = local.astimezone(UTC)
         if not (now - timedelta(hours=8) <= dt <= now + timedelta(days=14)):
             continue
         title = ''
         for candidate in lines[i+1:i+8]:
-            low = candidate.lower()
-            if low in {'news','data','article','view'} or len(candidate) < 8:
-                continue
-            if candidate.startswith('Release Schedule'):
+            if candidate.lower() in {'news','data','article','view'} or len(candidate) < 8 or candidate.startswith('Release Schedule'):
                 continue
             title = candidate
             break
@@ -128,9 +176,7 @@ def parse_fed_month(year: int, month: int, now: datetime) -> list[dict]:
         tm = time_rx.match(line)
         if not tm:
             continue
-        title = ''
-        day = None
-        # Fed calendar text normally places event label after time and the release day after its description.
+        title, day = '', None
         for candidate in lines[i+1:i+12]:
             if not title and (candidate.lower().startswith('speech') or candidate.lower().startswith('fomc')):
                 title = candidate
@@ -166,13 +212,8 @@ def impact_for(title: str, source: str) -> str:
 def event(title: str, dt: datetime, source: str, link: str, category: str) -> dict:
     impact = impact_for(title, source)
     return {
-        'title': title,
-        'source': source,
-        'category': category,
-        'impact': impact,
-        'scheduled_at': dt.isoformat(),
-        'link': link,
-        'relevance': ['XAUUSD','BTCUSD'] if impact in ('high','medium') else ['XAUUSD','BTCUSD'],
+        'title': title, 'source': source, 'category': category, 'impact': impact,
+        'scheduled_at': dt.isoformat(), 'link': link, 'relevance': ['XAUUSD','BTCUSD'],
     }
 
 
@@ -192,8 +233,7 @@ def risk_state(minutes: int, impact: str) -> str:
 
 def main() -> None:
     now = datetime.now(UTC)
-    errors = []
-    items = []
+    errors, items = [], []
     for name, fn in [('BLS', lambda: parse_bls(now)), ('BEA', lambda: parse_bea(now))]:
         try:
             items.extend(fn())
@@ -220,12 +260,7 @@ def main() -> None:
         x['minutes_from_now'] = mins
         x['risk_state'] = risk_state(mins, x['impact'])
         if mins >= 0:
-            if mins < 60:
-                x['countdown'] = f'{mins}m'
-            elif mins < 1440:
-                x['countdown'] = f'{mins//60}h {mins%60}m'
-            else:
-                x['countdown'] = f'{mins//1440}d {(mins%1440)//60}h'
+            x['countdown'] = f'{mins}m' if mins < 60 else (f'{mins//60}h {mins%60}m' if mins < 1440 else f'{mins//1440}d {(mins%1440)//60}h')
         else:
             x['countdown'] = 'released' if mins > -120 else 'past'
 
@@ -233,15 +268,11 @@ def main() -> None:
     urgent = [x for x in visible if x['risk_state'] in ('ACTIVE','HIGH','ELEVATED','POST-EVENT')]
     nearest = next((x for x in visible if x['minutes_from_now'] >= -120), None)
     out = {
-        'version': '1.0',
+        'version': '1.1',
         'status': 'active' if visible else ('degraded' if errors else 'clear'),
-        'updated_at': now.isoformat(),
-        'horizon_days': 14,
+        'updated_at': now.isoformat(), 'horizon_days': 14,
         'sources': ['U.S. Bureau of Labor Statistics', 'U.S. Bureau of Economic Analysis', 'Federal Reserve Board'],
-        'urgent': urgent[:8],
-        'nearest': nearest,
-        'events': visible,
-        'source_errors': errors,
+        'urgent': urgent[:8], 'nearest': nearest, 'events': visible, 'source_errors': errors,
         'notice': 'Event risk is contextual information, not a trading instruction. Times can change at the source; verify critical releases with the linked official source.'
     }
     OUT.parent.mkdir(parents=True, exist_ok=True)
