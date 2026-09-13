@@ -1,0 +1,68 @@
+{
+  "version": "1.0.0",
+  "currency": "EUR",
+  "mode": "prepared_waiting_connections",
+  "daily_revenue_goal_note": "Revenue is a target, not a guarantee.",
+  "public_site_url": "https://twentyones23415-max.github.io/VASTcode21-runner/",
+  "brand_account": "vast.code21",
+  "sales_guardrails": {
+    "vast_indicator_sales_enabled": false,
+    "paid_ads": false,
+    "live_trading": false,
+    "no_profit_guarantees": true,
+    "no_personalized_financial_advice": true,
+    "no_signals_product": true
+  },
+  "connections": {
+    "stripe": false,
+    "calendly": false,
+    "resend": false
+  },
+  "offers": [
+    {
+      "id": "mt5-setup-audit",
+      "name": "MT5 Setup & Automation Audit",
+      "type": "technical_service",
+      "price_eur": 99,
+      "billing": "one_time",
+      "enabled": true,
+      "checkout_url": "",
+      "booking_url": "",
+      "headline": "Get your MT5 setup reviewed and automation-ready.",
+      "deliverable": "45-minute technical MT5 setup session covering installation, templates, EA/indicator setup, VPS/terminal hygiene and automation troubleshooting.",
+      "not_included": "No trading signals, account management, profit promise or personalized investment advice.",
+      "fulfillment": "customer books a session after successful payment"
+    },
+    {
+      "id": "research-brief",
+      "name": "VASTcode21 Research Brief",
+      "type": "educational_membership",
+      "price_eur": 15,
+      "billing": "monthly",
+      "enabled": true,
+      "checkout_url": "",
+      "headline": "Weekly validation notes for serious MT5 research followers.",
+      "deliverable": "A weekly educational email covering verified VASTcode21 research milestones, MT5 validation concepts and GOLD/BITCOIN system-development lessons.",
+      "not_included": "No signals, copy trading, guaranteed returns or personalized financial advice.",
+      "fulfillment": "weekly automated email after active subscription"
+    },
+    {
+      "id": "vast-early-access",
+      "name": "VAST Early Access List",
+      "type": "free_waitlist",
+      "price_eur": 0,
+      "billing": "free",
+      "enabled": true,
+      "checkout_url": "",
+      "headline": "Join the free VAST release waitlist.",
+      "deliverable": "Verified development and release updates.",
+      "not_included": "The VAST indicator is not for sale while validation is incomplete.",
+      "fulfillment": "email waitlist"
+    }
+  ],
+  "launch_requirements": {
+    "mt5-setup-audit": ["stripe", "calendly"],
+    "research-brief": ["stripe", "resend"],
+    "vast-early-access": ["resend"]
+  }
+}
