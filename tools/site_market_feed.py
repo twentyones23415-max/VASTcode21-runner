@@ -8,7 +8,7 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 CONFIG=ROOT/'config/context_sources.json'
 OUT=ROOT/'site/data/market_intelligence.json'
-UA='VASTcode21-MarketMonitor/1.3 (+https://github.com/twentyones23415-max/VASTcode21-runner)'
+UA='VASTcode21-MarketMonitor/1.4 (+https://github.com/twentyones23415-max/VASTcode21-runner)'
 
 GOLD_MARKET_WORDS={
     'price','prices','market','markets','futures','bullion','ounce','ounces','metal','metals','demand',
@@ -21,6 +21,12 @@ FED_MARKET_WORDS={
     'monetary','fomc','federal open market','interest rate','interest rates','rate cut','rate hike',
     'inflation','economic outlook','economy','employment','labor market','unemployment','gdp',
     'financial conditions','treasury','balance sheet','powell','waller','governor','chair'
+}
+BLOCKED_SOURCES={
+    'facebook.com','instagram.com','tiktok.com','x.com','twitter.com','moomoo.com'
+}
+LOW_VALUE_TITLE_TERMS={
+    'prediction market','crypto prediction market','price range on','price on sep'
 }
 
 def text(node, name):
@@ -67,20 +73,33 @@ def relevant(title: str, feed_name: str) -> bool:
         return 'bitcoin' in t or ' btc' in f' {t}' or t.startswith('btc')
     return True
 
+def quality_allowed(title: str, source: str) -> bool:
+    t=' '.join(title.lower().split())
+    s=source.lower().strip()
+    if s in BLOCKED_SOURCES:
+        return False
+    if any(term in t for term in LOW_VALUE_TITLE_TERMS):
+        return False
+    return True
+
 def main():
     cfg=json.loads(CONFIG.read_text(encoding='utf-8'))
     feeds=cfg.get('news',{}).get('rss',[])
-    items=[]; errors=[]
+    items=[]; errors=[]; filtered=0
     for f in feeds:
         try:
             root=ET.fromstring(fetch(f['url']))
             for it in root.findall('.//item')[:40]:
                 title=text(it,'title'); link=text(it,'link')
                 if not title or not link or not relevant(title,f.get('name','')): continue
+                source=source_name(it,f.get('name','') or 'source')
+                if not quality_allowed(title,source):
+                    filtered+=1
+                    continue
                 dt=parse_date(text(it,'pubDate') or text(it,'date'))
                 name=f.get('name','')
                 category='gold / macro' if 'gold' in name else 'bitcoin / crypto' if 'bitcoin' in name else 'fed / macro' if 'fed' in name else f.get('category','market_news')
-                items.append({'title':title,'link':link,'source':source_name(it,name or 'source'),'category':category,'published_at':dt.isoformat() if dt else None,'age':age_string(dt)})
+                items.append({'title':title,'link':link,'source':source,'category':category,'published_at':dt.isoformat() if dt else None,'age':age_string(dt)})
         except Exception as e:
             errors.append({'feed':f.get('name','unknown'),'error':str(e)[:180]})
 
@@ -106,9 +125,9 @@ def main():
         leftovers.sort(key=lambda x:x.get('published_at') or '',reverse=True)
         clean.extend(leftovers[:16-len(clean)])
 
-    out={'version':'1.3','status':'active' if clean else 'degraded','updated_at':datetime.now(timezone.utc).isoformat(),'scope':['XAUUSD','BTCUSD','macro'],'items':clean,'feed_errors':errors}
+    out={'version':'1.4','status':'active' if clean else 'degraded','updated_at':datetime.now(timezone.utc).isoformat(),'scope':['XAUUSD','BTCUSD','macro'],'items':clean,'feed_errors':errors,'quality_filtered':filtered}
     OUT.parent.mkdir(parents=True,exist_ok=True)
     OUT.write_text(json.dumps(out,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
-    print(f'Published {len(clean)} interleaved market-intelligence headlines; errors={len(errors)}')
+    print(f'Published {len(clean)} interleaved market-intelligence headlines; filtered={filtered}; errors={len(errors)}')
 
 if __name__=='__main__': main()
