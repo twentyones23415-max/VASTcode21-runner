@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 from __future__ import annotations
-import json, urllib.request, xml.etree.ElementTree as ET
+import json, re, urllib.request, xml.etree.ElementTree as ET
 from datetime import datetime, timezone
 from email.utils import parsedate_to_datetime
 from pathlib import Path
@@ -8,7 +8,7 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 CONFIG=ROOT/'config/context_sources.json'
 OUT=ROOT/'site/data/market_intelligence.json'
-UA='VASTcode21-MarketMonitor/1.4 (+https://github.com/twentyones23415-max/VASTcode21-runner)'
+UA='VASTcode21-MarketMonitor/1.5 (+https://github.com/twentyones23415-max/VASTcode21-runner)'
 
 GOLD_MARKET_WORDS={
     'price','prices','market','markets','futures','bullion','ounce','ounces','metal','metals','demand',
@@ -26,7 +26,8 @@ BLOCKED_SOURCES={
     'facebook.com','instagram.com','tiktok.com','x.com','twitter.com','moomoo.com'
 }
 LOW_VALUE_TITLE_TERMS={
-    'prediction market','crypto prediction market','price range on','price on sep'
+    'prediction market','crypto prediction market','price range on','price on sep',
+    'casino','casinos','gambling','sportsbook','betting','lottery','giveaway','airdrop'
 }
 
 def text(node, name):
@@ -61,16 +62,23 @@ def source_name(item, fallback):
     if ' - ' in title: return title.rsplit(' - ',1)[-1][:70]
     return fallback.replace('_',' ').title()
 
+def has_term(normalized: str, term: str) -> bool:
+    # Match complete words/phrases so e.g. "fed" does not match "Feds" and
+    # "gold" does not accidentally qualify unrelated company names by itself.
+    parts=[re.escape(p) for p in term.lower().split()]
+    pattern=r'(?<![a-z0-9])' + r'\s+'.join(parts) + r'(?![a-z0-9])'
+    return re.search(pattern, normalized) is not None
+
 def relevant(title: str, feed_name: str) -> bool:
     t=' '.join(title.lower().split())
     name=feed_name.lower()
     if 'fed' in name:
-        return any(word in t for word in FED_MARKET_WORDS)
+        return any(has_term(t, word) for word in FED_MARKET_WORDS)
     if 'gold' in name:
-        if 'xau' in t or 'bullion' in t or 'precious metal' in t: return True
-        return 'gold' in t and any(word in t for word in GOLD_MARKET_WORDS)
+        if has_term(t,'xau') or has_term(t,'bullion') or has_term(t,'precious metal'): return True
+        return has_term(t,'gold') and any(has_term(t, word) for word in GOLD_MARKET_WORDS)
     if 'bitcoin' in name:
-        return 'bitcoin' in t or ' btc' in f' {t}' or t.startswith('btc')
+        return has_term(t,'bitcoin') or has_term(t,'btc')
     return True
 
 def quality_allowed(title: str, source: str) -> bool:
@@ -78,7 +86,7 @@ def quality_allowed(title: str, source: str) -> bool:
     s=source.lower().strip()
     if s in BLOCKED_SOURCES:
         return False
-    if any(term in t for term in LOW_VALUE_TITLE_TERMS):
+    if any(has_term(t, term) for term in LOW_VALUE_TITLE_TERMS):
         return False
     return True
 
@@ -125,7 +133,7 @@ def main():
         leftovers.sort(key=lambda x:x.get('published_at') or '',reverse=True)
         clean.extend(leftovers[:16-len(clean)])
 
-    out={'version':'1.4','status':'active' if clean else 'degraded','updated_at':datetime.now(timezone.utc).isoformat(),'scope':['XAUUSD','BTCUSD','macro'],'items':clean,'feed_errors':errors,'quality_filtered':filtered}
+    out={'version':'1.5','status':'active' if clean else 'degraded','updated_at':datetime.now(timezone.utc).isoformat(),'scope':['XAUUSD','BTCUSD','macro'],'items':clean,'feed_errors':errors,'quality_filtered':filtered}
     OUT.parent.mkdir(parents=True,exist_ok=True)
     OUT.write_text(json.dumps(out,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
     print(f'Published {len(clean)} interleaved market-intelligence headlines; filtered={filtered}; errors={len(errors)}')
