@@ -6,6 +6,7 @@ on:
     branches: [main]
     paths:
       - 'tools/stripe_mailchimp_sync.py'
+      - 'tools/revenue_engine.py'
       - '.github/workflows/subscriber_sync.yml'
   schedule:
     - cron: '37 * * * *'
@@ -33,15 +34,23 @@ jobs:
           MAILCHIMP_API_KEY: ${{ secrets.MAILCHIMP_API_KEY }}
         run: python tools/stripe_mailchimp_sync.py
 
-      - name: Refresh revenue readiness and landing page
+      - name: Refresh revenue readiness and optional offers page
         run: python tools/revenue_engine.py
+
+      - name: Assert Tutor app entry point is untouched
+        shell: bash
+        run: |
+          if ! grep -q 'VASTcode21 — Tutor AI Workspace' site/index.html; then
+            echo 'Refusing to persist: site/index.html is not the Tutor app entry point.' >&2
+            exit 1
+          fi
 
       - name: Persist subscriber sync state
         shell: bash
         run: |
           git config user.name 'VASTcode21 Revenue Bot'
           git config user.email 'vastcode21-bot@users.noreply.github.com'
-          git add marketing/revenue_config.json marketing/revenue_status.json marketing/subscriber_sync_state.json site/index.html
+          git add marketing/revenue_config.json marketing/revenue_status.json marketing/subscriber_sync_state.json site/offers.html
           if git diff --cached --quiet; then
             echo 'No subscriber sync change.'
           else
