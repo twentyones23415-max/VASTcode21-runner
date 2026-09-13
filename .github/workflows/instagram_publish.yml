@@ -1,0 +1,63 @@
+name: VASTcode21 Instagram publisher
+
+on:
+  workflow_dispatch:
+    inputs:
+      validate_only:
+        description: 'Validate token/account only; do not publish'
+        required: false
+        default: true
+        type: boolean
+      force_publish:
+        description: 'Publish now, bypassing the configured local publish hour'
+        required: false
+        default: false
+        type: boolean
+  schedule:
+    - cron: '35 * * * *'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: vastcode21-instagram-publisher
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+
+      - name: Validate or publish Instagram content
+        env:
+          INSTAGRAM_ACCESS_TOKEN: ${{ secrets.INSTAGRAM_ACCESS_TOKEN }}
+          VALIDATE_ONLY: ${{ github.event_name == 'workflow_dispatch' && inputs.validate_only || false }}
+          FORCE_PUBLISH: ${{ github.event_name == 'workflow_dispatch' && inputs.force_publish || false }}
+        run: python tools/instagram_publisher.py
+
+      - name: Commit Instagram publish state when changed
+        if: ${{ always() && github.event_name != 'workflow_dispatch' || (github.event_name == 'workflow_dispatch' && !inputs.validate_only) }}
+        shell: bash
+        run: |
+          git config user.name 'VASTcode21 Instagram Bot'
+          git config user.email 'vastcode21-bot@users.noreply.github.com'
+          git add marketing/publish_state.json
+          if git diff --cached --quiet; then
+            echo 'No Instagram publish state change.'
+          else
+            git commit -m 'chore: record Instagram publication'
+            for attempt in 1 2 3; do
+              git pull --rebase origin main && git push && break
+              if [ "$attempt" -eq 3 ]; then
+                echo 'Could not persist Instagram publish state after retries' >&2
+                exit 1
+              fi
+              sleep 3
+            done
+          fi
