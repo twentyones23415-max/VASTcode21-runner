@@ -17,7 +17,7 @@
   <header class="app-topbar">
     <button class="brandlock" type="button" data-page="home" aria-label="VASTcode21 home">
       <img class="brand-logo" src="vastcode21-instagram-logo.svg" alt="VASTcode21 logo">
-      <span class="brand-copy"><strong>VAST<span>code21</span></strong><small>TUTOR AI · BETA</small></span>
+      <span class="brand-copy"><strong><span class="brand-vast">VAST</span><span class="brand-code">code</span><span class="brand-21">21</span></strong><small>TUTOR AI · BETA</small></span>
     </button>
 
     <nav class="topnav" aria-label="Workspace navigation">
@@ -26,6 +26,7 @@
       <button type="button" data-page="tutor">Tutor</button>
       <button type="button" data-page="outcome">Outcome Lab</button>
       <button type="button" data-page="context">Context</button>
+      <button type="button" data-page="pricing">Pricing</button>
     </nav>
 
     <div class="topbar-right">
@@ -77,6 +78,44 @@
       <section class="app-page" id="page-context">
         <div class="workspace-head"><div><span class="page-kicker">VERIFIED CONTEXT</span><h1>Event risk</h1><p>Freshness-gated context only. Missing dependencies stay explicitly unavailable.</p></div></div>
         <div id="markets" hidden></div><div class="module-slot" id="context-slot"></div>
+      </section>
+
+      <section class="app-page" id="page-pricing">
+        <div class="workspace-head pricing-head"><div><span class="page-kicker">VASTCODE21 PRICING</span><h1>Plans & services</h1><p>Clear public pricing. Products still under validation stay visibly unavailable instead of pretending to be for sale.</p></div></div>
+        <div class="pricing-grid">
+          <article class="plan-card beta-plan">
+            <div class="plan-top"><span class="plan-tag">AI BETA</span><span class="plan-state">CHECKOUT OFF</span></div>
+            <h2>VAST Tutor AI</h2>
+            <div class="plan-price"><strong>Beta</strong><span>pricing not launched</span></div>
+            <p>Vision AI, Tutor learning, Outcome Lab and verified context are still being validated.</p>
+            <div class="plan-note">No public Tutor checkout until the product and payment flow are fully verified.</div>
+          </article>
+
+          <article class="plan-card">
+            <div class="plan-top"><span class="plan-tag">TECHNICAL SERVICE</span><span class="plan-state available">AVAILABLE</span></div>
+            <h2>MT5 Setup & Automation Audit</h2>
+            <div class="plan-price"><strong>€99</strong><span>one time</span></div>
+            <p>45-minute technical MT5 setup session covering installation, templates, EA/indicator setup and troubleshooting.</p>
+            <a class="plan-action" href="https://book.stripe.com/bJedRaaIVaZG6L55S6cEw00" target="_blank" rel="noopener">Buy for €99</a>
+          </article>
+
+          <article class="plan-card">
+            <div class="plan-top"><span class="plan-tag">EDUCATIONAL MEMBERSHIP</span><span class="plan-state available">AVAILABLE</span></div>
+            <h2>VASTcode21 Research Brief</h2>
+            <div class="plan-price"><strong>€15</strong><span>/ month</span></div>
+            <p>Weekly educational email with validation milestones, MT5 concepts and GOLD/BITCOIN system-development lessons.</p>
+            <a class="plan-action" href="https://buy.stripe.com/6oUaEY5oB8RyglFeoCcEw01" target="_blank" rel="noopener">Subscribe €15/mo</a>
+          </article>
+
+          <article class="plan-card free-plan">
+            <div class="plan-top"><span class="plan-tag">EARLY ACCESS</span><span class="plan-state available">OPEN</span></div>
+            <h2>VAST Early Access List</h2>
+            <div class="plan-price"><strong>FREE</strong><span>waitlist</span></div>
+            <p>Verified development and release updates. The VAST indicator itself is not currently for sale.</p>
+            <a class="plan-action secondary" href="http://eepurl.com/cN6dWhHhtP" target="_blank" rel="noopener">Join free waitlist</a>
+          </article>
+        </div>
+        <div class="pricing-foot">Prices shown in EUR. No trading signals, account management, profit guarantees or personalized investment advice are included.</div>
       </section>
     </div>
   </main>
