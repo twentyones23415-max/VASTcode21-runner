@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-13T12:28:46.657252+00:00",
-  "mode": "launch_discovery",
+  "generated_at": "2026-09-13T12:30:02.507118+00:00",
+  "mode": "zero_to_ten_rescue",
   "followers_count": 0,
   "growth_goal_followers": 100,
   "paid_ads": false,
@@ -14,20 +14,22 @@
     "forward_collecting": 1,
     "forward_passed": 0,
     "release_candidates": 0,
-    "revenue_offers_ready": true
+    "revenue_offers_ready": true,
+    "growth_rescue_mode": true,
+    "event_risk_active": true
   },
   "items": [
     {
-      "id": "offers-ready-v1",
-      "pillar": "services",
-      "hook": "VASTcode21 services are now available.",
-      "caption": "Three VASTcode21 offers are now operational: MT5 Setup & Automation Audit — €99 one-time for a 45-minute technical MT5 setup/automation review; VASTcode21 Research Brief — €15/month for weekly educational validation notes; VAST Early Access — free for verified development and release updates. The VAST indicator itself is NOT for sale while validation is incomplete.",
-      "creative_brief": "Clean 4:5 three-offer availability card. Show €99 Audit, €15/mo Research Brief and FREE Early Access. Do not depict profit charts, returns or the VAST indicator as released.",
-      "format": "image",
+      "id": "event-risk-20260913",
+      "pillar": "market_risk",
+      "hook": "High-impact event ahead: FOMC Meeting.",
+      "caption": "FOMC Meeting is scheduled for Wednesday 16 Sep, 21:00 local time. VASTcode21 flags it as high-impact context for XAUUSD, BTCUSD. Around major scheduled releases, volatility and execution conditions can change quickly. Mark the time, reduce assumptions, and verify the official source before acting.",
+      "creative_brief": "9:16 event-risk Reel. First frame: EVENT RISK AHEAD. Second: event name + local time. Third: XAUUSD / BTCUSD + CHECK CONTEXT, NOT HYPE.",
+      "format": "reel",
       "platforms": [
         "Instagram"
       ],
-      "priority": 300,
+      "priority": 240,
       "status": "ready_for_design",
       "hashtags": [
         "#VASTcode21",
@@ -37,21 +39,25 @@
         "#TradingEducation",
         "#Backtesting"
       ],
-      "cta": "Research Brief, MT5 Audit and VAST Early Access — use the links in bio.",
-      "disclaimer": "Technical and educational services only. No signals, account management, personalized investment advice or profit guarantees. Trading involves risk.",
-      "bio_links_ready": true
+      "cta": "Save the time and follow @vast.code21 for the next verified market-risk alert.",
+      "disclaimer": "Event-risk context only, not a trading instruction. Scheduled times can change; verify the linked official source. Trading involves risk.",
+      "reel_script": [
+        "EVENT RISK AHEAD",
+        "FOMC Meeting\n16 Sep · 21:00",
+        "XAUUSD + BTCUSD\nCHECK CONTEXT FIRST"
+      ]
     },
     {
       "id": "growth-20260913",
       "pillar": "education",
-      "hook": "A backtest is not a promise.",
-      "caption": "A strategy can look excellent on historical data and still fail when execution detail, new market regimes and forward observation are introduced. VASTcode21 treats every pass as permission for more testing—not as permission for hype.",
-      "creative_brief": "9:16 three-card Reel: BACKTEST → REAL-TICK MT5 → FORWARD. Strong first-frame hook, clean quant aesthetic.",
+      "hook": "Your backtest is not proof.",
+      "caption": "A strong historical curve is only the start. Spread, ticks, execution detail, regime change and forward observation can expose weaknesses that a clean backtest hides. VASTcode21 is documenting that filtering process in public.",
+      "creative_brief": "Fast 9:16 Reel with four words appearing sequentially: BACKTEST / TICKS / ROBUSTNESS / FORWARD.",
       "format": "reel",
       "platforms": [
         "Instagram"
       ],
-      "priority": 120,
+      "priority": 220,
       "status": "ready_for_design",
       "hashtags": [
         "#VASTcode21",
@@ -62,7 +68,12 @@
         "#Backtesting"
       ],
       "cta": "Follow @vast.code21 to watch VAST survive—or fail—real validation in public.",
-      "disclaimer": "Trading involves risk. Historical or backtested results do not guarantee future performance."
+      "disclaimer": "Trading involves risk. Historical or backtested results do not guarantee future performance.",
+      "reel_script": [
+        "YOUR BACKTEST\nIS NOT PROOF",
+        "TICKS · SPREAD · REGIME",
+        "FORWARD TEST\nOR IT DIDN'T SURVIVE"
+      ]
     },
     {
       "id": "evergreen-validation-stack",
@@ -132,6 +143,30 @@
       ],
       "cta": "Follow @vast.code21 for the next validation result, market-risk alert and MT5 lesson.",
       "disclaimer": "Trading involves risk. Historical or backtested results do not guarantee future performance."
+    },
+    {
+      "id": "offers-ready-v1",
+      "pillar": "services",
+      "hook": "VASTcode21 services are available.",
+      "caption": "VASTcode21 educational and technical services are available: MT5 Setup & Automation Audit, VASTcode21 Research Brief and free VAST Early Access. The VAST indicator itself is not for sale while validation is incomplete.",
+      "creative_brief": "Clean 4:5 service card. No profit charts or performance claims.",
+      "format": "image",
+      "platforms": [
+        "Instagram"
+      ],
+      "priority": 25,
+      "status": "ready_for_design",
+      "hashtags": [
+        "#VASTcode21",
+        "#XAUUSD",
+        "#MT5",
+        "#AlgoTrading",
+        "#TradingEducation",
+        "#Backtesting"
+      ],
+      "cta": "Research Brief, MT5 Audit and VAST Early Access — use the links in bio.",
+      "disclaimer": "Technical and educational services only. No signals, account management, personalized investment advice or profit guarantees. Trading involves risk.",
+      "bio_links_ready": true
     }
   ]
 }
