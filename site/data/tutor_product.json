@@ -1,0 +1,50 @@
+{
+  "version": "0.1",
+  "status": "prelaunch",
+  "brand": "VAST Tutor AI",
+  "vision_module": "VAST Vision AI",
+  "positioning": "Paid educational AI for structured trading study, screenshot-based chart review, market-context explanation and prediction-to-outcome learning.",
+  "pricing": [
+    {
+      "id": "core",
+      "name": "Tutor Core",
+      "price_eur_month": 19,
+      "screenshot_analyses_month": 15,
+      "features": ["24/7 tutor chat", "Structured lessons and quizzes", "Learning progress", "15 Vision analyses / month"]
+    },
+    {
+      "id": "vision",
+      "name": "Vision Pro",
+      "price_eur_month": 39,
+      "screenshot_analyses_month": 60,
+      "features": ["Everything in Tutor Core", "60 Vision analyses / month", "XAUUSD + BTCUSD context", "Scenario and invalidation review", "Prediction-to-outcome journal"]
+    },
+    {
+      "id": "lab",
+      "name": "VAST Lab",
+      "price_eur_month": 69,
+      "screenshot_analyses_month": 180,
+      "features": ["Everything in Vision Pro", "180 Vision analyses / month", "Deep review mode", "Longer scenario history", "Priority beta features"]
+    }
+  ],
+  "capabilities": {
+    "tutor_chat": "planned_backend",
+    "screenshot_upload": "local_preview_prototype",
+    "vision_chart_extraction": "planned_backend",
+    "live_market_context": "planned_backend",
+    "market_news_context": "available_public_feed",
+    "scenario_forecast": "planned_backend",
+    "prediction_outcome_review": "planned_backend",
+    "learning_progress": "planned_backend",
+    "billing": "requires_payment_provider_connection",
+    "user_accounts": "requires_secure_backend"
+  },
+  "guardrails": [
+    "Educational market analysis, not personalized financial advice",
+    "No guaranteed outcomes or accuracy claims",
+    "No account management or trade execution",
+    "Screenshot-derived conclusions must state uncertainty and visible-data limits",
+    "Live-context claims require verified current market data",
+    "Uploads remain local until a secure server-side privacy flow is connected"
+  ]
+}
