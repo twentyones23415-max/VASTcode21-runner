@@ -1,5 +1,5 @@
 {
-  "version": "1.0.5",
+  "version": "1.1.0",
   "currency": "EUR",
   "mode": "stripe_mailchimp_connected",
   "daily_revenue_goal_note": "Revenue is a target, not a guarantee.",
@@ -23,6 +23,36 @@
     "weekly_research_brief": true
   },
   "offers": [
+    {
+      "id": "vast-mentor-1to1",
+      "name": "VAST Mentor 1:1",
+      "type": "private_trading_education",
+      "price_eur": 79,
+      "billing": "one_time",
+      "enabled": true,
+      "sales_channel": "application",
+      "request_url": "https://ig.me/m/vast.code21",
+      "cta_label": "Request mentor session",
+      "headline": "A focused 50-minute private lesson built around the learner's current level and one specific skill.",
+      "deliverable": "Personal level check, live MT5 walkthrough, one focused topic per session and action notes for the next practice block.",
+      "not_included": "No trading signals, account management, profit promise or personalized investment advice.",
+      "fulfillment": "private 50-minute educational mentor session after request and scheduling"
+    },
+    {
+      "id": "vast-mentor-4week",
+      "name": "4-Week Mentorship",
+      "type": "structured_trading_education",
+      "price_eur": 249,
+      "billing": "one_time",
+      "enabled": true,
+      "sales_channel": "application",
+      "request_url": "https://ig.me/m/vast.code21",
+      "cta_label": "Apply for 4-week track",
+      "headline": "A guided four-week learning track for structure, accountability and measurable educational progress.",
+      "deliverable": "4 private mentor sessions, personal learning roadmap, MT5 + risk + market-context curriculum, weekly practice objectives and an end-of-program review.",
+      "not_included": "No trading signals, account management, guaranteed outcomes or personalized investment advice.",
+      "fulfillment": "four-week private educational mentorship after application and scheduling"
+    },
     {
       "id": "mt5-setup-audit",
       "name": "MT5 Setup & Automation Audit",
@@ -69,6 +99,8 @@
     }
   ],
   "launch_requirements": {
+    "vast-mentor-1to1": [],
+    "vast-mentor-4week": [],
     "mt5-setup-audit": [
       "stripe",
       "calcom"
