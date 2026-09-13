@@ -11,7 +11,9 @@ CONFIG = ROOT / "marketing" / "revenue_config.json"
 GROWTH = ROOT / "marketing" / "growth_metrics.json"
 SUMMARY = ROOT / "status" / "summary.json"
 OUT = ROOT / "marketing" / "revenue_status.json"
-SITE = ROOT / "site" / "index.html"
+# Revenue automation must never replace the Tutor/Vision application entry point.
+# Keep the optional offers page isolated from site/index.html.
+OFFERS_SITE = ROOT / "site" / "offers.html"
 
 
 def load(path: Path) -> dict:
@@ -100,8 +102,8 @@ def main() -> None:
         "note": "Revenue is a business target, not a guarantee."
     }
     OUT.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
-    SITE.parent.mkdir(parents=True, exist_ok=True)
-    SITE.write_text(build_site(config, statuses), encoding="utf-8")
+    OFFERS_SITE.parent.mkdir(parents=True, exist_ok=True)
+    OFFERS_SITE.write_text(build_site(config, statuses), encoding="utf-8")
     print(json.dumps(payload, ensure_ascii=False))
 
 
