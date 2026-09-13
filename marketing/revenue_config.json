@@ -1,7 +1,7 @@
 {
-  "version": "1.0.0",
+  "version": "1.0.1",
   "currency": "EUR",
-  "mode": "prepared_waiting_connections",
+  "mode": "stripe_provisioning",
   "daily_revenue_goal_note": "Revenue is a target, not a guarantee.",
   "public_site_url": "https://twentyones23415-max.github.io/VASTcode21-runner/",
   "brand_account": "vast.code21",
