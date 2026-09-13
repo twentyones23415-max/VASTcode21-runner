@@ -1,46 +1,240 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>VASTcode21 — MT5 Research & Technical Services</title>
-<meta name="description" content="VASTcode21 technical MT5 services and research membership. No profit guarantees. VAST remains in validation.">
-<style>
-body{font-family:Arial,sans-serif;background:#09111e;color:#eef3f8;margin:0;line-height:1.55}.wrap{max-width:1000px;margin:auto;padding:48px 20px}h1{font-size:44px;margin:0 0 12px}.lead{color:#b8c4d2;font-size:20px;max-width:760px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:34px}.card{background:#101b2d;border:1px solid #26364d;border-radius:20px;padding:24px}.tag{font-size:12px;color:#e1ba56;font-weight:700}.price{font-size:32px;font-weight:800;margin:8px 0}.small{font-size:14px;color:#b8c4d2}.btn{display:inline-block;background:#4acbff;color:#07111d;text-decoration:none;font-weight:800;padding:12px 18px;border-radius:10px;margin-top:10px}.disabled{background:#425166;color:#cfd8e3}.notice{margin-top:32px;padding:18px;border-left:4px solid #e1ba56;background:#111c2d;color:#c9d4df}footer{margin-top:44px;color:#8090a3;font-size:13px}
-</style>
-</head><body><main class="wrap">
-<h1>VAST<span style="color:#4acbff">code21</span></h1>
-<p class="lead">Technical MT5 help and transparent research education for GOLD & BITCOIN system builders. The VAST indicator itself is still under validation and is not being sold yet.</p>
-<section class="grid">
-        <article class="card">
-          <div class="tag">TECHNICAL SERVICE</div>
-          <h2>MT5 Setup &amp; Automation Audit</h2>
-          <div class="price">€99</div>
-          <p>Get your MT5 setup reviewed and automation-ready.</p>
-          <p class="small"><strong>Includes:</strong> 45-minute technical MT5 setup session covering installation, templates, EA/indicator setup, VPS/terminal hygiene and automation troubleshooting.</p>
-          <p class="small"><strong>Does not include:</strong> No trading signals, account management, profit promise or personalized investment advice.</p>
-          <a class="btn" href="https://book.stripe.com/bJedRaaIVaZG6L55S6cEw00" rel="noopener">Buy now</a>
-        </article>
-        
-        <article class="card">
-          <div class="tag">EDUCATIONAL MEMBERSHIP</div>
-          <h2>VASTcode21 Research Brief</h2>
-          <div class="price">€15/mo</div>
-          <p>Weekly validation notes for serious MT5 research followers.</p>
-          <p class="small"><strong>Includes:</strong> A weekly educational email covering verified VASTcode21 research milestones, MT5 validation concepts and GOLD/BITCOIN system-development lessons.</p>
-          <p class="small"><strong>Does not include:</strong> No signals, copy trading, guaranteed returns or personalized financial advice.</p>
-          <a class="btn" href="https://buy.stripe.com/6oUaEY5oB8RyglFeoCcEw01" rel="noopener">Buy now</a>
-        </article>
-        
-        <article class="card">
-          <div class="tag">FREE WAITLIST</div>
-          <h2>VAST Early Access List</h2>
-          <div class="price">FREE</div>
-          <p>Join the free VAST release waitlist.</p>
-          <p class="small"><strong>Includes:</strong> Verified development and release updates.</p>
-          <p class="small"><strong>Does not include:</strong> The VAST indicator is not for sale while validation is incomplete.</p>
-          <a class="btn" href="mailto:vastcode21@gmail.com?subject=VAST%20Early%20Access" rel="noopener">Join early access</a>
-        </article>
-        </section>
-<div class="notice"><strong>Risk disclosure:</strong> Trading involves risk. Historical or backtested results do not guarantee future performance. Nothing on this page is financial advice, a signal service, account management, or a promise of profit.</div>
-<footer>© VASTcode21 · Paid ads OFF · Live trading OFF · Validation first.</footer>
-</main><!-- deployment trigger: GitHub Pages enabled 2026-09-13 --></body></html>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#060a10">
+  <meta name="description" content="VASTcode21 — transparent MT5 research, automation support and validation-first development for GOLD and BITCOIN system builders.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="VASTcode21 — Research. Validate. Automate.">
+  <meta property="og:description" content="MT5 technical services, research briefings and transparent VAST development. No profit guarantees. Validation first.">
+  <meta property="og:url" content="https://twentyones23415-max.github.io/VASTcode21-runner/">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://twentyones23415-max.github.io/VASTcode21-runner/">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <title>VASTcode21 — Research. Validate. Automate.</title>
+  <style>
+    :root{
+      --bg:#05080d;--bg2:#080d14;--panel:#0b121c;--panel2:#0e1723;--line:#1c2a3a;
+      --text:#f4f7fb;--muted:#8e9bad;--muted2:#667488;--cyan:#55d8ff;--cyan2:#1bb7e8;
+      --gold:#d8b15b;--green:#57d68a;--red:#ff6b78;--radius:24px;--shadow:0 24px 80px rgba(0,0,0,.36)
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;color:var(--text);background:
+      radial-gradient(circle at 12% 4%,rgba(85,216,255,.10),transparent 28%),
+      radial-gradient(circle at 88% 18%,rgba(216,177,91,.08),transparent 24%),
+      linear-gradient(180deg,#04070b 0%,#07101a 45%,#05080d 100%);
+      font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.55;overflow-x:hidden}
+    body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.25;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:42px 42px;mask-image:linear-gradient(to bottom,black,transparent 72%)}
+    a{color:inherit}.shell{width:min(1160px,calc(100% - 36px));margin:auto}.eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:800;color:var(--cyan)}
+    .nav{position:sticky;top:0;z-index:50;background:rgba(5,8,13,.72);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.05)}
+    .navin{height:74px;display:flex;align-items:center;justify-content:space-between;gap:28px}.brand{display:flex;align-items:center;gap:12px;text-decoration:none;font-weight:850;letter-spacing:-.03em;font-size:20px}.mark{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:linear-gradient(135deg,rgba(85,216,255,.18),rgba(216,177,91,.12));border:1px solid rgba(85,216,255,.28);box-shadow:inset 0 0 24px rgba(85,216,255,.08)}.mark svg{width:20px;height:20px}.code{color:var(--cyan)}
+    .navlinks{display:flex;align-items:center;gap:24px}.navlinks a{text-decoration:none;color:#b7c1cf;font-size:14px;font-weight:650}.navlinks a:hover{color:white}.navcta{padding:10px 15px!important;border:1px solid #2b4055;border-radius:12px;background:#0c1621;color:#eef8ff!important}
+    .hero{padding:92px 0 66px;position:relative}.hero-grid{display:grid;grid-template-columns:1.06fr .94fr;gap:64px;align-items:center}.status{display:inline-flex;align-items:center;gap:9px;padding:8px 12px;border:1px solid #233244;border-radius:999px;background:rgba(11,18,28,.78);font-size:12px;font-weight:760;color:#c8d2df}.dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 18px rgba(87,214,138,.8)}
+    h1{font-size:clamp(52px,7vw,88px);line-height:.95;letter-spacing:-.06em;margin:24px 0 22px;max-width:760px}.grad{background:linear-gradient(90deg,#fff 0%,#a8eaff 42%,#d8b15b 100%);-webkit-background-clip:text;background-clip:text;color:transparent}.lead{font-size:19px;color:#a7b4c4;max-width:690px;margin:0 0 30px}.actions{display:flex;flex-wrap:wrap;gap:12px}.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;text-decoration:none;font-weight:820;border-radius:14px;padding:14px 18px;border:1px solid transparent;transition:.2s transform,.2s border-color,.2s background}.btn:hover{transform:translateY(-2px)}.btn.primary{background:linear-gradient(135deg,#66ddff,#26bee9);color:#031018;box-shadow:0 12px 30px rgba(38,190,233,.18)}.btn.secondary{background:rgba(12,21,32,.82);border-color:#27384b;color:#eaf2fa}.subnote{margin-top:17px;color:#718096;font-size:13px}
+    .visual{position:relative;min-height:520px}.terminal{position:absolute;inset:0;border:1px solid #213045;border-radius:30px;background:linear-gradient(180deg,rgba(13,21,32,.94),rgba(7,12,18,.94));box-shadow:var(--shadow);overflow:hidden}.terminal:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 68% 26%,rgba(85,216,255,.09),transparent 30%),linear-gradient(rgba(255,255,255,.024) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.024) 1px,transparent 1px);background-size:auto,34px 34px,34px 34px}.terminal-top{height:56px;border-bottom:1px solid #1c2a3b;display:flex;align-items:center;justify-content:space-between;padding:0 20px;position:relative}.lights{display:flex;gap:7px}.light{width:8px;height:8px;border-radius:50%;background:#304153}.terminal-label{font-size:11px;letter-spacing:.12em;color:#718096;text-transform:uppercase}.chart{position:absolute;inset:78px 24px 126px}.chart svg{width:100%;height:100%}.signal{position:absolute;display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:11px;background:rgba(9,17,27,.9);border:1px solid #26384c;font-size:11px;font-weight:800;box-shadow:0 12px 28px rgba(0,0,0,.24)}.signal.buy{left:14%;top:55%;color:#8ceaae}.signal.sell{right:10%;top:25%;color:#ff9ba4}.diamond{width:8px;height:8px;transform:rotate(45deg);background:currentColor}.circle{width:8px;height:8px;border-radius:50%;border:2px solid var(--gold)}.signal.exit{right:23%;bottom:18%;color:#e2c477}.terminal-foot{position:absolute;left:24px;right:24px;bottom:24px;display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.metric{padding:12px;border:1px solid #1c2a3b;background:rgba(8,14,22,.72);border-radius:13px}.metric b{display:block;font-size:13px}.metric span{font-size:10px;color:#657488;text-transform:uppercase;letter-spacing:.08em}
+    .trust{border-top:1px solid rgba(255,255,255,.05);border-bottom:1px solid rgba(255,255,255,.05);background:rgba(255,255,255,.012)}.trustin{display:grid;grid-template-columns:repeat(4,1fr)}.trustitem{padding:22px 18px;border-right:1px solid rgba(255,255,255,.05)}.trustitem:last-child{border-right:0}.trustitem strong{display:block;font-size:14px}.trustitem span{color:#778699;font-size:12px}
+    section{padding:92px 0}.section-head{display:flex;align-items:end;justify-content:space-between;gap:30px;margin-bottom:34px}.section-head h2{font-size:clamp(34px,4vw,54px);line-height:1.02;letter-spacing:-.045em;margin:8px 0 0}.section-head p{max-width:520px;color:#8f9eb0;margin:0}
+    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.card{position:relative;padding:26px;border-radius:var(--radius);background:linear-gradient(180deg,rgba(15,24,37,.95),rgba(8,14,22,.95));border:1px solid #1d2b3c;box-shadow:0 14px 42px rgba(0,0,0,.16);overflow:hidden}.card:after{content:"";position:absolute;width:180px;height:180px;border-radius:50%;right:-90px;top:-90px;background:radial-gradient(circle,rgba(85,216,255,.09),transparent 70%)}.card.featured{border-color:#34506b;transform:translateY(-8px);box-shadow:0 24px 60px rgba(0,0,0,.28)}.tag{display:inline-flex;padding:7px 10px;border:1px solid #25384c;border-radius:999px;color:#9fdff3;background:#0a1520;font-size:10px;font-weight:850;letter-spacing:.1em;text-transform:uppercase}.card h3{font-size:23px;letter-spacing:-.025em;margin:18px 0 8px}.price{font-size:36px;font-weight:880;letter-spacing:-.04em;margin:10px 0}.price small{font-size:14px;color:#8b9aab;font-weight:650;letter-spacing:0}.desc{color:#9ba8b8;min-height:52px}.list{list-style:none;padding:0;margin:20px 0 24px}.list li{display:flex;gap:10px;color:#c6d0dc;font-size:14px;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.045)}.tick{color:var(--green);font-weight:900}.card .btn{width:100%}.micro{font-size:11px;color:#657488;margin-top:12px;text-align:center}
+    .vast-panel{display:grid;grid-template-columns:.88fr 1.12fr;gap:18px}.manifesto,.process{border:1px solid #1c2a3b;border-radius:28px;background:linear-gradient(180deg,#0c141f,#080e16);padding:34px}.manifesto h3{font-size:35px;line-height:1.05;letter-spacing:-.04em;margin:12px 0 18px}.manifesto p{color:#93a1b2}.state{display:flex;align-items:center;justify-content:space-between;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.06)}.state:last-child{border-bottom:0}.state span{color:#8b99aa;font-size:13px}.state b{font-size:13px}.good{color:#80e5a3}.hold{color:#e5c273}
+    .steps{display:grid;gap:2px}.step{display:grid;grid-template-columns:46px 1fr;gap:16px;padding:18px 0;border-bottom:1px solid rgba(255,255,255,.06)}.step:last-child{border-bottom:0}.num{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:#0b1824;border:1px solid #294056;color:#86e6ff;font-weight:900;font-size:12px}.step h4{margin:1px 0 4px;font-size:16px}.step p{margin:0;color:#7f8da0;font-size:13px}
+    .principles{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.principle{padding:26px;border-top:1px solid #2a3b4f;background:linear-gradient(180deg,rgba(12,20,31,.65),rgba(7,12,19,.4));border-radius:0 0 20px 20px}.icon{width:44px;height:44px;border-radius:14px;background:#0c1824;border:1px solid #263a4f;display:grid;place-items:center;margin-bottom:18px;color:var(--cyan)}.principle h3{margin:0 0 8px;font-size:20px}.principle p{margin:0;color:#8795a7;font-size:14px}
+    .faq{display:grid;grid-template-columns:.7fr 1.3fr;gap:52px}.faq h2{font-size:44px;letter-spacing:-.045em;line-height:1.02;margin:8px 0}.faq-intro p{color:#8998aa}.questions details{border-bottom:1px solid #1b2939;padding:18px 0}.questions summary{cursor:pointer;font-weight:780;list-style:none;display:flex;justify-content:space-between;gap:20px}.questions summary:after{content:"+";color:var(--cyan)}.questions details[open] summary:after{content:"–"}.questions p{color:#8796a8;font-size:14px;margin:12px 0 2px;max-width:680px}
+    .closing{padding:30px 0 92px}.cta-panel{border:1px solid #284057;border-radius:30px;padding:44px;background:radial-gradient(circle at 86% 20%,rgba(85,216,255,.12),transparent 30%),linear-gradient(135deg,#0d1825,#09111b);display:flex;align-items:center;justify-content:space-between;gap:34px}.cta-panel h2{font-size:38px;letter-spacing:-.04em;margin:7px 0 8px}.cta-panel p{color:#8d9cad;margin:0}
+    .risk{padding:22px;border:1px solid #322c20;background:rgba(43,35,19,.32);border-radius:18px;color:#a99c82;font-size:12px;margin-bottom:28px}.risk strong{color:#dcc481}
+    footer{border-top:1px solid rgba(255,255,255,.05);padding:34px 0 48px;color:#647386;font-size:12px}.foot{display:flex;justify-content:space-between;gap:24px;align-items:center}.footlinks{display:flex;gap:18px;flex-wrap:wrap}.foot a{text-decoration:none;color:#7e8da0}.foot a:hover{color:white}
+    @media(max-width:960px){.navlinks a:not(.navcta){display:none}.hero{padding-top:62px}.hero-grid,.vast-panel,.faq{grid-template-columns:1fr}.visual{min-height:460px}.cards,.principles{grid-template-columns:1fr}.card.featured{transform:none}.trustin{grid-template-columns:1fr 1fr}.trustitem:nth-child(2){border-right:0}.trustitem:nth-child(-n+2){border-bottom:1px solid rgba(255,255,255,.05)}.section-head{align-items:start;flex-direction:column}.faq{gap:18px}.cta-panel{align-items:flex-start;flex-direction:column}}
+    @media(max-width:620px){.shell{width:min(100% - 24px,1160px)}.navin{height:66px}.navcta{font-size:12px!important;padding:9px 12px!important}.hero{padding:48px 0 48px}h1{font-size:52px}.lead{font-size:16px}.actions .btn{width:100%}.visual{min-height:420px}.terminal-foot{grid-template-columns:1fr 1fr}.trustin{grid-template-columns:1fr}.trustitem{border-right:0!important;border-bottom:1px solid rgba(255,255,255,.05)!important}.trustitem:last-child{border-bottom:0!important}section{padding:68px 0}.manifesto,.process,.card{padding:22px}.cta-panel{padding:28px}.cta-panel h2{font-size:31px}.foot{align-items:flex-start;flex-direction:column}.signal.sell{right:4%}.signal.exit{right:10%}}
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="shell navin">
+      <a class="brand" href="#top" aria-label="VASTcode21 home">
+        <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 6.5 10 18l3.1-6.2L16 17l4-10.5" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <span>VAST<span class="code">code21</span></span>
+      </a>
+      <div class="navlinks">
+        <a href="#services">Services</a><a href="#vast">VAST</a><a href="#process">Process</a><a href="#faq">FAQ</a>
+        <a class="navcta" href="mailto:vastcode21@gmail.com?subject=VAST%20Early%20Access">Join early access</a>
+      </div>
+    </div>
+  </nav>
+
+  <main id="top">
+    <header class="hero">
+      <div class="shell hero-grid">
+        <div>
+          <div class="status"><span class="dot"></span> VAST research active · validation in progress</div>
+          <h1>Research.<br><span class="grad">Validate. Automate.</span></h1>
+          <p class="lead">VASTcode21 is a validation-first MT5 research studio for traders and system builders who care about process, robustness and automation—not hype.</p>
+          <div class="actions">
+            <a class="btn primary" href="#services">Explore services <span>↗</span></a>
+            <a class="btn secondary" href="#vast">See the VAST process</a>
+          </div>
+          <div class="subnote">GOLD · BITCOIN · MetaTrader 5 · No profit guarantees · No signal selling</div>
+        </div>
+
+        <div class="visual" aria-label="VAST validation interface illustration">
+          <div class="terminal">
+            <div class="terminal-top"><div class="lights"><span class="light"></span><span class="light"></span><span class="light"></span></div><div class="terminal-label">VAST / validation workspace</div></div>
+            <div class="chart">
+              <svg viewBox="0 0 720 360" preserveAspectRatio="none" aria-hidden="true">
+                <defs><linearGradient id="line" x1="0" x2="1"><stop offset="0" stop-color="#55d8ff" stop-opacity=".15"/><stop offset=".55" stop-color="#55d8ff"/><stop offset="1" stop-color="#d8b15b"/></linearGradient></defs>
+                <path d="M4 283 C56 270 77 282 119 247 S187 267 226 205 S293 229 333 177 S396 205 434 140 S505 164 551 98 S628 125 716 48" fill="none" stroke="url(#line)" stroke-width="4" stroke-linecap="round"/>
+                <path d="M4 283 C56 270 77 282 119 247 S187 267 226 205 S293 229 333 177 S396 205 434 140 S505 164 551 98 S628 125 716 48 L716 360 L4 360 Z" fill="url(#line)" opacity=".06"/>
+              </svg>
+              <div class="signal buy"><span class="diamond"></span> ARM BUY</div>
+              <div class="signal sell"><span class="diamond"></span> ARM SELL</div>
+              <div class="signal exit"><span class="circle"></span> EXIT</div>
+            </div>
+            <div class="terminal-foot">
+              <div class="metric"><span>Mode</span><b>Validation</b></div>
+              <div class="metric"><span>Platform</span><b>MT5</b></div>
+              <div class="metric"><span>Paid ads</span><b>OFF</b></div>
+              <div class="metric"><span>Live trading</span><b>OFF</b></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="trust">
+      <div class="shell trustin">
+        <div class="trustitem"><strong>Validation first</strong><span>Research before release</span></div>
+        <div class="trustitem"><strong>MT5 focused</strong><span>Automation and system workflow</span></div>
+        <div class="trustitem"><strong>Transparent positioning</strong><span>No guaranteed-return language</span></div>
+        <div class="trustitem"><strong>Controlled rollout</strong><span>VAST is not for sale yet</span></div>
+      </div>
+    </div>
+
+    <section id="services">
+      <div class="shell">
+        <div class="section-head">
+          <div><div class="eyebrow">Available now</div><h2>Practical MT5 support.<br>Zero hype.</h2></div>
+          <p>Choose technical help, ongoing research education, or simply join the VAST early-access list while the indicator remains in validation.</p>
+        </div>
+        <div class="cards">
+          <article class="card featured">
+            <div class="tag">Technical service</div>
+            <h3>MT5 Setup &amp; Automation Audit</h3>
+            <div class="price">€99 <small>/ session</small></div>
+            <p class="desc">A focused 45-minute technical review to make your MT5 environment cleaner, safer and automation-ready.</p>
+            <ul class="list">
+              <li><span class="tick">✓</span><span>MT5 installation and workspace review</span></li>
+              <li><span class="tick">✓</span><span>EA / indicator setup troubleshooting</span></li>
+              <li><span class="tick">✓</span><span>VPS and terminal hygiene guidance</span></li>
+              <li><span class="tick">✓</span><span>Automation workflow checks</span></li>
+            </ul>
+            <a class="btn primary" href="https://book.stripe.com/bJedRaaIVaZG6L55S6cEw00" rel="noopener noreferrer">Book technical audit ↗</a>
+            <div class="micro">No signals · No account management · No investment advice</div>
+          </article>
+
+          <article class="card">
+            <div class="tag">Educational membership</div>
+            <h3>VASTcode21 Research Brief</h3>
+            <div class="price">€15 <small>/ month</small></div>
+            <p class="desc">A weekly educational briefing on validation milestones, MT5 research concepts and systematic-development lessons.</p>
+            <ul class="list">
+              <li><span class="tick">✓</span><span>Weekly research and validation notes</span></li>
+              <li><span class="tick">✓</span><span>GOLD / BITCOIN system-development context</span></li>
+              <li><span class="tick">✓</span><span>Backtest and robustness education</span></li>
+              <li><span class="tick">✓</span><span>VAST project milestone updates</span></li>
+            </ul>
+            <a class="btn secondary" href="https://buy.stripe.com/6oUaEY5oB8RyglFeoCcEw01" rel="noopener noreferrer">Join Research Brief ↗</a>
+            <div class="micro">Educational only · No copy trading · No guaranteed returns</div>
+          </article>
+
+          <article class="card">
+            <div class="tag">Free waitlist</div>
+            <h3>VAST Early Access</h3>
+            <div class="price">FREE</div>
+            <p class="desc">Follow the project before release and receive verified development and release updates when meaningful milestones are reached.</p>
+            <ul class="list">
+              <li><span class="tick">✓</span><span>Release-status updates</span></li>
+              <li><span class="tick">✓</span><span>Validation milestone notices</span></li>
+              <li><span class="tick">✓</span><span>No purchase required</span></li>
+              <li><span class="tick">✓</span><span>No pre-release sales pressure</span></li>
+            </ul>
+            <a class="btn secondary" href="mailto:vastcode21@gmail.com?subject=VAST%20Early%20Access">Join early access</a>
+            <div class="micro">The VAST indicator is not currently for sale</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="vast" style="padding-top:30px">
+      <div class="shell">
+        <div class="section-head">
+          <div><div class="eyebrow">The VAST project</div><h2>Built to earn release.<br>Not to rush it.</h2></div>
+          <p>VAST is being developed as an MT5 decision-support indicator with Buy, Sell, Exit and Wait states. The release gate stays closed while validation is incomplete.</p>
+        </div>
+        <div class="vast-panel">
+          <div class="manifesto">
+            <div class="eyebrow">Current state</div>
+            <h3>Pre-release research mode.</h3>
+            <p>The public positioning is intentionally conservative: test first, publish verified milestones, and only move toward release when robustness and operational checks justify it.</p>
+            <div class="state"><span>Research &amp; development</span><b class="good">ACTIVE</b></div>
+            <div class="state"><span>Backtest / robustness validation</span><b class="good">ACTIVE</b></div>
+            <div class="state"><span>Paid ads</span><b class="hold">OFF</b></div>
+            <div class="state"><span>Live trading</span><b class="hold">OFF</b></div>
+            <div class="state"><span>VAST public sale</span><b class="hold">NOT OPEN</b></div>
+          </div>
+          <div class="process" id="process">
+            <div class="eyebrow">Validation pipeline</div>
+            <div class="steps">
+              <div class="step"><div class="num">01</div><div><h4>Research</h4><p>Define the signal logic, states and measurable behavior before marketing conclusions.</p></div></div>
+              <div class="step"><div class="num">02</div><div><h4>Backtest</h4><p>Evaluate historical behavior across varied market conditions without treating backtests as promises.</p></div></div>
+              <div class="step"><div class="num">03</div><div><h4>Robustness</h4><p>Stress assumptions, parameter sensitivity and consistency rather than optimizing for a pretty chart.</p></div></div>
+              <div class="step"><div class="num">04</div><div><h4>Shadow forward</h4><p>Observe behavior in forward conditions without enabling live-trading automation.</p></div></div>
+              <div class="step"><div class="num">05</div><div><h4>Release gate</h4><p>Only verified milestones can move the product closer to public availability.</p></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="shell">
+        <div class="section-head"><div><div class="eyebrow">Operating principles</div><h2>Serious process over noise.</h2></div></div>
+        <div class="principles">
+          <div class="principle"><div class="icon">◎</div><h3>Transparent validation</h3><p>Progress is communicated as research milestones, not as guaranteed outcomes or selective profit screenshots.</p></div>
+          <div class="principle"><div class="icon">⌁</div><h3>Automation discipline</h3><p>MT5 workflows are designed around repeatability, account safety and controlled execution—not uncontrolled bot behavior.</p></div>
+          <div class="principle"><div class="icon">◇</div><h3>Release restraint</h3><p>VAST remains unavailable for sale until the internal validation path reaches a release-worthy state.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" style="padding-top:30px">
+      <div class="shell faq">
+        <div class="faq-intro"><div class="eyebrow">FAQ</div><h2>Clear answers.<br>No sales fog.</h2><p>What VASTcode21 does today, what it does not do, and where the VAST indicator currently stands.</p></div>
+        <div class="questions">
+          <details open><summary>Can I buy the VAST indicator now?</summary><p>No. VAST is still in validation and the indicator is not currently offered for public sale. The free early-access list is the right place for release updates.</p></details>
+          <details><summary>Do you sell trading signals?</summary><p>No. The current services are technical MT5 support and educational research content. They do not include trading signals, account management, copy trading or personalized financial advice.</p></details>
+          <details><summary>What is the €99 MT5 audit?</summary><p>A 45-minute technical session focused on MT5 setup, EA/indicator configuration, VPS or terminal hygiene and automation troubleshooting.</p></details>
+          <details><summary>What does the Research Brief include?</summary><p>A weekly educational email covering verified project milestones, validation concepts and GOLD/BITCOIN systematic-development lessons.</p></details>
+          <details><summary>Are backtests proof of future performance?</summary><p>No. Historical and backtested results cannot guarantee future performance. VASTcode21 treats backtesting as one part of a broader validation process.</p></details>
+        </div>
+      </div>
+    </section>
+
+    <div class="closing">
+      <div class="shell">
+        <div class="cta-panel">
+          <div><div class="eyebrow">Stay close to the build</div><h2>Follow the validation. Not the hype.</h2><p>Join early access for verified VAST development and release updates.</p></div>
+          <div class="actions"><a class="btn primary" href="mailto:vastcode21@gmail.com?subject=VAST%20Early%20Access">Join early access</a><a class="btn secondary" href="https://www.instagram.com/vast.code21/" rel="noopener noreferrer">Instagram ↗</a></div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div class="shell">
+    <div class="risk"><strong>Risk disclosure:</strong> Trading involves risk. Historical or backtested results do not guarantee future performance. Nothing on this website is financial advice, a signal service, account management, copy trading, or a promise of profit.</div>
+  </div>
+
+  <footer>
+    <div class="shell foot"><div>© 2026 VASTcode21 · Validation first.</div><div class="footlinks"><a href="#services">Services</a><a href="#vast">VAST</a><a href="#faq">FAQ</a><a href="mailto:vastcode21@gmail.com">Contact</a><a href="https://www.instagram.com/vast.code21/" rel="noopener noreferrer">Instagram</a></div></div>
+  </footer>
+</body>
+</html>
