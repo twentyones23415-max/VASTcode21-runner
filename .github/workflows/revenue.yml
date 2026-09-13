@@ -18,10 +18,6 @@ on:
 permissions:
   contents: write
 
-concurrency:
-  group: vastcode21-revenue
-  cancel-in-progress: false
-
 jobs:
   build:
     runs-on: ubuntu-latest
