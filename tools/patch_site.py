@@ -1,21 +1,22 @@
 #!/usr/bin/env python3
 from pathlib import Path
 
-p=Path('site/index.html')
-s=p.read_text(encoding='utf-8')
-assets=[
-    ('</head>','  <link rel="stylesheet" href="vast-upgrade.css">\n'),
-    ('</head>','  <link rel="stylesheet" href="tutor-lab.css">\n'),
-    ('</head>','  <link rel="stylesheet" href="tutor-learning.css">\n'),
-    ('</head>','  <link rel="stylesheet" href="tutor-outcome.css">\n'),
-    ('</body>','  <script src="vast-upgrade.js" defer></script>\n'),
-    ('</body>','  <script src="tutor-lab.js" defer></script>\n'),
-    ('</body>','  <script src="tutor-learning.js" defer></script>\n'),
-    ('</body>','  <script src="tutor-outcome.js" defer></script>\n'),
-    ('</body>','  <script src="tutor-vision-runtime.js" defer></script>\n'),
+p = Path('site/index.html')
+s = p.read_text(encoding='utf-8')
+
+required = [
+    'VASTcode21 — Tutor AI Workspace',
+    'app-shell.css',
+    'app-shell.js',
+    'tutor-lab.js',
+    'tutor-learning.js',
+    'tutor-outcome.js',
+    'tutor-vision-runtime.js',
 ]
-for marker, asset in assets:
-    if asset.strip() not in s:
-        s=s.replace(marker,asset+marker)
-p.write_text(s,encoding='utf-8')
-print('Patched site/index.html for VASTcode21 upgrades, Tutor AI Lab, secure Vision runtime bridge, structured learning, Outcome Lab and Event Risk Shield.')
+missing = [item for item in required if item not in s]
+if missing:
+    raise SystemExit('Tutor app entry point is incomplete; refusing legacy patch: ' + ', '.join(missing))
+
+# The modern Tutor workspace owns its own shell and assets. Legacy vast-upgrade
+# injection is intentionally disabled because it can conflict with app routing.
+print('Tutor app verified. No legacy site patching applied.')
