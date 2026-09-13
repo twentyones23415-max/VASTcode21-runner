@@ -19,7 +19,8 @@
     "calcom": true,
     "resend": false,
     "mailchimp": true,
-    "subscriber_sync": true
+    "subscriber_sync": true,
+    "weekly_research_brief": true
   },
   "offers": [
     {
@@ -75,7 +76,8 @@
     "research-brief": [
       "stripe",
       "mailchimp",
-      "subscriber_sync"
+      "subscriber_sync",
+      "weekly_research_brief"
     ],
     "vast-early-access": [
       "mailchimp"

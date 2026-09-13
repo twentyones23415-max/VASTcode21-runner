@@ -1,0 +1,15 @@
+{
+  "updated_at": "2026-09-13T10:17:45.945228+00:00",
+  "provider": "mailchimp",
+  "tag": "Research Brief Subscriber",
+  "week": "2026-W37",
+  "paid_ads": false,
+  "live_trading": false,
+  "delivery_ready": true,
+  "connected": true,
+  "health": "Everything's Chimpy!",
+  "segment_member_count": 0,
+  "active_subscribers": 0,
+  "last_error": "",
+  "mode": "ready_no_subscribers"
+}
