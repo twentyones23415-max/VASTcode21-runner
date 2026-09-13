@@ -2,7 +2,7 @@
   const SESSION_KEY='vast_tutor_supabase_session_v1';
   const q=(s,r=document)=>r.querySelector(s);
   const qa=(s,r=document)=>[...r.querySelectorAll(s)];
-  const pageMap={home:'page-home',vision:'page-vision',tutor:'page-tutor',outcome:'page-outcome',context:'page-context'};
+  const pageMap={home:'page-home',vision:'page-vision',tutor:'page-tutor',outcome:'page-outcome',context:'page-context',pricing:'page-pricing'};
 
   function route(name,replace=false){
     if(!pageMap[name])name='home';
