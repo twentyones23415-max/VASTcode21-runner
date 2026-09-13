@@ -10,6 +10,7 @@ on:
       - 'marketing/brand.json'
       - 'marketing/social_config.json'
       - 'tools/marketing_planner.py'
+      - 'tools/instagram_link_in_bio_cleanup.py'
       - 'tools/marketing_asset_builder.py'
       - 'tools/instagram_growth_analytics.py'
       - '.github/workflows/marketing.yml'
@@ -51,6 +52,9 @@ jobs:
 
       - name: Generate discovery-focused organic content queue
         run: python tools/marketing_planner.py
+
+      - name: Route service CTAs to clickable profile links
+        run: python tools/instagram_link_in_bio_cleanup.py
 
       - name: Generate branded image carousel and Reel assets
         run: python tools/marketing_asset_builder.py
