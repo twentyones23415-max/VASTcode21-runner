@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-13T10:26:07.151415+00:00",
+  "generated_at": "2026-09-13T10:46:16.315684+00:00",
   "mode": "launch_discovery",
   "followers_count": 0,
   "growth_goal_followers": 100,
@@ -21,7 +21,7 @@
       "id": "offers-ready-v1",
       "pillar": "services",
       "hook": "VASTcode21 services are now available.",
-      "caption": "Three VASTcode21 offers are now operational: MT5 Setup & Automation Audit — €99 one-time for a 45-minute technical MT5 setup/automation review; VASTcode21 Research Brief — €15/month for weekly educational validation notes; VAST Early Access — free for verified development and release updates. The VAST indicator itself is NOT for sale while validation is incomplete.\n\nAudit: https://book.stripe.com/bJedRaaIVaZG6L55S6cEw00\nResearch Brief: https://buy.stripe.com/6oUaEY5oB8RyglFeoCcEw01\nEarly Access: http://eepurl.com/cN6dWhHhtP",
+      "caption": "Three VASTcode21 offers are now operational: MT5 Setup & Automation Audit — €99 one-time for a 45-minute technical MT5 setup/automation review; VASTcode21 Research Brief — €15/month for weekly educational validation notes; VAST Early Access — free for verified development and release updates. The VAST indicator itself is NOT for sale while validation is incomplete.",
       "creative_brief": "Clean 4:5 three-offer availability card. Show €99 Audit, €15/mo Research Brief and FREE Early Access. Do not depict profit charts, returns or the VAST indicator as released.",
       "format": "image",
       "platforms": [
@@ -38,8 +38,9 @@
         "#TradingSystems",
         "#QuantTrading"
       ],
-      "cta": "Choose the Audit, Research Brief or free Early Access option. Links are in this caption.",
-      "disclaimer": "Technical and educational services only. No signals, account management, personalized investment advice or profit guarantees. Trading involves risk."
+      "cta": "Research Brief, MT5 Audit and VAST Early Access — use the links in bio.",
+      "disclaimer": "Technical and educational services only. No signals, account management, personalized investment advice or profit guarantees. Trading involves risk.",
+      "bio_links_ready": true
     },
     {
       "id": "growth-20260913",
