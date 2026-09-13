@@ -1,0 +1,62 @@
+name: VASTcode21 weekly Research Brief
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'tools/weekly_research_brief.py'
+      - '.github/workflows/weekly_research_brief.yml'
+  schedule:
+    - cron: '45 7 * * 1'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: vastcode21-weekly-research-brief
+  cancel-in-progress: false
+
+jobs:
+  deliver:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+
+      - name: Refresh active Research Brief subscribers
+        env:
+          STRIPE_RESTRICTED_KEY: ${{ secrets.STRIPE_RESTRICTED_KEY }}
+          MAILCHIMP_API_KEY: ${{ secrets.MAILCHIMP_API_KEY }}
+        run: python tools/stripe_mailchimp_sync.py
+
+      - name: Build and deliver weekly Research Brief
+        env:
+          MAILCHIMP_API_KEY: ${{ secrets.MAILCHIMP_API_KEY }}
+        run: python tools/weekly_research_brief.py
+
+      - name: Refresh revenue readiness
+        run: python tools/revenue_engine.py
+
+      - name: Persist weekly delivery state
+        shell: bash
+        run: |
+          git config user.name 'VASTcode21 Revenue Bot'
+          git config user.email 'vastcode21-bot@users.noreply.github.com'
+          git add marketing/revenue_config.json marketing/revenue_status.json marketing/subscriber_sync_state.json marketing/research_brief_state.json site/index.html
+          if git diff --cached --quiet; then
+            echo 'No weekly Research Brief state change.'
+          else
+            git commit -m 'chore: refresh weekly Research Brief delivery state'
+            for attempt in 1 2 3; do
+              git pull --rebase origin main && git push && break
+              if [ "$attempt" -eq 3 ]; then
+                echo 'Could not persist weekly Research Brief state' >&2
+                exit 1
+              fi
+              sleep 3
+            done
+          fi
