@@ -26,8 +26,13 @@ def offer_ready(offer: dict, config: dict) -> tuple[bool, list[str]]:
     reqs = config.get("launch_requirements", {}).get(offer.get("id"), [])
     conns = config.get("connections", {})
     missing = [x for x in reqs if not conns.get(x, False)]
-    if offer.get("billing") != "free" and not offer.get("checkout_url"):
-        missing.append("checkout_url")
+    sales_channel = offer.get("sales_channel", "checkout")
+    if offer.get("billing") != "free":
+        if sales_channel == "application":
+            if not offer.get("request_url"):
+                missing.append("request_url")
+        elif not offer.get("checkout_url"):
+            missing.append("checkout_url")
     if offer.get("id") == "mt5-setup-audit" and not offer.get("booking_url"):
         missing.append("booking_url")
     return len(missing) == 0, sorted(set(missing))
@@ -41,12 +46,15 @@ def build_site(config: dict, statuses: list[dict]) -> str:
         price = "FREE" if o.get("billing") == "free" else f"€{o.get('price_eur')}" + ("/mo" if o.get("billing") == "monthly" else "")
         if ready:
             if o.get("billing") == "free":
-                href = "mailto:vastcode21@gmail.com?subject=VAST%20Early%20Access"
+                href = o.get("signup_url") or "mailto:vastcode21@gmail.com?subject=VAST%20Early%20Access"
                 label = "Join early access"
+            elif o.get("sales_channel") == "application":
+                href = o.get("request_url", "#")
+                label = o.get("cta_label", "Apply / request")
             else:
                 href = o.get("checkout_url", "#")
                 label = "Buy now"
-            button = f'<a class="btn" href="{html.escape(href)}" rel="noopener">{label}</a>'
+            button = f'<a class="btn" href="{html.escape(href)}" rel="noopener">{html.escape(label)}</a>'
         else:
             button = '<span class="btn disabled">Opening soon</span>'
         cards.append(f"""
@@ -65,13 +73,13 @@ def build_site(config: dict, statuses: list[dict]) -> str:
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>VASTcode21 — MT5 Research & Technical Services</title>
-<meta name="description" content="VASTcode21 technical MT5 services and research membership. No profit guarantees. VAST remains in validation.">
+<meta name="description" content="VASTcode21 technical MT5 services, private education and research membership. No profit guarantees. VAST remains in validation.">
 <style>
-body{{font-family:Arial,sans-serif;background:#09111e;color:#eef3f8;margin:0;line-height:1.55}}.wrap{{max-width:1000px;margin:auto;padding:48px 20px}}h1{{font-size:44px;margin:0 0 12px}}.lead{{color:#b8c4d2;font-size:20px;max-width:760px}}.grid{{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:34px}}.card{{background:#101b2d;border:1px solid #26364d;border-radius:20px;padding:24px}}.tag{{font-size:12px;color:#e1ba56;font-weight:700}}.price{{font-size:32px;font-weight:800;margin:8px 0}}.small{{font-size:14px;color:#b8c4d2}}.btn{{display:inline-block;background:#4acbff;color:#07111d;text-decoration:none;font-weight:800;padding:12px 18px;border-radius:10px;margin-top:10px}}.disabled{{background:#425166;color:#cfd8e3}}.notice{{margin-top:32px;padding:18px;border-left:4px solid #e1ba56;background:#111c2d;color:#c9d4df}}footer{{margin-top:44px;color:#8090a3;font-size:13px}}
+body{{font-family:Arial,sans-serif;background:#09111e;color:#eef3f8;margin:0;line-height:1.55}}.wrap{{max-width:1180px;margin:auto;padding:48px 20px}}h1{{font-size:44px;margin:0 0 12px}}.lead{{color:#b8c4d2;font-size:20px;max-width:760px}}.grid{{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:34px}}.card{{background:#101b2d;border:1px solid #26364d;border-radius:20px;padding:24px}}.tag{{font-size:12px;color:#e1ba56;font-weight:700}}.price{{font-size:32px;font-weight:800;margin:8px 0}}.small{{font-size:14px;color:#b8c4d2}}.btn{{display:inline-block;background:#4acbff;color:#07111d;text-decoration:none;font-weight:800;padding:12px 18px;border-radius:10px;margin-top:10px}}.disabled{{background:#425166;color:#cfd8e3}}.notice{{margin-top:32px;padding:18px;border-left:4px solid #e1ba56;background:#111c2d;color:#c9d4df}}footer{{margin-top:44px;color:#8090a3;font-size:13px}}
 </style>
 </head><body><main class="wrap">
 <h1>VAST<span style="color:#4acbff">code21</span></h1>
-<p class="lead">Technical MT5 help and transparent research education for GOLD & BITCOIN system builders. The VAST indicator itself is still under validation and is not being sold yet.</p>
+<p class="lead">Technical MT5 help, private trading education and transparent research education for GOLD & BITCOIN system builders. The VAST indicator itself is still under validation and is not being sold yet.</p>
 <section class="grid">{''.join(cards)}</section>
 <div class="notice"><strong>Risk disclosure:</strong> Trading involves risk. Historical or backtested results do not guarantee future performance. Nothing on this page is financial advice, a signal service, account management, or a promise of profit.</div>
 <footer>© VASTcode21 · Paid ads OFF · Live trading OFF · Validation first.</footer>
