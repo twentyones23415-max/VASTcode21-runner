@@ -1,10 +1,11 @@
 {
-  "updated_at": "2026-09-13T08:38:10.008146+00:00",
-  "mode": "stripe_live_connected",
+  "updated_at": "2026-09-13T10:11:51.153976+00:00",
+  "mode": "stripe_mailchimp_connected",
   "followers_count": 0,
   "research_experiments": 96,
   "launchable_offers": [
-    "mt5-setup-audit"
+    "mt5-setup-audit",
+    "vast-early-access"
   ],
   "offers": [
     {
@@ -16,15 +17,13 @@
       "id": "research-brief",
       "ready": false,
       "missing": [
-        "resend"
+        "subscriber_sync"
       ]
     },
     {
       "id": "vast-early-access",
-      "ready": false,
-      "missing": [
-        "resend"
-      ]
+      "ready": true,
+      "missing": []
     }
   ],
   "vast_indicator_sales_enabled": false,

@@ -1,0 +1,22 @@
+{
+  "updated_at": "2026-09-13T10:11:50.051663+00:00",
+  "paid_ads": false,
+  "live_trading": false,
+  "connected": true,
+  "mode": "live_ready",
+  "health": "Everything's Chimpy!",
+  "data_center": "us17",
+  "audience_id": "9e1d827894",
+  "audience_name": "Vastcode21",
+  "signup_url": "http://eepurl.com/cN6dWhHhtP",
+  "tags": {
+    "VAST Early Access": {
+      "id": 8337754,
+      "name": "VAST Early Access"
+    },
+    "Research Brief Subscriber": {
+      "id": 8337755,
+      "name": "Research Brief Subscriber"
+    }
+  }
+}

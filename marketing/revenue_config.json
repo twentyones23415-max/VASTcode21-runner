@@ -1,7 +1,7 @@
 {
   "version": "1.0.5",
   "currency": "EUR",
-  "mode": "stripe_live_connected",
+  "mode": "stripe_mailchimp_connected",
   "daily_revenue_goal_note": "Revenue is a target, not a guarantee.",
   "public_site_url": "https://twentyones23415-max.github.io/VASTcode21-runner/",
   "brand_account": "vast.code21",
@@ -18,7 +18,7 @@
     "calendly": false,
     "calcom": true,
     "resend": false,
-    "mailchimp": false,
+    "mailchimp": true,
     "subscriber_sync": false
   },
   "offers": [
@@ -59,7 +59,7 @@
       "billing": "free",
       "enabled": true,
       "checkout_url": "",
-      "signup_url": "",
+      "signup_url": "http://eepurl.com/cN6dWhHhtP",
       "email_provider": "mailchimp",
       "headline": "Join the free VAST release waitlist.",
       "deliverable": "Verified development and release updates.",
