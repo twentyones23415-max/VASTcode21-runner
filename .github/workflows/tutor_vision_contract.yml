@@ -1,0 +1,45 @@
+name: VAST Tutor Vision contract
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'tools/tutor_vision_contract.py'
+      - 'tools/tutor_vision_server.py'
+      - 'tests/test_tutor_vision_contract.py'
+      - '.github/workflows/tutor_vision_contract.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - name: Compile server and contract
+        run: python -m py_compile tools/tutor_vision_contract.py tools/tutor_vision_server.py
+      - name: Run contract tests
+        run: python -m unittest tests.test_tutor_vision_contract -v
+      - name: Verify backend fails closed without secret
+        shell: bash
+        run: |
+          python tools/tutor_vision_server.py > /tmp/vast-tutor.log 2>&1 &
+          pid=$!
+          trap 'kill $pid 2>/dev/null || true' EXIT
+          for i in 1 2 3 4 5; do
+            if curl -fsS http://127.0.0.1:8787/healthz > /tmp/health.json; then break; fi
+            sleep 1
+          done
+          python - <<'PY'
+          import json
+          d=json.load(open('/tmp/health.json'))
+          assert d['ok'] is True
+          assert d['vision_provider_configured'] is False
+          print(d)
+          PY
