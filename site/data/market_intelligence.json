@@ -1,7 +1,7 @@
 {
-  "version": "1.4",
+  "version": "1.5",
   "status": "active",
-  "updated_at": "2026-09-13T21:30:09.656161+00:00",
+  "updated_at": "2026-09-13T21:39:05.111024+00:00",
   "scope": [
     "XAUUSD",
     "BTCUSD",
@@ -9,33 +9,9 @@
   ],
   "items": [
     {
-      "title": "5 Best Crypto Casinos 2026 – Safe & Trusted Bitcoin Sites to Try This September - Muddy River Sports",
-      "link": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxPbWx2N2E3SzVoV0NYUTVGZlo5VGthbGxSaGNxUmZkWWI0SFlYemhTMml1YlZGUXllQ1dXVXk1RmFHQ29PMEotRzcxRi1WVkFGY1NsMEhuLWFLSGd1Mk01SmVZT0pBR2tKMFVESWpSV2o0QzNEWklsOGhIRERGR3k4cXU5aEJwWGJad29LNV9Xck5GWjloN1k5ajhfRjhaeXZjNE1uVEVpdzl5Z2NNR1lycW5yR0VtVEc5YTJwUHA2dEpaV3RELWJKT3VvaDhIZFZvWk1UTA?oc=5",
-      "source": "Muddy River Sports",
-      "category": "bitcoin / crypto",
-      "published_at": "2026-09-13T21:00:34+00:00",
-      "age": "29m ago"
-    },
-    {
-      "title": "Feds sue Gold Star Distribution to cease operations until company complies with health regulations - FOX 9 Minneapolis-St. Paul",
-      "link": "https://news.google.com/rss/articles/CBMitwFBVV95cUxPdmFhTmtseS1nNjNJMEQ2dk9RQm1oZExFTHFXWGlUUU9kLUpkTEVnbkJpdHUxbkFrbmVCN0JRaXd6Mmpvc3JFQjExWHZWbU1MbkMtU3FZSk1YdGJuQWFpclVIS3pXNkN2WlJyeVBnSGxXZ1FyVGhxV3BxTlNSMWNhNDUyNHlwT19uV3ZnQzMySDY1U2ZZV3ptdV9YeFdmNXZNeDh0N1NWVkhac2hqVDhuUTczVUctUlU?oc=5",
-      "source": "FOX 9 Minneapolis-St. Paul",
-      "category": "gold / macro",
-      "published_at": "2026-09-13T20:47:25+00:00",
-      "age": "42m ago"
-    },
-    {
-      "title": "Waller, The Economic Outlook and Some Comments on My Policy Communication",
-      "link": "https://www.federalreserve.gov/newsevents/speech/waller20260903a.htm",
-      "source": "Fed Speeches",
-      "category": "fed / macro",
-      "published_at": "2026-09-03T12:30:00+00:00",
-      "age": "10d ago"
-    },
-    {
-      "title": "Analysts Think Bitcoin is Less Than $5,000 Away From a Bull Market - finance.yahoo.com",
+      "title": "Analysts Think Bitcoin is Less Than $5,000 Away From a Bull Market - Yahoo Finance",
       "link": "https://news.google.com/rss/articles/CBMimgFBVV95cUxPUDRFZ0MyVE8wRW1nYkU2a3ljTHh4VGJrT3R6cDFELTR4eHJwcU9vUjY0QldVenY1MjlUMExMeS1DdnNJdEZHUTk2MVlCRk1rTFBDZ3V2WllyTTJzN3J5bFMzYmxqbnd5dmJ6VVhOXzlqQUljN0NXSjNFc2h0OWlRVTBzTjlmUXBNR3NzRGdJa2N4cWJnbDZkWWNR?oc=5",
-      "source": "finance.yahoo.com",
+      "source": "Yahoo Finance",
       "category": "bitcoin / crypto",
       "published_at": "2026-09-13T17:05:11+00:00",
       "age": "4h ago"
@@ -47,6 +23,30 @@
       "category": "gold / macro",
       "published_at": "2026-09-11T05:11:09+00:00",
       "age": "2d ago"
+    },
+    {
+      "title": "Waller, The Economic Outlook and Some Comments on My Policy Communication",
+      "link": "https://www.federalreserve.gov/newsevents/speech/waller20260903a.htm",
+      "source": "Fed Speeches",
+      "category": "fed / macro",
+      "published_at": "2026-09-03T12:30:00+00:00",
+      "age": "10d ago"
+    },
+    {
+      "title": "Trump is said to weigh ethics compromise ahead of crucial crypto bill vote (BTC-USD:Cryptocurrency) - Seeking Alpha",
+      "link": "https://news.google.com/rss/articles/CBMisgFBVV95cUxPd291OHZKYXBVMEdaMnBtRjNmVElBVVZKN0tsYUV5SnlnRERUS2ZUbi02eWRwSDRvWGp1Unkxd3ZIZzRPODlfc0ZmQ1BrWlk1STdnWFBRSFBLVDJzdVNOc2xsVXd2c1J0bzdyY29LZTlkSmFib0QwVTQ5VGNfVG1FRVVtV19JdHJSeGtUTTBsZU15bGxkMzN5U2JBa25SLTZ5MzM1N19ObUh3UnZPNWFET19B?oc=5",
+      "source": "Seeking Alpha",
+      "category": "bitcoin / crypto",
+      "published_at": "2026-09-13T16:31:22+00:00",
+      "age": "5h ago"
+    },
+    {
+      "title": "Gold falls over 1% as US inflation data boosts Fed hike bets - Reuters",
+      "link": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQU00zRjlwdjRLNzNsRDluVS1Rc0hCVmhNSTc0TThXMVUtMVgyYU1Mc3FVY1p4YlVIX0p2NzhYbEFCSkVUMEhHR2MtTlFRUHZlbXVGNkxINUVSc1FZNVB5S2hGOXdIUzMydEhHSllEcVVqbWM0VHlOajEzeHBQMlY4UW5nUnRNMm5NS1lvR3RYN2E5M1dIV3NMd3VuZDJOZDg2U0cxa1JR?oc=5",
+      "source": "Reuters",
+      "category": "gold / macro",
+      "published_at": "2026-09-10T17:52:02+00:00",
+      "age": "3d ago"
     },
     {
       "title": "Minutes of the Federal Open Market Committee, July 28–29, 2026",
@@ -65,12 +65,12 @@
       "age": "5h ago"
     },
     {
-      "title": "Gold falls over 1% as US inflation data boosts Fed hike bets - Reuters",
-      "link": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQU00zRjlwdjRLNzNsRDluVS1Rc0hCVmhNSTc0TThXMVUtMVgyYU1Mc3FVY1p4YlVIX0p2NzhYbEFCSkVUMEhHR2MtTlFRUHZlbXVGNkxINUVSc1FZNVB5S2hGOXdIUzMydEhHSllEcVVqbWM0VHlOajEzeHBQMlY4UW5nUnRNMm5NS1lvR3RYN2E5M1dIV3NMd3VuZDJOZDg2U0cxa1JR?oc=5",
-      "source": "Reuters",
+      "title": "Gold climbs on subdued U.S. dollar as inflation data awaited amid oil rally - CNBC",
+      "link": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxPUjlfa2dYcDFfLUs5aHBldm92Y2stdXZDMDdrSXlqNzl0Mm4zRmlCcXRBNWZXLWdWWThQY2Y2OFltUFozVE00Tll6alRZT3B6RTZINmtXbGRIczBaQVFRNnI3WFBON3JCX0wtbTVaOTFReko4dDJzYmhIN2NWa0c1d0J4X3JQQUw1Zkxham5CREdlc3Y3ZWxpYlpyXy0tSDNtNjRvZmZUVkNQQdIBrwFBVV95cUxQYW5RTFFQS050TzluSDNCXzJGSVBncklzbUFpUTFncWZibktVNVhhVzUxUndQbnBFd2F3MkFHM1VPMU5kN2VRa1RDekFVRkZFbzRLcUtxaTRMZERLaFZSanlDUGpjZVo0UXRueldfb2I4T0twNFF1Q2hjQW9xTGF1QjVRTnRRdlJEdlprM3llQVg0RUd0X29XLTNpdnNsTVpkOS1nbGlLdVdwTmpKT3Jj?oc=5",
+      "source": "CNBC",
       "category": "gold / macro",
-      "published_at": "2026-09-10T17:52:02+00:00",
-      "age": "3d ago"
+      "published_at": "2026-09-09T03:37:00+00:00",
+      "age": "4d ago"
     },
     {
       "title": "Federal Reserve issues FOMC statement",
@@ -81,20 +81,12 @@
       "age": "46d ago"
     },
     {
-      "title": "Jordi Visser Puts Bitcoin In The Same Bucket As SpaceX, Anthropic And OpenAI, Says ‘None Of Them Make Money’ - finance.yahoo.com",
+      "title": "Jordi Visser Puts Bitcoin In The Same Bucket As SpaceX, Anthropic And OpenAI, Says ‘None Of Them Make Money’ - Yahoo Finance",
       "link": "https://news.google.com/rss/articles/CBMimwFBVV95cUxNUkcxSFdpVnZmREM1eFd4dmZQMi13X1htM25JZHY1eGktcXE3eFpVa29ZbE9nVDFid1JtOXduanhkckI2VHNrQ2VpWkRMSnc2UkZldVlPNXptRlkwRENETVhxTXJRRVNCNk5qTDJxa3B3MlN3c0Y5X1Z0OXNncy05bXlkNk43ZExFYTQ1X2w1TWptT1ZuY3BHS1Ntdw?oc=5",
-      "source": "finance.yahoo.com",
+      "source": "Yahoo Finance",
       "category": "bitcoin / crypto",
       "published_at": "2026-09-13T11:38:59+00:00",
-      "age": "9h ago"
-    },
-    {
-      "title": "Gold climbs on subdued U.S. dollar as inflation data awaited amid oil rally - CNBC",
-      "link": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxPUjlfa2dYcDFfLUs5aHBldm92Y2stdXZDMDdrSXlqNzl0Mm4zRmlCcXRBNWZXLWdWWThQY2Y2OFltUFozVE00Tll6alRZT3B6RTZINmtXbGRIczBaQVFRNnI3WFBON3JCX0wtbTVaOTFReko4dDJzYmhIN2NWa0c1d0J4X3JQQUw1Zkxham5CREdlc3Y3ZWxpYlpyXy0tSDNtNjRvZmZUVkNQQdIBrwFBVV95cUxQYW5RTFFQS050TzluSDNCXzJGSVBncklzbUFpUTFncWZibktVNVhhVzUxUndQbnBFd2F3MkFHM1VPMU5kN2VRa1RDekFVRkZFbzRLcUtxaTRMZERLaFZSanlDUGpjZVo0UXRueldfb2I4T0twNFF1Q2hjQW9xTGF1QjVRTnRRdlJEdlprM3llQVg0RUd0X29XLTNpdnNsTVpkOS1nbGlLdVdwTmpKT3Jj?oc=5",
-      "source": "CNBC",
-      "category": "gold / macro",
-      "published_at": "2026-09-09T03:37:00+00:00",
-      "age": "4d ago"
+      "age": "10h ago"
     },
     {
       "title": "Jefferson, Navigating Economic Shocks: A Monetary Policymaker’s Perspective",
@@ -105,9 +97,9 @@
       "age": "58d ago"
     },
     {
-      "title": "MicroStrategy's Bitcoin Guide Issues a 93% Crash Warning to Investors - finance.yahoo.com",
+      "title": "MicroStrategy's Bitcoin Guide Issues a 93% Crash Warning to Investors - Yahoo Finance",
       "link": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQb2xibmc2QUVoYmhGS0N3N0p2YlI0M01FV1FBYmtSTGE1aUgzekROT0FQZTFlQkRnM2NZVWlHNmFjOGVudjBWU0hab2IyNVJGY1hkSjdHVVQ0ZHg4eTd6SlhST3gzOGJfdUxBazM2alp1MmYyZUxLdnpIS2FTT3k1NnJDNjlfV25xWklWU2N3ai1IMERvem8zdTRybFREZjU5R2lHaEZn?oc=5",
-      "source": "finance.yahoo.com",
+      "source": "Yahoo Finance",
       "category": "bitcoin / crypto",
       "published_at": "2026-09-13T10:15:01+00:00",
       "age": "11h ago"
@@ -121,9 +113,9 @@
       "age": "60d ago"
     },
     {
-      "title": "Wall Street Is Looking For New Ways to Play the Debasement Trade. Here's Why That's Bullish for Bitcoin. - finance.yahoo.com",
+      "title": "Wall Street Is Looking For New Ways to Play the Debasement Trade. Here's Why That's Bullish for Bitcoin. - Yahoo Finance",
       "link": "https://news.google.com/rss/articles/CBMimgFBVV95cUxPXzJWdlNLNXZrQzFsMmZsQVpQQmNsNG1PRExYRjJKQW5iOXZZRG9HTG9wM2VWc2ZXOHhpU1VCdDdxRE1NblhVWmM2aUlYUGFFdkNSWFhfc2cxYjdCS1B3cXZDUU5lYkxFS2RPOHVUR3lPX2xPZ1lXNURGcjFIZmpEMDNjTUFpM1IyRWJ1Rl9zbXpVdVlDcnlXNFZB?oc=5",
-      "source": "finance.yahoo.com",
+      "source": "Yahoo Finance",
       "category": "bitcoin / crypto",
       "published_at": "2026-09-13T09:46:00+00:00",
       "age": "11h ago"
@@ -135,8 +127,16 @@
       "category": "fed / macro",
       "published_at": "2026-07-13T16:30:00+00:00",
       "age": "62d ago"
+    },
+    {
+      "title": "US Housing Market Is Breaking. Will It Impact Stocks and Bitcoin Prices? - Yahoo Finance",
+      "link": "https://news.google.com/rss/articles/CBMimwFBVV95cUxPLXRiQml1STdKOHh1bFViTUNfdTdXRHpySjJ0YVRfbjNmY3kzUERzNW9OQkhoOUxFYldzbWVQejNlYTNkV01yN281czJ1S05yYjlkUmprZFJlMkFlTmpQYWR1aTJxd1VIQVJsQ0JaMFdoRFZpZnlDVTJ3dm5yTnBDS2hUR0hPMFY3NnhER05wWXZUY3JsNDl2ZGFmRQ?oc=5",
+      "source": "Yahoo Finance",
+      "category": "bitcoin / crypto",
+      "published_at": "2026-09-13T02:00:00+00:00",
+      "age": "19h ago"
     }
   ],
   "feed_errors": [],
-  "quality_filtered": 1
+  "quality_filtered": 2
 }
