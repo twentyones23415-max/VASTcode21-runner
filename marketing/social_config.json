@@ -1,8 +1,9 @@
 {
-  "version": "3.0.0",
+  "version": "3.1.0",
   "enabled": true,
   "growth_mode": true,
   "growth_goal_followers": 100,
+  "growth_rescue_followers_below": 10,
   "account_name": "vast.code21",
   "timezone": "Europe/Bucharest",
   "publish_hour_local": 19,
@@ -12,37 +13,34 @@
   "format_fallback_to_image": true,
   "raw_asset_base": "https://raw.githubusercontent.com/twentyones23415-max/VASTcode21-runner/main/marketing/assets",
   "cta_variants": [
-    "Follow @vast.code21 for transparent MT5 research and validation updates.",
-    "Follow @vast.code21 to watch the VAST validation process evolve in public.",
-    "Follow @vast.code21 for GOLD, BITCOIN and MT5 research without profit promises."
+    "Follow @vast.code21 to watch VAST survive—or fail—real validation in public.",
+    "Save this and follow @vast.code21 for practical MT5, GOLD and BITCOIN research.",
+    "Follow @vast.code21 for the next validation result, market-risk alert and MT5 lesson."
   ],
   "hashtag_sets": [
     [
       "#VASTcode21",
-      "#MT5",
-      "#AlgorithmicTrading",
-      "#GoldTrading",
-      "#BitcoinTrading",
-      "#TradingSystems",
-      "#QuantTrading"
-    ],
-    [
-      "#VASTcode21",
-      "#MetaTrader5",
-      "#AlgoTrading",
       "#XAUUSD",
-      "#Bitcoin",
-      "#TradingResearch",
-      "#SystematicTrading"
+      "#MT5",
+      "#AlgoTrading",
+      "#TradingEducation",
+      "#Backtesting"
     ],
     [
       "#VASTcode21",
+      "#Bitcoin",
+      "#MetaTrader5",
+      "#QuantTrading",
+      "#SystematicTrading",
+      "#TradingResearch"
+    ],
+    [
+      "#VASTcode21",
+      "#GoldTrading",
+      "#BTCUSD",
       "#MT5Trading",
-      "#TradingAlgo",
-      "#Gold",
-      "#BTC",
-      "#Backtesting",
-      "#TradingEducation"
+      "#TradingSystems",
+      "#RiskManagement"
     ]
   ],
   "paid_ads": false,
