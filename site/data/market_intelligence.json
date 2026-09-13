@@ -1,7 +1,7 @@
 {
-  "version": "1.1",
+  "version": "1.2",
   "status": "active",
-  "updated_at": "2026-09-13T11:14:12.141546+00:00",
+  "updated_at": "2026-09-13T11:14:59.078648+00:00",
   "scope": [
     "XAUUSD",
     "BTCUSD",
@@ -14,23 +14,7 @@
       "source": "Robinhood",
       "category": "bitcoin / crypto",
       "published_at": "2026-09-13T11:04:36+00:00",
-      "age": "9m ago"
-    },
-    {
-      "title": "HYPE price on Sep 13, 2026 at 8am EDT Crypto Prediction Market - Robinhood",
-      "link": "https://news.google.com/rss/articles/CBMirwFBVV95cUxQdnUySjNFUThqeGdjSW95MllEWURaSklzbi1jQ1E0WjlOYlQxd29YZWlGamRsOVVjcU5VQVYxblJXbnh0V0NlaDJUMk04d1BLZk5EenBaTzlUdkdSLVNLcXgtbXFtcVlPb2pEeDlXemU1c050ajFVNU01THNnYS1BXzJ0T3RtcVlDVUlYU0Ziekg2QWJRd2hZSjFETW1rd01IMkVZWmQ2V1VWbnctVUxN?oc=5",
-      "source": "Robinhood",
-      "category": "bitcoin / crypto",
-      "published_at": "2026-09-13T11:04:36+00:00",
-      "age": "9m ago"
-    },
-    {
-      "title": "Dogecoin price on Sep 13, 2026 at 8am EDT Crypto Prediction Market - Robinhood",
-      "link": "https://news.google.com/rss/articles/CBMitAFBVV95cUxOTlBLRTVIMUZ5cG5HX2MyZlRPS1g4bm92Zm55dVluQXhKOTJDaFJhMlktUzNhdnJaUW0ySG5WWmZBTVJURTBvanMzLXhfVWVVWG9GdVNnZXMzQjc2MWd1eGd4WmFFdF82YklCYXdNTTVqelRTZjU3XzlOdkZaeW03WFZvVVdIUGUtb25HTFZPa1o0NC1GaXdtcXpNb050U2UtZ2VNcUJ6RUFnWmc0VlF5VWdWNmY?oc=5",
-      "source": "Robinhood",
-      "category": "bitcoin / crypto",
-      "published_at": "2026-09-13T11:02:37+00:00",
-      "age": "11m ago"
+      "age": "10m ago"
     },
     {
       "title": "MicroStrategy's Bitcoin Guide Issues a 93% Crash Warning to Investors - Yahoo Finance",
@@ -39,14 +23,6 @@
       "category": "bitcoin / crypto",
       "published_at": "2026-09-13T10:15:01+00:00",
       "age": "59m ago"
-    },
-    {
-      "title": "Robinhood (HOOD) Expands Prediction Markets With Crypto.com Partnership - Yahoo Finance",
-      "link": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxNNWg4c3pSVllacDBGNUwwNkFzT1lZMmQwbXVpeV9iWmVsUkgwMXJIODlOcDAxRlQ2UHRrNmlUTHFwakUyQ1lHTm5xYmRTWGJYemJDVWMzNTBWRjFVX3lDX1hoaklTUTNLbHVLQmtzbGhuTFVaWDgyTTZ1NldXeVhNLXB3WjBlRDMwSUpRYjlHZUF3S0dTNnhHVGk3OXQ3TFllUDRQeGxYSVp2TUE?oc=5",
-      "source": "Yahoo Finance",
-      "category": "bitcoin / crypto",
-      "published_at": "2026-09-13T09:49:28+00:00",
-      "age": "1h ago"
     },
     {
       "title": "Wall Street Is Looking For New Ways to Play the Debasement Trade. Here's Why That's Bullish for Bitcoin. - The Motley Fool",
@@ -63,14 +39,6 @@
       "category": "bitcoin / crypto",
       "published_at": "2026-09-13T08:40:46+00:00",
       "age": "2h ago"
-    },
-    {
-      "title": "Crypto Price Today Highlights Solana Momentum as Apeing’s New Crypto Presale Stage 3 Almost Sold Out - markets.businessinsider.com",
-      "link": "https://news.google.com/rss/articles/CBMi8AFBVV95cUxOWU5XZllkdEFLdkZrMFd1VEVuUWNGay16WUR1b0ZfdENWNG15cUdQZjNjSEJVOEJUekcwQzNNTFZ6VTZpMG0yeWxwb1NzTU5VYjVlMUJ5YTJ0amd4U0I2SjUyZ2ZyRXhyWElpbXh2MzMydTJkREVPYU9fdGExYzlnSTRrUjlNbWtEWjRxb3l3RmxLSUFqN05IY3dUYlhCd2hyNVVia2lFRXVxSEpFN2JmREpMUHBkMjhhT2g2VDVWMndrTUZfTjl6RWI3UnNGOGYtWHM1N0FzMXQ4dXUzMDBSeWpkSjBIOFg5RzhCbzlBQ0k?oc=5",
-      "source": "markets.businessinsider.com",
-      "category": "bitcoin / crypto",
-      "published_at": "2026-09-13T07:54:34+00:00",
-      "age": "3h ago"
     },
     {
       "title": "US Housing Market Is Breaking. Will It Impact Stocks and Bitcoin Prices? - Yahoo Finance",
@@ -97,44 +65,76 @@
       "age": "13h ago"
     },
     {
-      "title": "Ethereum ETFs Took In $216 Million on Friday. Bitcoin’s Lost Money for a Fourth Day and XRP’s Took Zero - Yahoo Finance",
-      "link": "https://news.google.com/rss/articles/CBMimwFBVV95cUxNTzd3MWRReEljQjZ5ZkcyektpUFBRVDloVEFaMWRGVV92N2VQbTBXbl9rekpyb1Z2d3YtRUI2SXFBQUVIQjhuN1U4WmVoYnlMQWhpUnJPNi1XT1dMb2FkekN2TnUxOFpsSENFenBIWHJWY0RaejE2emp1WlhNSFBFZzFOVzQxcEFDS2R2WWhGeFM5UGlhUmJmUjVIdw?oc=5",
-      "source": "Yahoo Finance",
-      "category": "bitcoin / crypto",
-      "published_at": "2026-09-12T21:11:40+00:00",
-      "age": "14h ago"
-    },
-    {
-      "title": "Bitcoin Suisse plans to cut up to half its Swiss jobs as it shifts work abroad - CoinDesk",
-      "link": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxPT0Q3SC15RDF0YzhDMDJnbGV2N2I1QlJZN0NNbFBWRk1tUURPZHdHS184ckJLaUVKTXdOTkJtWllnYkNkOUtPNUhMZlBZckp4YTVQbE9zdUhES19IMmdiVlU0a0NKejNiQURWUFdpVFVVc0VhTmZMeGthRHdBY083STVRZHZncjRhc0YwYjNtUlFSaUt2c2JIM1RseVdyVEFRcVQzUmtXTUNvUHJ2N1lrMGE2SUNWdDFlbEdwTGxGa2Y?oc=5",
-      "source": "CoinDesk",
-      "category": "bitcoin / crypto",
-      "published_at": "2026-09-12T21:09:06+00:00",
-      "age": "14h ago"
-    },
-    {
-      "title": "Hidden crypto farm in Mexican mountains puts spotlight on cartel funding - Reuters",
-      "link": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxNU3JWY0h1VnVaSWl6MW5nYnlmcktHNS1uTVM0WHNnYnVPREdhalFjSnRNWUpsV3pXdGVCWjltLUttTW5qbXZLZjZQaDZwVENpY3JkbjhRSEZCRXZjOHpURjdsVmZLbEZoaHVLYXdXemE1QlpCWG5kc0lDWWVNem84ZjRWOVM4ZEZaeHRfMFFCeDVlWjhSN185U0ZaR2N6cVBxb0tiT0swU0xBRDczU2x2cWR2R0poQjRi?oc=5",
-      "source": "Reuters",
-      "category": "bitcoin / crypto",
-      "published_at": "2026-09-12T12:20:22+00:00",
-      "age": "22h ago"
-    },
-    {
-      "title": "Bitcoin’s Biggest 24 Hours of 2026? AI Models Predict BTC Price After CLARITY and Fed Decisions - Yahoo Finance",
-      "link": "https://news.google.com/rss/articles/CBMimgFBVV95cUxPRFVTT2RHZjF4X242RmR0Q1l6eFZlRGdNMHFYUnNxUWE2LVpFVGljek5YeERfWnktM090c2pheEVrZnU0S05TR1ZTWnFrdm9WM01UUXBwZXBNWWd2Y3RyVVFmdDVWT1ZxWmFaYUxFVlk0dGduMndKN3V6dE81MkRLNGZqV3BaUFZxN0ZFRDc3N0dyUHhYejBBVl9n?oc=5",
-      "source": "Yahoo Finance",
-      "category": "bitcoin / crypto",
-      "published_at": "2026-09-12T12:17:15+00:00",
-      "age": "22h ago"
-    },
-    {
       "title": "Gold rises on dip-buying even as Fed rate hike bets rise after US inflation data - Reuters",
       "link": "https://news.google.com/rss/articles/CBMiogFBVV95cUxOMk9xQnh0dkJvU0VUbjhfa0E5ZHhmb21sU1k4RWktNC0tdERMUlFyb05jamhUa0p0dUEwejVJbHlUaWp6VnZuUEJrc0ZmYzBMM1RwaUp0SUdWWXBiU2pRVUF4ZlRsQk1fVmY2MUlTcTFFV3RjSnQzSE5UUHdKWHJYcV9YaUVmZ01PVnVUWHI0MzU4dnJja25CTmpxc3N4STVOb1E?oc=5",
       "source": "Reuters",
       "category": "gold / macro",
       "published_at": "2026-09-11T23:53:51+00:00",
       "age": "1d ago"
+    },
+    {
+      "title": "Agencies seek comment on proposed third-party risk management guidance and issue statement on community bank engagement with core service providers",
+      "link": "https://www.federalreserve.gov/newsevents/pressreleases/bcreg20260911a.htm",
+      "source": "Fed Press All",
+      "category": "fed / macro",
+      "published_at": "2026-09-11T14:00:00+00:00",
+      "age": "1d ago"
+    },
+    {
+      "title": "Agencies reduce regulatory burden for community banks, increase eligibility for 18-month exam cycle",
+      "link": "https://www.federalreserve.gov/newsevents/pressreleases/bcreg20260910a.htm",
+      "source": "Fed Press All",
+      "category": "fed / macro",
+      "published_at": "2026-09-10T20:00:00+00:00",
+      "age": "2d ago"
+    },
+    {
+      "title": "Gold falls over 1% as US inflation data boosts Fed hike bets - Reuters",
+      "link": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQU00zRjlwdjRLNzNsRDluVS1Rc0hCVmhNSTc0TThXMVUtMVgyYU1Mc3FVY1p4YlVIX0p2NzhYbEFCSkVUMEhHR2MtTlFRUHZlbXVGNkxINUVSc1FZNVB5S2hGOXdIUzMydEhHSllEcVVqbWM0VHlOajEzeHBQMlY4UW5nUnRNMm5NS1lvR3RYN2E5M1dIV3NMd3VuZDJOZDg2U0cxa1JR?oc=5",
+      "source": "Reuters",
+      "category": "gold / macro",
+      "published_at": "2026-09-10T18:52:02+00:00",
+      "age": "2d ago"
+    },
+    {
+      "title": "Gold climbs on subdued U.S. dollar as inflation data awaited amid oil rally - CNBC",
+      "link": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxPUjlfa2dYcDFfLUs5aHBldm92Y2stdXZDMDdrSXlqNzl0Mm4zRmlCcXRBNWZXLWdWWThQY2Y2OFltUFozVE00Tll6alRZT3B6RTZINmtXbGRIczBaQVFRNnI3WFBON3JCX0wtbTVaOTFReko4dDJzYmhIN2NWa0c1d0J4X3JQQUw1Zkxham5CREdlc3Y3ZWxpYlpyXy0tSDNtNjRvZmZUVkNQQdIBrwFBVV95cUxQYW5RTFFQS050TzluSDNCXzJGSVBncklzbUFpUTFncWZibktVNVhhVzUxUndQbnBFd2F3MkFHM1VPMU5kN2VRa1RDekFVRkZFbzRLcUtxaTRMZERLaFZSanlDUGpjZVo0UXRueldfb2I4T0twNFF1Q2hjQW9xTGF1QjVRTnRRdlJEdlprM3llQVg0RUd0X29XLTNpdnNsTVpkOS1nbGlLdVdwTmpKT3Jj?oc=5",
+      "source": "CNBC",
+      "category": "gold / macro",
+      "published_at": "2026-09-09T03:37:00+00:00",
+      "age": "4d ago"
+    },
+    {
+      "title": "Federal Reserve Board announces termination of enforcement actions with United Texas Bank, Quontic Bank Acquisition Corp., and Quontic Bank Holdings Corp.",
+      "link": "https://www.federalreserve.gov/newsevents/pressreleases/enforcement20260904a.htm",
+      "source": "Fed Press All",
+      "category": "fed / macro",
+      "published_at": "2026-09-04T15:00:00+00:00",
+      "age": "8d ago"
+    },
+    {
+      "title": "Waller, The Economic Outlook and Some Comments on My Policy Communication",
+      "link": "https://www.federalreserve.gov/newsevents/speech/waller20260903a.htm",
+      "source": "Fed Speeches",
+      "category": "fed / macro",
+      "published_at": "2026-09-03T12:30:00+00:00",
+      "age": "9d ago"
+    },
+    {
+      "title": "Barr, Unlocking Opportunities for Workers and Entrepreneurs with a Criminal Record",
+      "link": "https://www.federalreserve.gov/newsevents/speech/barr20260901a.htm",
+      "source": "Fed Speeches",
+      "category": "fed / macro",
+      "published_at": "2026-09-01T13:05:00+00:00",
+      "age": "11d ago"
+    },
+    {
+      "title": "Warsh, In Our Time",
+      "link": "https://www.federalreserve.gov/newsevents/speech/warsh20260828a.htm",
+      "source": "Fed Speeches",
+      "category": "fed / macro",
+      "published_at": "2026-08-28T14:00:00+00:00",
+      "age": "15d ago"
     }
   ],
   "feed_errors": []
