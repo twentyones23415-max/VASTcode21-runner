@@ -14,11 +14,18 @@
 
   async function addLearning(){
     if(q('#tutor-learning-path')) return;
-    const lab=q('#tutor-ai-lab'); if(!lab) return;
+    const slot=q('#tutor-slot');
+    const lab=q('#tutor-ai-lab');
+    if(!slot && !lab) return;
     const s=document.createElement('section');
     s.id='tutor-learning-path'; s.className='tutor-learning';
     s.innerHTML='<div class="shell"><div class="learning-shell"><div class="intel-empty">Loading Tutor foundations…</div></div></div>';
-    lab.insertAdjacentElement('afterend',s);
+    if(slot){
+      slot.querySelectorAll('.module-empty').forEach(n=>n.remove());
+      slot.appendChild(s);
+    }else{
+      lab.insertAdjacentElement('afterend',s);
+    }
     try{
       const r=await fetch(`${FEED}?t=${Date.now()}`,{cache:'no-store'}); if(!r.ok) throw new Error('curriculum');
       render(await r.json());
