@@ -1,5 +1,6 @@
 (()=>{
   const EARLY='https://eepurl.com/cN6dWhHhtP';
+  const NEWS_FEED='https://raw.githubusercontent.com/twentyones23415-max/VASTcode21-runner/main/site/data/market_intelligence.json';
   const progress=42;
   const q=(s,r=document)=>r.querySelector(s);
   const qa=(s,r=document)=>[...r.querySelectorAll(s)];
@@ -66,7 +67,7 @@
   async function loadNews(){
     const grid=q('#news-grid'), updated=q('#intel-updated'); if(!grid) return;
     try{
-      const r=await fetch(`data/market_intelligence.json?t=${Date.now()}`,{cache:'no-store'}); if(!r.ok) throw new Error('feed');
+      const r=await fetch(`${NEWS_FEED}?t=${Date.now()}`,{cache:'no-store'}); if(!r.ok) throw new Error('feed');
       const d=await r.json(); const items=(d.items||[]).slice(0,8);
       if(updated) updated.textContent=d.updated_at?`Last monitor refresh · ${new Date(d.updated_at).toLocaleString()}`:'Monitor active';
       if(!items.length){grid.innerHTML='<div class="intel-empty">Monitor is active; no new qualifying headlines are available in the current window.</div>';return;}
