@@ -1,5 +1,5 @@
 {
-  "version": "1.0.4",
+  "version": "1.0.5",
   "currency": "EUR",
   "mode": "stripe_live_connected",
   "daily_revenue_goal_note": "Revenue is a target, not a guarantee.",
