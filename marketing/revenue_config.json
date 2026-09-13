@@ -1,5 +1,5 @@
 {
-  "version": "1.0.1",
+  "version": "1.0.2",
   "currency": "EUR",
   "mode": "stripe_live_connected",
   "daily_revenue_goal_note": "Revenue is a target, not a guarantee.",
@@ -28,6 +28,7 @@
       "enabled": true,
       "checkout_url": "https://buy.stripe.com/bJedRaaIVaZG6L55S6cEw00",
       "booking_url": "",
+      "booking_provider": "cal.com",
       "headline": "Get your MT5 setup reviewed and automation-ready.",
       "deliverable": "45-minute technical MT5 setup session covering installation, templates, EA/indicator setup, VPS/terminal hygiene and automation troubleshooting.",
       "not_included": "No trading signals, account management, profit promise or personalized investment advice.",
@@ -62,8 +63,7 @@
   ],
   "launch_requirements": {
     "mt5-setup-audit": [
-      "stripe",
-      "calendly"
+      "stripe"
     ],
     "research-brief": [
       "stripe",
