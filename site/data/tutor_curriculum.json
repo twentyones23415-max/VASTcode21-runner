@@ -1,8 +1,8 @@
 {
-  "version": "1.0",
-  "status": "prelaunch",
+  "version": "1.1",
+  "status": "beta",
   "title": "VAST Tutor Foundations",
-  "storage_notice": "Progress in this prelaunch module is stored only in this browser. No account sync is active yet.",
+  "storage_notice": "Signed-in lesson progress is synced to the authenticated Tutor profile. If no authenticated session is available, progress falls back to this browser only.",
   "lessons": [
     {
       "id": "foundation-risk",
