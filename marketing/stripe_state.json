@@ -8,10 +8,10 @@
       "checkout_url": "https://book.stripe.com/bJedRaaIVaZG6L55S6cEw00",
       "livemode": true,
       "after_completion": {
-        "hosted_confirmation": {
-          "custom_message": null
+        "redirect": {
+          "url": "https://cal.com/vastcode21/mt5-setup-audit"
         },
-        "type": "hosted_confirmation"
+        "type": "redirect"
       }
     },
     "research-brief": {
@@ -29,7 +29,7 @@
       }
     }
   },
-  "updated_at": "2026-09-13T08:37:43.185338+00:00",
+  "updated_at": "2026-09-13T08:38:08.905292+00:00",
   "live_trading": false,
   "paid_ads": false,
   "mode": "live_ready",

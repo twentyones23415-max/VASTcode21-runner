@@ -1,16 +1,16 @@
 {
-  "updated_at": "2026-09-13T08:37:44.781845+00:00",
+  "updated_at": "2026-09-13T08:38:10.008146+00:00",
   "mode": "stripe_live_connected",
   "followers_count": 0,
   "research_experiments": 96,
-  "launchable_offers": [],
+  "launchable_offers": [
+    "mt5-setup-audit"
+  ],
   "offers": [
     {
       "id": "mt5-setup-audit",
-      "ready": false,
-      "missing": [
-        "booking_url"
-      ]
+      "ready": true,
+      "missing": []
     },
     {
       "id": "research-brief",
