@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0",
+  "version": "2.1.0",
   "last_publish_at": "2026-09-13T06:57:10.679394+00:00",
   "published": [
     {
@@ -8,6 +8,18 @@
       "published_at": "2026-09-13T06:57:10.679394+00:00",
       "account": "vast.code21",
       "image_url": "https://raw.githubusercontent.com/twentyones23415-max/VASTcode21-runner/main/marketing/assets/milestone-forward.jpg"
+    },
+    {
+      "queue_id": "offers-ready-v1",
+      "media_id": "18113547598825870",
+      "published_at": "2026-09-13T10:29:19.369850+00:00",
+      "account": "vast.code21",
+      "media_url": "https://raw.githubusercontent.com/twentyones23415-max/VASTcode21-runner/main/marketing/assets/offers-ready-v1.jpg",
+      "format": "image",
+      "pillar": "services",
+      "caption_fingerprint": "38d402d00e357725c8bcf65541761ba8908043393dd8e0f76f20981c28debb58",
+      "reconciled": false,
+      "free_publish": true
     }
   ]
 }
