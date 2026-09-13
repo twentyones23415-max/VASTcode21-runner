@@ -13,6 +13,10 @@ on:
         required: false
         default: false
         type: boolean
+  # Run hourly; instagram_publisher.py itself gates on the configured local
+  # publish hour, max 1 post/local day and minimum 20-hour spacing.
+  schedule:
+    - cron: '7 * * * *'
 
 permissions:
   contents: write
