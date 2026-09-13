@@ -1,0 +1,52 @@
+name: VASTcode21 revenue funnel
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'marketing/revenue_config.json'
+      - 'marketing/growth_metrics.json'
+      - 'status/summary.json'
+      - 'tools/revenue_engine.py'
+      - '.github/workflows/revenue.yml'
+  schedule:
+    - cron: '5 7 * * *'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: vastcode21-revenue
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - name: Build revenue readiness and landing page
+        run: python tools/revenue_engine.py
+      - name: Commit revenue status and site when changed
+        shell: bash
+        run: |
+          git config user.name 'VASTcode21 Revenue Bot'
+          git config user.email 'vastcode21-bot@users.noreply.github.com'
+          git add marketing/revenue_status.json site/index.html
+          if git diff --cached --quiet; then
+            echo 'No revenue funnel change.'
+          else
+            git commit -m 'chore: refresh revenue funnel state'
+            for attempt in 1 2 3; do
+              git pull --rebase origin main && git push && break
+              if [ "$attempt" -eq 3 ]; then
+                echo 'Could not persist revenue funnel state' >&2
+                exit 1
+              fi
+              sleep 3
+            done
+          fi
