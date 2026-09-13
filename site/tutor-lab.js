@@ -3,9 +3,20 @@
   const PRODUCT_FEED='data/tutor_product.json';
   const EARLY='https://eepurl.com/cN6dWhHhtP';
   const MENTOR_DM='https://ig.me/m/vast.code21';
+  const EVENT_MAX_AGE_MS=150*60*1000;
   const q=(s,r=document)=>r.querySelector(s);
   const qa=(s,r=document)=>[...r.querySelectorAll(s)];
   const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+  function setLabState(label,state,online=false){
+    qa('.lab-state').forEach(row=>{
+      const span=q('span',row), b=q('b',row);
+      if(span && b && span.textContent.trim()===label){
+        b.textContent=state;
+        b.classList.toggle('online',online);
+      }
+    });
+  }
 
   function addTutorLab(){
     if(q('#tutor-ai-lab')) return;
@@ -28,7 +39,7 @@
         </div>
         <aside class="tutor-console-side">
           <div class="lab-state"><span>VISION ENGINE</span><b>BUILDING</b></div>
-          <div class="lab-state"><span>EVENT RISK SHIELD</span><b class="online">ONLINE</b></div>
+          <div class="lab-state"><span>EVENT RISK SHIELD</span><b>VERIFYING</b></div>
           <div class="lab-state"><span>NEWS CONTEXT</span><b class="online">ONLINE</b></div>
           <div class="lab-state"><span>LIVE MARKET API</span><b>PLANNED</b></div>
           <div class="lab-state"><span>OUTCOME REVIEW</span><b>PLANNED</b></div>
@@ -73,16 +84,30 @@
     if(q('#event-risk-shield')) return;
     const markets=q('#markets'); if(!markets) return;
     const s=document.createElement('section'); s.id='event-risk-shield'; s.className='event-shield';
-    s.innerHTML=`<div class="shell"><div class="event-shell"><div class="event-head"><div><div class="eyebrow">VAST Event Risk Shield</div><h2>Know what can hit the market next.</h2><p>Official-source monitoring for scheduled U.S. macro and Federal Reserve events that can materially change volatility in XAUUSD and BTCUSD.</p></div><div class="risk-orb" id="risk-orb"><span>SCANNING</span><b>—</b></div></div><div class="event-alert" id="event-alert">Connecting to official event calendars…</div><div class="event-grid" id="event-grid"></div><div class="event-foot">Sources are checked automatically. Critical release times can change; the linked official source remains the final reference.</div></div></div>`;
+    s.innerHTML=`<div class="shell"><div class="event-shell"><div class="event-head"><div><div class="eyebrow">VAST Event Risk Shield</div><h2>Know what can hit the market next.</h2><p>Official-source monitoring for scheduled U.S. macro and Federal Reserve events that can materially change volatility in XAUUSD and BTCUSD.</p></div><div class="risk-orb" id="risk-orb"><span>SCANNING</span><b>—</b></div></div><div class="event-alert" id="event-alert">Connecting to official event calendars…</div><div class="event-grid" id="event-grid"></div><div class="event-foot" id="event-foot">Sources are checked automatically. Critical release times can change; the linked official source remains the final reference.</div></div></div>`;
     markets.insertAdjacentElement('afterend',s);
     loadEvents();
   }
 
   async function loadEvents(){
-    const alert=q('#event-alert'), grid=q('#event-grid'), orb=q('#risk-orb'); if(!grid) return;
+    const alert=q('#event-alert'), grid=q('#event-grid'), orb=q('#risk-orb'), foot=q('#event-foot'); if(!grid) return;
     try{
       const r=await fetch(`${EVENT_FEED}?t=${Date.now()}`,{cache:'no-store'}); if(!r.ok) throw new Error('events');
-      const d=await r.json(); const urgent=d.urgent||[], events=(d.events||[]).slice(0,8), n=d.nearest;
+      const d=await r.json();
+      const updated=new Date(d.updated_at||0);
+      const age=Date.now()-updated.getTime();
+      const fresh=Number.isFinite(age) && age>=0 && age<=EVENT_MAX_AGE_MS;
+      if(!fresh || d.status==='degraded'){
+        setLabState('EVENT RISK SHIELD','DEGRADED',false);
+        orb.dataset.state='degraded'; orb.innerHTML='<span>EVENT RISK</span><b>DEGRADED</b>';
+        alert.className='event-alert warn';
+        alert.innerHTML='<strong>DATA CHECK</strong><span>Official event-risk data is stale or incomplete. Do not rely on it for timing until the feed refreshes.</span>';
+        grid.innerHTML='';
+        if(foot) foot.textContent=`Last verified snapshot: ${Number.isFinite(updated.getTime())?updated.toLocaleString():'unknown'} · official source links remain the final reference.`;
+        return;
+      }
+      setLabState('EVENT RISK SHIELD','ONLINE',true);
+      const urgent=d.urgent||[], events=(d.events||[]).slice(0,8), n=d.nearest;
       let state='CLEAR';
       if(urgent.some(x=>x.risk_state==='ACTIVE')) state='ACTIVE'; else if(urgent.some(x=>x.risk_state==='HIGH')) state='HIGH'; else if(urgent.length) state='ELEVATED'; else if(n) state='WATCH';
       orb.dataset.state=state.toLowerCase(); orb.innerHTML=`<span>EVENT RISK</span><b>${state}</b>`;
@@ -92,8 +117,10 @@
         alert.innerHTML=`<strong>${esc(n.risk_state)}</strong><span>${esc(n.title)} · ${esc(n.source)} · ${when}</span>`;
       } else alert.textContent='No medium/high-impact official-source event is currently inside the monitoring horizon.';
       grid.innerHTML=events.map(x=>`<a class="event-card impact-${esc(x.impact)}" href="${esc(x.link)}" target="_blank" rel="noopener noreferrer"><div class="event-meta"><span>${esc(x.source)}</span><b>${esc(x.impact).toUpperCase()}</b></div><h3>${esc(x.title)}</h3><div class="event-time"><strong>${esc(x.countdown)}</strong><span>${new Date(x.scheduled_at).toLocaleString()}</span></div><div class="event-state">${esc(x.risk_state)} · official source ↗</div></a>`).join('') || '<div class="intel-empty">No qualifying events in the current 14-day window.</div>';
+      if(foot) foot.textContent=`Last verified: ${updated.toLocaleString()} · sources checked automatically. Critical release times can change; the linked official source remains the final reference.`;
     }catch(e){
-      orb.innerHTML='<span>EVENT RISK</span><b>DEGRADED</b>'; alert.textContent='Official event-risk snapshot is temporarily unavailable.'; grid.innerHTML='';
+      setLabState('EVENT RISK SHIELD','DEGRADED',false);
+      orb.dataset.state='degraded'; orb.innerHTML='<span>EVENT RISK</span><b>DEGRADED</b>'; alert.className='event-alert warn'; alert.textContent='Official event-risk snapshot is temporarily unavailable. Treat event timing as unknown until the feed recovers.'; grid.innerHTML='';
     }
   }
 
