@@ -1,65 +1,63 @@
 (()=>{
-  const EVENT_FEED='https://raw.githubusercontent.com/twentyones23415-max/VASTcode21-runner/main/site/data/event_risk.json';
-  const PRODUCT_FEED='data/tutor_product.json';
-  const EARLY='https://eepurl.com/cN6dWhHhtP';
-  const MENTOR_DM='https://ig.me/m/vast.code21';
+  const EVENT_FEED='data/event_risk.json';
   const EVENT_MAX_AGE_MS=150*60*1000;
   const q=(s,r=document)=>r.querySelector(s);
-  const qa=(s,r=document)=>[...r.querySelectorAll(s)];
   const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
+  function clearPlaceholder(slot){slot?.querySelectorAll('.module-empty').forEach(n=>n.remove())}
+
   function setLabState(label,state,online=false){
-    qa('.lab-state').forEach(row=>{
+    document.querySelectorAll('.lab-state').forEach(row=>{
       const span=q('span',row), b=q('b',row);
-      if(span && b && span.textContent.trim()===label){
-        b.textContent=state;
-        b.classList.toggle('online',online);
-      }
+      if(span&&b&&span.textContent.trim()===label){b.textContent=state;b.classList.toggle('online',online)}
     });
   }
 
-  function addTutorLab(){
+  function mountVision(){
     if(q('#tutor-ai-lab')) return;
-    const mentor=q('#mentor'); if(!mentor) return;
+    const slot=q('#vision-slot');
+    if(!slot) return;
+    clearPlaceholder(slot);
     const s=document.createElement('section');
     s.id='tutor-ai-lab'; s.className='tutor-lab';
-    s.innerHTML=`<div class="shell">
-      <div class="section-head"><div><div class="eyebrow">VAST Tutor AI · product lab</div><h2>Learn. Upload. Analyze.<br>Review what happened.</h2></div><p>A paid educational AI product being built around structured learning, screenshot analysis, event-risk awareness and prediction-to-outcome review. No fake live mode: features go public only when their backend is genuinely connected.</p></div>
-      <div class="tutor-console">
-        <div class="tutor-console-main">
-          <div class="tutor-modebar"><span class="active">VISION LAB</span><span>TUTOR</span><span>OUTCOME LAB</span><b>PRELAUNCH</b></div>
-          <div class="upload-zone" id="vision-drop" tabindex="0" role="button" aria-label="Choose chart screenshot">
-            <input id="vision-file" type="file" accept="image/png,image/jpeg,image/webp" hidden>
-            <div class="upload-icon">◇</div><h3>Drop a chart screenshot here</h3>
-            <p>PNG, JPG or WEBP · local preview only during prelaunch</p>
-            <button class="btn secondary" type="button" id="vision-choose">Choose screenshot</button>
-          </div>
-          <div class="vision-preview" id="vision-preview" hidden><img id="vision-img" alt="Local chart screenshot preview"><div class="vision-preview-meta"><div><span>LOCAL PREVIEW</span><b id="vision-name">chart</b></div><button type="button" id="vision-clear">Remove</button></div></div>
-          <div class="vision-actionbar"><button class="btn primary" type="button" id="vision-analyze" disabled>Secure AI analysis · backend required</button><span>Your image is not uploaded by this prototype.</span></div>
+    s.innerHTML=`<div class="shell"><div class="tutor-console">
+      <div class="tutor-console-main">
+        <div class="upload-zone" id="vision-drop" tabindex="0" role="button" aria-label="Choose chart screenshot">
+          <input id="vision-file" type="file" accept="image/png,image/jpeg,image/webp" hidden>
+          <div class="upload-icon">◇</div><h3>Drop a chart screenshot here</h3>
+          <p>PNG, JPG or WEBP · maximum 8 MB</p>
+          <button class="btn secondary" type="button" id="vision-choose">Choose screenshot</button>
         </div>
-        <aside class="tutor-console-side">
-          <div class="lab-state"><span>VISION ENGINE</span><b>BUILDING</b></div>
-          <div class="lab-state"><span>EVENT RISK SHIELD</span><b>VERIFYING</b></div>
-          <div class="lab-state"><span>NEWS CONTEXT</span><b class="online">ONLINE</b></div>
-          <div class="lab-state"><span>LIVE MARKET API</span><b>PLANNED</b></div>
-          <div class="lab-state"><span>OUTCOME REVIEW</span><b>PLANNED</b></div>
-          <div class="lab-trust"><strong>Trust rule</strong><p>Screenshot evidence, live market data and news context will always be labelled separately. The system must say “unknown” instead of inventing missing information.</p></div>
-        </aside>
+        <div class="vision-preview" id="vision-preview" hidden><img id="vision-img" alt="Local chart screenshot preview"><div class="vision-preview-meta"><div><span>LOCAL PREVIEW</span><b id="vision-name">chart</b></div><button type="button" id="vision-clear">Remove</button></div></div>
+        <div class="vision-actionbar"><button class="btn primary" type="button" id="vision-analyze" disabled>Secure AI analysis · checking backend</button><span>Screenshot stays local until you request analysis.</span></div>
       </div>
-      <div class="tutor-pricing" id="tutor-pricing"><div class="intel-empty">Loading planned paid beta tiers…</div></div>
-    </div>`;
-    mentor.insertAdjacentElement('afterend',s);
+      <aside class="tutor-console-side">
+        <div class="lab-state"><span>VISION ENGINE</span><b>CHECKING</b></div>
+        <div class="lab-state"><span>EVENT RISK SHIELD</span><b>CHECKING</b></div>
+        <div class="lab-state"><span>NEWS CONTEXT</span><b class="online">ONLINE</b></div>
+        <div class="lab-state"><span>LIVE MARKET API</span><b>NOT CONNECTED</b></div>
+        <div class="lab-trust"><strong>Trust rule</strong><p>Screenshot evidence and verified context are labelled separately. Missing information stays unknown instead of being invented.</p></div>
+      </aside>
+    </div></div>`;
+    slot.appendChild(s);
     bindUpload();
-    loadProduct();
   }
 
   function bindUpload(){
     const input=q('#vision-file'), drop=q('#vision-drop'), choose=q('#vision-choose'), preview=q('#vision-preview'), img=q('#vision-img'), name=q('#vision-name'), clear=q('#vision-clear');
     if(!input||!drop) return;
+    let previewUrl='';
+    const reset=()=>{
+      if(previewUrl){URL.revokeObjectURL(previewUrl);previewUrl=''}
+      img?.removeAttribute('src'); input.value=''; preview.hidden=true; drop.hidden=false;
+      document.dispatchEvent(new CustomEvent('vast:vision-cleared'));
+    };
     const show=file=>{
-      if(!file || !/^image\/(png|jpeg|webp)$/.test(file.type)){ alert('Please choose a PNG, JPG or WEBP chart screenshot.'); return; }
-      if(file.size>12*1024*1024){ alert('Please use an image smaller than 12 MB.'); return; }
-      const url=URL.createObjectURL(file); img.src=url; name.textContent=file.name; preview.hidden=false; drop.hidden=true;
+      if(!file||!/^image\/(png|jpeg|webp)$/.test(file.type)){alert('Please choose a PNG, JPG or WEBP chart screenshot.');return}
+      if(file.size>8*1024*1024){alert('Please use an image smaller than 8 MB.');return}
+      if(previewUrl)URL.revokeObjectURL(previewUrl);
+      previewUrl=URL.createObjectURL(file);img.src=previewUrl;name.textContent=file.name;preview.hidden=false;drop.hidden=true;
+      document.dispatchEvent(new CustomEvent('vast:vision-image-changed'));
     };
     choose?.addEventListener('click',e=>{e.stopPropagation();input.click()});
     drop.addEventListener('click',()=>input.click());
@@ -67,67 +65,34 @@
     input.addEventListener('change',()=>show(input.files?.[0]));
     ['dragenter','dragover'].forEach(evt=>drop.addEventListener(evt,e=>{e.preventDefault();drop.classList.add('drag')}));
     ['dragleave','drop'].forEach(evt=>drop.addEventListener(evt,e=>{e.preventDefault();drop.classList.remove('drag')}));
-    drop.addEventListener('drop',e=>show(e.dataTransfer?.files?.[0]));
-    clear?.addEventListener('click',()=>{if(img.src.startsWith('blob:'))URL.revokeObjectURL(img.src);img.removeAttribute('src');input.value='';preview.hidden=true;drop.hidden=false});
+    drop.addEventListener('drop',e=>{const file=e.dataTransfer?.files?.[0];if(file){try{const dt=new DataTransfer();dt.items.add(file);input.files=dt.files}catch{}show(file)}});
+    clear?.addEventListener('click',reset);
   }
 
-  async function loadProduct(){
-    const host=q('#tutor-pricing'); if(!host) return;
-    try{
-      const r=await fetch(`${PRODUCT_FEED}?t=${Date.now()}`,{cache:'no-store'}); if(!r.ok) throw new Error('product');
-      const d=await r.json();
-      host.innerHTML=(d.pricing||[]).map((p,i)=>`<article class="tutor-tier ${i===1?'featured':''}"><div class="tag">${i===1?'Most balanced':'Paid beta plan'}</div><h3>${esc(p.name)}</h3><div class="tier-price">€${esc(p.price_eur_month)} <small>/ month</small></div><div class="tier-credit">${esc(p.screenshot_analyses_month)} Vision analyses / month</div><ul>${(p.features||[]).map(x=>`<li>✓ ${esc(x)}</li>`).join('')}</ul><a class="btn ${i===1?'primary':'secondary'}" href="${EARLY}" target="_blank" rel="noopener noreferrer">Join paid-beta updates ↗</a><div class="micro">Checkout stays closed until the advertised AI features are genuinely functional.</div></article>`).join('');
-    }catch(e){host.innerHTML='<div class="intel-empty">Paid beta configuration is temporarily unavailable.</div>'}
-  }
-
-  function eventShield(){
+  function mountContext(){
     if(q('#event-risk-shield')) return;
-    const markets=q('#markets'); if(!markets) return;
-    const s=document.createElement('section'); s.id='event-risk-shield'; s.className='event-shield';
-    s.innerHTML=`<div class="shell"><div class="event-shell"><div class="event-head"><div><div class="eyebrow">VAST Event Risk Shield</div><h2>Know what can hit the market next.</h2><p>Official-source monitoring for scheduled U.S. macro and Federal Reserve events that can materially change volatility in XAUUSD and BTCUSD.</p></div><div class="risk-orb" id="risk-orb"><span>SCANNING</span><b>—</b></div></div><div class="event-alert" id="event-alert">Connecting to official event calendars…</div><div class="event-grid" id="event-grid"></div><div class="event-foot" id="event-foot">Sources are checked automatically. Critical release times can change; the linked official source remains the final reference.</div></div></div>`;
-    markets.insertAdjacentElement('afterend',s);
-    loadEvents();
+    const slot=q('#context-slot');
+    if(!slot) return;
+    clearPlaceholder(slot);
+    const s=document.createElement('section');s.id='event-risk-shield';s.className='event-shield';
+    s.innerHTML=`<div class="shell"><div class="event-shell"><div class="event-head"><div><div class="eyebrow">VAST Event Risk Shield</div><h2>Verified event context</h2><p>Official-source monitoring for scheduled U.S. macro and Federal Reserve events that can materially affect XAUUSD and BTCUSD volatility.</p></div><div class="risk-orb" id="risk-orb"><span>SCANNING</span><b>—</b></div></div><div class="event-alert" id="event-alert">Checking event-risk freshness…</div><div class="event-grid" id="event-grid"></div><div class="event-foot" id="event-foot">Stale or incomplete data is shown as unavailable.</div></div></div>`;
+    slot.appendChild(s);loadEvents();
   }
 
   async function loadEvents(){
-    const alert=q('#event-alert'), grid=q('#event-grid'), orb=q('#risk-orb'), foot=q('#event-foot'); if(!grid) return;
+    const alert=q('#event-alert'),grid=q('#event-grid'),orb=q('#risk-orb'),foot=q('#event-foot');if(!grid)return;
     try{
-      const r=await fetch(`${EVENT_FEED}?t=${Date.now()}`,{cache:'no-store'}); if(!r.ok) throw new Error('events');
-      const d=await r.json();
-      const updated=new Date(d.updated_at||0);
-      const age=Date.now()-updated.getTime();
-      const fresh=Number.isFinite(age) && age>=0 && age<=EVENT_MAX_AGE_MS;
-      if(!fresh || d.status==='degraded'){
-        setLabState('EVENT RISK SHIELD','DEGRADED',false);
-        orb.dataset.state='degraded'; orb.innerHTML='<span>EVENT RISK</span><b>DEGRADED</b>';
-        alert.className='event-alert warn';
-        alert.innerHTML='<strong>DATA CHECK</strong><span>Official event-risk data is stale or incomplete. Do not rely on it for timing until the feed refreshes.</span>';
-        grid.innerHTML='';
-        if(foot) foot.textContent=`Last verified snapshot: ${Number.isFinite(updated.getTime())?updated.toLocaleString():'unknown'} · official source links remain the final reference.`;
-        return;
-      }
+      const r=await fetch(`${EVENT_FEED}?t=${Date.now()}`,{cache:'no-store'});if(!r.ok)throw new Error('events');
+      const d=await r.json();const updated=new Date(d.updated_at||0);const age=Date.now()-updated.getTime();const fresh=Number.isFinite(age)&&age>=0&&age<=EVENT_MAX_AGE_MS&&d.status!=='degraded';
+      if(!fresh){setLabState('EVENT RISK SHIELD','DEGRADED',false);orb.dataset.state='degraded';orb.innerHTML='<span>EVENT RISK</span><b>DEGRADED</b>';alert.className='event-alert warn';alert.textContent='Verified event-risk data is stale or incomplete. Timing is unavailable until the feed refreshes.';grid.innerHTML='';if(foot)foot.textContent=`Last snapshot: ${Number.isFinite(updated.getTime())?updated.toLocaleString():'unknown'}`;return}
       setLabState('EVENT RISK SHIELD','ONLINE',true);
-      const urgent=d.urgent||[], events=(d.events||[]).slice(0,8), n=d.nearest;
-      let state='CLEAR';
-      if(urgent.some(x=>x.risk_state==='ACTIVE')) state='ACTIVE'; else if(urgent.some(x=>x.risk_state==='HIGH')) state='HIGH'; else if(urgent.length) state='ELEVATED'; else if(n) state='WATCH';
-      orb.dataset.state=state.toLowerCase(); orb.innerHTML=`<span>EVENT RISK</span><b>${state}</b>`;
-      if(n){
-        const when=n.minutes_from_now>=0?`in ${esc(n.countdown)}`:'recently released';
-        alert.className=`event-alert ${['ACTIVE','HIGH','ELEVATED'].includes(n.risk_state)?'warn':''}`;
-        alert.innerHTML=`<strong>${esc(n.risk_state)}</strong><span>${esc(n.title)} · ${esc(n.source)} · ${when}</span>`;
-      } else alert.textContent='No medium/high-impact official-source event is currently inside the monitoring horizon.';
-      grid.innerHTML=events.map(x=>`<a class="event-card impact-${esc(x.impact)}" href="${esc(x.link)}" target="_blank" rel="noopener noreferrer"><div class="event-meta"><span>${esc(x.source)}</span><b>${esc(x.impact).toUpperCase()}</b></div><h3>${esc(x.title)}</h3><div class="event-time"><strong>${esc(x.countdown)}</strong><span>${new Date(x.scheduled_at).toLocaleString()}</span></div><div class="event-state">${esc(x.risk_state)} · official source ↗</div></a>`).join('') || '<div class="intel-empty">No qualifying events in the current 14-day window.</div>';
-      if(foot) foot.textContent=`Last verified: ${updated.toLocaleString()} · sources checked automatically. Critical release times can change; the linked official source remains the final reference.`;
-    }catch(e){
-      setLabState('EVENT RISK SHIELD','DEGRADED',false);
-      orb.dataset.state='degraded'; orb.innerHTML='<span>EVENT RISK</span><b>DEGRADED</b>'; alert.className='event-alert warn'; alert.textContent='Official event-risk snapshot is temporarily unavailable. Treat event timing as unknown until the feed recovers.'; grid.innerHTML='';
-    }
+      const events=(d.events||[]).slice(0,8),n=d.nearest;const urgent=d.urgent||[];let state='CLEAR';if(urgent.some(x=>x.risk_state==='ACTIVE'))state='ACTIVE';else if(urgent.some(x=>x.risk_state==='HIGH'))state='HIGH';else if(urgent.length)state='ELEVATED';else if(n)state='WATCH';
+      orb.dataset.state=state.toLowerCase();orb.innerHTML=`<span>EVENT RISK</span><b>${state}</b>`;
+      alert.className='event-alert';alert.textContent=n?`${n.title||'Scheduled event'} · ${n.source||'official source'} · ${n.countdown||'timing available'}`:'No qualifying event is inside the current monitoring horizon.';
+      grid.innerHTML=events.map(x=>`<a class="event-card impact-${esc(x.impact)}" href="${esc(x.link)}" target="_blank" rel="noopener noreferrer"><div class="event-meta"><span>${esc(x.source)}</span><b>${esc(x.impact).toUpperCase()}</b></div><h3>${esc(x.title)}</h3><div class="event-time"><strong>${esc(x.countdown)}</strong><span>${new Date(x.scheduled_at).toLocaleString()}</span></div><div class="event-state">${esc(x.risk_state)} · official source ↗</div></a>`).join('')||'<div class="intel-empty">No qualifying events in the current window.</div>';
+      if(foot)foot.textContent=`Last verified: ${updated.toLocaleString()} · official source remains the final reference.`;
+    }catch{setLabState('EVENT RISK SHIELD','DEGRADED',false);orb.dataset.state='degraded';orb.innerHTML='<span>EVENT RISK</span><b>DEGRADED</b>';alert.className='event-alert warn';alert.textContent='Verified event-risk data is temporarily unavailable.';grid.innerHTML=''}
   }
 
-  function nav(){
-    const links=q('.navlinks'); if(!links) return; const faq=q('a[href="#faq"]',links);
-    if(!q('a[href="#tutor-ai-lab"]',links)){const a=document.createElement('a');a.href='#tutor-ai-lab';a.textContent='Tutor AI';links.insertBefore(a,faq||links.lastElementChild)}
-  }
-
-  document.addEventListener('DOMContentLoaded',()=>{addTutorLab();eventShield();nav()});
+  document.addEventListener('DOMContentLoaded',()=>{mountVision();mountContext()});
 })();
