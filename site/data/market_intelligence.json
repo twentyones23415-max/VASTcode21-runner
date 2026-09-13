@@ -1,0 +1,8 @@
+{
+  "version": "1.0",
+  "status": "initializing",
+  "updated_at": null,
+  "scope": ["XAUUSD", "BTCUSD", "macro"],
+  "items": [],
+  "feed_errors": []
+}
