@@ -9,7 +9,12 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "tools"))
 
-from tutor_vision_contract import ContractError, normalize_analysis, validate_image_data_url  # noqa: E402
+from tutor_vision_contract import (  # noqa: E402
+    ContractError,
+    build_analysis_instructions,
+    normalize_analysis,
+    validate_image_data_url,
+)
 
 
 class TutorVisionContractTests(unittest.TestCase):
@@ -31,6 +36,22 @@ class TutorVisionContractTests(unittest.TestCase):
         value = "data:text/plain;base64," + base64.b64encode(b"hello").decode("ascii")
         with self.assertRaises(ContractError):
             validate_image_data_url(value)
+
+    def test_analysis_instructions_include_verified_market_intelligence(self):
+        context = {
+            "event_risk": {"status": "verified", "nearest": {"title": "CPI"}},
+            "market": {"status": "unavailable", "markets": {}},
+            "market_intelligence": {
+                "status": "verified",
+                "updated_at": "2026-09-13T21:39:00+00:00",
+                "items": [{"title": "Gold context headline", "source": "official"}],
+            },
+        }
+        prompt = build_analysis_instructions(context)
+        self.assertIn("Gold context headline", prompt)
+        self.assertIn("Verified market-intelligence/news context", prompt)
+        self.assertIn("never treat them as live price data", prompt)
+        self.assertIn('"status":"unavailable"', prompt)
 
     def test_normalizes_required_scenario_shape(self):
         payload = {
