@@ -1,7 +1,8 @@
 {
-  "version": "2.1.0",
+  "version": "2.2.0",
   "enabled": true,
   "account_name": "vast.code21",
+  "timezone": "Europe/Bucharest",
   "publish_hour_local": 19,
   "max_posts_per_day": 1,
   "min_hours_between_posts": 20,
