@@ -9,6 +9,7 @@ on:
       - 'marketing/growth_metrics.json'
       - 'status/summary.json'
       - 'tools/revenue_engine.py'
+      - 'tools/stripe_revenue_setup.py'
       - '.github/workflows/revenue.yml'
   schedule:
     - cron: '5 7 * * *'
@@ -29,18 +30,25 @@ jobs:
       - uses: actions/setup-python@v7
         with:
           python-version: '3.12'
+
+      - name: Provision or recover Stripe live products and payment links
+        env:
+          STRIPE_RESTRICTED_KEY: ${{ secrets.STRIPE_RESTRICTED_KEY }}
+        run: python tools/stripe_revenue_setup.py
+
       - name: Build revenue readiness and landing page
         run: python tools/revenue_engine.py
-      - name: Commit revenue status and site when changed
+
+      - name: Commit revenue status Stripe state and site when changed
         shell: bash
         run: |
           git config user.name 'VASTcode21 Revenue Bot'
           git config user.email 'vastcode21-bot@users.noreply.github.com'
-          git add marketing/revenue_status.json site/index.html
+          git add marketing/revenue_config.json marketing/revenue_status.json marketing/stripe_state.json site/index.html
           if git diff --cached --quiet; then
             echo 'No revenue funnel change.'
           else
-            git commit -m 'chore: refresh revenue funnel state'
+            git commit -m 'chore: refresh automated revenue funnel state'
             for attempt in 1 2 3; do
               git pull --rebase origin main && git push && break
               if [ "$attempt" -eq 3 ]; then
