@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://twentyones23415-max.github.io/VASTcode21-runner/sitemap.xml
