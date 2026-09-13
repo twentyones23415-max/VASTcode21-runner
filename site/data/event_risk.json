@@ -1,30 +1,48 @@
 {
-  "version": "1.1",
+  "version": "1.2",
   "status": "active",
-  "updated_at": "2026-09-13T12:14:29.154356+00:00",
+  "updated_at": "2026-09-13T12:15:58.008048+00:00",
   "horizon_days": 14,
   "sources": [
     "U.S. Bureau of Labor Statistics",
     "U.S. Bureau of Economic Analysis",
     "Federal Reserve Board"
   ],
+  "source_modes": {
+    "BLS": "checked_fallback"
+  },
   "urgent": [],
   "nearest": {
-    "title": "FOMC Meeting",
-    "source": "Federal Reserve",
-    "category": "fed",
-    "impact": "high",
-    "scheduled_at": "2026-09-16T18:00:00+00:00",
-    "link": "https://www.federalreserve.gov/newsevents/2026-september.htm",
+    "title": "U.S. Import and Export Price Indexes for August 2026",
+    "source": "BLS",
+    "category": "macro",
+    "impact": "medium",
+    "scheduled_at": "2026-09-16T12:30:00+00:00",
+    "link": "https://www.bls.gov/schedule/2026/",
     "relevance": [
       "XAUUSD",
       "BTCUSD"
     ],
-    "minutes_from_now": 4665,
+    "minutes_from_now": 4334,
     "risk_state": "SCHEDULED",
-    "countdown": "3d 5h"
+    "countdown": "3d 0h"
   },
   "events": [
+    {
+      "title": "U.S. Import and Export Price Indexes for August 2026",
+      "source": "BLS",
+      "category": "macro",
+      "impact": "medium",
+      "scheduled_at": "2026-09-16T12:30:00+00:00",
+      "link": "https://www.bls.gov/schedule/2026/",
+      "relevance": [
+        "XAUUSD",
+        "BTCUSD"
+      ],
+      "minutes_from_now": 4334,
+      "risk_state": "SCHEDULED",
+      "countdown": "3d 0h"
+    },
     {
       "title": "FOMC Meeting",
       "source": "Federal Reserve",
@@ -36,7 +54,7 @@
         "XAUUSD",
         "BTCUSD"
       ],
-      "minutes_from_now": 4665,
+      "minutes_from_now": 4664,
       "risk_state": "SCHEDULED",
       "countdown": "3d 5h"
     },
@@ -51,7 +69,7 @@
         "XAUUSD",
         "BTCUSD"
       ],
-      "minutes_from_now": 4695,
+      "minutes_from_now": 4694,
       "risk_state": "SCHEDULED",
       "countdown": "3d 6h"
     },
@@ -66,16 +84,11 @@
         "XAUUSD",
         "BTCUSD"
       ],
-      "minutes_from_now": 7275,
+      "minutes_from_now": 7274,
       "risk_state": "SCHEDULED",
       "countdown": "5d 1h"
     }
   ],
-  "source_errors": [
-    {
-      "source": "BLS",
-      "error": "HTTP Error 403: Forbidden"
-    }
-  ],
+  "source_errors": [],
   "notice": "Event risk is contextual information, not a trading instruction. Times can change at the source; verify critical releases with the linked official source."
 }
