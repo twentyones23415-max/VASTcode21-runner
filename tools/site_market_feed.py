@@ -8,7 +8,21 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 CONFIG=ROOT/'config/context_sources.json'
 OUT=ROOT/'site/data/market_intelligence.json'
-UA='VASTcode21-MarketMonitor/1.0 (+https://github.com/twentyones23415-max/VASTcode21-runner)'
+UA='VASTcode21-MarketMonitor/1.1 (+https://github.com/twentyones23415-max/VASTcode21-runner)'
+
+GOLD_MARKET_WORDS={
+    'price','prices','market','markets','futures','bullion','ounce','ounces','metal','metals',
+    'demand','reserve','reserves','central bank','investor','investors','etf','rally','rallies',
+    'rise','rises','rising','gain','gains','climb','climbs','fall','falls','falling','drop','drops',
+    'slip','slips','forecast','outlook','record high','safe haven','dollar','yield','yields','fed',
+    'inflation','rates','rate cut','geopolitical','tariff','treasury'
+}
+CRYPTO_MARKET_WORDS={
+    'price','prices','market','markets','etf','exchange','regulation','regulatory','institutional',
+    'treasury','reserve','reserves','miner','miners','mining','wallet','on-chain','liquidity',
+    'futures','options','funding','volatility','rally','falls','rises','drops','gains','outlook',
+    'adoption','stablecoin','hack','custody'
+}
 
 def text(node, name):
     e=node.find(name)
@@ -42,6 +56,25 @@ def source_name(item, fallback):
     if ' - ' in title: return title.rsplit(' - ',1)[-1][:70]
     return fallback.replace('_',' ').title()
 
+def relevant(title: str, feed_name: str) -> bool:
+    t=' '.join(title.lower().split())
+    name=feed_name.lower()
+    if 'fed' in name:
+        return True
+    if 'gold' in name:
+        if 'xau' in t or 'bullion' in t or 'precious metal' in t:
+            return True
+        if 'gold' not in t:
+            return False
+        return any(word in t for word in GOLD_MARKET_WORDS)
+    if 'bitcoin' in name:
+        if 'bitcoin' in t or ' btc' in f' {t}' or t.startswith('btc'):
+            return True
+        if 'crypto' in t:
+            return any(word in t for word in CRYPTO_MARKET_WORDS)
+        return False
+    return True
+
 def main():
     cfg=json.loads(CONFIG.read_text(encoding='utf-8'))
     feeds=cfg.get('news',{}).get('rss',[])
@@ -50,9 +83,10 @@ def main():
         try:
             root=ET.fromstring(fetch(f['url']))
             found=root.findall('.//item')
-            for it in found[:20]:
+            for it in found[:30]:
                 title=text(it,'title'); link=text(it,'link')
-                if not title or not link: continue
+                if not title or not link or not relevant(title, f.get('name','')):
+                    continue
                 dt=parse_date(text(it,'pubDate') or text(it,'date'))
                 category=f.get('category','market_news')
                 if 'gold' in f.get('name',''): category='gold / macro'
@@ -68,9 +102,9 @@ def main():
         if k in seen: continue
         seen.add(k); clean.append(x)
         if len(clean)>=16: break
-    out={'version':'1.0','status':'active' if clean else 'degraded','updated_at':datetime.now(timezone.utc).isoformat(),'scope':['XAUUSD','BTCUSD','macro'],'items':clean,'feed_errors':errors}
+    out={'version':'1.1','status':'active' if clean else 'degraded','updated_at':datetime.now(timezone.utc).isoformat(),'scope':['XAUUSD','BTCUSD','macro'],'items':clean,'feed_errors':errors}
     OUT.parent.mkdir(parents=True,exist_ok=True)
     OUT.write_text(json.dumps(out,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
-    print(f'Published {len(clean)} public market-intelligence headlines; errors={len(errors)}')
+    print(f'Published {len(clean)} relevant public market-intelligence headlines; errors={len(errors)}')
 
 if __name__=='__main__': main()
