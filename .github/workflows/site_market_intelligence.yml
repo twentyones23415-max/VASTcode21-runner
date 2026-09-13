@@ -8,6 +8,7 @@ on:
       - 'tools/site_market_feed.py'
       - 'tools/site_event_risk.py'
       - 'config/context_sources.json'
+      - 'config/bls_schedule_fallback_2026.json'
       - '.github/workflows/site_market_intelligence.yml'
   schedule:
     - cron: '23 * * * *'
