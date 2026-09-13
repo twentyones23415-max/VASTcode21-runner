@@ -1,6 +1,8 @@
 {
-  "version": "0.1",
-  "vision_backend_base_url": "",
-  "enabled": false,
-  "notice": "Set vision_backend_base_url to the verified HTTPS backend origin and enabled=true only after /healthz reports vision_provider_configured=true. Do not put API keys or secrets in this file."
+  "version": "0.2",
+  "supabase_url": "https://euprqlvahznueecatahz.supabase.co",
+  "supabase_publishable_key": "sb_publishable_q0hg5ZpnlpWWyoaNVUot2w_-Zmk5aRq",
+  "vision_function_url": "https://euprqlvahznueecatahz.supabase.co/functions/v1/vast-tutor-vision",
+  "enabled": true,
+  "notice": "The browser contains only the Supabase publishable key. AI provider credentials remain server-side. Vision analysis remains disabled unless the authenticated backend reports vision_provider_configured=true."
 }
