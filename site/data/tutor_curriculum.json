@@ -1,0 +1,77 @@
+{
+  "version": "1.0",
+  "status": "prelaunch",
+  "title": "VAST Tutor Foundations",
+  "storage_notice": "Progress in this prelaunch module is stored only in this browser. No account sync is active yet.",
+  "lessons": [
+    {
+      "id": "foundation-risk",
+      "order": 1,
+      "title": "Risk before prediction",
+      "level": "Foundation",
+      "minutes": 5,
+      "summary": "Separate market analysis from risk decisions. A chart view can be wrong; position risk must still remain controlled.",
+      "key_points": [
+        "A directional idea is a scenario, not a certainty.",
+        "Event risk can invalidate short-term chart structure quickly.",
+        "Never increase exposure just because confidence feels high."
+      ],
+      "quiz": {
+        "question": "What should happen when a high-impact event is close and the chart setup still looks attractive?",
+        "options": [
+          "Ignore the event because chart structure is more important",
+          "Treat volatility risk as elevated and reassess before acting",
+          "Increase size because volatility creates opportunity"
+        ],
+        "correct_index": 1,
+        "explanation": "Scheduled macro events can rapidly change volatility and invalidate otherwise reasonable chart assumptions."
+      }
+    },
+    {
+      "id": "foundation-context",
+      "order": 2,
+      "title": "Evidence layers",
+      "level": "Foundation",
+      "minutes": 6,
+      "summary": "Learn to distinguish what is visible in a screenshot from what requires live external data.",
+      "key_points": [
+        "Screenshot evidence includes only what is visible in the uploaded image.",
+        "Live price, news and economic-event timing require verified external feeds.",
+        "When live evidence is unavailable, the correct answer is unknown — not a guess."
+      ],
+      "quiz": {
+        "question": "A screenshot does not show the symbol and no verified live feed is connected. What should VAST Tutor report?",
+        "options": [
+          "Infer the symbol from candle shape",
+          "State that the symbol is unknown",
+          "Assume XAUUSD because it is commonly traded"
+        ],
+        "correct_index": 1,
+        "explanation": "VAST Tutor must never fabricate missing market context. Unknown inputs stay explicitly unknown."
+      }
+    },
+    {
+      "id": "foundation-review",
+      "order": 3,
+      "title": "Prediction → outcome review",
+      "level": "Foundation",
+      "minutes": 7,
+      "summary": "A useful forecast is one that can be reviewed later against a clearly stated scenario and invalidation condition.",
+      "key_points": [
+        "Record the scenario before the outcome is known.",
+        "Define what would invalidate the scenario.",
+        "Review process quality separately from profit or loss."
+      ],
+      "quiz": {
+        "question": "Which review method best reduces hindsight bias?",
+        "options": [
+          "Rewrite the original forecast after the move",
+          "Save the original scenario and invalidation before the outcome",
+          "Judge only by whether the trade made money"
+        ],
+        "correct_index": 1,
+        "explanation": "Freezing the original reasoning before the outcome makes later review more honest and useful."
+      }
+    }
+  ]
+}
