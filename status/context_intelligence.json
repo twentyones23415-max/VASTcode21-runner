@@ -6,13 +6,13 @@
   "information_scope": "unbounded_relevant",
   "live_trading": false,
   "mode": "persistent_zero_cost_context_intelligence",
-  "news_rows_persistent": 150,
-  "observation_rows_persistent": 27491,
+  "news_rows_persistent": 350,
+  "observation_rows_persistent": 29991,
   "paid_data": false,
   "paid_services": false,
   "private_context_history": true,
-  "rows_written_this_cycle": 116992,
-  "series_count": 12,
+  "rows_written_this_cycle": 120531,
+  "series_count": 13,
   "source_health": {
     "binance": {
       "ok": false
@@ -38,10 +38,10 @@
     "fred:DTWEXBGS": {
       "ok": true
     },
-    "fred:GOLDAMGBD228NLBM": {
-      "ok": false
-    },
     "fred:NASDAQCOM": {
+      "ok": true
+    },
+    "fred:NASDAQQGLDI": {
       "ok": true
     },
     "fred:SP500": {
@@ -56,11 +56,8 @@
     "fred:WALCL": {
       "ok": true
     },
-    "gdelt:bitcoin_global_news": {
+    "rss:bitcoin_global_news": {
       "ok": true
-    },
-    "gdelt:gold_global_news": {
-      "ok": false
     },
     "rss:fed_monetary": {
       "ok": true
@@ -70,11 +67,14 @@
     },
     "rss:fed_speeches": {
       "ok": true
+    },
+    "rss:gold_global_news": {
+      "ok": true
     }
   },
   "sources_attempted": 19,
-  "sources_failed": 3,
-  "sources_succeeded": 16,
-  "updated_at": "2026-09-12T18:29:38.063753+00:00",
-  "version": "1.0.0"
+  "sources_failed": 1,
+  "sources_succeeded": 18,
+  "updated_at": "2026-09-13T18:29:57.875417+00:00",
+  "version": "1.2.1"
 }
