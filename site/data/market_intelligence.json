@@ -1,8 +1,141 @@
 {
   "version": "1.0",
-  "status": "initializing",
-  "updated_at": null,
-  "scope": ["XAUUSD", "BTCUSD", "macro"],
-  "items": [],
+  "status": "active",
+  "updated_at": "2026-09-13T11:12:32.201566+00:00",
+  "scope": [
+    "XAUUSD",
+    "BTCUSD",
+    "macro"
+  ],
+  "items": [
+    {
+      "title": "BTC price on Sep 13, 2026 at 8am EDT Crypto Prediction Market - Robinhood",
+      "link": "https://news.google.com/rss/articles/CBMirgFBVV95cUxPYzZpVUtwc2hNUUlhUHFWbE8tZ2NKcVZ2WkJkcVZuS0tlemFMSTl0OUctMnZWOXAzZ3JNUmlMem9xbG8zUkR5Q2hXNDdUQWx0YUdlbzdZd3lhZ2FpUGRETmY3UXBRU3Q1YWhaSkJLMkhVZnBfT2dvTlg5VVZMVXdDWVdvMFlzNkJSazlMSjRCSDQzY005VkVDMGJzQ1JNODNYUEJDaTJDbkRhNF92OFE?oc=5",
+      "source": "Robinhood",
+      "category": "bitcoin / crypto",
+      "published_at": "2026-09-13T11:04:36+00:00",
+      "age": "7m ago"
+    },
+    {
+      "title": "Shoppers of all economic backgrounds are flocking to dollar stores - Cleveland.com",
+      "link": "https://news.google.com/rss/articles/CBMirwFBVV95cUxQNDJGdjFUTXpNd2wtWmpXUWhodHZFYzhwMGRaRXFyYUZXWkh2U2lNb0ZJZ284ZGN5RjFSSW9qZ2RhUWtObjhjdkh4cFJYeGNPZWN1YjFsd2N5dFo2Q0lUYVhtbVRaUkRja1lxOWVqZGJlWGRxeFEwdGo4dXNDMjlyMTVwTENGSlZPMHVRLVFmcVpSS2FaVV9KMmFwQTFHVm9lMkVySEJJN3UwRThUdS1Z0gHDAUFVX3lxTE1rNHBnbUdPbWZfbjg4WUpJczBabzN0ZFRvRlJJVFZ2TFpvVTF4WTZsOGFfU0QyUVBNVGpRTzZaaFAtOVFkNW00UmlBQkprTkI5QjA5M0Z5Nkd1NXNOZ2kyY2JfVmhKZVpzTnJINkZnTXJIa0hLZDVsbFVjWTctWExwSF93cW9MamxWSkZxb0dDNndpODU4Sm5EVjhrMVVnTm4wTm1MUmcwNzAzTjRIVVpaSU8tZldDcHNkaGttOWxlbzVYRQ?oc=5",
+      "source": "Cleveland.com",
+      "category": "gold / macro",
+      "published_at": "2026-09-13T11:00:00+00:00",
+      "age": "12m ago"
+    },
+    {
+      "title": "MicroStrategy's Bitcoin Guide Issues a 93% Crash Warning to Investors - Yahoo Finance",
+      "link": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQb2xibmc2QUVoYmhGS0N3N0p2YlI0M01FV1FBYmtSTGE1aUgzekROT0FQZTFlQkRnM2NZVWlHNmFjOGVudjBWU0hab2IyNVJGY1hkSjdHVVQ0ZHg4eTd6SlhST3gzOGJfdUxBazM2alp1MmYyZUxLdnpIS2FTT3k1NnJDNjlfV25xWklWU2N3ai1IMERvem8zdTRybFREZjU5R2lHaEZn?oc=5",
+      "source": "Yahoo Finance",
+      "category": "bitcoin / crypto",
+      "published_at": "2026-09-13T10:15:01+00:00",
+      "age": "57m ago"
+    },
+    {
+      "title": "Gold.com (GOLD): On A Gold Rush With Cracks Underneath - Yahoo Finance",
+      "link": "https://news.google.com/rss/articles/CBMikgFBVV95cUxQTHFfMFphZ2dfend5b2taUVRHYWtZZHQ1RFU1NTdLVUg3Y1R4aUZXRHBITkFjdVV0Z3VPTDNlLXRxLTl2YU4tV0szRy01MHZxU19CV29feWZjb2JMVnN1MFphbW9RWGZsb2lUb3RvYWtKM05oRXY2dUpaVzR2VmpKYVM3V1B1dFh6M094OTNXb2FjUQ?oc=5",
+      "source": "Yahoo Finance",
+      "category": "gold / macro",
+      "published_at": "2026-09-13T10:14:42+00:00",
+      "age": "57m ago"
+    },
+    {
+      "title": "Robinhood (HOOD) Expands Prediction Markets With Crypto.com Partnership - Yahoo Finance",
+      "link": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxNNWg4c3pSVllacDBGNUwwNkFzT1lZMmQwbXVpeV9iWmVsUkgwMXJIODlOcDAxRlQ2UHRrNmlUTHFwakUyQ1lHTm5xYmRTWGJYemJDVWMzNTBWRjFVX3lDX1hoaklTUTNLbHVLQmtzbGhuTFVaWDgyTTZ1NldXeVhNLXB3WjBlRDMwSUpRYjlHZUF3S0dTNnhHVGk3OXQ3TFllUDRQeGxYSVp2TUE?oc=5",
+      "source": "Yahoo Finance",
+      "category": "bitcoin / crypto",
+      "published_at": "2026-09-13T09:49:28+00:00",
+      "age": "1h ago"
+    },
+    {
+      "title": "Labour Signals Action to Stifle Farage’s Crypto Donation Surge - Bloomberg.com",
+      "link": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPMnRsUFZWbGoyVkx5Q3NoS0pfZ2ljRGUzZW1UYWJ6UGRRckxHbHZzZVRPN3JJQW0yV2MzdDZtZ2VVRGNSWEF6Z19HbHM0azFNay1tT3NXOVVwWXFlRDB3VUtWdXF6cGdXSmFyb0luUEtOUXBBa0tRMkxzUkVvTGY4cUV6VEs2bmh1bVhGbzk3NHJSWU93QzNwbVFaUWtRZzdYUVEyeEZwOFFFb2ZlZTZFVHZQZw?oc=5",
+      "source": "Bloomberg.com",
+      "category": "bitcoin / crypto",
+      "published_at": "2026-09-13T09:40:48+00:00",
+      "age": "1h ago"
+    },
+    {
+      "title": "How Alabama Power Escaped a Push for Tighter Regulation With Record Profits Intact - Inside Climate News",
+      "link": "https://news.google.com/rss/articles/CBMikwFBVV95cUxOMllTZFhJOW5yUFZtcjMyZkM5RTVHWVM1aWdTejMtOGlhQmR4R0tnM1pUcEtVa1F2OGxsWlZQMENGS1VPMEsxdTZtakpPRndZamMwMDdGaDJvckhLVmlKX3FYS2xHRzA1MGdTajh5THpQV0pXVG56c0FQTWJRTzI4cHIyWXFOX0NsZkJMeDE3VnVHd2c?oc=5",
+      "source": "Inside Climate News",
+      "category": "bitcoin / crypto",
+      "published_at": "2026-09-13T09:00:00+00:00",
+      "age": "2h ago"
+    },
+    {
+      "title": "$Bitcoin (BTC.CC)$ - Moomoo",
+      "link": "https://news.google.com/rss/articles/CBMid0FVX3lxTFBqRUtBTWJ4SU1VXzRXRXZNTTZXaTUxeUhTd05rMW8yNmVDemFFLU15ZkNTVlBCTjdaSzN1Nl96VXMtR2NjZXhYZjRlUHdCYTUxajN6a2xhVnVEb01FdlZPbm9FWm1SQm5xSTBGUy1GcG5CdnBGUnE4?oc=5",
+      "source": "Moomoo",
+      "category": "bitcoin / crypto",
+      "published_at": "2026-09-13T08:40:46+00:00",
+      "age": "2h ago"
+    },
+    {
+      "title": "GAME RECAP: Chelsea Gray, Jackie Young Into Gold Medal Game With 76-66 USA Victory Over Spain - Las Vegas Aces",
+      "link": "https://news.google.com/rss/articles/CBMiugFBVV95cUxQWU1WYnQwYWlMUEllSnlMYlBJUzZ4REtDbWlYVTZxMzJQRTc0NWZFSUhSdHJpUksycmRIYldrcmxPbjdMYVlCS1cwVjduOG5xVk41ZEszWTN5Yzc0VGF0cW5RenlabWRkNFZXY1hJbFM2OGcxdXZMRXRMWTkzam1uWC1uNjhaUUlkbi02TFFTaUdERzc1NXJSbnI3ZUh3VjRGc1YtYUNjMncwRDZGZTNYbUx4eUFOUXprc1E?oc=5",
+      "source": "Las Vegas Aces",
+      "category": "gold / macro",
+      "published_at": "2026-09-13T07:22:58+00:00",
+      "age": "3h ago"
+    },
+    {
+      "title": "House Republican weighs regulation as Anthropic CEO urges industry to slow down - CNN",
+      "link": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxNdUg3d0tXLU9jTEVaTExiRHBMcUFfRU5NeGt3SUJpQTQ4MjBCMG1scWlBZmZuc0lYVTdaNnBWd2hzVXpkRjVlSXdudDJNUlRFU1Vxb2xOc2wtYWVjVVg0cTlraElzY1BFTEsyMVFId1VnZ2NjZDBfNHdxdUtnSlVUZlJkQmZFek5LVUY2Si1KRzIybG1WcHl6TVZfRnQ3OU9BMi0xaFAyUElQZVA5RUk5dDNweERQOVl6ZzVR?oc=5",
+      "source": "CNN",
+      "category": "bitcoin / crypto",
+      "published_at": "2026-09-13T01:41:32+00:00",
+      "age": "9h ago"
+    },
+    {
+      "title": "2026 FIBA Women's World Cup: USA-France gold medal game preview - ESPN",
+      "link": "https://news.google.com/rss/articles/CBMisgFBVV95cUxQSVhzOC1CeWhKaWtSaktBaUppVlFfSGIxTnRKRnJYUHBxUUVPMkNnVEJMMVotT0k3Z0xkQUpRLWlVbjlTX2dKN2c1R0pUYS1DR2NPTnVzc1ZMWWY5VXFySkd4RzE5S1ZibFo0bkRfZ0pOYkFfS1ktMlZNWDI3a0x3QkF0em40TU9LV2EyX3ZoNnZnNzRpTUxUOEtIVzVPWVRNdVV5M1MzY2lCTE1pU3N0YmtB?oc=5",
+      "source": "ESPN",
+      "category": "gold / macro",
+      "published_at": "2026-09-13T01:00:00+00:00",
+      "age": "10h ago"
+    },
+    {
+      "title": "Why are European banks moving gold out of United States? - DW.com",
+      "link": "https://news.google.com/rss/articles/CBMikgFBVV95cUxNNnUwWTNfTlFKeW02MWt4WFlCLUdtRmhsNUhFOUhlMkFhMWNFTmpFYl90YnVBSlF3WHRXZjJKZHBuejQ3YkNMcHZHS285aDlGcVAwOXhnQjMtZGI4R3dqOE9rZ05uU1p6QlhZM3gxRkhiWXp4c0F1QlJoTlJCbTdlcUlaYlRoRlNoRlFhLVBKaUtfZ9IBkgFBVV95cUxNQjlCemtDUEFvbHM0b2l6QlZQN0xiWmZwd2x6d3Y0aC1OTnM3d2VKRHFYak1NSlpIRndZVkR6TlZzU3N3T0gxWllsZ0xMWDBGWXJibmlHY0xuZzV6OUdUV2hQTE1udVI4WXE4M3l0anlfZW80dzZXLThhSVRCSkc4aEdMMjJtdVpoXzdGRS1nUExHZw?oc=5",
+      "source": "DW.com",
+      "category": "gold / macro",
+      "published_at": "2026-09-13T00:53:00+00:00",
+      "age": "10h ago"
+    },
+    {
+      "title": "1 injured in shooting at Dollar Tree in Northern Colorado - CBS News",
+      "link": "https://news.google.com/rss/articles/CBMikAFBVV95cUxNUHVteU1rVU5Nc25jVThZdHlrcG1nR2JWUFVtTXowTjE5M3A4RkpfT1MwdTVPcHdpdGtGVE5Bc0k4MVpoSzUteEdmcFJJYWIwS0VuMGMzNUplSEFsa1pHZmJkaXcxVnNqOXdnZFJ3ZzZ5RWFSNXJJNjFERTlFS1BCdlZLVUp6am9mTGZOdEMzYTg?oc=5",
+      "source": "CBS News",
+      "category": "gold / macro",
+      "published_at": "2026-09-13T00:34:27+00:00",
+      "age": "10h ago"
+    },
+    {
+      "title": "Forever Young draws outside for Jockey Club Gold Cup as new Belmont Park debuts - Daily Racing Form",
+      "link": "https://news.google.com/rss/articles/CBMingFBVV95cUxNd1BOSVFhazg0eFZHN2txTVN1QVljTlBzeEZSM1pVVm1reC1BNTZHOE1Ub3NwODFmOGZ2XzE2azNicHRtUllsbDB1TGFZdTJqX1BpN29YNjFxTlVvbkktbzg5NFpYSzk2c1JIdnNWMUtPTm5DY3dGd0gzenREWHBmRDkzdVBrd2lkS09aZWt2VHZDbWNZcHVmVHVXZjREUQ?oc=5",
+      "source": "Daily Racing Form",
+      "category": "gold / macro",
+      "published_at": "2026-09-13T00:17:14+00:00",
+      "age": "10h ago"
+    },
+    {
+      "title": "Former CIA official found with $40 million in gold bars for 'work-related expenses' reaches tentative plea deal - Fortune",
+      "link": "https://news.google.com/rss/articles/CBMipwFBVV95cUxNZWx0MG1pdHhOa0kwRFVmMVVUa1dzQk9GRzZyNmlLdkJVLXp0WjdaY3BnXzFzQnZ5ckJUYUs2VFR1QVVkdC1JYlZJdUdJRFV4X0d6dXZTUUVUY1h3SnJUUGpManlPS1hRRi1mS0R6cU9FMTRoSFI0VFpUQ2tCVWhyUDh1YlR2LU5EN0J0UzJYVG9LdUZjUFZWQmEtT3FQOVA0cUtHamFrMA?oc=5",
+      "source": "Fortune",
+      "category": "gold / macro",
+      "published_at": "2026-09-12T23:37:00+00:00",
+      "age": "11h ago"
+    },
+    {
+      "title": "Field Set For Jockey Club Gold Cup; Forever Young Draws Outside - Thoroughbred Daily News",
+      "link": "https://news.google.com/rss/articles/CBMiowFBVV95cUxOSkxLdklSTnZKbkRjbVVTY1ZLeVpZVTR1WVVsWUlacmRyNXJuTnBYNlVIRkZrV0tKZVBBSnhHYUJBMjVVY1R1akZpcGFQRnJWWHk3MXR3VmlVRFM0VlVKNkV3OU4wZXhLLTBFWHpma0lLTy1wY3VtOU5fVThRWVJkNEZKRkZNWlJ3cXJXSGRwTmZhQkVYTHQzc3ZmRmFqSm5wdElR?oc=5",
+      "source": "Thoroughbred Daily News",
+      "category": "gold / macro",
+      "published_at": "2026-09-12T22:54:00+00:00",
+      "age": "12h ago"
+    }
+  ],
   "feed_errors": []
 }
