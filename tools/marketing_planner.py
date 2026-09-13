@@ -10,6 +10,8 @@ SUMMARY = ROOT / "status" / "summary.json"
 AUTONOMY = ROOT / "status" / "autonomy.json"
 GROWTH = ROOT / "marketing" / "growth_metrics.json"
 CONFIG = ROOT / "marketing" / "social_config.json"
+REVENUE_CONFIG = ROOT / "marketing" / "revenue_config.json"
+REVENUE_STATUS = ROOT / "marketing" / "revenue_status.json"
 OUT = ROOT / "marketing" / "queue.json"
 DISCLAIMER = "Trading involves risk. Historical or backtested results do not guarantee future performance."
 
@@ -23,7 +25,7 @@ def load_json(path: Path) -> dict:
         return {}
 
 
-def growth_item(pid: str, pillar: str, hook: str, caption: str, creative: str, fmt: str, hashtags: list[str], cta: str, priority: int = 100) -> dict:
+def growth_item(pid: str, pillar: str, hook: str, caption: str, creative: str, fmt: str, hashtags: list[str], cta: str, priority: int = 100, disclaimer: str = DISCLAIMER) -> dict:
     return {
         "id": pid,
         "pillar": pillar,
@@ -36,7 +38,7 @@ def growth_item(pid: str, pillar: str, hook: str, caption: str, creative: str, f
         "status": "ready_for_design",
         "hashtags": hashtags,
         "cta": cta,
-        "disclaimer": DISCLAIMER,
+        "disclaimer": disclaimer,
     }
 
 
@@ -45,6 +47,8 @@ def main() -> None:
     autonomy = load_json(AUTONOMY)
     growth = load_json(GROWTH)
     config = load_json(CONFIG)
+    revenue_config = load_json(REVENUE_CONFIG)
+    revenue_status = load_json(REVENUE_STATUS)
 
     experiments = int(summary.get("experiments", 0) or 0)
     rejected = int(summary.get("rejected", 0) or 0)
@@ -172,6 +176,45 @@ def main() -> None:
     ]
 
     items = [daily] + evergreen
+
+    launchable = set(revenue_status.get("launchable_offers") or [])
+    guardrails = revenue_config.get("sales_guardrails") or {}
+    offers = {str(o.get("id")): o for o in revenue_config.get("offers", []) if isinstance(o, dict)}
+    required_offers = {"mt5-setup-audit", "research-brief", "vast-early-access"}
+    revenue_safe = (
+        required_offers.issubset(launchable)
+        and not bool(guardrails.get("paid_ads", True))
+        and not bool(guardrails.get("live_trading", True))
+        and not bool(guardrails.get("vast_indicator_sales_enabled", True))
+    )
+    if revenue_safe:
+        audit = offers.get("mt5-setup-audit", {})
+        brief = offers.get("research-brief", {})
+        early = offers.get("vast-early-access", {})
+        offer_caption = (
+            "Three VASTcode21 offers are now operational: "
+            "MT5 Setup & Automation Audit — €99 one-time for a 45-minute technical MT5 setup/automation review; "
+            "VASTcode21 Research Brief — €15/month for weekly educational validation notes; "
+            "VAST Early Access — free for verified development and release updates. "
+            "The VAST indicator itself is NOT for sale while validation is incomplete.\n\n"
+            f"Audit: {audit.get('checkout_url', '')}\n"
+            f"Research Brief: {brief.get('checkout_url', '')}\n"
+            f"Early Access: {early.get('signup_url', '')}"
+        )
+        offers_item = growth_item(
+            "offers-ready-v1",
+            "services",
+            "VASTcode21 services are now available.",
+            offer_caption,
+            "Clean 4:5 three-offer availability card. Show €99 Audit, €15/mo Research Brief and FREE Early Access. Do not depict profit charts, returns or the VAST indicator as released.",
+            "image",
+            hashtag_sets[0],
+            "Choose the Audit, Research Brief or free Early Access option. Links are in this caption.",
+            300,
+            "Technical and educational services only. No signals, account management, personalized investment advice or profit guarantees. Trading involves risk.",
+        )
+        items = [offers_item] + items
+
     payload = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "mode": mode,
@@ -188,6 +231,7 @@ def main() -> None:
             "forward_collecting": forward_collecting,
             "forward_passed": forward_passed,
             "release_candidates": release_candidates,
+            "revenue_offers_ready": revenue_safe,
         },
         "items": items,
     }
@@ -199,6 +243,7 @@ def main() -> None:
         "daily_format": daily["format"],
         "growth_mode": mode,
         "followers": followers,
+        "revenue_offers_ready": revenue_safe,
         "paid_ads": False,
         "live_trading": False,
     }))
