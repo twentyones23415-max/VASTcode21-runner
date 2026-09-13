@@ -1,6 +1,8 @@
 (()=>{
   const EVENT_FEED='data/event_risk.json';
+  const MARKET_FEED='data/market_intelligence.json';
   const EVENT_MAX_AGE_MS=150*60*1000;
+  const NEWS_MAX_AGE_MS=150*60*1000;
   const q=(s,r=document)=>r.querySelector(s);
   const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
@@ -34,13 +36,14 @@
       <aside class="tutor-console-side">
         <div class="lab-state"><span>VISION ENGINE</span><b>CHECKING</b></div>
         <div class="lab-state"><span>EVENT RISK SHIELD</span><b>CHECKING</b></div>
-        <div class="lab-state"><span>NEWS CONTEXT</span><b class="online">ONLINE</b></div>
+        <div class="lab-state"><span>NEWS CONTEXT</span><b>CHECKING</b></div>
         <div class="lab-state"><span>LIVE MARKET API</span><b>NOT CONNECTED</b></div>
         <div class="lab-trust"><strong>Trust rule</strong><p>Screenshot evidence and verified context are labelled separately. Missing information stays unknown instead of being invented.</p></div>
       </aside>
     </div></div>`;
     slot.appendChild(s);
     bindUpload();
+    loadNewsContext();
   }
 
   function bindUpload(){
@@ -67,6 +70,23 @@
     ['dragleave','drop'].forEach(evt=>drop.addEventListener(evt,e=>{e.preventDefault();drop.classList.remove('drag')}));
     drop.addEventListener('drop',e=>{const file=e.dataTransfer?.files?.[0];if(file){try{const dt=new DataTransfer();dt.items.add(file);input.files=dt.files}catch{}show(file)}});
     clear?.addEventListener('click',reset);
+  }
+
+  async function loadNewsContext(){
+    setLabState('NEWS CONTEXT','CHECKING',false);
+    try{
+      const r=await fetch(`${MARKET_FEED}?t=${Date.now()}`,{cache:'no-store'});
+      if(!r.ok)throw new Error('news feed');
+      const d=await r.json();
+      const updated=new Date(d.updated_at||0);
+      const age=Date.now()-updated.getTime();
+      const hasItems=Array.isArray(d.items)&&d.items.length>0;
+      const fresh=Number.isFinite(age)&&age>=0&&age<=NEWS_MAX_AGE_MS&&d.status==='active'&&hasItems;
+      if(fresh)setLabState('NEWS CONTEXT','VERIFIED',true);
+      else setLabState('NEWS CONTEXT','UNAVAILABLE',false);
+    }catch{
+      setLabState('NEWS CONTEXT','UNAVAILABLE',false);
+    }
   }
 
   function mountContext(){
