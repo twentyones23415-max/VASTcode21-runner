@@ -10,6 +10,7 @@ on:
       - 'status/summary.json'
       - 'tools/revenue_engine.py'
       - 'tools/stripe_revenue_setup.py'
+      - 'tools/mailchimp_revenue_setup.py'
       - '.github/workflows/revenue.yml'
   schedule:
     - cron: '5 7 * * *'
@@ -36,15 +37,20 @@ jobs:
           STRIPE_RESTRICTED_KEY: ${{ secrets.STRIPE_RESTRICTED_KEY }}
         run: python tools/stripe_revenue_setup.py
 
+      - name: Provision or recover Mailchimp audience and tags
+        env:
+          MAILCHIMP_API_KEY: ${{ secrets.MAILCHIMP_API_KEY }}
+        run: python tools/mailchimp_revenue_setup.py
+
       - name: Build revenue readiness and landing page
         run: python tools/revenue_engine.py
 
-      - name: Commit revenue status Stripe state and site when changed
+      - name: Commit revenue status provider states and site when changed
         shell: bash
         run: |
           git config user.name 'VASTcode21 Revenue Bot'
           git config user.email 'vastcode21-bot@users.noreply.github.com'
-          git add marketing/revenue_config.json marketing/revenue_status.json marketing/stripe_state.json site/index.html
+          git add marketing/revenue_config.json marketing/revenue_status.json marketing/stripe_state.json marketing/mailchimp_state.json site/index.html
           if git diff --cached --quiet; then
             echo 'No revenue funnel change.'
           else
