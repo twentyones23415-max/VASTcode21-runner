@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-13T12:30:02.507118+00:00",
+  "generated_at": "2026-09-13T12:59:02.694617+00:00",
   "mode": "zero_to_ten_rescue",
   "followers_count": 0,
   "growth_goal_followers": 100,
@@ -22,30 +22,33 @@
     {
       "id": "event-risk-20260913",
       "pillar": "market_risk",
-      "hook": "High-impact event ahead: FOMC Meeting.",
-      "caption": "FOMC Meeting is scheduled for Wednesday 16 Sep, 21:00 local time. VASTcode21 flags it as high-impact context for XAUUSD, BTCUSD. Around major scheduled releases, volatility and execution conditions can change quickly. Mark the time, reduce assumptions, and verify the official source before acting.",
+      "hook": "FOMC Wednesday 21:00: 3 things to check before XAUUSD or BTCUSD moves.",
+      "caption": "FOMC decision: Wednesday 16 Sep at 21:00 local time; press conference follows at 21:30. For XAUUSD and BTCUSD, watch three things instead of guessing direction: 1) spread/liquidity conditions around the release, 2) the first reaction versus the reaction after the statement is digested, and 3) whether the press conference changes the market's interpretation. This is event-risk context, not a trade call. Verify the Federal Reserve schedule before acting.",
       "creative_brief": "9:16 event-risk Reel. First frame: EVENT RISK AHEAD. Second: event name + local time. Third: XAUUSD / BTCUSD + CHECK CONTEXT, NOT HYPE.",
       "format": "reel",
       "platforms": [
         "Instagram"
       ],
-      "priority": 240,
+      "priority": 260,
       "status": "ready_for_design",
       "hashtags": [
-        "#VASTcode21",
+        "#FOMC",
         "#XAUUSD",
-        "#MT5",
-        "#AlgoTrading",
-        "#TradingEducation",
-        "#Backtesting"
+        "#GoldTrading",
+        "#BTCUSD",
+        "#BitcoinTrading",
+        "#MT5"
       ],
-      "cta": "Save the time and follow @vast.code21 for the next verified market-risk alert.",
+      "cta": "Save this checklist and follow @vast.code21 for verified XAUUSD/BTCUSD event-risk context.",
       "disclaimer": "Event-risk context only, not a trading instruction. Scheduled times can change; verify the linked official source. Trading involves risk.",
       "reel_script": [
-        "EVENT RISK AHEAD",
-        "FOMC Meeting\n16 Sep · 21:00",
-        "XAUUSD + BTCUSD\nCHECK CONTEXT FIRST"
-      ]
+        "FOMC · WED 21:00",
+        "1 · SPREAD / LIQUIDITY",
+        "2 · FIRST MOVE ≠ FINAL MOVE",
+        "3 · PRESSER 21:30",
+        "XAUUSD · BTCUSD\nSAVE THIS CHECKLIST"
+      ],
+      "growth_hypothesis": "timely_saveable_search_intent_reel"
     },
     {
       "id": "growth-20260913",
@@ -154,7 +157,7 @@
       "platforms": [
         "Instagram"
       ],
-      "priority": 25,
+      "priority": 5,
       "status": "ready_for_design",
       "hashtags": [
         "#VASTcode21",
@@ -166,7 +169,13 @@
       ],
       "cta": "Research Brief, MT5 Audit and VAST Early Access — use the links in bio.",
       "disclaimer": "Technical and educational services only. No signals, account management, personalized investment advice or profit guarantees. Trading involves risk.",
-      "bio_links_ready": true
+      "bio_links_ready": true,
+      "growth_role": "profile_funnel_only"
     }
-  ]
+  ],
+  "growth_strategy": {
+    "stage": "zero_to_ten",
+    "principle": "discovery_and_saves_before_sales",
+    "evidence": "0 followers and 0 measured likes/comments across current media"
+  }
 }
