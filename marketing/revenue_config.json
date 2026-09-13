@@ -36,7 +36,8 @@
       "headline": "A focused 50-minute private lesson built around the learner's current level and one specific skill.",
       "deliverable": "Personal level check, live MT5 walkthrough, one focused topic per session and action notes for the next practice block.",
       "not_included": "No trading signals, account management, profit promise or personalized investment advice.",
-      "fulfillment": "private 50-minute educational mentor session after request and scheduling"
+      "fulfillment": "private 50-minute educational mentor session after request and scheduling",
+      "checkout_url": "https://buy.stripe.com/7sY00k9ER9VCfhB3JYcEw02"
     },
     {
       "id": "vast-mentor-4week",
@@ -51,7 +52,8 @@
       "headline": "A guided four-week learning track for structure, accountability and measurable educational progress.",
       "deliverable": "4 private mentor sessions, personal learning roadmap, MT5 + risk + market-context curriculum, weekly practice objectives and an end-of-program review.",
       "not_included": "No trading signals, account management, guaranteed outcomes or personalized investment advice.",
-      "fulfillment": "four-week private educational mentorship after application and scheduling"
+      "fulfillment": "four-week private educational mentorship after application and scheduling",
+      "checkout_url": "https://buy.stripe.com/bJe3cw9ER5Fm5H1dkycEw03"
     },
     {
       "id": "mt5-setup-audit",

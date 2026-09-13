@@ -1,14 +1,26 @@
 {
-  "updated_at": "2026-09-13T18:17:38.533693+00:00",
+  "updated_at": "2026-09-13T18:21:42.875272+00:00",
   "mode": "stripe_mailchimp_connected",
   "followers_count": 0,
   "research_experiments": 96,
   "launchable_offers": [
+    "vast-mentor-1to1",
+    "vast-mentor-4week",
     "mt5-setup-audit",
     "research-brief",
     "vast-early-access"
   ],
   "offers": [
+    {
+      "id": "vast-mentor-1to1",
+      "ready": true,
+      "missing": []
+    },
+    {
+      "id": "vast-mentor-4week",
+      "ready": true,
+      "missing": []
+    },
     {
       "id": "mt5-setup-audit",
       "ready": true,

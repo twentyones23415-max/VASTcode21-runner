@@ -27,9 +27,37 @@
         },
         "type": "hosted_confirmation"
       }
+    },
+    "vast-mentor-1to1": {
+      "product_id": "prod_VFnZ3pKb5mh7uE",
+      "price_id": "price_1UFHyQINRPxwjisC9nG86WMk",
+      "lookup_key": "vastcode21_vast_mentor_1to1_eur_7900_v1",
+      "payment_link_id": "plink_1UFHyQINRPxwjisCj69oZui7",
+      "checkout_url": "https://buy.stripe.com/7sY00k9ER9VCfhB3JYcEw02",
+      "livemode": true,
+      "after_completion": {
+        "hosted_confirmation": {
+          "custom_message": null
+        },
+        "type": "hosted_confirmation"
+      }
+    },
+    "vast-mentor-4week": {
+      "product_id": "prod_VFnZ0yrqkuUUWN",
+      "price_id": "price_1UFHyRINRPxwjisCSBagXClO",
+      "lookup_key": "vastcode21_vast_mentor_4week_eur_24900_v1",
+      "payment_link_id": "plink_1UFHySINRPxwjisCxJlmGuKq",
+      "checkout_url": "https://buy.stripe.com/bJe3cw9ER5Fm5H1dkycEw03",
+      "livemode": true,
+      "after_completion": {
+        "hosted_confirmation": {
+          "custom_message": null
+        },
+        "type": "hosted_confirmation"
+      }
     }
   },
-  "updated_at": "2026-09-13T17:50:54.847528+00:00",
+  "updated_at": "2026-09-13T18:21:39.801181+00:00",
   "live_trading": false,
   "paid_ads": false,
   "mode": "live_ready",
