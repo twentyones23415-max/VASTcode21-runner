@@ -8,7 +8,7 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 CONFIG=ROOT/'config/context_sources.json'
 OUT=ROOT/'site/data/market_intelligence.json'
-UA='VASTcode21-MarketMonitor/1.2 (+https://github.com/twentyones23415-max/VASTcode21-runner)'
+UA='VASTcode21-MarketMonitor/1.3 (+https://github.com/twentyones23415-max/VASTcode21-runner)'
 
 GOLD_MARKET_WORDS={
     'price','prices','market','markets','futures','bullion','ounce','ounces','metal','metals','demand',
@@ -16,6 +16,11 @@ GOLD_MARKET_WORDS={
     'rising','gain','gains','climb','climbs','fall','falls','falling','drop','drops','slip','slips',
     'forecast','outlook','record high','safe haven','dollar','yield','yields','fed','inflation','rates',
     'rate cut','geopolitical','tariff','treasury'
+}
+FED_MARKET_WORDS={
+    'monetary','fomc','federal open market','interest rate','interest rates','rate cut','rate hike',
+    'inflation','economic outlook','economy','employment','labor market','unemployment','gdp',
+    'financial conditions','treasury','balance sheet','powell','waller','governor','chair'
 }
 
 def text(node, name):
@@ -53,7 +58,8 @@ def source_name(item, fallback):
 def relevant(title: str, feed_name: str) -> bool:
     t=' '.join(title.lower().split())
     name=feed_name.lower()
-    if 'fed' in name: return True
+    if 'fed' in name:
+        return any(word in t for word in FED_MARKET_WORDS)
     if 'gold' in name:
         if 'xau' in t or 'bullion' in t or 'precious metal' in t: return True
         return 'gold' in t and any(word in t for word in GOLD_MARKET_WORDS)
@@ -87,7 +93,7 @@ def main():
         (buckets.get(x['category'],other)).append(x)
 
     clean=[]
-    # Keep the public desk balanced instead of allowing one topic to dominate.
+    # Interleave categories so the visible cards stay balanced: BTC -> GOLD -> macro.
     for i in range(6):
         for cat in ('bitcoin / crypto','gold / macro','fed / macro'):
             if i < len(buckets[cat]): clean.append(buckets[cat][i])
@@ -100,10 +106,9 @@ def main():
         leftovers.sort(key=lambda x:x.get('published_at') or '',reverse=True)
         clean.extend(leftovers[:16-len(clean)])
 
-    clean.sort(key=lambda x:x.get('published_at') or '',reverse=True)
-    out={'version':'1.2','status':'active' if clean else 'degraded','updated_at':datetime.now(timezone.utc).isoformat(),'scope':['XAUUSD','BTCUSD','macro'],'items':clean,'feed_errors':errors}
+    out={'version':'1.3','status':'active' if clean else 'degraded','updated_at':datetime.now(timezone.utc).isoformat(),'scope':['XAUUSD','BTCUSD','macro'],'items':clean,'feed_errors':errors}
     OUT.parent.mkdir(parents=True,exist_ok=True)
     OUT.write_text(json.dumps(out,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
-    print(f'Published {len(clean)} balanced market-intelligence headlines; errors={len(errors)}')
+    print(f'Published {len(clean)} interleaved market-intelligence headlines; errors={len(errors)}')
 
 if __name__=='__main__': main()
