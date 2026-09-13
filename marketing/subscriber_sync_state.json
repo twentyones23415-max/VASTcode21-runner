@@ -1,0 +1,17 @@
+{
+  "updated_at": "2026-09-13T10:14:05.050452+00:00",
+  "paid_ads": false,
+  "live_trading": false,
+  "provider": "stripe_to_mailchimp",
+  "tag": "Research Brief Subscriber",
+  "connected": true,
+  "mode": "ready",
+  "last_error": "",
+  "research_price_id": "price_1UF8TRINRPxwjisCr9wIjEoN",
+  "subscriptions_seen": 0,
+  "members_synced": 0,
+  "active_subscribers": 0,
+  "inactive_subscribers": 0,
+  "suppressed_members": 0,
+  "skipped_no_email": 0
+}

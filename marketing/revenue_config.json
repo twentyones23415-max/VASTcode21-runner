@@ -19,7 +19,7 @@
     "calcom": true,
     "resend": false,
     "mailchimp": true,
-    "subscriber_sync": false
+    "subscriber_sync": true
   },
   "offers": [
     {
