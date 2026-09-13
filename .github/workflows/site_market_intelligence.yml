@@ -6,6 +6,7 @@ on:
     branches: [main]
     paths:
       - 'tools/site_market_feed.py'
+      - 'tools/site_event_risk.py'
       - 'config/context_sources.json'
       - '.github/workflows/site_market_intelligence.yml'
   schedule:
@@ -29,20 +30,22 @@ jobs:
           python-version: '3.12'
       - name: Refresh public market intelligence snapshot
         run: python tools/site_market_feed.py
-      - name: Commit public feed when changed
+      - name: Refresh official-source event risk snapshot
+        run: python tools/site_event_risk.py
+      - name: Commit public intelligence feeds when changed
         shell: bash
         run: |
           git config user.name 'VASTcode21 Market Monitor'
           git config user.email 'vastcode21-bot@users.noreply.github.com'
-          git add site/data/market_intelligence.json
+          git add site/data/market_intelligence.json site/data/event_risk.json
           if git diff --cached --quiet; then
-            echo 'No public feed change.'
+            echo 'No public intelligence change.'
           else
-            git commit -m 'chore: refresh public market intelligence'
+            git commit -m 'chore: refresh public market intelligence and event risk'
             for attempt in 1 2 3; do
               git pull --rebase origin main && git push && break
               if [ "$attempt" -eq 3 ]; then
-                echo 'Could not persist public market feed' >&2
+                echo 'Could not persist public intelligence feeds' >&2
                 exit 1
               fi
               sleep 3
