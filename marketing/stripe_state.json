@@ -5,8 +5,14 @@
       "price_id": "price_1UF8TQINRPxwjisCWoIqOhmQ",
       "lookup_key": "vastcode21_mt5_setup_audit_eur_9900_v1",
       "payment_link_id": "plink_1UF8TQINRPxwjisC2NwzuhCe",
-      "checkout_url": "https://buy.stripe.com/bJedRaaIVaZG6L55S6cEw00",
-      "livemode": true
+      "checkout_url": "https://book.stripe.com/bJedRaaIVaZG6L55S6cEw00",
+      "livemode": true,
+      "after_completion": {
+        "hosted_confirmation": {
+          "custom_message": null
+        },
+        "type": "hosted_confirmation"
+      }
     },
     "research-brief": {
       "product_id": "prod_VFdkNwy5syj9z0",
@@ -14,10 +20,16 @@
       "lookup_key": "vastcode21_research_brief_eur_1500_v1",
       "payment_link_id": "plink_1UF8TSINRPxwjisCpr5NhyrP",
       "checkout_url": "https://buy.stripe.com/6oUaEY5oB8RyglFeoCcEw01",
-      "livemode": true
+      "livemode": true,
+      "after_completion": {
+        "hosted_confirmation": {
+          "custom_message": null
+        },
+        "type": "hosted_confirmation"
+      }
     }
   },
-  "updated_at": "2026-09-13T08:24:36.034595+00:00",
+  "updated_at": "2026-09-13T08:37:43.185338+00:00",
   "live_trading": false,
   "paid_ads": false,
   "mode": "live_ready",

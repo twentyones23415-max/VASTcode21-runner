@@ -26,7 +26,7 @@
       "price_eur": 99,
       "billing": "one_time",
       "enabled": true,
-      "checkout_url": "https://buy.stripe.com/bJedRaaIVaZG6L55S6cEw00",
+      "checkout_url": "https://book.stripe.com/bJedRaaIVaZG6L55S6cEw00",
       "booking_url": "",
       "booking_provider": "cal.com",
       "headline": "Get your MT5 setup reviewed and automation-ready.",
