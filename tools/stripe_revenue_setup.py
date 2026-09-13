@@ -105,13 +105,35 @@ def create_price(offer, product_id):
 
 
 def create_link(offer, price_id):
-    return request("POST", "/payment_links", {
+    data = {
         "line_items[0][price]": price_id,
         "line_items[0][quantity]": 1,
         "billing_address_collection": "auto",
         "metadata[vastcode21_offer_id]": offer["id"],
         "metadata[brand]": "VASTcode21",
-    })
+    }
+    if offer.get("id") == "mt5-setup-audit":
+        data["submit_type"] = "book"
+    return request("POST", "/payment_links", data)
+
+
+def configure_link_after_payment(offer, link):
+    data = {}
+    booking_url = str(offer.get("booking_url", "")).strip()
+
+    if offer.get("id") == "mt5-setup-audit" and link.get("submit_type") != "book":
+        data["submit_type"] = "book"
+
+    if booking_url:
+        after = link.get("after_completion") or {}
+        redirect = after.get("redirect") or {}
+        if after.get("type") != "redirect" or redirect.get("url") != booking_url:
+            data["after_completion[type]"] = "redirect"
+            data["after_completion[redirect][url]"] = booking_url
+
+    if data:
+        link = request("POST", f"/payment_links/{link['id']}", data)
+    return link
 
 
 def main():
@@ -165,9 +187,12 @@ def main():
             link = get_or_none(f"/payment_links/{offer_state['payment_link_id']}")
         if not link:
             link = find_link(offer["id"]) or create_link(offer, price["id"])
+        link = configure_link_after_payment(offer, link)
+
         offer_state["payment_link_id"] = link["id"]
         offer_state["checkout_url"] = link["url"]
         offer_state["livemode"] = bool(link.get("livemode"))
+        offer_state["after_completion"] = link.get("after_completion")
         all_ready = all_ready and offer_state["livemode"] and bool(link.get("url"))
 
         for cfg_offer in config.get("offers", []):
