@@ -1,0 +1,81 @@
+{
+  "version": "1.0",
+  "status": "active",
+  "updated_at": "2026-09-13T11:38:21.311696+00:00",
+  "horizon_days": 14,
+  "sources": [
+    "U.S. Bureau of Labor Statistics",
+    "U.S. Bureau of Economic Analysis",
+    "Federal Reserve Board"
+  ],
+  "urgent": [],
+  "nearest": {
+    "title": "FOMC Meeting",
+    "source": "Federal Reserve",
+    "category": "fed",
+    "impact": "high",
+    "scheduled_at": "2026-09-16T18:00:00+00:00",
+    "link": "https://www.federalreserve.gov/newsevents/2026-september.htm",
+    "relevance": [
+      "XAUUSD",
+      "BTCUSD"
+    ],
+    "minutes_from_now": 4701,
+    "risk_state": "SCHEDULED",
+    "countdown": "3d 6h"
+  },
+  "events": [
+    {
+      "title": "FOMC Meeting",
+      "source": "Federal Reserve",
+      "category": "fed",
+      "impact": "high",
+      "scheduled_at": "2026-09-16T18:00:00+00:00",
+      "link": "https://www.federalreserve.gov/newsevents/2026-september.htm",
+      "relevance": [
+        "XAUUSD",
+        "BTCUSD"
+      ],
+      "minutes_from_now": 4701,
+      "risk_state": "SCHEDULED",
+      "countdown": "3d 6h"
+    },
+    {
+      "title": "FOMC Press Conference",
+      "source": "Federal Reserve",
+      "category": "fed",
+      "impact": "high",
+      "scheduled_at": "2026-09-16T18:30:00+00:00",
+      "link": "https://www.federalreserve.gov/newsevents/2026-september.htm",
+      "relevance": [
+        "XAUUSD",
+        "BTCUSD"
+      ],
+      "minutes_from_now": 4731,
+      "risk_state": "SCHEDULED",
+      "countdown": "3d 6h"
+    },
+    {
+      "title": "Speech - Vice Chair for Supervision Michelle W. Bowman",
+      "source": "Federal Reserve",
+      "category": "fed",
+      "impact": "high",
+      "scheduled_at": "2026-09-18T13:30:00+00:00",
+      "link": "https://www.federalreserve.gov/newsevents/2026-september.htm",
+      "relevance": [
+        "XAUUSD",
+        "BTCUSD"
+      ],
+      "minutes_from_now": 7311,
+      "risk_state": "SCHEDULED",
+      "countdown": "5d 1h"
+    }
+  ],
+  "source_errors": [
+    {
+      "source": "BLS",
+      "error": "HTTP Error 403: Forbidden"
+    }
+  ],
+  "notice": "Event risk is contextual information, not a trading instruction. Times can change at the source; verify critical releases with the linked official source."
+}
