@@ -1,0 +1,16 @@
+{
+  "version": "2026.09",
+  "source": "U.S. Bureau of Labor Statistics",
+  "source_url": "https://www.bls.gov/schedule/2026/",
+  "timezone": "America/New_York",
+  "note": "Fallback dates transcribed from the official BLS 2026 release calendar. Used only when public BLS calendar endpoints reject the automation runner.",
+  "events": [
+    {"title":"U.S. Import and Export Price Indexes for August 2026","local":"2026-09-16T08:30:00","impact":"medium"},
+    {"title":"Job Openings and Labor Turnover Survey for August 2026","local":"2026-09-29T10:00:00","impact":"medium"},
+    {"title":"Employment Situation for September 2026","local":"2026-10-02T08:30:00","impact":"high"},
+    {"title":"Consumer Price Index for September 2026","local":"2026-10-14T08:30:00","impact":"high"},
+    {"title":"Producer Price Index for September 2026","local":"2026-10-15T08:30:00","impact":"medium"},
+    {"title":"U.S. Import and Export Price Indexes for September 2026","local":"2026-10-16T08:30:00","impact":"medium"},
+    {"title":"Employment Cost Index for Third Quarter 2026","local":"2026-10-30T08:30:00","impact":"medium"}
+  ]
+}
