@@ -8,20 +8,14 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 CONFIG=ROOT/'config/context_sources.json'
 OUT=ROOT/'site/data/market_intelligence.json'
-UA='VASTcode21-MarketMonitor/1.1 (+https://github.com/twentyones23415-max/VASTcode21-runner)'
+UA='VASTcode21-MarketMonitor/1.2 (+https://github.com/twentyones23415-max/VASTcode21-runner)'
 
 GOLD_MARKET_WORDS={
-    'price','prices','market','markets','futures','bullion','ounce','ounces','metal','metals',
-    'demand','reserve','reserves','central bank','investor','investors','etf','rally','rallies',
-    'rise','rises','rising','gain','gains','climb','climbs','fall','falls','falling','drop','drops',
-    'slip','slips','forecast','outlook','record high','safe haven','dollar','yield','yields','fed',
-    'inflation','rates','rate cut','geopolitical','tariff','treasury'
-}
-CRYPTO_MARKET_WORDS={
-    'price','prices','market','markets','etf','exchange','regulation','regulatory','institutional',
-    'treasury','reserve','reserves','miner','miners','mining','wallet','on-chain','liquidity',
-    'futures','options','funding','volatility','rally','falls','rises','drops','gains','outlook',
-    'adoption','stablecoin','hack','custody'
+    'price','prices','market','markets','futures','bullion','ounce','ounces','metal','metals','demand',
+    'reserve','reserves','central bank','investor','investors','etf','rally','rallies','rise','rises',
+    'rising','gain','gains','climb','climbs','fall','falls','falling','drop','drops','slip','slips',
+    'forecast','outlook','record high','safe haven','dollar','yield','yields','fed','inflation','rates',
+    'rate cut','geopolitical','tariff','treasury'
 }
 
 def text(node, name):
@@ -30,7 +24,7 @@ def text(node, name):
 
 def age_string(dt):
     if not dt: return ''
-    now=datetime.now(timezone.utc); d=max(0,int((now-dt).total_seconds()))
+    d=max(0,int((datetime.now(timezone.utc)-dt).total_seconds()))
     if d<3600: return f'{max(1,d//60)}m ago'
     if d<86400: return f'{d//3600}h ago'
     return f'{d//86400}d ago'
@@ -59,20 +53,12 @@ def source_name(item, fallback):
 def relevant(title: str, feed_name: str) -> bool:
     t=' '.join(title.lower().split())
     name=feed_name.lower()
-    if 'fed' in name:
-        return True
+    if 'fed' in name: return True
     if 'gold' in name:
-        if 'xau' in t or 'bullion' in t or 'precious metal' in t:
-            return True
-        if 'gold' not in t:
-            return False
-        return any(word in t for word in GOLD_MARKET_WORDS)
+        if 'xau' in t or 'bullion' in t or 'precious metal' in t: return True
+        return 'gold' in t and any(word in t for word in GOLD_MARKET_WORDS)
     if 'bitcoin' in name:
-        if 'bitcoin' in t or ' btc' in f' {t}' or t.startswith('btc'):
-            return True
-        if 'crypto' in t:
-            return any(word in t for word in CRYPTO_MARKET_WORDS)
-        return False
+        return 'bitcoin' in t or ' btc' in f' {t}' or t.startswith('btc')
     return True
 
 def main():
@@ -82,29 +68,42 @@ def main():
     for f in feeds:
         try:
             root=ET.fromstring(fetch(f['url']))
-            found=root.findall('.//item')
-            for it in found[:30]:
+            for it in root.findall('.//item')[:40]:
                 title=text(it,'title'); link=text(it,'link')
-                if not title or not link or not relevant(title, f.get('name','')):
-                    continue
+                if not title or not link or not relevant(title,f.get('name','')): continue
                 dt=parse_date(text(it,'pubDate') or text(it,'date'))
-                category=f.get('category','market_news')
-                if 'gold' in f.get('name',''): category='gold / macro'
-                elif 'bitcoin' in f.get('name',''): category='bitcoin / crypto'
-                elif 'fed' in f.get('name',''): category='fed / macro'
-                items.append({'title':title,'link':link,'source':source_name(it,f.get('name','source')),'category':category,'published_at':dt.isoformat() if dt else None,'age':age_string(dt)})
+                name=f.get('name','')
+                category='gold / macro' if 'gold' in name else 'bitcoin / crypto' if 'bitcoin' in name else 'fed / macro' if 'fed' in name else f.get('category','market_news')
+                items.append({'title':title,'link':link,'source':source_name(it,name or 'source'),'category':category,'published_at':dt.isoformat() if dt else None,'age':age_string(dt)})
         except Exception as e:
             errors.append({'feed':f.get('name','unknown'),'error':str(e)[:180]})
-    seen=set(); clean=[]
+
     items.sort(key=lambda x:x.get('published_at') or '',reverse=True)
+    seen=set(); buckets={'gold / macro':[],'bitcoin / crypto':[],'fed / macro':[]}; other=[]
     for x in items:
         k=' '.join(x['title'].lower().split())
         if k in seen: continue
-        seen.add(k); clean.append(x)
+        seen.add(k)
+        (buckets.get(x['category'],other)).append(x)
+
+    clean=[]
+    # Keep the public desk balanced instead of allowing one topic to dominate.
+    for i in range(6):
+        for cat in ('bitcoin / crypto','gold / macro','fed / macro'):
+            if i < len(buckets[cat]): clean.append(buckets[cat][i])
+            if len(clean)>=16: break
         if len(clean)>=16: break
-    out={'version':'1.1','status':'active' if clean else 'degraded','updated_at':datetime.now(timezone.utc).isoformat(),'scope':['XAUUSD','BTCUSD','macro'],'items':clean,'feed_errors':errors}
+    if len(clean)<16:
+        leftovers=[]
+        for cat in buckets: leftovers.extend(buckets[cat][6:])
+        leftovers.extend(other)
+        leftovers.sort(key=lambda x:x.get('published_at') or '',reverse=True)
+        clean.extend(leftovers[:16-len(clean)])
+
+    clean.sort(key=lambda x:x.get('published_at') or '',reverse=True)
+    out={'version':'1.2','status':'active' if clean else 'degraded','updated_at':datetime.now(timezone.utc).isoformat(),'scope':['XAUUSD','BTCUSD','macro'],'items':clean,'feed_errors':errors}
     OUT.parent.mkdir(parents=True,exist_ok=True)
     OUT.write_text(json.dumps(out,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
-    print(f'Published {len(clean)} relevant public market-intelligence headlines; errors={len(errors)}')
+    print(f'Published {len(clean)} balanced market-intelligence headlines; errors={len(errors)}')
 
 if __name__=='__main__': main()
