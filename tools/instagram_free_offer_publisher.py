@@ -1,18 +1,27 @@
 #!/usr/bin/env python3
-"""Publish approved VASTcode21 service-offer posts without the normal cadence gate.
+"""Publish approved VASTcode21 service-offer posts through the shared organic cadence.
 
-This path is intentionally limited to organic service/revenue offer items. It keeps
-account validation, paid-ads/live-trading safety stops, local/remote duplicate
-protection and Instagram media-container checks, while not consuming the normal
-organic post/day spacing budget.
+This path is limited to organic service/revenue offer items. It keeps account
+validation, paid-ads/live-trading safety stops, local/remote duplicate protection,
+Instagram media-container checks, and the same global daily/spacing limits as the
+main Instagram publisher.
 """
 
 from __future__ import annotations
 
 import os
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
+from zoneinfo import ZoneInfo
 
 import instagram_publisher as pub
+
+
+def _advance_last_publish_at(state: dict, published_at: str) -> None:
+    """Keep last_publish_at aligned with the newest known publication timestamp."""
+    candidate = pub.parse_dt(published_at)
+    current = pub.parse_dt(state.get("last_publish_at"))
+    if candidate and (current is None or candidate.astimezone(timezone.utc) > current.astimezone(timezone.utc)):
+        state["last_publish_at"] = candidate.isoformat()
 
 
 def main() -> int:
@@ -24,7 +33,7 @@ def main() -> int:
     config = pub.load_json(pub.CONFIG_PATH)
     queue = pub.load_json(pub.QUEUE_PATH)
     state = pub.load_json(pub.STATE_PATH) if pub.STATE_PATH.exists() else {
-        "version": "2.0.0", "last_publish_at": None, "published": []
+        "version": "2.2.0", "last_publish_at": None, "published": []
     }
 
     if not config.get("enabled", False):
@@ -44,7 +53,32 @@ def main() -> int:
     if expected and username.lower() != expected.lower():
         raise RuntimeError(f"Safety stop: token belongs to @{username}, expected @{expected}.")
 
-    published_ids = {x.get("queue_id") for x in state.get("published", [])}
+    tz_name = config.get("timezone", "Europe/Bucharest")
+    local_tz = ZoneInfo(tz_name)
+    now_utc = datetime.now(timezone.utc)
+    now_local = now_utc.astimezone(local_tz)
+    published = state.get("published", [])
+    published_ids = {x.get("queue_id") for x in published}
+
+    # Global organic cadence: service offers share the same daily and spacing budget
+    # as research/education posts. No publishing path may bypass these guards.
+    today_count = 0
+    for entry in published:
+        dt = pub.parse_dt(entry.get("published_at"))
+        if dt and dt.astimezone(local_tz).date() == now_local.date():
+            today_count += 1
+
+    max_posts = int(config.get("max_posts_per_day", 1))
+    if today_count >= max_posts:
+        print(f"Daily publish limit reached ({today_count}/{max_posts}).")
+        return 0
+
+    last_publish = pub.parse_dt(state.get("last_publish_at"))
+    min_hours = int(config.get("min_hours_between_posts", 20))
+    if last_publish and now_utc - last_publish.astimezone(timezone.utc) < timedelta(hours=min_hours):
+        print("Minimum spacing between posts has not elapsed.")
+        return 0
+
     candidates = [
         item for item in queue.get("items", [])
         if "Instagram" in item.get("platforms", [])
@@ -53,7 +87,7 @@ def main() -> int:
     ]
     candidates.sort(key=lambda x: int(x.get("priority", 0)), reverse=True)
     if not candidates:
-        print("No unpublished free-publish service offers available.")
+        print("No unpublished service offers available.")
         return 0
 
     item = candidates[0]
@@ -74,18 +108,18 @@ def main() -> int:
     ] if x)
     caption_fp = pub.fingerprint(caption)
 
-    if any(x.get("caption_fingerprint") == caption_fp for x in state.get("published", [])):
+    if any(x.get("caption_fingerprint") == caption_fp for x in published):
         print(f"Local duplicate blocked for {queue_id}.")
         return 0
 
-    now_utc = datetime.now(timezone.utc)
     remote = pub.find_remote_duplicate(token, caption, now_utc, int(config.get("remote_duplicate_window_hours", 336)))
     if remote:
-        state["version"] = "2.1.0"
+        published_at = remote.get("timestamp") or now_utc.isoformat()
+        state["version"] = "2.2.0"
         state.setdefault("published", []).append({
             "queue_id": queue_id,
             "media_id": str(remote.get("id")),
-            "published_at": remote.get("timestamp") or now_utc.isoformat(),
+            "published_at": published_at,
             "account": username,
             "media_url": image_url,
             "format": fmt,
@@ -94,11 +128,12 @@ def main() -> int:
             "reconciled": True,
             "free_publish": True,
         })
+        _advance_last_publish_at(state, published_at)
         pub.save_json(pub.STATE_PATH, state)
         print(f"Remote duplicate reconciled for {queue_id}; no second post created.")
         return 0
 
-    print(f"Preparing free-publish @{username} {fmt} offer: {queue_id}")
+    print(f"Preparing @{username} {fmt} service offer: {queue_id}")
     media_url = image_url
     try:
         if fmt == "carousel":
@@ -131,9 +166,7 @@ def main() -> int:
         published_at = datetime.now(timezone.utc).isoformat()
         reconciled = False
 
-    # Free-publish offers are recorded but deliberately do not change last_publish_at,
-    # so the normal education/research cadence keeps its existing daily/spacing budget.
-    state["version"] = "2.1.0"
+    state["version"] = "2.2.0"
     state.setdefault("published", []).append({
         "queue_id": queue_id,
         "media_id": media_id,
@@ -146,8 +179,9 @@ def main() -> int:
         "reconciled": reconciled,
         "free_publish": True,
     })
+    _advance_last_publish_at(state, published_at)
     pub.save_json(pub.STATE_PATH, state)
-    print(f"Published free-publish offer {queue_id} as {fmt} media {media_id}.")
+    print(f"Published service offer {queue_id} as {fmt} media {media_id}.")
     return 0
 
 
