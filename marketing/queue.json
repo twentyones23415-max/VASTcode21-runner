@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-09-12T16:29:02.896097+00:00",
+  "generated_at": "2026-09-13T06:39:10.628348+00:00",
   "mode": "pre_release_organic",
   "paid_ads": false,
   "live_trading": false,
   "source_status": {
-    "experiments": 84,
-    "generation": 4,
+    "experiments": 96,
+    "generation": 5,
     "mt5_validation_passed": 1,
-    "mt5_validation_rejected": 1,
+    "mt5_validation_rejected": 2,
     "robustness_passed": 1,
     "forward_collecting": 1,
     "release_candidates": 0
@@ -35,7 +35,7 @@
       "id": "milestone-mt5-pass",
       "pillar": "verified_milestone",
       "hook": "First real-tick MT5 validation milestone reached.",
-      "caption": "VASTcode21 has recorded 1 MT5 real-tick PASS and 1 MT5 real-tick REJECT result(s) in the current research state. A PASS does not mean live-ready—it means the candidate is allowed to face stricter testing.",
+      "caption": "VASTcode21 has recorded 1 MT5 real-tick PASS and 2 MT5 real-tick REJECT result(s) in the current research state. A PASS does not mean live-ready—it means the candidate is allowed to face stricter testing.",
       "creative_brief": "Professional milestone card: MT5 REAL-TICK PASS. Small subtext: Next gate: robustness. Avoid P&L screenshots or money imagery.",
       "platforms": [
         "Instagram",
@@ -70,8 +70,8 @@
     {
       "id": "milestone-experiments",
       "pillar": "research_progress",
-      "hook": "84 research experiments and counting.",
-      "caption": "The VASTcode21 research engine has evaluated 84 experiments so far, reaching generation 4. Most candidates are expected to fail—because rejection is part of the validation process.",
+      "hook": "96 research experiments and counting.",
+      "caption": "The VASTcode21 research engine has evaluated 96 experiments so far, reaching generation 5. Most candidates are expected to fail—because rejection is part of the validation process.",
       "creative_brief": "Data-driven vertical graphic with large experiment count, generation number, and a funnel narrowing toward validation.",
       "platforms": [
         "Instagram",
