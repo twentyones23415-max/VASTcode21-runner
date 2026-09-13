@@ -1,4 +1,4 @@
-name: VASTcode21 marketing planner
+name: VASTcode21 organic growth engine
 
 on:
   workflow_dispatch:
@@ -11,6 +11,7 @@ on:
       - 'marketing/social_config.json'
       - 'tools/marketing_planner.py'
       - 'tools/marketing_asset_builder.py'
+      - 'tools/instagram_growth_analytics.py'
       - '.github/workflows/marketing.yml'
   schedule:
     - cron: '25 6 * * *'
@@ -25,7 +26,7 @@ concurrency:
 jobs:
   plan:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v7
 
@@ -33,29 +34,41 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Install free asset dependency
-        run: python -m pip install --disable-pip-version-check pillow
-
-      - name: Generate safe organic content queue
-        run: python tools/marketing_planner.py
-
-      - name: Generate branded Instagram assets
-        run: python tools/marketing_asset_builder.py
-
-      - name: Commit queue and assets when changed
+      - name: Install free asset dependencies
         shell: bash
         run: |
-          git config user.name 'VASTcode21 Marketing Bot'
+          python -m pip install --disable-pip-version-check pillow
+          if ! command -v ffmpeg >/dev/null 2>&1; then
+            sudo apt-get update -qq
+            sudo apt-get install -y ffmpeg
+          fi
+
+      - name: Collect Instagram growth metrics
+        continue-on-error: true
+        env:
+          INSTAGRAM_ACCESS_TOKEN: ${{ secrets.INSTAGRAM_ACCESS_TOKEN }}
+        run: python tools/instagram_growth_analytics.py
+
+      - name: Generate discovery-focused organic content queue
+        run: python tools/marketing_planner.py
+
+      - name: Generate branded image carousel and Reel assets
+        run: python tools/marketing_asset_builder.py
+
+      - name: Commit growth metrics queue and assets when changed
+        shell: bash
+        run: |
+          git config user.name 'VASTcode21 Growth Bot'
           git config user.email 'vastcode21-bot@users.noreply.github.com'
-          git add marketing/queue.json marketing/assets/
+          git add marketing/queue.json marketing/assets/ marketing/growth_metrics.json marketing/growth_history.json
           if git diff --cached --quiet; then
-            echo 'No marketing queue or asset change.'
+            echo 'No organic growth state or asset change.'
           else
-            git commit -m 'chore: refresh marketing content and assets'
+            git commit -m 'chore: refresh organic growth content and metrics'
             for attempt in 1 2 3; do
               git pull --rebase origin main && git push && break
               if [ "$attempt" -eq 3 ]; then
-                echo 'Could not publish marketing assets after retries' >&2
+                echo 'Could not publish growth assets after retries' >&2
                 exit 1
               fi
               sleep 3
