@@ -1,5 +1,5 @@
 {
-  "version": "1.0.3",
+  "version": "1.0.4",
   "currency": "EUR",
   "mode": "stripe_live_connected",
   "daily_revenue_goal_note": "Revenue is a target, not a guarantee.",
@@ -17,7 +17,9 @@
     "stripe": true,
     "calendly": false,
     "calcom": true,
-    "resend": false
+    "resend": false,
+    "mailchimp": false,
+    "subscriber_sync": false
   },
   "offers": [
     {
@@ -43,6 +45,7 @@
       "billing": "monthly",
       "enabled": true,
       "checkout_url": "https://buy.stripe.com/6oUaEY5oB8RyglFeoCcEw01",
+      "email_provider": "mailchimp",
       "headline": "Weekly validation notes for serious MT5 research followers.",
       "deliverable": "A weekly educational email covering verified VASTcode21 research milestones, MT5 validation concepts and GOLD/BITCOIN system-development lessons.",
       "not_included": "No signals, copy trading, guaranteed returns or personalized financial advice.",
@@ -56,6 +59,8 @@
       "billing": "free",
       "enabled": true,
       "checkout_url": "",
+      "signup_url": "",
+      "email_provider": "mailchimp",
       "headline": "Join the free VAST release waitlist.",
       "deliverable": "Verified development and release updates.",
       "not_included": "The VAST indicator is not for sale while validation is incomplete.",
@@ -69,10 +74,11 @@
     ],
     "research-brief": [
       "stripe",
-      "resend"
+      "mailchimp",
+      "subscriber_sync"
     ],
     "vast-early-access": [
-      "resend"
+      "mailchimp"
     ]
   }
 }
