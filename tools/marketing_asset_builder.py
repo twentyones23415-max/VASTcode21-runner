@@ -27,21 +27,25 @@ def font(size: int, bold: bool = False):
 
 
 def fit_lines(draw: ImageDraw.ImageDraw, text: str, fnt, max_width: int) -> list[str]:
-    words = text.split()
-    lines: list[str] = []
-    line = ""
-    for word in words:
-        trial = f"{line} {word}".strip()
-        bbox = draw.textbbox((0, 0), trial, font=fnt)
-        if bbox[2] - bbox[0] <= max_width:
-            line = trial
-        else:
-            if line:
-                lines.append(line)
-            line = word
-    if line:
-        lines.append(line)
-    return lines
+    output: list[str] = []
+    for paragraph in str(text).split("\n"):
+        words = paragraph.split()
+        line = ""
+        if not words:
+            output.append("")
+            continue
+        for word in words:
+            trial = f"{line} {word}".strip()
+            bbox = draw.textbbox((0, 0), trial, font=fnt)
+            if bbox[2] - bbox[0] <= max_width:
+                line = trial
+            else:
+                if line:
+                    output.append(line)
+                line = word
+        if line:
+            output.append(line)
+    return output
 
 
 def palette():
@@ -61,6 +65,10 @@ def base_image(width: int, height: int) -> Image.Image:
     p = palette()
     img = Image.new("RGB", (width, height), p["bg"])
     draw = ImageDraw.Draw(img)
+    for x in range(0, width, 80):
+        draw.line((x, 0, x, height), fill=(11, 21, 34), width=1)
+    for y in range(0, height, 80):
+        draw.line((0, y, width, y), fill=(11, 21, 34), width=1)
     draw.rounded_rectangle((55, 55, width - 55, height - 55), radius=38, outline=p["line"], width=2, fill=p["panel"])
     draw.rounded_rectangle((78, 80, width - 78, 205), radius=28, fill=p["panel2"])
     draw.text((105, 112), "VAST", font=font(62, True), fill=p["white"])
@@ -114,10 +122,10 @@ def carousel_slide(item: dict, slide: int, path: Path) -> None:
         title = hook
         subtitle = "Swipe →"
     elif slide == 2:
-        title = "THE PROCESS"
+        title = "THE CHECK"
         subtitle = body
     else:
-        title = "VALIDATION BEFORE HYPE"
+        title = "SAVE THE PROCESS"
         subtitle = str(item.get("cta") or "Follow @vast.code21 for the next research update.")
 
     y = 355
@@ -142,29 +150,39 @@ def reel_frame(item: dict, slide: int, path: Path) -> None:
     pillar = str(item.get("pillar") or "research").upper().replace("_", " ")
     draw.text((105, 245), f"{pillar}  •  {slide}/3", font=font(27, True), fill=p["gold"])
 
+    script = item.get("reel_script") if isinstance(item.get("reel_script"), list) else []
+    scripted = str(script[slide - 1]).strip() if len(script) >= slide else ""
     hook = str(item.get("hook") or "").strip()
-    body = str(item.get("caption") or "").strip()
-    if slide == 1:
+    if scripted:
+        title = scripted
+    elif slide == 1:
         title = hook
-        subtitle = "VASTcode21"
     elif slide == 2:
-        title = "TEST HARDER."
-        subtitle = body
+        title = "CHECK THE EVIDENCE"
     else:
-        title = "FOLLOW THE EVIDENCE."
+        title = "FOLLOW THE NEXT TEST"
+
+    if slide == 1:
+        subtitle = "VASTcode21 · research in public"
+    elif slide == 2:
+        subtitle = "GOLD · BITCOIN · MT5"
+    else:
         subtitle = str(item.get("cta") or "Follow @vast.code21 for transparent MT5 research.")
 
-    y = 470
-    for line in fit_lines(draw, title, font(70, True), 850)[:7]:
-        draw.text((105, y), line, font=font(70, True), fill=p["white"])
-        y += 92
-    y += 35
-    for line in fit_lines(draw, subtitle, font(34), 850)[:10]:
+    accent_y = 390
+    draw.rounded_rectangle((105, accent_y, 295, accent_y + 12), radius=6, fill=p["cyan"])
+    y = 500
+    for line in fit_lines(draw, title, font(76, True), 850)[:7]:
+        draw.text((105, y), line, font=font(76, True), fill=p["white"])
+        y += 98
+    y += 34
+    for line in fit_lines(draw, subtitle, font(34), 850)[:7]:
         draw.text((105, y), line, font=font(34), fill=p["muted"])
         y += 52
 
-    draw.rounded_rectangle((105, 1640, 975, 1740), radius=22, fill=(18, 31, 50))
-    draw.text((135, 1670), "GOLD • BITCOIN • MT5 • VALIDATION FIRST", font=font(24, True), fill=p["gold"])
+    draw.rounded_rectangle((105, 1550, 975, 1730), radius=26, fill=(18, 31, 50), outline=p["line"], width=2)
+    draw.text((135, 1590), "VAST PULSE", font=font(25, True), fill=p["cyan"])
+    draw.text((135, 1640), "VALIDATION > HYPE", font=font(35, True), fill=p["gold"])
     draw.text((105, 1810), "@vast.code21", font=font(30, True), fill=p["cyan"])
     img.save(path, format="JPEG", quality=91, optimize=True)
 
@@ -175,26 +193,36 @@ def build_reel(item: dict, pid: str) -> bool:
         print(f"ffmpeg unavailable; reel {pid} will fall back to image publishing")
         return False
 
-    frames = []
+    frames: list[Path] = []
+    clips: list[Path] = []
     for slide in range(1, 4):
-        path = OUT / f"{pid}-reel-{slide}.jpg"
-        reel_frame(item, slide, path)
-        frames.append(path)
+        frame = OUT / f"{pid}-reel-{slide}.jpg"
+        reel_frame(item, slide, frame)
+        frames.append(frame)
+        clip = OUT / f"{pid}-clip-{slide}.mp4"
+        zoom = "min(zoom+0.0009,1.055)" if slide != 2 else "min(zoom+0.0006,1.04)"
+        vf = f"scale=1080:1920,zoompan=z='{zoom}':d=90:s=1080x1920:fps=30,format=yuv420p"
+        cmd = [
+            ffmpeg, "-y", "-loglevel", "error", "-loop", "1", "-i", str(frame),
+            "-t", "3", "-vf", vf, "-r", "30", "-c:v", "libx264", "-preset", "veryfast",
+            "-movflags", "+faststart", str(clip),
+        ]
+        try:
+            subprocess.run(cmd, check=True, timeout=120)
+        except Exception as exc:
+            print(f"Could not animate Reel frame {slide} for {pid}: {exc}")
+            return False
+        clips.append(clip)
 
     with tempfile.NamedTemporaryFile("w", suffix=".txt", delete=False, encoding="utf-8") as tf:
         concat_path = Path(tf.name)
-        for frame in frames:
-            tf.write(f"file '{frame.resolve()}'\n")
-            tf.write("duration 3\n")
-        tf.write(f"file '{frames[-1].resolve()}'\n")
+        for clip in clips:
+            tf.write(f"file '{clip.resolve()}'\n")
 
     out = OUT / f"{pid}.mp4"
     cmd = [
-        ffmpeg, "-y", "-loglevel", "error",
-        "-f", "concat", "-safe", "0", "-i", str(concat_path),
-        "-vf", "scale=1080:1920,format=yuv420p",
-        "-r", "30", "-c:v", "libx264", "-preset", "veryfast",
-        "-movflags", "+faststart", str(out),
+        ffmpeg, "-y", "-loglevel", "error", "-f", "concat", "-safe", "0", "-i", str(concat_path),
+        "-c", "copy", "-movflags", "+faststart", str(out),
     ]
     try:
         subprocess.run(cmd, check=True, timeout=120)
@@ -204,6 +232,8 @@ def build_reel(item: dict, pid: str) -> bool:
         return False
     finally:
         concat_path.unlink(missing_ok=True)
+        for clip in clips:
+            clip.unlink(missing_ok=True)
 
 
 def main() -> None:
