@@ -4,6 +4,7 @@ import json
 import os
 import urllib.error
 import urllib.request
+from datetime import datetime, timezone
 from http import HTTPStatus
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
@@ -13,8 +14,9 @@ from tutor_vision_contract import ContractError, build_analysis_instructions, no
 
 ROOT = Path(__file__).resolve().parents[1]
 EVENT_PATH = ROOT / "site" / "data" / "event_risk.json"
-MARKET_PATH = ROOT / "site" / "data" / "market_feed.json"
+MARKET_INTELLIGENCE_PATH = ROOT / "site" / "data" / "market_intelligence.json"
 MAX_BODY_BYTES = 12 * 1024 * 1024
+MAX_CONTEXT_AGE_SECONDS = 150 * 60
 OPENAI_URL = "https://api.openai.com/v1/responses"
 MODEL = os.environ.get("VAST_VISION_MODEL", "gpt-5.6-luna")
 ALLOWED_ORIGIN = os.environ.get("VAST_TUTOR_ORIGIN", "")
@@ -28,21 +30,52 @@ def load_json(path: Path) -> dict[str, Any]:
         return {}
 
 
+def fresh_timestamp(value: Any, max_age_seconds: int = MAX_CONTEXT_AGE_SECONDS) -> bool:
+    if not isinstance(value, str) or not value.strip():
+        return False
+    try:
+        parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
+        if parsed.tzinfo is None:
+            parsed = parsed.replace(tzinfo=timezone.utc)
+        age = (datetime.now(timezone.utc) - parsed.astimezone(timezone.utc)).total_seconds()
+        return 0 <= age <= max_age_seconds
+    except Exception:
+        return False
+
+
 def verified_context() -> dict[str, Any]:
     event = load_json(EVENT_PATH)
-    market = load_json(MARKET_PATH)
+    intelligence = load_json(MARKET_INTELLIGENCE_PATH)
+
+    event_fresh = fresh_timestamp(event.get("updated_at")) and event.get("status") != "degraded"
+    intelligence_fresh = fresh_timestamp(intelligence.get("updated_at")) and intelligence.get("status") == "active"
+
+    event_context: dict[str, Any] = {
+        "status": "verified" if event_fresh else "unknown",
+        "updated_at": event.get("updated_at") if event_fresh else None,
+        "nearest": event.get("nearest") if event_fresh else None,
+        "urgent": event.get("urgent", []) if event_fresh else [],
+    }
+    intelligence_context: dict[str, Any] = {
+        "status": "verified" if intelligence_fresh else "unknown",
+        "updated_at": intelligence.get("updated_at") if intelligence_fresh else None,
+        "scope": intelligence.get("scope", []) if intelligence_fresh else [],
+        "items": intelligence.get("items", [])[:12] if intelligence_fresh else [],
+    }
+
+    # There is currently no verified real-time XAUUSD/BTCUSD price feed in the repository.
+    # Fail closed instead of presenting the news/intelligence feed as live market pricing.
+    market_context = {
+        "status": "unavailable",
+        "updated_at": None,
+        "markets": {},
+        "notice": "No verified real-time XAUUSD/BTCUSD price feed is connected to this backend yet.",
+    }
+
     return {
-        "event_risk": {
-            "status": event.get("status", "unknown"),
-            "updated_at": event.get("updated_at"),
-            "nearest": event.get("nearest"),
-            "urgent": event.get("urgent", []),
-        },
-        "market": {
-            "status": market.get("status", "unknown"),
-            "updated_at": market.get("updated_at"),
-            "markets": market.get("markets", {}),
-        },
+        "event_risk": event_context,
+        "market": market_context,
+        "market_intelligence": intelligence_context,
     }
 
 
@@ -79,7 +112,7 @@ def call_openai(image_data_url: str, context: dict[str, Any]) -> dict[str, Any]:
         headers={
             "Authorization": f"Bearer {key}",
             "Content-Type": "application/json",
-            "User-Agent": "VASTcode21-TutorVision/0.1",
+            "User-Agent": "VASTcode21-TutorVision/0.2",
         },
         method="POST",
     )
@@ -98,7 +131,7 @@ def call_openai(image_data_url: str, context: dict[str, Any]) -> dict[str, Any]:
 
 
 class Handler(BaseHTTPRequestHandler):
-    server_version = "VASTTutorVision/0.1"
+    server_version = "VASTTutorVision/0.2"
 
     def _headers(self, status: int, content_type: str = "application/json") -> None:
         self.send_response(status)
@@ -126,7 +159,12 @@ class Handler(BaseHTTPRequestHandler):
     def do_GET(self) -> None:
         if self.path == "/healthz":
             configured = bool(os.environ.get("OPENAI_API_KEY", "").strip())
-            self._json(HTTPStatus.OK, {"ok": True, "vision_provider_configured": configured, "model": MODEL})
+            self._json(HTTPStatus.OK, {
+                "ok": True,
+                "vision_provider_configured": configured,
+                "model": MODEL,
+                "context": verified_context(),
+            })
             return
         self._json(HTTPStatus.NOT_FOUND, {"error": "not_found"})
 
@@ -149,7 +187,7 @@ class Handler(BaseHTTPRequestHandler):
             context = verified_context()
             result = call_openai(image.data_url, context)
             self._json(HTTPStatus.OK, {
-                "version": "0.1",
+                "version": "0.2",
                 "analysis": result,
                 "context": context,
                 "privacy": {"stored": False, "retention": "request-memory-only"},
