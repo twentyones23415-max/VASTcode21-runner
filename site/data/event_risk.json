@@ -1,7 +1,7 @@
 {
   "version": "1.2",
   "status": "active",
-  "updated_at": "2026-09-13T12:18:21.246677+00:00",
+  "updated_at": "2026-09-13T12:35:24.294193+00:00",
   "horizon_days": 14,
   "sources": [
     "U.S. Bureau of Labor Statistics",
@@ -23,9 +23,9 @@
       "XAUUSD",
       "BTCUSD"
     ],
-    "minutes_from_now": 4331,
+    "minutes_from_now": 4314,
     "risk_state": "SCHEDULED",
-    "countdown": "3d 0h"
+    "countdown": "2d 23h"
   },
   "events": [
     {
@@ -39,9 +39,9 @@
         "XAUUSD",
         "BTCUSD"
       ],
-      "minutes_from_now": 4331,
+      "minutes_from_now": 4314,
       "risk_state": "SCHEDULED",
-      "countdown": "3d 0h"
+      "countdown": "2d 23h"
     },
     {
       "title": "FOMC Meeting",
@@ -54,7 +54,7 @@
         "XAUUSD",
         "BTCUSD"
       ],
-      "minutes_from_now": 4661,
+      "minutes_from_now": 4644,
       "risk_state": "SCHEDULED",
       "countdown": "3d 5h"
     },
@@ -69,9 +69,9 @@
         "XAUUSD",
         "BTCUSD"
       ],
-      "minutes_from_now": 4691,
+      "minutes_from_now": 4674,
       "risk_state": "SCHEDULED",
-      "countdown": "3d 6h"
+      "countdown": "3d 5h"
     },
     {
       "title": "Speech - Vice Chair for Supervision Michelle W. Bowman",
@@ -84,11 +84,16 @@
         "XAUUSD",
         "BTCUSD"
       ],
-      "minutes_from_now": 7271,
+      "minutes_from_now": 7254,
       "risk_state": "SCHEDULED",
-      "countdown": "5d 1h"
+      "countdown": "5d 0h"
     }
   ],
-  "source_errors": [],
+  "source_errors": [
+    {
+      "source": "BEA",
+      "error": "HTTP Error 403: Forbidden"
+    }
+  ],
   "notice": "Event risk is contextual information, not a trading instruction. Times can change at the source; verify critical releases with the linked official source."
 }
