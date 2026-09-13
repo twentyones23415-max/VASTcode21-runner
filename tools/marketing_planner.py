@@ -3,10 +3,13 @@ from __future__ import annotations
 import json
 from datetime import datetime, timezone
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 ROOT = Path(__file__).resolve().parents[1]
 SUMMARY = ROOT / "status" / "summary.json"
 AUTONOMY = ROOT / "status" / "autonomy.json"
+GROWTH = ROOT / "marketing" / "growth_metrics.json"
+CONFIG = ROOT / "marketing" / "social_config.json"
 OUT = ROOT / "marketing" / "queue.json"
 DISCLAIMER = "Trading involves risk. Historical or backtested results do not guarantee future performance."
 
@@ -20,16 +23,19 @@ def load_json(path: Path) -> dict:
         return {}
 
 
-def post(pid: str, pillar: str, hook: str, caption: str, creative: str, priority: int = 50) -> dict:
+def growth_item(pid: str, pillar: str, hook: str, caption: str, creative: str, fmt: str, hashtags: list[str], cta: str, priority: int = 100) -> dict:
     return {
         "id": pid,
         "pillar": pillar,
         "hook": hook,
         "caption": caption,
         "creative_brief": creative,
-        "platforms": ["Instagram", "TikTok", "YouTube Shorts", "Facebook", "X", "Threads"],
+        "format": fmt,
+        "platforms": ["Instagram"],
         "priority": priority,
         "status": "ready_for_design",
+        "hashtags": hashtags,
+        "cta": cta,
         "disclaimer": DISCLAIMER,
     }
 
@@ -37,130 +43,140 @@ def post(pid: str, pillar: str, hook: str, caption: str, creative: str, priority
 def main() -> None:
     summary = load_json(SUMMARY)
     autonomy = load_json(AUTONOMY)
+    growth = load_json(GROWTH)
+    config = load_json(CONFIG)
+
     experiments = int(summary.get("experiments", 0) or 0)
+    rejected = int(summary.get("rejected", 0) or 0)
     mt5_passed = int(summary.get("mt5_validation_passed", 0) or 0)
     mt5_rejected = int(summary.get("mt5_validation_rejected", 0) or 0)
     generation = int(summary.get("max_generation", 0) or 0)
     robustness_passed = int(autonomy.get("robustness_passed", 0) or 0)
     forward_collecting = int(autonomy.get("forward_collecting", 0) or 0)
+    forward_passed = int(autonomy.get("forward_passed", 0) or 0)
     release_candidates = int(autonomy.get("release_candidates", 0) or 0)
+    followers = int(growth.get("followers_count", 0) or 0)
 
-    items = [
-        post(
-            "evergreen-001",
-            "engineering",
-            "A trading idea is not a product until it survives testing.",
-            "VASTcode21 is being built as a validation-first MT5 research system focused only on GOLD and BITCOIN. Candidates move through research, real-tick MT5 testing, robustness checks and forward observation before they can become release candidates.",
-            "Dark technical vertical visual: four-stage pipeline Research → MT5 Real Ticks → Robustness → Forward. VASTcode21 logo, clean typography, no profit imagery.",
-            80,
+    tz_name = config.get("timezone", "Europe/Bucharest")
+    now_local = datetime.now(timezone.utc).astimezone(ZoneInfo(tz_name))
+    day_key = now_local.strftime("%Y%m%d")
+    slot = now_local.toordinal() % 7
+
+    ctas = config.get("cta_variants") or [
+        "Follow @vast.code21 for transparent MT5 research and validation updates.",
+        "Follow @vast.code21 to watch the VAST validation process evolve in public.",
+        "Follow @vast.code21 for GOLD, BITCOIN and MT5 research without profit promises.",
+    ]
+    hashtag_sets = config.get("hashtag_sets") or [
+        ["#VASTcode21", "#MT5", "#AlgorithmicTrading", "#GoldTrading", "#BitcoinTrading", "#TradingSystems", "#QuantTrading"],
+        ["#VASTcode21", "#MetaTrader5", "#AlgoTrading", "#XAUUSD", "#Bitcoin", "#TradingResearch", "#SystematicTrading"],
+        ["#VASTcode21", "#MT5Trading", "#TradingAlgo", "#Gold", "#BTC", "#Backtesting", "#TradingEducation"],
+    ]
+    cta = ctas[now_local.toordinal() % len(ctas)]
+    hashtags = hashtag_sets[now_local.toordinal() % len(hashtag_sets)]
+
+    mode = "launch_discovery" if followers < 10 else ("growth_10_100" if followers < 100 else "community_growth")
+
+    templates = [
+        {
+            "pillar": "education",
+            "format": "reel",
+            "hook": "A backtest is not a promise.",
+            "caption": "A strategy can look excellent on historical data and still fail when execution detail, new market regimes and forward observation are introduced. VASTcode21 treats every pass as permission for more testing—not as permission for hype.",
+            "creative": "9:16 three-card Reel: BACKTEST → REAL-TICK MT5 → FORWARD. Strong first-frame hook, clean quant aesthetic.",
+        },
+        {
+            "pillar": "engineering",
+            "format": "carousel",
+            "hook": "What happens when a trading idea fails?",
+            "caption": "It gets rejected. The VASTcode21 pipeline is designed to eliminate weak candidates before they become products. Failure is data: it can inform the next generation, but it does not become a marketing claim.",
+            "creative": "Three-slide carousel: 1) FAIL FAST 2) LEARN FROM REJECTION 3) ONLY SURVIVORS ADVANCE.",
+        },
+        {
+            "pillar": "scope",
+            "format": "reel",
+            "hook": "Why VASTcode21 is focused on GOLD and BITCOIN.",
+            "caption": "Narrow scope creates cleaner research. Instead of claiming to trade everything, VASTcode21 concentrates its current autonomous validation on GOLD and BITCOIN so the testing process can go deeper.",
+            "creative": "9:16 split visual: GOLD / BITCOIN, then validation funnel.",
+        },
+        {
+            "pillar": "research_progress",
+            "format": "image",
+            "hook": f"{experiments} experiments. Generation {generation}. Still testing.",
+            "caption": f"The current research state has evaluated {experiments} experiments, with {rejected} rejected in research, {mt5_passed} MT5 PASS and {mt5_rejected} MT5 REJECT result(s). Most ideas are expected to fail. That is the point of a validation-first process.",
+            "creative": "4:5 data card with experiment count, generation, MT5 pass/reject, no P&L imagery.",
+        },
+        {
+            "pillar": "education",
+            "format": "carousel",
+            "hook": "Three gates before a VAST candidate can earn trust.",
+            "caption": f"Research is only the first gate. Candidates then face real-tick MT5 validation, robustness checks and shadow-forward observation. Current state: {robustness_passed} robustness PASS and {forward_collecting} collecting forward evidence.",
+            "creative": "Three-slide validation ladder: RESEARCH → ROBUSTNESS → FORWARD, with current stage highlighted.",
+        },
+        {
+            "pillar": "engineering",
+            "format": "reel",
+            "hook": "Most trading ideas should fail in research.",
+            "caption": "If nearly every experiment becomes a product, the filter is probably too weak. VASTcode21 is built to reject aggressively and keep only candidates that survive progressively harder tests.",
+            "creative": "9:16 funnel animation: many candidates → few survivors.",
+        },
+        {
+            "pillar": "weekly_digest",
+            "format": "image",
+            "hook": "VASTcode21 weekly research snapshot.",
+            "caption": f"Current snapshot: {experiments} experiments, generation {generation}, {mt5_passed} MT5 PASS, {robustness_passed} robustness PASS, {forward_collecting} in forward observation and {release_candidates} release candidate(s). Live trading remains OFF.",
+            "creative": "4:5 weekly dashboard card with verified counters only.",
+        },
+    ]
+
+    selected = dict(templates[slot])
+
+    if release_candidates > 0:
+        selected = {
+            "pillar": "verified_milestone",
+            "format": "carousel",
+            "hook": "A VASTcode21 release candidate exists.",
+            "caption": f"The validation pipeline currently shows {release_candidates} release candidate(s). This is still a controlled pre-release state. A release candidate is not a guarantee of performance and does not switch live trading on.",
+            "creative": "Three-slide controlled milestone carousel: RELEASE CANDIDATE / WHAT IT MEANS / WHAT IT DOES NOT MEAN.",
+        }
+    elif forward_passed > 0:
+        selected = {
+            "pillar": "verified_milestone",
+            "format": "reel",
+            "hook": "A candidate cleared shadow-forward observation.",
+            "caption": f"The current autonomous state shows {forward_passed} forward PASS candidate(s). That is a meaningful validation milestone, but it still does not imply guaranteed performance or automatic live trading.",
+            "creative": "9:16 milestone Reel: FORWARD PASS → next controlled gate.",
+        }
+
+    daily = growth_item(
+        f"growth-{day_key}", selected["pillar"], selected["hook"], selected["caption"], selected["creative"],
+        selected["format"], hashtags, cta, 120,
+    )
+
+    evergreen = [
+        growth_item(
+            "evergreen-validation-stack", "education", "The four-stage VASTcode21 validation stack.",
+            "Research → real-tick MT5 → robustness → shadow-forward. A candidate must keep surviving as the evidence gets harder.",
+            "4:5 validation ladder graphic.", "image", hashtag_sets[0], ctas[0], 60,
         ),
-        post(
-            "evergreen-002",
-            "education",
-            "Why real ticks matter in MT5 testing.",
-            "A strategy can look impressive on simplified data and fail when execution detail is introduced. VASTcode21 uses real-tick MT5 validation as a gate, not as a marketing screenshot generator.",
-            "15-second Reel/Short: animated tick stream entering an MT5 test gate, then PASS/REJECT split. Minimal futuristic style.",
-            70,
+        growth_item(
+            "evergreen-no-hype", "brand", "No profit screenshots. No guaranteed returns. Just the process.",
+            "VASTcode21 publishes verified research milestones and validation stages while keeping proprietary strategy logic private.",
+            "Minimal 4:5 manifesto card.", "image", hashtag_sets[1 % len(hashtag_sets)], ctas[1 % len(ctas)], 55,
         ),
-        post(
-            "evergreen-003",
-            "scope",
-            "Why only GOLD and BITCOIN?",
-            "VASTcode21 deliberately stays narrow: GOLD and BITCOIN. The goal is deeper validation and cleaner product specialization rather than claiming to trade everything.",
-            "Split-screen vertical creative: gold texture on one side, abstract Bitcoin network on the other, centered VASTcode21 mark.",
-            65,
-        ),
-        post(
-            "evergreen-004",
-            "education",
-            "Backtest ≠ future guarantee.",
-            "A backtest is evidence from historical data, not a promise about tomorrow. VASTcode21 treats every pass as permission for more testing—not permission for hype.",
-            "Bold typographic carousel: BACKTEST ≠ GUARANTEE. Second slide: PASS = MORE TESTING. Third slide: VASTcode21 validation stack.",
-            75,
+        growth_item(
+            "evergreen-real-ticks", "education", "Why real ticks matter in MT5.",
+            "Simplified data can hide execution detail. Real-tick validation is one of the gates VASTcode21 uses before a candidate can advance.",
+            "Three-slide educational carousel.", "carousel", hashtag_sets[2 % len(hashtag_sets)], ctas[2 % len(ctas)], 50,
         ),
     ]
 
-    if experiments > 0:
-        items.append(post(
-            "milestone-experiments",
-            "research_progress",
-            f"{experiments} research experiments and counting.",
-            f"The VASTcode21 research engine has evaluated {experiments} experiments so far, reaching generation {generation}. Most candidates are expected to fail—because rejection is part of the validation process.",
-            "Data-driven vertical graphic with large experiment count, generation number, and a funnel narrowing toward validation.",
-            95,
-        ))
-
-    if mt5_passed > 0:
-        items.append(post(
-            "milestone-mt5-pass",
-            "verified_milestone",
-            "First real-tick MT5 validation milestone reached.",
-            f"VASTcode21 has recorded {mt5_passed} MT5 real-tick PASS and {mt5_rejected} MT5 real-tick REJECT result(s) in the current research state. A PASS does not mean live-ready—it means the candidate is allowed to face stricter testing.",
-            "Professional milestone card: MT5 REAL-TICK PASS. Small subtext: Next gate: robustness. Avoid P&L screenshots or money imagery.",
-            100,
-        ))
-
-    if robustness_passed > 0:
-        items.append(post(
-            "milestone-robustness-pass",
-            "verified_milestone",
-            "A candidate survived the robustness gate.",
-            f"The autonomous VASTcode21 pipeline now shows {robustness_passed} robustness PASS candidate(s). Next step: shadow-forward observation. No live-trading claim is being made.",
-            "Validation ladder graphic highlighting Robustness PASS and Forward next.",
-            100,
-        ))
-
-    if forward_collecting > 0:
-        items.append(post(
-            "milestone-forward",
-            "verified_milestone",
-            "Now collecting forward evidence.",
-            f"{forward_collecting} VASTcode21 candidate(s) are in shadow-forward observation. This stage is intentionally slow: time and new market data are part of the test.",
-            "Calendar/time visual with forward-observation progress bar, no performance promises.",
-            100,
-        ))
-
-    if release_candidates > 0:
-        items.append(post(
-            "milestone-release-candidate",
-            "product_milestone",
-            "A VASTcode21 release candidate exists.",
-            f"The validation pipeline currently shows {release_candidates} release candidate(s). This is still a controlled pre-release state and requires explicit human approval before any commercial or live-trading launch.",
-            "Premium product reveal silhouette with RELEASE CANDIDATE badge and controlled-access feel.",
-            100,
-        ))
-
-    items.extend([
-        post(
-            "evergreen-005",
-            "engineering",
-            "What happens when a strategy fails?",
-            "It gets rejected. VASTcode21 is designed to keep failures in the research process instead of turning them into marketing claims. Failed candidates can inform future generations, but they do not become products.",
-            "Red reject stamp over a generic strategy card, followed by mutation/exploration arrows toward new candidates.",
-            60,
-        ),
-        post(
-            "evergreen-006",
-            "education",
-            "Profit Factor is only one number.",
-            "A serious validation process looks at more than one metric. Trade count, drawdown, recovery, Sharpe, regime behavior and forward evidence all matter before a candidate can advance.",
-            "Metric dashboard visual with PF, DD, Recovery, Sharpe, Trades—no actual unapproved performance values.",
-            65,
-        ),
-        post(
-            "evergreen-007",
-            "brand",
-            "VASTcode21 is building in public—without exposing the core IP.",
-            "The research logic and strategy parameters remain private. Public updates focus on process, validation stages and verified milestones.",
-            "Encrypted core icon in center, public status ring around it; sleek cybersecurity + quant aesthetic.",
-            60,
-        ),
-    ])
-
-    items = sorted(items, key=lambda x: (-x["priority"], x["id"]))
+    items = [daily] + evergreen
     payload = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
-        "mode": "pre_release_organic",
+        "mode": mode,
+        "followers_count": followers,
+        "growth_goal_followers": int(config.get("growth_goal_followers", 100)),
         "paid_ads": False,
         "live_trading": False,
         "source_status": {
@@ -170,13 +186,22 @@ def main() -> None:
             "mt5_validation_rejected": mt5_rejected,
             "robustness_passed": robustness_passed,
             "forward_collecting": forward_collecting,
+            "forward_passed": forward_passed,
             "release_candidates": release_candidates,
         },
         "items": items,
     }
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps(payload, indent=2, ensure_ascii=False), encoding="utf-8")
-    print(json.dumps({"generated": len(items), "output": str(OUT), "paid_ads": False, "live_trading": False}))
+    print(json.dumps({
+        "generated": len(items),
+        "daily_id": daily["id"],
+        "daily_format": daily["format"],
+        "growth_mode": mode,
+        "followers": followers,
+        "paid_ads": False,
+        "live_trading": False,
+    }))
 
 
 if __name__ == "__main__":
