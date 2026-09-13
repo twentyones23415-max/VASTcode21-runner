@@ -12,9 +12,10 @@ assets=[
     ('</body>','  <script src="tutor-lab.js" defer></script>\n'),
     ('</body>','  <script src="tutor-learning.js" defer></script>\n'),
     ('</body>','  <script src="tutor-outcome.js" defer></script>\n'),
+    ('</body>','  <script src="tutor-vision-runtime.js" defer></script>\n'),
 ]
 for marker, asset in assets:
     if asset.strip() not in s:
         s=s.replace(marker,asset+marker)
 p.write_text(s,encoding='utf-8')
-print('Patched site/index.html for VASTcode21 upgrades, Tutor AI Lab, structured learning, Outcome Lab and Event Risk Shield.')
+print('Patched site/index.html for VASTcode21 upgrades, Tutor AI Lab, secure Vision runtime bridge, structured learning, Outcome Lab and Event Risk Shield.')
