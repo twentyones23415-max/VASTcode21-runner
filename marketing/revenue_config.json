@@ -1,7 +1,7 @@
 {
   "version": "1.0.1",
   "currency": "EUR",
-  "mode": "stripe_provisioning",
+  "mode": "stripe_live_connected",
   "daily_revenue_goal_note": "Revenue is a target, not a guarantee.",
   "public_site_url": "https://twentyones23415-max.github.io/VASTcode21-runner/",
   "brand_account": "vast.code21",
@@ -14,7 +14,7 @@
     "no_signals_product": true
   },
   "connections": {
-    "stripe": false,
+    "stripe": true,
     "calendly": false,
     "resend": false
   },
@@ -26,7 +26,7 @@
       "price_eur": 99,
       "billing": "one_time",
       "enabled": true,
-      "checkout_url": "",
+      "checkout_url": "https://buy.stripe.com/bJedRaaIVaZG6L55S6cEw00",
       "booking_url": "",
       "headline": "Get your MT5 setup reviewed and automation-ready.",
       "deliverable": "45-minute technical MT5 setup session covering installation, templates, EA/indicator setup, VPS/terminal hygiene and automation troubleshooting.",
@@ -40,7 +40,7 @@
       "price_eur": 15,
       "billing": "monthly",
       "enabled": true,
-      "checkout_url": "",
+      "checkout_url": "https://buy.stripe.com/6oUaEY5oB8RyglFeoCcEw01",
       "headline": "Weekly validation notes for serious MT5 research followers.",
       "deliverable": "A weekly educational email covering verified VASTcode21 research milestones, MT5 validation concepts and GOLD/BITCOIN system-development lessons.",
       "not_included": "No signals, copy trading, guaranteed returns or personalized financial advice.",
@@ -61,8 +61,16 @@
     }
   ],
   "launch_requirements": {
-    "mt5-setup-audit": ["stripe", "calendly"],
-    "research-brief": ["stripe", "resend"],
-    "vast-early-access": ["resend"]
+    "mt5-setup-audit": [
+      "stripe",
+      "calendly"
+    ],
+    "research-brief": [
+      "stripe",
+      "resend"
+    ],
+    "vast-early-access": [
+      "resend"
+    ]
   }
 }

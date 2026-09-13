@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-09-13T07:57:15.413899+00:00",
-  "mode": "prepared_waiting_connections",
+  "updated_at": "2026-09-13T08:09:18.233805+00:00",
+  "mode": "stripe_live_connected",
   "followers_count": 0,
   "research_experiments": 96,
   "launchable_offers": [],
@@ -10,18 +10,14 @@
       "ready": false,
       "missing": [
         "booking_url",
-        "calendly",
-        "checkout_url",
-        "stripe"
+        "calendly"
       ]
     },
     {
       "id": "research-brief",
       "ready": false,
       "missing": [
-        "checkout_url",
-        "resend",
-        "stripe"
+        "resend"
       ]
     },
     {
