@@ -138,6 +138,7 @@
     const host=ensureResultHost(); if(!host) return;
     const a=payload?.analysis||{}, ctx=payload?.context||{}, scenarios=a.scenarios||{};
     const scenario=name=>{const s=scenarios[name]||{};return `<article style="padding:14px;border:1px solid #26364d;border-radius:12px;margin:10px 0"><strong>${name.toUpperCase()}</strong><div><b>Evidence</b>${list(s.evidence)}</div><div><b>Invalidation</b>${list(s.invalidation)}</div></article>`};
+    const usage=payload?.usage||{};
     host.style.display='block';
     host.innerHTML=`<div style="font-weight:800;font-size:18px;margin-bottom:8px">VAST Vision AI · educational review</div>
       <div style="color:#b8c4d2;margin-bottom:12px">Detected: <b>${esc(a.symbol||'unknown')}</b> · timeframe <b>${esc(a.timeframe||'unknown')}</b></div>
@@ -145,7 +146,7 @@
       ${scenario('bullish')}${scenario('bearish')}${scenario('neutral')}
       <p><strong>Uncertainty</strong><br>${esc(a.uncertainty||'unknown')}</p>
       <p><strong>Educational takeaway</strong><br>${esc(a.educational_takeaway||'')}</p>
-      <div style="margin-top:14px;padding-top:12px;border-top:1px solid #26364d;color:#9fb0c4;font-size:13px">Event risk: ${esc(ctx.event_risk?.status||'unknown')} · Market prices: ${esc(ctx.market?.status||'unknown')} · News context: ${esc(ctx.market_intelligence?.status||'unknown')}<br>Privacy: ${payload?.privacy?.screenshot_stored===false?'screenshot not stored':'unknown'} · ${esc(payload?.notice||'Educational use only.')}</div>`;
+      <div style="margin-top:14px;padding-top:12px;border-top:1px solid #26364d;color:#9fb0c4;font-size:13px">Event risk: ${esc(ctx.event_risk?.status||'unknown')} · Market prices: ${esc(ctx.market?.status||'unknown')} · News context: ${esc(ctx.market_intelligence?.status||'unknown')}<br>Privacy: ${payload?.privacy?.screenshot_stored===false?'screenshot not stored':'unknown'} · Analysis history: ${payload?.privacy?.analysis_saved?'saved securely':'not saved'} · Usage today: ${esc(usage.today??'—')}/${esc(usage.daily_limit??'—')}<br>${esc(payload?.notice||'Educational use only.')}</div>`;
   }
 
   function fileToDataUrl(file){return new Promise((resolve,reject)=>{const r=new FileReader();r.onload=()=>resolve(r.result);r.onerror=()=>reject(new Error('Could not read screenshot'));r.readAsDataURL(file)})}
@@ -173,11 +174,18 @@
     const btn=q('#vision-analyze');if(btn){btn.disabled=true;btn.textContent='Sign in for secure AI analysis'}
   }
 
+  function historyCards(items){
+    if(!Array.isArray(items)||!items.length)return '<div style="margin-top:12px;color:#73889b;font-size:12px">No saved Vision reviews yet.</div>';
+    return `<div style="margin-top:14px"><div style="font-size:11px;font-weight:900;letter-spacing:.08em;color:#72d9ed;margin-bottom:8px">RECENT PRIVATE HISTORY</div><div style="display:grid;gap:8px">${items.map(x=>`<article style="padding:10px 12px;border:1px solid #20394d;border-radius:10px;background:#08131f"><div style="display:flex;justify-content:space-between;gap:8px;align-items:center"><b>${esc(x.symbol||'unknown')} · ${esc(x.timeframe||'unknown')}</b><span style="font-size:10px;color:#6f8798">${esc(x.created_at?new Date(x.created_at).toLocaleString():'')}</span></div><div style="margin-top:5px;color:#9aafbd;font-size:11px;line-height:1.4">${esc(x.educational_takeaway||x.visible_structure||'Saved educational review')}</div></article>`).join('')}</div></div>`;
+  }
+
   function signedInPanel(health){
     const host=ensureResultHost();if(!host)return;
     const configured=health?.vision_provider_configured===true;
+    const usage=health?.usage||{};
+    const privacy=health?.privacy||{};
     host.style.display='block';
-    host.innerHTML=`<div style="display:flex;justify-content:space-between;gap:14px;align-items:center;flex-wrap:wrap"><div><div style="font-weight:800">Secure beta session active</div><div style="color:#8294a8;font-size:12px;margin-top:4px">Vision backend ${configured?'is ready':'is connected but awaits the AI provider secret'} · daily beta limit ${esc(health?.daily_vision_limit??'—')}</div></div><button type="button" id="vast-auth-logout" class="btn secondary">Sign out</button></div>`;
+    host.innerHTML=`<div style="display:flex;justify-content:space-between;gap:14px;align-items:center;flex-wrap:wrap"><div><div style="font-weight:800">Secure beta session active</div><div style="color:#8294a8;font-size:12px;margin-top:4px">Vision backend ${configured?'is ready':'is connected but awaits the AI provider secret'} · usage ${esc(usage.today??0)}/${esc(usage.daily_limit??health?.daily_vision_limit??'—')} today</div><div style="color:#6f8798;font-size:11px;margin-top:4px">Screenshots are not stored · analysis history ${privacy.save_analysis===false?'off':`on (${esc(privacy.analysis_retention_days??30)} days)`}</div></div><button type="button" id="vast-auth-logout" class="btn secondary">Sign out</button></div>${historyCards(health?.recent_history)}`;
     q('#vast-auth-logout')?.addEventListener('click',signOut);
   }
 
