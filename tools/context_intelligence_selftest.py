@@ -20,7 +20,21 @@ def main() -> int:
     require(cfg.get("trade_scope") == ["XAUUSD", "BTCUSD"], "trade scope must be XAUUSD/BTCUSD")
     require(cfg.get("policy") == "zero_cost_public_or_existing_sources_only", "paid-data policy mismatch")
     require(len(cfg.get("fred_graph_series", [])) >= 10, "macro/cross-asset coverage too small")
-    require(len(cfg.get("news", {}).get("gdelt", [])) >= 2, "news coverage missing")
+
+    # News coverage is intentionally source-agnostic. GDELT may be disabled when
+    # another zero-cost feed set provides equivalent coverage, so validate the
+    # configured aggregate rather than requiring one specific provider.
+    news_cfg = cfg.get("news", {})
+    news_sources = list(news_cfg.get("gdelt", [])) + list(news_cfg.get("rss", []))
+    require(len(news_sources) >= 2, "news coverage missing")
+    require(
+        any(str(x.get("category", "")) == "global_news" for x in news_sources if isinstance(x, dict)),
+        "global news coverage missing",
+    )
+    require(
+        any(str(x.get("category", "")) == "macro_news" for x in news_sources if isinstance(x, dict)),
+        "macro news coverage missing",
+    )
 
     require(ci.parse_dt("2026-09-12") is not None, "ISO date parser failed")
     require(ci.parse_dt("20260912T120000Z") is not None, "GDELT date parser failed")
@@ -57,6 +71,7 @@ def main() -> int:
     print("VASTcode21 CONTEXT INTELLIGENCE SELF-TEST")
     print("PASS: XAUUSD/BTCUSD execution scope")
     print("PASS: zero-cost public-data policy")
+    print("PASS: provider-agnostic news coverage")
     print("PASS: timestamp and event-time handling")
     print("PASS: persistent SQLite context bus")
     print("PASS: feature extraction")
