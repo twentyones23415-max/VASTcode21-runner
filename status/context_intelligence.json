@@ -6,12 +6,12 @@
   "information_scope": "unbounded_relevant",
   "live_trading": false,
   "mode": "persistent_zero_cost_context_intelligence",
-  "news_rows_persistent": 445,
-  "observation_rows_persistent": 29991,
+  "news_rows_persistent": 571,
+  "observation_rows_persistent": 29980,
   "paid_data": false,
   "paid_services": false,
   "private_context_history": true,
-  "rows_written_this_cycle": 120426,
+  "rows_written_this_cycle": 120458,
   "series_count": 13,
   "source_health": {
     "binance": {
@@ -56,6 +56,9 @@
     "fred:WALCL": {
       "ok": true
     },
+    "rss:bitcoin_coindesk": {
+      "ok": true
+    },
     "rss:bitcoin_global_news": {
       "ok": true
     },
@@ -70,11 +73,14 @@
     },
     "rss:gold_global_news": {
       "ok": true
+    },
+    "rss:gold_world_gold_council": {
+      "ok": true
     }
   },
-  "sources_attempted": 19,
+  "sources_attempted": 21,
   "sources_failed": 1,
-  "sources_succeeded": 18,
-  "updated_at": "2026-09-13T21:26:45.681240+00:00",
+  "sources_succeeded": 20,
+  "updated_at": "2026-09-14T00:36:42.459706+00:00",
   "version": "1.2.1"
 }
