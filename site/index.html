@@ -3,178 +3,228 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#02070d">
-<title>VASTcode21 — Tutor AI Workspace</title>
-<meta name="description" content="VASTcode21 Tutor AI beta: secure chart screenshot review, structured learning, mentoring, outcome review and verified context. Educational use only.">
-<link rel="icon" type="image/svg+xml" href="vastcode21-instagram-logo.svg">
-<link rel="stylesheet" href="tutor-lab.css">
-<link rel="stylesheet" href="tutor-learning.css">
-<link rel="stylesheet" href="tutor-outcome.css">
-<link rel="stylesheet" href="app-shell.css">
-<link rel="stylesheet" href="pricing.css">
+<meta name="theme-color" content="#03060b">
+<title>VASTcode21 — Evidence-first trading technology</title>
+<meta name="description" content="VASTcode21 is building an evidence-first fintech platform for retail traders: proprietary market research, systematic MT5 validation and AI-guided education.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://vastcode21.com/">
+<meta property="og:title" content="VASTcode21 — Evidence-first trading technology">
+<meta property="og:description" content="Research. Validate. Understand. A fintech platform designed to turn trading systems into testable, explainable, risk-aware decision tools.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://vastcode21.com/">
+<link rel="icon" type="image/svg+xml" href="logo-mark.svg">
+<link rel="stylesheet" href="future.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"VASTcode21","url":"https://vastcode21.com/","description":"Evidence-first trading technology platform combining proprietary research, systematic MT5 validation and AI-guided education."}</script>
 </head>
 <body>
-<div class="app">
-  <header class="app-topbar">
-    <button class="brandlock" type="button" data-page="home" aria-label="VASTcode21 home">
-      <img class="brand-logo" src="vastcode21-instagram-logo.svg" alt="VASTcode21 logo">
-      <span class="brand-copy"><strong><span class="brand-vast">VAST</span><span class="brand-code">code</span><span class="brand-21">21</span></strong><small>TUTOR AI · BETA</small></span>
-    </button>
+<canvas id="signal-canvas" aria-hidden="true"></canvas>
+<div class="aurora" aria-hidden="true"></div>
+<div class="noise" aria-hidden="true"></div>
 
-    <nav class="topnav" aria-label="Workspace navigation">
-      <button type="button" data-page="home">Home</button>
-      <button type="button" data-page="vision">Vision AI</button>
-      <button type="button" data-page="tutor">Tutor</button>
-      <button type="button" data-page="mentor">Mentor</button>
-      <button type="button" data-page="outcome">Outcome Lab</button>
-      <button type="button" data-page="context">Context</button>
-      <button type="button" data-page="pricing">Pricing</button>
-    </nav>
-
-    <div class="topbar-right">
-      <span class="beta-pill"><i></i>SECURE BETA</span>
-      <span class="account-pill" id="account-pill">Beta workspace</span>
+<div class="site">
+  <header class="topbar">
+    <div class="wrap navshell">
+      <a class="brand" href="#top" aria-label="VASTcode21 home">
+        <img src="logo-mark.svg" alt="VASTcode21">
+        <span><strong>VASTcode21</strong><small>EVIDENCE-FIRST FINTECH</small></span>
+      </a>
+      <nav class="nav" aria-label="Primary navigation">
+        <a href="#platform">Platform</a>
+        <a href="#evidence">Evidence</a>
+        <a href="#roadmap">Roadmap</a>
+        <a href="#founder">Founder</a>
+        <a href="investor-deck.html">Investor deck</a>
+        <a class="nav-cta" href="app.html">Open product beta</a>
+      </nav>
+      <button class="menu-toggle" type="button" aria-label="Toggle menu">Menu</button>
     </div>
   </header>
 
-  <main class="app-main">
-    <div class="page-wrap">
-      <section class="app-page active" id="page-home">
-        <div class="home-screen">
-          <article class="hero-card">
-            <div class="hero-content">
-              <span class="hero-chip"><i></i>VISION AI CONNECTED</span>
-              <h1>See the chart.<br><span>Understand the evidence.</span></h1>
-              <p>One focused workspace for secure screenshot review, structured learning, personal mentoring, outcome review and verified event context.</p>
-              <div class="hero-mini"><span>Screenshot not stored</span><span>Authenticated backend</span><span>No invented live prices</span></div>
-            </div>
-          </article>
-
-          <aside class="status-card">
-            <div class="status-head"><div><span class="page-kicker">SYSTEM</span><h2>Trust status</h2></div><span class="live-orb"></span></div>
-            <div class="system-list">
-              <div class="system-row"><span>Vision analysis</span><b class="state-online">ONLINE</b></div>
-              <div class="system-row"><span>Event risk</span><b class="state-safe">FRESHNESS CHECKED</b></div>
-              <div class="system-row"><span>News context</span><b class="state-safe">VERIFIED WHEN FRESH</b></div>
-              <div class="system-row"><span>Live market prices</span><b class="state-planned">NOT CONNECTED</b></div>
-            </div>
-          </aside>
+  <main id="top">
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div data-reveal>
+          <span class="eyebrow"><i></i> PRE-SEED · BUILDING IN PUBLIC WITH EVIDENCE</span>
+          <h1>Trading technology<br><span>without the black box.</span></h1>
+          <p class="hero-lead">VASTcode21 is building an evidence-first platform that combines proprietary market research, systematic MT5 validation and AI-guided education — so trading systems can be tested, explained and understood before they are trusted.</p>
+          <div class="hero-actions">
+            <a class="btn primary" href="app.html">Enter VAST Tutor AI <span>↗</span></a>
+            <a class="btn" href="investor-deck.html">Open investor deck</a>
+            <button class="btn ghost" type="button" data-command-open>Explore system /</button>
+          </div>
+          <div class="microtrust">
+            <span>No guaranteed-profit claims</span>
+            <span>Risk-aware by design</span>
+            <span>MT5-native validation</span>
+            <span>AI for explanation, not hype</span>
+          </div>
         </div>
-      </section>
 
-      <section class="app-page" id="page-vision">
-        <div class="workspace-head"><div><span class="page-kicker">VAST VISION AI</span><h1>Chart review</h1><p>Upload one chart and get one structured educational review.</p></div></div>
-        <div id="mentor" hidden></div><div class="module-slot" id="vision-slot"></div>
-      </section>
-
-      <section class="app-page" id="page-tutor">
-        <div class="workspace-head"><div><span class="page-kicker">VAST TUTOR</span><h1>Learning path</h1><p>Short lessons and checkpoints, separated from chart analysis.</p></div></div>
-        <div class="module-slot" id="tutor-slot"><div class="module-empty">Tutor lessons are loading…</div></div>
-      </section>
-
-      <section class="app-page" id="page-mentor">
-        <div class="workspace-head mentor-head"><div><span class="page-kicker">VAST MENTOR · PERSONAL TRADING EDUCATION</span><h1>Private guidance, built around your level.</h1><p>MT5 practice, XAUUSD/BTCUSD market context, risk discipline and a repeatable VAST workflow — education only, never signals.</p></div></div>
-        <div class="mentor-workspace">
-          <article class="mentor-intro-card">
-            <span class="mentor-badge">PERSONALIZED PATH</span>
-            <h2>Become more independent, not more dependent.</h2>
-            <p>The mentor program is structured around five learning stages: platform foundation, market structure, risk discipline, VAST workflow and independent review.</p>
-            <div class="mentor-path"><span>01 Foundation</span><span>02 Market structure</span><span>03 Risk discipline</span><span>04 VAST workflow</span><span>05 Independent review</span></div>
-            <div class="mentor-disclaimer">No account management · No personalized investment advice · No buy/sell signals</div>
-          </article>
-
-          <article class="mentor-service-card">
-            <div class="plan-top"><span class="plan-tag">PRIVATE SESSION</span><span class="plan-state available">AVAILABLE</span></div>
-            <h2>VAST Mentor 1:1</h2>
-            <div class="plan-price"><strong>€79</strong><span>/ 50 min</span></div>
-            <p>A focused private lesson around your current level and one specific skill you want to improve.</p>
-            <ul><li>Personal level check</li><li>Live MT5 walkthrough</li><li>One focused topic per session</li><li>Action notes for your next practice block</li></ul>
-            <a class="plan-action" href="https://ig.me/m/vast.code21" target="_blank" rel="noopener noreferrer">Request 1:1 session</a>
-          </article>
-
-          <article class="mentor-service-card featured-mentor">
-            <div class="plan-top"><span class="plan-tag">STRUCTURED PROGRAM</span><span class="plan-state available">AVAILABLE</span></div>
-            <h2>4-Week Mentorship</h2>
-            <div class="plan-price"><strong>€249</strong><span>/ 4 weeks</span></div>
-            <p>A guided learning track for structure, accountability and measurable educational progress.</p>
-            <ul><li>4 private mentor sessions</li><li>Personal learning roadmap</li><li>MT5 + risk + market-context curriculum</li><li>Weekly practice objectives</li><li>End-of-program review</li></ul>
-            <a class="plan-action" href="https://ig.me/m/vast.code21" target="_blank" rel="noopener noreferrer">Apply for 4-week track</a>
-          </article>
+        <div class="orb-shell" data-reveal aria-label="VAST evidence engine visualization">
+          <div class="orb-halo"></div>
+          <div class="orb"><div class="orb-grid"></div><div class="orb-label"><b>VAST EVIDENCE ENGINE</b><span>Research → Validate → Explain</span></div></div>
+          <div class="float-card fc1"><strong><span class="dot"></span>Research layer</strong><p>Original market-behavior logic and state-based decision structure.</p></div>
+          <div class="float-card fc2"><strong><span class="dot"></span>Validation layer</strong><p>Cross-symbol and cross-timeframe MT5 testing with explicit failure modes.</p></div>
+          <div class="float-card fc3"><strong><span class="dot"></span>Learning layer</strong><p>AI-guided explanations designed to improve trader process and risk discipline.</p></div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section class="app-page" id="page-outcome">
-        <div class="workspace-head"><div><span class="page-kicker">OUTCOME LAB</span><h1>Review outcomes</h1><p>Capture the scenario first, then compare it with what actually happened.</p></div></div>
-        <div class="module-slot" id="outcome-slot"><div class="module-empty">Outcome Lab is loading…</div></div>
-      </section>
+    <section class="metrics" aria-label="Company snapshot">
+      <div class="wrap metric-grid">
+        <div class="metric" data-reveal><b>8 years</b><span>Founder trading experience</span></div>
+        <div class="metric" data-reveal><b>4 years</b><span>EA & indicator development</span></div>
+        <div class="metric" data-reveal><b>€500k</b><span>Target pre-seed round</span></div>
+        <div class="metric" data-reveal><b>Global</b><span>Built in Europe for international retail markets</span></div>
+      </div>
+    </section>
 
-      <section class="app-page" id="page-context">
-        <div class="workspace-head"><div><span class="page-kicker">VERIFIED CONTEXT</span><h1>Event risk</h1><p>Freshness-gated context only. Missing dependencies stay explicitly unavailable.</p></div></div>
-        <div id="markets" hidden></div><div class="module-slot" id="context-slot"></div>
-      </section>
-
-      <section class="app-page" id="page-pricing">
-        <div class="workspace-head pricing-head"><div><span class="page-kicker">VASTCODE21 PRICING</span><h1>Plans & services</h1><p>All current public services in one place. Products still under validation remain unavailable.</p></div></div>
-        <div class="pricing-grid">
-          <article class="plan-card mentor-price-card">
-            <div class="plan-top"><span class="plan-tag">MENTOR 1:1</span><span class="plan-state available">AVAILABLE</span></div>
-            <h2>VAST Mentor 1:1</h2>
-            <div class="plan-price"><strong>€79</strong><span>/ 50 min</span></div>
-            <p>Private focused education with level check, live MT5 walkthrough and next-step practice notes.</p>
-            <a class="plan-action" href="https://ig.me/m/vast.code21" target="_blank" rel="noopener noreferrer">Request session</a>
-          </article>
-
-          <article class="plan-card mentor-price-card featured-mentor">
-            <div class="plan-top"><span class="plan-tag">MENTOR PROGRAM</span><span class="plan-state available">AVAILABLE</span></div>
-            <h2>4-Week Mentorship</h2>
-            <div class="plan-price"><strong>€249</strong><span>/ 4 weeks</span></div>
-            <p>4 private sessions, personal roadmap, weekly practice objectives and end-of-program review.</p>
-            <a class="plan-action" href="https://ig.me/m/vast.code21" target="_blank" rel="noopener noreferrer">Apply for program</a>
-          </article>
-
-          <article class="plan-card">
-            <div class="plan-top"><span class="plan-tag">TECHNICAL SERVICE</span><span class="plan-state available">AVAILABLE</span></div>
-            <h2>MT5 Setup & Automation Audit</h2>
-            <div class="plan-price"><strong>€99</strong><span>one time</span></div>
-            <p>45-minute MT5 setup session covering installation, templates, EA/indicator setup and troubleshooting.</p>
-            <a class="plan-action" href="https://book.stripe.com/bJedRaaIVaZG6L55S6cEw00" target="_blank" rel="noopener">Buy for €99</a>
-          </article>
-
-          <article class="plan-card">
-            <div class="plan-top"><span class="plan-tag">EDUCATIONAL MEMBERSHIP</span><span class="plan-state available">AVAILABLE</span></div>
-            <h2>VASTcode21 Research Brief</h2>
-            <div class="plan-price"><strong>€15</strong><span>/ month</span></div>
-            <p>Weekly educational email with validation milestones, MT5 concepts and GOLD/BITCOIN development lessons.</p>
-            <a class="plan-action" href="https://buy.stripe.com/6oUaEY5oB8RyglFeoCcEw01" target="_blank" rel="noopener">Subscribe €15/mo</a>
-          </article>
-
-          <article class="plan-card beta-plan">
-            <div class="plan-top"><span class="plan-tag">AI BETA</span><span class="plan-state">CHECKOUT OFF</span></div>
-            <h2>VAST Tutor AI</h2>
-            <div class="plan-price"><strong>Beta</strong><span>pricing not launched</span></div>
-            <p>Vision AI, Tutor learning, Outcome Lab and verified context are still being validated.</p>
-            <div class="plan-note">No public Tutor checkout until the product and payment flow are fully verified.</div>
-          </article>
-
-          <article class="plan-card free-plan">
-            <div class="plan-top"><span class="plan-tag">EARLY ACCESS</span><span class="plan-state available">OPEN</span></div>
-            <h2>VAST Early Access List</h2>
-            <div class="plan-price"><strong>FREE</strong><span>waitlist</span></div>
-            <p>Verified development and release updates. The VAST indicator itself is not currently for sale.</p>
-            <a class="plan-action secondary" href="http://eepurl.com/cN6dWhHhtP" target="_blank" rel="noopener">Join free waitlist</a>
-          </article>
+    <section class="section" id="platform">
+      <div class="wrap">
+        <div class="section-head" data-reveal>
+          <div><span class="kicker">THE PLATFORM</span><h2>Three layers. One evidence loop.</h2></div>
+          <p>Most trading products stop at a signal. VASTcode21 is designed to connect research, validation and learning into one system where every decision has context.</p>
         </div>
-        <div class="pricing-foot">Prices shown in EUR. No trading signals, account management, profit guarantees or personalized investment advice are included.</div>
-      </section>
-    </div>
+        <div class="grid-3">
+          <article class="card" data-reveal><span class="num">01 / RESEARCH</span><span class="tag build">IN R&D</span><h3>Proprietary market logic</h3><p>Original formula development and state-machine research focused on market behavior rather than repackaging existing indicator logic.</p></article>
+          <article class="card" data-reveal><span class="num">02 / VALIDATION</span><span class="tag build">BUILDING</span><h3>Systematic MT5 evidence</h3><p>Test strategy behavior across symbols, timeframes and changing market conditions. Surface robustness, drawdown sensitivity and failure modes instead of hiding them.</p></article>
+          <article class="card" data-reveal><span class="num">03 / EDUCATION</span><span class="tag live">BETA LIVE</span><h3>AI-guided understanding</h3><p>Turn chart reviews, outcomes and context into structured learning. The objective is a more independent trader, not dependency on a constant stream of signals.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap architecture" data-reveal>
+        <span class="kicker">SYSTEM ARCHITECTURE</span>
+        <h2>From market idea to explainable decision support.</h2>
+        <div class="arch-grid">
+          <div class="arch-node"><b>01 · Observe</b><h3>Research engine</h3><p>Captures proprietary market behavior and translates it into explicit states rather than constant buy/sell noise.</p></div>
+          <div class="arch-link">→</div>
+          <div class="arch-node"><b>02 · Challenge</b><h3>Validation engine</h3><p>Stress-tests the behavior across environments and records where the logic works, degrades or should be ignored.</p></div>
+          <div class="arch-link">→</div>
+          <div class="arch-node"><b>03 · Explain</b><h3>Learning engine</h3><p>Uses AI to make the evidence understandable and actionable as education, checklists and disciplined workflow.</p></div>
+        </div>
+        <div class="arch-caption">Long-term direction: a versioned evidence graph linking trading logic, market context, validation outcomes and learning behavior.</div>
+      </div>
+    </section>
+
+    <section class="section" id="evidence">
+      <div class="wrap">
+        <div class="section-head" data-reveal>
+          <div><span class="kicker">DESIGNED FOR DISCIPLINE</span><h2>The system can say “wait”.</h2></div>
+          <p>Retail trading software often rewards action. VAST is being designed around state transitions that separate observation, preparation, trigger and exit.</p>
+        </div>
+        <div class="state-machine">
+          <article class="state wait" data-reveal><small>STATE 00</small><h3>WAIT</h3><p>No forced trade when evidence is insufficient. Silence is a valid system output.</p></article>
+          <article class="state arm" data-reveal><small>STATE 01</small><h3>ARM</h3><p>Preparation state. The user is alerted to observe conditions without chasing a move.</p></article>
+          <article class="state signal" data-reveal><small>STATE 02</small><h3>SIGNAL</h3><p>A trigger appears only when the system’s internal condition is satisfied.</p></article>
+          <article class="state exit" data-reveal><small>STATE 03</small><h3>EXIT</h3><p>Closing logic is explicit. Risk discipline is part of the product, not an afterthought.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap console">
+        <div class="console-panel" data-reveal>
+          <div class="console-top"><span>VAST / EVIDENCE CONSOLE</span><div class="console-dots"><i></i><i></i><i></i></div></div>
+          <div class="console-body">
+            <div class="console-line"><span>RESEARCH</span><b class="ok">proprietary logic isolated</b></div>
+            <div class="console-line"><span>TESTING</span><b>multi-symbol / multi-timeframe workflow</b></div>
+            <div class="console-line"><span>CONTEXT</span><b class="warn">freshness-gated external events</b></div>
+            <div class="console-line"><span>VISION</span><b class="ok">structured chart review beta</b></div>
+            <div class="console-line"><span>PRICES</span><b class="warn">not presented as live unless connected</b></div>
+            <div class="console-line"><span>CLAIMS</span><b class="ok">no fabricated performance metrics</b></div>
+          </div>
+        </div>
+        <div class="console-copy" data-reveal>
+          <span class="kicker">TRUST IS A PRODUCT FEATURE</span>
+          <h3>What the system does not know should stay visible.</h3>
+          <p>The future of financial software is not a prettier black box. It is software that exposes uncertainty, freshness, provenance and failure states as clearly as it exposes opportunity.</p>
+          <div class="principles">
+            <div class="principle"><i>01</i><span>Separate verified context from unavailable context.</span></div>
+            <div class="principle"><i>02</i><span>Version research and validation instead of presenting one-off screenshots as proof.</span></div>
+            <div class="principle"><i>03</i><span>Use AI to explain evidence and process — not to manufacture certainty.</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="roadmap">
+      <div class="wrap">
+        <div class="section-head" data-reveal>
+          <div><span class="kicker">18-MONTH ROADMAP</span><h2>Convert founder know-how into a scalable platform.</h2></div>
+          <p>The pre-seed plan is intentionally staged: formalize the company, harden the product, prove the evidence loop with real users, then scale what survives validation.</p>
+        </div>
+        <div class="roadmap">
+          <article class="mile" data-reveal><small>0–3 MONTHS</small><h3>Foundation</h3><p>Company formation, compliance review, VAST prototype hardening and validation harness.</p></article>
+          <article class="mile" data-reveal><small>3–6 MONTHS</small><h3>Evidence</h3><p>Cross-market testing, internal evidence reports and tightly scoped alpha user feedback.</p></article>
+          <article class="mile" data-reveal><small>6–12 MONTHS</small><h3>Product proof</h3><p>Validation dashboard, education layer, early paid usage and measurable engagement data.</p></article>
+          <article class="mile" data-reveal><small>12–18 MONTHS</small><h3>Scale</h3><p>Repeatable SaaS release, partnership experiments and next-round metrics based on actual behavior.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="founder">
+      <div class="wrap founder">
+        <div class="founder-panel" data-reveal>
+          <div class="founder-mark">ST</div>
+          <h3>Stefanos Tsormpatzoglou</h3>
+          <div class="role">FOUNDER · VASTcode21</div>
+          <p>Solo founder with eight years of trading experience and four years developing Expert Advisors and indicators for MetaTrader 5.</p>
+          <div class="founder-stats">
+            <div class="fstat"><b>8y</b><span>Trading experience</span></div>
+            <div class="fstat"><b>4y</b><span>EA / indicator development</span></div>
+          </div>
+        </div>
+        <div class="founder-panel" data-reveal>
+          <span class="kicker">FOUNDER THESIS</span>
+          <p class="thesis">The category does not need more certainty theatre. It needs <span>better evidence, better explanation and better decision discipline.</span></p>
+          <p>VASTcode21 is being built from the intersection of lived retail trading experience and hands-on system development. The objective is to turn that domain knowledge into infrastructure that can scale beyond one indicator or one strategy.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap investor-room" data-reveal>
+        <div>
+          <span class="kicker">INVESTOR ROOM</span>
+          <h2>Pre-seed: €500,000</h2>
+          <p>Capital is intended for product engineering, systematic validation infrastructure, data and testing, AI education, compliance readiness and first structured customer validation. Current stage: pre-incorporation, founder-led R&D and product beta.</p>
+          <div class="ask-pill"><b>Target:</b> turn proprietary research into a defensible evidence-first fintech platform.</div>
+        </div>
+        <div class="room-actions">
+          <a class="btn primary" href="investor-deck.html">View investor deck</a>
+          <a class="btn" href="app.html">Open product beta</a>
+          <a class="btn ghost" href="https://github.com/twentyones23415-max/VASTcode21-runner" target="_blank" rel="noopener">View public build</a>
+        </div>
+      </div>
+    </section>
   </main>
+
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footgrid">
+        <div class="footbrand"><img src="logo-mark.svg" alt=""><p><strong>VASTcode21</strong><br>Evidence-first trading technology · <span id="year"></span></p></div>
+        <div class="footlinks"><a href="app.html">Product beta</a><a href="investor-deck.html">Investor deck</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></div>
+      </div>
+      <div class="disclaimer">VASTcode21 is an early-stage technology project. Public materials are for product, educational and fundraising context only. No content on this website is personalized investment advice, account management, a guarantee of profit, or a promise of trading performance.</div>
+    </div>
+  </footer>
 </div>
 
-<script src="tutor-lab.js" defer></script>
-<script src="tutor-learning.js" defer></script>
-<script src="tutor-outcome.js" defer></script>
-<script src="tutor-vision-runtime.js" defer></script>
-<script src="tutor-vision-bridge.js" defer></script>
-<script src="app-shell.js" defer></script>
+<div class="command"><span>Future navigation</span><kbd>/</kbd></div>
+<div class="modal" id="command-modal" role="dialog" aria-modal="true" aria-label="Explore VASTcode21">
+  <div class="modal-card">
+    <div class="modal-head"><strong>VAST / NAVIGATE</strong><button class="modal-close" type="button" aria-label="Close">×</button></div>
+    <div class="palette">
+      <a href="app.html"><b>Product beta</b><span>Open Tutor AI, Vision AI, Outcome Lab and verified context.</span></a>
+      <a href="investor-deck.html"><b>Investor deck</b><span>Open the current VASTcode21 pre-seed narrative.</span></a>
+      <a href="#platform"><b>Platform architecture</b><span>See how research, validation and education connect.</span></a>
+      <a href="#roadmap"><b>18-month roadmap</b><span>See the staged path from R&D to scalable fintech.</span></a>
+    </div>
+  </div>
+</div>
+
+<script src="future.js" defer></script>
 </body>
 </html>
