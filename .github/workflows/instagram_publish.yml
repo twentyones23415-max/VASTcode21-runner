@@ -41,7 +41,28 @@ jobs:
           INSTAGRAM_ACCESS_TOKEN: ${{ secrets.INSTAGRAM_ACCESS_TOKEN }}
           VALIDATE_ONLY: ${{ github.event_name == 'workflow_dispatch' && inputs.validate_only || false }}
           FORCE_PUBLISH: ${{ github.event_name == 'workflow_dispatch' && inputs.force_publish || false }}
-        run: python tools/instagram_publisher.py
+        shell: bash
+        run: |
+          set +e
+          python tools/instagram_publisher.py 2>&1 | tee /tmp/instagram-publisher.log
+          publisher_status=${PIPESTATUS[0]}
+          set -e
+
+          if [ "$publisher_status" -eq 0 ]; then
+            exit 0
+          fi
+
+          # Meta can temporarily or administratively block API access even when
+          # the configured token is present. Keep checking every scheduled run,
+          # but do not turn this known external authorization state into a false
+          # repository/CI failure. Any other publisher error still fails hard.
+          if grep -Fq '"message":"API access blocked."' /tmp/instagram-publisher.log \
+             && grep -Fq '"code":200' /tmp/instagram-publisher.log; then
+            echo '::warning title=Instagram API blocked::Meta currently blocks API access. No post was attempted or published; automatic checks will continue.'
+            exit 0
+          fi
+
+          exit "$publisher_status"
 
       - name: Commit Instagram publish state when changed
         if: ${{ always() && github.event_name != 'workflow_dispatch' || (github.event_name == 'workflow_dispatch' && !inputs.validate_only) }}
