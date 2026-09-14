@@ -1,6 +1,6 @@
 {
-  "version": "2.2.0",
-  "last_publish_at": "2026-09-13T10:29:19.369850+00:00",
+  "version": "2.0.0",
+  "last_publish_at": "2026-09-14T07:23:47.041924+00:00",
   "published": [
     {
       "queue_id": "milestone-forward",
@@ -20,6 +20,17 @@
       "caption_fingerprint": "38d402d00e357725c8bcf65541761ba8908043393dd8e0f76f20981c28debb58",
       "reconciled": false,
       "free_publish": true
+    },
+    {
+      "queue_id": "event-risk-20260914",
+      "media_id": "18334949947275107",
+      "published_at": "2026-09-14T07:23:47.041924+00:00",
+      "account": "vast.code21",
+      "media_url": "https://raw.githubusercontent.com/twentyones23415-max/VASTcode21-runner/main/marketing/assets/event-risk-20260914.mp4",
+      "format": "reel",
+      "pillar": "market_risk",
+      "caption_fingerprint": "e70714e8f587ec1091d2d37b4dbad2b3e6aebf4859a6d61584b6884dbf1c0239",
+      "reconciled": false
     }
   ]
 }
