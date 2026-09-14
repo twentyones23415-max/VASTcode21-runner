@@ -1,7 +1,7 @@
 {
   "version": "1.2",
   "status": "active",
-  "updated_at": "2026-09-14T00:39:53.657334+00:00",
+  "updated_at": "2026-09-14T01:04:33.780975+00:00",
   "horizon_days": 14,
   "sources": [
     "U.S. Bureau of Labor Statistics",
@@ -23,7 +23,7 @@
       "XAUUSD",
       "BTCUSD"
     ],
-    "minutes_from_now": 3590,
+    "minutes_from_now": 3565,
     "risk_state": "SCHEDULED",
     "countdown": "2d 11h"
   },
@@ -39,7 +39,7 @@
         "XAUUSD",
         "BTCUSD"
       ],
-      "minutes_from_now": 3590,
+      "minutes_from_now": 3565,
       "risk_state": "SCHEDULED",
       "countdown": "2d 11h"
     },
@@ -54,9 +54,9 @@
         "XAUUSD",
         "BTCUSD"
       ],
-      "minutes_from_now": 3920,
+      "minutes_from_now": 3895,
       "risk_state": "SCHEDULED",
-      "countdown": "2d 17h"
+      "countdown": "2d 16h"
     },
     {
       "title": "FOMC Press Conference",
@@ -69,7 +69,7 @@
         "XAUUSD",
         "BTCUSD"
       ],
-      "minutes_from_now": 3950,
+      "minutes_from_now": 3925,
       "risk_state": "SCHEDULED",
       "countdown": "2d 17h"
     },
@@ -84,7 +84,7 @@
         "XAUUSD",
         "BTCUSD"
       ],
-      "minutes_from_now": 6530,
+      "minutes_from_now": 6505,
       "risk_state": "SCHEDULED",
       "countdown": "4d 12h"
     }
