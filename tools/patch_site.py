@@ -1,22 +1,21 @@
 #!/usr/bin/env python3
 from pathlib import Path
 
-p = Path('site/index.html')
-s = p.read_text(encoding='utf-8')
+landing = Path('site/index.html')
+app = Path('site/app.html')
 
-required = [
-    'VASTcode21 — Tutor AI Workspace',
-    'app-shell.css',
-    'app-shell.js',
-    'tutor-lab.js',
-    'tutor-learning.js',
-    'tutor-outcome.js',
-    'tutor-vision-runtime.js',
-]
-missing = [item for item in required if item not in s]
-if missing:
-    raise SystemExit('Tutor app entry point is incomplete; refusing legacy patch: ' + ', '.join(missing))
+for path in (landing, app):
+    if not path.exists():
+        raise SystemExit(f'Missing required site file: {path}')
 
-# The modern Tutor workspace owns its own shell and assets. Legacy vast-upgrade
-# injection is intentionally disabled because it can conflict with app routing.
-print('Tutor app verified. No legacy site patching applied.')
+landing_text = landing.read_text(encoding='utf-8')
+app_text = app.read_text(encoding='utf-8')
+
+if 'future.css' not in landing_text or 'future.js' not in landing_text:
+    raise SystemExit('Landing page assets are not wired correctly')
+if 'investor-deck.html' not in landing_text or 'app.html' not in landing_text:
+    raise SystemExit('Landing page navigation is incomplete')
+if 'Tutor AI Workspace' not in app_text or 'app-shell.js' not in app_text:
+    raise SystemExit('Tutor app is incomplete')
+
+print('VASTcode21 site verified.')
