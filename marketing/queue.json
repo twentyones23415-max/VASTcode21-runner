@@ -1,15 +1,15 @@
 {
-  "generated_at": "2026-09-14T12:41:24.630317+00:00",
+  "generated_at": "2026-09-14T18:38:37.929016+00:00",
   "mode": "zero_to_ten_rescue",
   "followers_count": 0,
   "growth_goal_followers": 100,
   "paid_ads": false,
   "live_trading": false,
   "source_status": {
-    "experiments": 180,
+    "experiments": 204,
     "generation": 5,
     "mt5_validation_passed": 1,
-    "mt5_validation_rejected": 6,
+    "mt5_validation_rejected": 7,
     "robustness_passed": 1,
     "forward_collecting": 1,
     "forward_passed": 0,
@@ -54,7 +54,7 @@
       "id": "growth-20260914",
       "pillar": "build_in_public",
       "hook": "We are building VASTcode21 from zero—in public.",
-      "caption": "Current state: 180 experiments, generation 5, 1 MT5 pass result(s), 6 MT5 reject result(s). We will publish the process, including failures, without turning a backtest into a profit promise.",
+      "caption": "Current state: 204 experiments, generation 5, 1 MT5 pass result(s), 7 MT5 reject result(s). We will publish the process, including failures, without turning a backtest into a profit promise.",
       "creative_brief": "9:16 build-in-public Reel: ZERO → TEST → REJECT → IMPROVE. Large numeric counters.",
       "format": "reel",
       "platforms": [
@@ -74,7 +74,7 @@
       "disclaimer": "Trading involves risk. Historical or backtested results do not guarantee future performance.",
       "reel_script": [
         "BUILDING FROM ZERO",
-        "180 EXPERIMENTS\nGEN 5",
+        "204 EXPERIMENTS\nGEN 5",
         "FOLLOW THE BUILD\nNOT THE HYPE"
       ]
     },
