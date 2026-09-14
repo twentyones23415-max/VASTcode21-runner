@@ -192,6 +192,16 @@
     return '';
   }
 
+  function releaseLocalPreview(){
+    const input=q('#vision-file'), img=q('#vision-img'), preview=q('#vision-preview'), drop=q('#vision-drop');
+    if(img?.src?.startsWith('blob:')){try{URL.revokeObjectURL(img.src)}catch{}}
+    img?.removeAttribute('src');
+    if(input)input.value='';
+    if(preview)preview.hidden=true;
+    if(drop)drop.hidden=false;
+    document.dispatchEvent(new CustomEvent('vast:vision-cleared'));
+  }
+
   async function analyze(){
     const input=q('#vision-file'), btn=q('#vision-analyze'), file=input?.files?.[0];
     if(!file){status('Choose a chart screenshot first.','error');return}
@@ -208,7 +218,7 @@
       else if((e.message||e)==='REQUEST_TIMEOUT')status('The secure analysis service did not respond within 30 seconds. No result was invented; choose the screenshot again and retry when the backend is available.','error');
       else status(`Analysis could not be completed: ${e.message||e}`,'error');
     }finally{
-      if(input)input.value='';
+      releaseLocalPreview();
       await refreshVisionHealth(true);
     }
   }
