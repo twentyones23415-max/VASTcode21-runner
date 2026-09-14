@@ -8,7 +8,7 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 CONFIG=ROOT/'config/context_sources.json'
 OUT=ROOT/'site/data/market_intelligence.json'
-UA='VASTcode21-MarketMonitor/1.5 (+https://github.com/twentyones23415-max/VASTcode21-runner)'
+UA='VASTcode21-MarketMonitor/1.6 (+https://github.com/twentyones23415-max/VASTcode21-runner)'
 
 GOLD_MARKET_WORDS={
     'price','prices','market','markets','futures','bullion','ounce','ounces','metal','metals','demand',
@@ -22,8 +22,8 @@ FED_MARKET_WORDS={
     'inflation','economic outlook','economy','employment','labor market','unemployment','gdp',
     'financial conditions','treasury','balance sheet','powell','waller','governor','chair'
 }
-BLOCKED_SOURCES={
-    'facebook.com','instagram.com','tiktok.com','x.com','twitter.com','moomoo.com'
+BLOCKED_SOURCE_TOKENS={
+    'facebook','instagram','tiktok','twitter','x.com','moomoo'
 }
 LOW_VALUE_TITLE_TERMS={
     'prediction market','crypto prediction market','price range on','price on sep',
@@ -63,8 +63,6 @@ def source_name(item, fallback):
     return fallback.replace('_',' ').title()
 
 def has_term(normalized: str, term: str) -> bool:
-    # Match complete words/phrases so e.g. "fed" does not match "Feds" and
-    # "gold" does not accidentally qualify unrelated company names by itself.
     parts=[re.escape(p) for p in term.lower().split()]
     pattern=r'(?<![a-z0-9])' + r'\s+'.join(parts) + r'(?![a-z0-9])'
     return re.search(pattern, normalized) is not None
@@ -81,10 +79,16 @@ def relevant(title: str, feed_name: str) -> bool:
         return has_term(t,'bitcoin') or has_term(t,'btc')
     return True
 
+def normalize_source(source: str) -> str:
+    s=' '.join(source.lower().strip().split())
+    s=re.sub(r'^https?://','',s)
+    s=s.removeprefix('www.')
+    return s
+
 def quality_allowed(title: str, source: str) -> bool:
     t=' '.join(title.lower().split())
-    s=source.lower().strip()
-    if s in BLOCKED_SOURCES:
+    s=normalize_source(source)
+    if any(token == s or token in s for token in BLOCKED_SOURCE_TOKENS):
         return False
     if any(has_term(t, term) for term in LOW_VALUE_TITLE_TERMS):
         return False
@@ -120,7 +124,6 @@ def main():
         (buckets.get(x['category'],other)).append(x)
 
     clean=[]
-    # Interleave categories so the visible cards stay balanced: BTC -> GOLD -> macro.
     for i in range(6):
         for cat in ('bitcoin / crypto','gold / macro','fed / macro'):
             if i < len(buckets[cat]): clean.append(buckets[cat][i])
@@ -133,7 +136,7 @@ def main():
         leftovers.sort(key=lambda x:x.get('published_at') or '',reverse=True)
         clean.extend(leftovers[:16-len(clean)])
 
-    out={'version':'1.5','status':'active' if clean else 'degraded','updated_at':datetime.now(timezone.utc).isoformat(),'scope':['XAUUSD','BTCUSD','macro'],'items':clean,'feed_errors':errors,'quality_filtered':filtered}
+    out={'version':'1.6','status':'active' if clean else 'degraded','updated_at':datetime.now(timezone.utc).isoformat(),'scope':['XAUUSD','BTCUSD','macro'],'items':clean,'feed_errors':errors,'quality_filtered':filtered}
     OUT.parent.mkdir(parents=True,exist_ok=True)
     OUT.write_text(json.dumps(out,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
     print(f'Published {len(clean)} interleaved market-intelligence headlines; filtered={filtered}; errors={len(errors)}')
