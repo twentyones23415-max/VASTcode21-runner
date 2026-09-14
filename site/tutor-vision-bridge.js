@@ -1,7 +1,7 @@
 (()=>{
   const KEY='vast_latest_vision_learning_focus_v1';
   const q=(s,r=document)=>r.querySelector(s);
-  const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot',"'":'&#39;'}[c]));
+  const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
   function readFocus(){
     try{return JSON.parse(sessionStorage.getItem(KEY)||'null')}catch{return null}
