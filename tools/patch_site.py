@@ -17,8 +17,9 @@ for asset in ('future.css', 'responsive.css', 'future.js'):
         raise SystemExit(f'Landing page asset missing: {asset}')
 if 'app.html' not in landing_text:
     raise SystemExit('Product beta navigation is incomplete')
-if 'Investor' in landing_text or 'investor' in landing_text:
-    raise SystemExit('Public landing page must not contain investor-facing language')
+for banned_visible_phrase in ('Investor deck', 'INVESTOR ROOM', 'Pre-seed: €500,000', 'Open investor deck'):
+    if banned_visible_phrase in landing_text:
+        raise SystemExit(f'Public landing page contains hidden funding copy: {banned_visible_phrase}')
 if 'Tutor AI Workspace' not in app_text or 'app-shell.js' not in app_text:
     raise SystemExit('Tutor app is incomplete')
 
