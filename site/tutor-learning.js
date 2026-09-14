@@ -4,19 +4,14 @@
   const STORE='vast_tutor_foundations_v1';
   const SESSION_KEY='vast_tutor_supabase_session_v1';
   const q=(s,r=document)=>r.querySelector(s);
-  const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot',"'":'&#39;'}[c]));
   let runtime=null;
   let curriculum=null;
 
-  function loadState(){
-    try{return JSON.parse(localStorage.getItem(STORE)||'{}')}catch{return {}}
-  }
-  function saveState(state){
-    try{localStorage.setItem(STORE,JSON.stringify(state))}catch{}
-  }
-  function loadSession(){
-    try{return JSON.parse(localStorage.getItem(SESSION_KEY)||'null')}catch{return null}
-  }
+  function loadState(){try{return JSON.parse(localStorage.getItem(STORE)||'{}')}catch{return {}}}
+  function saveState(state){try{localStorage.setItem(STORE,JSON.stringify(state))}catch{}}
+  function loadSession(){try{return JSON.parse(localStorage.getItem(SESSION_KEY)||'null')}catch{return null}}
+  function saveSession(value){try{if(value)localStorage.setItem(SESSION_KEY,JSON.stringify(value));else localStorage.removeItem(SESSION_KEY)}catch{}}
   function percent(done,total){return total?Math.round((done/total)*100):0}
 
   async function loadRuntime(){
@@ -28,39 +23,63 @@
     }catch{return null}
   }
 
-  function authContext(){
-    const s=loadSession();
-    const userId=s?.user?.id;
-    if(!runtime||!s?.access_token||!userId)return null;
-    return {token:s.access_token,userId};
+  async function refreshSession(current){
+    if(!runtime||!current?.refresh_token)return null;
+    try{
+      const r=await fetch(`${runtime.supabase}/auth/v1/token?grant_type=refresh_token`,{
+        method:'POST',cache:'no-store',
+        headers:{'Content-Type':'application/json',apikey:runtime.key},
+        body:JSON.stringify({refresh_token:current.refresh_token})
+      });
+      const d=await r.json().catch(()=>({}));
+      if(!r.ok||!d.access_token){saveSession(null);return null}
+      const next={
+        access_token:d.access_token,
+        refresh_token:d.refresh_token||current.refresh_token,
+        expires_at:Math.floor(Date.now()/1000)+(Number(d.expires_in)||3600),
+        user:d.user||current.user||null
+      };
+      saveSession(next);
+      return next;
+    }catch{return null}
+  }
+
+  async function validAuth(){
+    let s=loadSession();
+    if(!runtime||!s?.access_token||!s?.user?.id)return null;
+    if(Number(s.expires_at||0)-60<=Math.floor(Date.now()/1000))s=await refreshSession(s);
+    if(!s?.access_token||!s?.user?.id)return null;
+    return {token:s.access_token,userId:s.user.id,session:s};
   }
 
   async function remoteProgress(){
-    const auth=authContext();if(!auth)return null;
+    let auth=await validAuth();if(!auth)return null;
     const url=`${runtime.supabase}/rest/v1/tutor_progress?select=lesson_id,status,best_score,attempts,completed_at`;
-    const r=await fetch(url,{cache:'no-store',headers:{apikey:runtime.key,Authorization:`Bearer ${auth.token}`}});
+    const make=()=>fetch(url,{cache:'no-store',headers:{apikey:runtime.key,Authorization:`Bearer ${auth.token}`}});
+    let r=await make();
+    if(r.status===401){
+      const renewed=await refreshSession(auth.session);
+      if(renewed){auth={token:renewed.access_token,userId:renewed.user?.id||auth.userId,session:renewed};r=await make()}
+    }
     if(!r.ok)return null;
     return r.json().catch(()=>null);
   }
 
   async function syncLesson(lessonId,state,correct){
-    const auth=authContext();if(!auth)return false;
+    let auth=await validAuth();if(!auth)return false;
     const prev=state.remote?.[lessonId]||{};
     const attempts=Math.max(Number(prev.attempts)||0,Number(state.attempts?.[lessonId])||0);
-    const body={
-      user_id:auth.userId,
-      lesson_id:lessonId,
-      status:correct?'completed':'in_progress',
-      best_score:correct?100:Math.max(0,Number(prev.best_score)||0),
-      attempts,
-      completed_at:correct?(prev.completed_at||new Date().toISOString()):null,
-      updated_at:new Date().toISOString()
-    };
-    const r=await fetch(`${runtime.supabase}/rest/v1/tutor_progress?on_conflict=user_id,lesson_id`,{
+    const body={user_id:auth.userId,lesson_id:lessonId,status:correct?'completed':'in_progress',best_score:correct?100:Math.max(0,Number(prev.best_score)||0),attempts,completed_at:correct?(prev.completed_at||new Date().toISOString()):null,updated_at:new Date().toISOString()};
+    const make=()=>fetch(`${runtime.supabase}/rest/v1/tutor_progress?on_conflict=user_id,lesson_id`,{
       method:'POST',
       headers:{'Content-Type':'application/json',apikey:runtime.key,Authorization:`Bearer ${auth.token}`,Prefer:'resolution=merge-duplicates,return=minimal'},
       body:JSON.stringify(body)
     });
+    let r=await make();
+    if(r.status===401){
+      const renewed=await refreshSession(auth.session);
+      if(renewed){auth={token:renewed.access_token,userId:renewed.user?.id||auth.userId,session:renewed};body.user_id=auth.userId;r=await make()}
+    }
     if(r.ok){state.remote=state.remote||{};state.remote[lessonId]=body;saveState(state);return true}
     return false;
   }
@@ -103,8 +122,9 @@
     const lessons=(data.lessons||[]).sort((a,b)=>(a.order||0)-(b.order||0));
     state.completed=state.completed||{};state.answers=state.answers||{};state.attempts=state.attempts||{};
     const done=lessons.filter(x=>state.completed[x.id]).length;
-    const signedIn=!!authContext();
-    host.innerHTML=`<div class="learning-head"><div><div class="eyebrow">VAST Tutor · structured learning</div><h2>Foundations that can be measured.</h2><p>${signedIn?'Signed-in progress is synced securely to your private Tutor profile.':'Progress stays on this device until you sign in through Vision AI.'}</p></div><div class="learning-progress"><b>${percent(done,lessons.length)}%</b><span>${done}/${lessons.length} lessons completed</span><div><i style="width:${percent(done,lessons.length)}%"></i></div></div></div><div class="lesson-grid">${lessons.map((x,i)=>lessonCard(x,i,state)).join('')}</div><div class="learning-foot"><span>${signedIn?'PRIVATE SYNC ON':'LOCAL FALLBACK'}</span><p>${signedIn?'Lesson status, score and attempt count are stored in the authenticated backend under row-level security. Screenshots are not stored here.':'Clearing browser storage resets local-only progress. Sign in through Vision AI to enable private cross-device progress sync.'}</p><button type="button" id="learning-reset">Reset local progress</button></div>`;
+    const s=loadSession();
+    const signedIn=!!(s?.access_token&&s?.user?.id&&runtime);
+    host.innerHTML=`<div class="learning-head"><div><div class="eyebrow">VAST Tutor · structured learning</div><h2>Foundations that can be measured.</h2><p>${signedIn?'Signed-in progress is synced securely to your private Tutor profile.':'Progress stays on this device until you sign in through Vision AI.'}</p></div><div class="learning-progress"><b>${percent(done,lessons.length)}%</b><span>${done}/${lessons.length} lessons completed</span><div><i style="width:${percent(done,lessons.length)}%"></i></div></div></div><div class="lesson-grid">${lessons.map((x,i)=>lessonCard(x,i,state)).join('')}</div><div class="learning-foot"><span>${signedIn?'PRIVATE SYNC ON':'LOCAL FALLBACK'}</span><p>${signedIn?'Lesson status, score and attempt count are stored in the authenticated backend under row-level security. Expired access tokens refresh automatically; screenshots are not stored here.':'Clearing browser storage resets local-only progress. Sign in through Vision AI to enable private cross-device progress sync.'}</p><button type="button" id="learning-reset">Reset local progress</button></div>`;
     bind(lessons,state,data);
   }
 
@@ -115,10 +135,7 @@
     return `<article class="lesson-card ${complete?'complete':''}" data-lesson="${esc(x.id)}"><div class="lesson-meta"><span>${String(i+1).padStart(2,'0')} · ${esc(x.level)}</span><b>${esc(x.minutes)} min${attempts?` · ${attempts} attempt${attempts===1?'':'s'}`:''}</b></div><h3>${esc(x.title)}</h3><p>${esc(x.summary)}</p><ul>${(x.key_points||[]).map(k=>`<li>${esc(k)}</li>`).join('')}</ul><div class="quiz-box"><strong>Checkpoint</strong><p>${esc(x.quiz?.question||'')}</p><div class="quiz-options">${(x.quiz?.options||[]).map((o,idx)=>`<button type="button" data-answer="${idx}" ${answered!==undefined?'disabled':''}>${esc(o)}</button>`).join('')}</div><div class="quiz-result ${answered===undefined?'':'show'}">${answered===undefined?'':resultText(x,answered)}</div></div><div class="lesson-complete">${complete?'✓ Completed':'Complete the checkpoint to finish this lesson'}</div></article>`;
   }
 
-  function resultText(x,answer){
-    const ok=Number(answer)===Number(x.quiz?.correct_index);
-    return `<b>${ok?'Correct':'Review this'}</b><span>${esc(x.quiz?.explanation||'')}</span>`;
-  }
+  function resultText(x,answer){const ok=Number(answer)===Number(x.quiz?.correct_index);return `<b>${ok?'Correct':'Review this'}</b><span>${esc(x.quiz?.explanation||'')}</span>`}
 
   function bind(lessons,state,data){
     q('#learning-reset')?.addEventListener('click',()=>{try{localStorage.removeItem(STORE)}catch{}render(data,{completed:{},answers:{},attempts:{},remote:{}})});
