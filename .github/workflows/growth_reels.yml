@@ -1,0 +1,68 @@
+name: VASTcode21 growth Reels
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'tools/generate_growth_reels.py'
+      - '.github/workflows/growth_reels.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: vastcode21-growth-reels
+  cancel-in-progress: false
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 1
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+
+      - name: Install creative dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install pillow
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg fonts-dejavu-core
+
+      - name: Generate varied Reels with embedded original audio
+        run: python tools/generate_growth_reels.py
+
+      - name: Verify both Reels contain audio streams
+        run: |
+          for f in marketing/assets/growth-xauusd-mistakes-v1.mp4 marketing/assets/growth-build-public-v1.mp4; do
+            test -s "$f"
+            ffprobe -v error -select_streams a:0 -show_entries stream=codec_name -of csv=p=0 "$f" | grep -qi aac
+          done
+
+      - name: Commit growth assets and queue
+        run: |
+          git config user.name 'VASTcode21 Growth Bot'
+          git config user.email 'vastcode21-bot@users.noreply.github.com'
+          git add marketing/assets/growth-xauusd-mistakes-v1.mp4 \
+                  marketing/assets/growth-xauusd-mistakes-v1.jpg \
+                  marketing/assets/growth-build-public-v1.mp4 \
+                  marketing/assets/growth-build-public-v1.jpg \
+                  marketing/queue.json
+          if git diff --cached --quiet; then
+            echo 'Growth Reels already current.'
+            exit 0
+          fi
+          git commit -m 'growth: add varied Reels with embedded audio'
+          for attempt in 1 2 3; do
+            git pull --rebase origin main && git push && break
+            if [ "$attempt" -eq 3 ]; then
+              echo 'Could not persist growth Reel assets after retries' >&2
+              exit 1
+            fi
+            sleep 3
+          done
