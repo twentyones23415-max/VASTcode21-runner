@@ -24,6 +24,7 @@ ROOT = Path(__file__).resolve().parents[1]
 QUEUE_PATH = ROOT / "marketing" / "queue.json"
 CONFIG_PATH = ROOT / "marketing" / "social_config.json"
 STATE_PATH = ROOT / "marketing" / "publish_state.json"
+GROWTH_PATH = ROOT / "marketing" / "growth_metrics.json"
 API_BASE = "https://graph.instagram.com"
 
 
@@ -172,6 +173,8 @@ def main() -> int:
     config = load_json(CONFIG_PATH)
     queue = load_json(QUEUE_PATH)
     state = load_json(STATE_PATH) if STATE_PATH.exists() else {"version": "2.0.0", "last_publish_at": None, "published": []}
+    growth = load_json(GROWTH_PATH) if GROWTH_PATH.exists() else {}
+    followers = int(growth.get("followers_count", 0) or 0)
 
     if not config.get("enabled", False):
         print("Instagram publishing disabled in social_config.json")
@@ -225,12 +228,17 @@ def main() -> int:
 
     candidates = [
         item for item in queue.get("items", [])
-        if "Instagram" in item.get("platforms", []) and item.get("id") not in published_ids
+        if "Instagram" in item.get("platforms", [])
+        and item.get("id") not in published_ids
+        and not (followers < 10 and str(item.get("pillar") or "").lower() == "services")
     ]
     candidates.sort(key=lambda x: int(x.get("priority", 0)), reverse=True)
     if not candidates:
         print("No unpublished Instagram queue items available.")
         return 0
+
+    if followers < 10:
+        print(f"Discovery-first guard active at {followers} followers: service posts excluded from organic cadence.")
 
     item = candidates[0]
     queue_id = str(item["id"])
