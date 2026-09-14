@@ -4,7 +4,8 @@
 This path is limited to organic service/revenue offer items. It keeps account
 validation, paid-ads/live-trading safety stops, local/remote duplicate protection,
 Instagram media-container checks, and the same global daily/spacing limits as the
-main Instagram publisher.
+main Instagram publisher. While the account has fewer than 10 followers, service
+posts are deferred so the scarce organic slot is reserved for discovery/value.
 """
 
 from __future__ import annotations
@@ -43,6 +44,13 @@ def main() -> int:
         raise RuntimeError("Safety stop: paid_ads must remain false.")
     if config.get("live_trading", True):
         raise RuntimeError("Safety stop: live_trading must remain false.")
+
+    growth_path = pub.ROOT / "marketing" / "growth_metrics.json"
+    growth = pub.load_json(growth_path) if growth_path.exists() else {}
+    followers = int(growth.get("followers_count", 0) or 0)
+    if followers < 10:
+        print(f"Discovery-first guard active: {followers} followers. Service offers stay profile-only until 10 followers.")
+        return 0
 
     me = pub.api("GET", "/me", token, {"fields": "id,username"})
     username = me.get("username")
