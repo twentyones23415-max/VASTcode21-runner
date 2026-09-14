@@ -1,15 +1,15 @@
 {
-  "generated_at": "2026-09-14T05:45:00+00:00",
+  "generated_at": "2026-09-14T06:42:26.975207+00:00",
   "mode": "zero_to_ten_rescue",
   "followers_count": 0,
   "growth_goal_followers": 100,
   "paid_ads": false,
   "live_trading": false,
   "source_status": {
-    "experiments": 132,
+    "experiments": 156,
     "generation": 5,
     "mt5_validation_passed": 1,
-    "mt5_validation_rejected": 4,
+    "mt5_validation_rejected": 6,
     "robustness_passed": 1,
     "forward_collecting": 1,
     "forward_passed": 0,
@@ -22,41 +22,39 @@
     {
       "id": "event-risk-20260914",
       "pillar": "market_risk",
-      "hook": "FOMC is Wednesday. If you trade GOLD or BITCOIN, save this before 21:00 Bucharest.",
-      "caption": "The Federal Reserve's September 15-16 meeting decision is scheduled for Wednesday 16 Sep at 2:00 p.m. ET (21:00 Bucharest); the press conference is scheduled for 2:30 p.m. ET (21:30 Bucharest). For XAUUSD and BTCUSD, watch three things instead of guessing direction: 1) spread/liquidity conditions around the release, 2) the first reaction versus the follow-through after the statement is digested, and 3) whether the press conference changes the market's interpretation. Source: Federal Reserve calendar, verified 14 Sep 2026. This is event-risk context, not a trade call.",
-      "creative_brief": "9:16 event-risk Reel. First frame: FOMC WED 21:00. Then three fast checklist frames. Final frame: SAVE THIS CHECKLIST + FOLLOW @vast.code21. Keep the verified-source line visible.",
+      "hook": "FOMC Wednesday 21:00: 3 things to check before XAUUSD or BTCUSD moves.",
+      "caption": "FOMC decision: Wednesday 16 Sep at 21:00 local time; press conference follows at 21:30. For XAUUSD and BTCUSD, watch three things instead of guessing direction: 1) spread/liquidity conditions around the release, 2) the first reaction versus the reaction after the statement is digested, and 3) whether the press conference changes the market's interpretation. This is event-risk context, not a trade call. Verify the Federal Reserve schedule before acting.",
+      "creative_brief": "9:16 event-risk Reel. First frame: EVENT RISK AHEAD. Second: event name + local time. Third: XAUUSD / BTCUSD + CHECK CONTEXT, NOT HYPE.",
       "format": "reel",
       "platforms": [
         "Instagram"
       ],
-      "priority": 400,
-      "status": "ready_to_publish",
+      "priority": 260,
+      "status": "ready_for_design",
       "hashtags": [
         "#FOMC",
         "#XAUUSD",
         "#GoldTrading",
         "#BTCUSD",
-        "#MetaTrader5",
-        "#TradingEducation"
+        "#BitcoinTrading",
+        "#MT5"
       ],
       "cta": "Save this checklist and follow @vast.code21 for verified XAUUSD/BTCUSD event-risk context.",
-      "disclaimer": "Event-risk context only, not a trading instruction. Scheduled times can change; verify the official Federal Reserve calendar. Trading involves risk.",
+      "disclaimer": "Event-risk context only, not a trading instruction. Scheduled times can change; verify the linked official source. Trading involves risk.",
       "reel_script": [
-        "FOMC · WED 16 SEP · 21:00",
+        "FOMC · WED 21:00",
         "1 · SPREAD / LIQUIDITY",
         "2 · FIRST MOVE ≠ FINAL MOVE",
-        "3 · PRESS CONFERENCE · 21:30",
-        "XAUUSD · BTCUSD\nSAVE + FOLLOW @vast.code21"
+        "3 · PRESSER 21:30",
+        "XAUUSD · BTCUSD\nSAVE THIS CHECKLIST"
       ],
-      "growth_hypothesis": "timely_saveable_search_intent_reel",
-      "verified_source": "https://www.federalreserve.gov/newsevents/2026-september.htm",
-      "verified_at": "2026-09-14"
+      "growth_hypothesis": "timely_saveable_search_intent_reel"
     },
     {
       "id": "growth-20260914",
       "pillar": "build_in_public",
       "hook": "We are building VASTcode21 from zero—in public.",
-      "caption": "Current state: 132 experiments, generation 5, 1 MT5 pass result(s), 4 MT5 reject result(s). We will publish the process, including failures, without turning a backtest into a profit promise.",
+      "caption": "Current state: 156 experiments, generation 5, 1 MT5 pass result(s), 6 MT5 reject result(s). We will publish the process, including failures, without turning a backtest into a profit promise.",
       "creative_brief": "9:16 build-in-public Reel: ZERO → TEST → REJECT → IMPROVE. Large numeric counters.",
       "format": "reel",
       "platforms": [
@@ -76,7 +74,7 @@
       "disclaimer": "Trading involves risk. Historical or backtested results do not guarantee future performance.",
       "reel_script": [
         "BUILDING FROM ZERO",
-        "132 EXPERIMENTS\nGEN 5",
+        "156 EXPERIMENTS\nGEN 5",
         "FOLLOW THE BUILD\nNOT THE HYPE"
       ]
     },
@@ -178,7 +176,6 @@
   "growth_strategy": {
     "stage": "zero_to_ten",
     "principle": "discovery_and_saves_before_sales",
-    "evidence": "0 followers and 0 measured likes/comments across current media",
-    "today_focus": "one verified, timely, saveable Reel plus authentic niche engagement; no service promotion"
+    "evidence": "0 followers and 0 measured likes/comments across current media"
   }
 }
