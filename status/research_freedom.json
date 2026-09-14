@@ -12,7 +12,7 @@
     "rates_fx"
   ],
   "context_intelligence_status": "signals_detected",
-  "context_signal_count": 85,
+  "context_signal_count": 89,
   "explicit_restriction_signal_count": 4,
   "freedom_status": "review_required",
   "information_scope": "unbounded_relevant",
@@ -21,7 +21,7 @@
   "restriction_signal_kinds": [
     "fixed_timeframe_list"
   ],
-  "scanned_text_files": 34,
+  "scanned_text_files": 36,
   "scope_contract_ok": true,
   "tradable_assets": [
     "XAUUSD",
