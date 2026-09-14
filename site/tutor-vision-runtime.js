@@ -2,6 +2,8 @@
   const CONFIG='data/tutor_runtime.json';
   const SESSION_KEY='vast_tutor_supabase_session_v1';
   const MAX_IMAGE_BYTES=8*1024*1024;
+  const REQUEST_TIMEOUT_MS=30000;
+  const CONFIG_TIMEOUT_MS=10000;
   const ALLOWED_IMAGE_TYPES=new Set(['image/png','image/jpeg','image/webp']);
   const q=(s,r=document)=>r.querySelector(s);
   const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -14,6 +16,14 @@
       if(u.protocol!=='https:' && !['localhost','127.0.0.1'].includes(u.hostname)) return '';
       return u.href.replace(/\/$/,'');
     }catch(_){return ''}
+  }
+
+  async function timedFetch(url,options={},timeoutMs=REQUEST_TIMEOUT_MS){
+    const controller=new AbortController();
+    const timer=setTimeout(()=>controller.abort(),timeoutMs);
+    try{return await fetch(url,{...options,signal:controller.signal})}
+    catch(e){if(e?.name==='AbortError')throw new Error('REQUEST_TIMEOUT');throw e}
+    finally{clearTimeout(timer)}
   }
 
   function loadSession(){
@@ -71,7 +81,7 @@
   }
 
   async function authRequest(path,body){
-    const r=await fetch(`${runtime.supabase}${path}`,{
+    const r=await timedFetch(`${runtime.supabase}${path}`,{
       method:'POST',cache:'no-store',
       headers:{'Content-Type':'application/json','apikey':runtime.key},
       body:JSON.stringify(body)
@@ -97,7 +107,9 @@
       }else{
         authPanel('Account created. Check your email for the Supabase confirmation message, then return here and sign in.');
       }
-    }catch(e){if(note)note.textContent=`Could not ${mode==='signup'?'create account':'sign in'}: ${e.message||e}`}
+    }catch(e){
+      if(note)note.textContent=(e.message||e)==='REQUEST_TIMEOUT'?'The secure sign-in service did not respond in time. Try again.':`Could not ${mode==='signup'?'create account':'sign in'}: ${e.message||e}`
+    }
   }
 
   async function refreshSession(){
@@ -119,7 +131,7 @@
 
   async function backendFetch(method,body){
     if(!(await validSession())) throw new Error('AUTH_REQUIRED');
-    const make=()=>fetch(runtime.fn,{
+    const make=()=>timedFetch(runtime.fn,{
       method,cache:'no-store',
       headers:{'Content-Type':'application/json','apikey':runtime.key,'Authorization':`Bearer ${session.access_token}`},
       body:body===undefined?undefined:JSON.stringify(body)
@@ -193,13 +205,17 @@
       render(d);
     }catch(e){
       if((e.message||e)==='AUTH_REQUIRED')authPanel('Your secure session expired. Sign in again to continue.');
+      else if((e.message||e)==='REQUEST_TIMEOUT')status('The secure analysis service did not respond within 30 seconds. No result was invented; choose the screenshot again and retry when the backend is available.','error');
       else status(`Analysis could not be completed: ${e.message||e}`,'error');
-    }finally{await refreshVisionHealth(true)}
+    }finally{
+      if(input)input.value='';
+      await refreshVisionHealth(true);
+    }
   }
 
   async function signOut(){
     if(session?.access_token){
-      try{await fetch(`${runtime.supabase}/auth/v1/logout`,{method:'POST',headers:{apikey:runtime.key,Authorization:`Bearer ${session.access_token}`}})}catch{}
+      try{await timedFetch(`${runtime.supabase}/auth/v1/logout`,{method:'POST',headers:{apikey:runtime.key,Authorization:`Bearer ${session.access_token}`}},CONFIG_TIMEOUT_MS)}catch{}
     }
     saveSession(null);setVisionState('SIGN IN',false);authPanel();
     const btn=q('#vision-analyze');if(btn){btn.disabled=true;btn.textContent='Sign in for secure AI analysis'}
@@ -237,7 +253,7 @@
       if(!silent)signedInPanel(health);
     }catch(e){
       if((e.message||e)==='AUTH_REQUIRED'){setVisionState('SIGN IN',false);btn.disabled=true;btn.textContent='Sign in for secure AI analysis';if(!silent)authPanel();return}
-      setVisionState('DEGRADED',false);btn.disabled=true;btn.textContent='Secure AI analysis · temporarily unavailable';if(!silent)status(`Backend check failed: ${e.message||e}`,'error');
+      setVisionState('DEGRADED',false);btn.disabled=true;btn.textContent='Secure AI analysis · temporarily unavailable';if(!silent)status((e.message||e)==='REQUEST_TIMEOUT'?'Backend health check timed out. Live analysis remains disabled until the secure backend responds.':`Backend check failed: ${e.message||e}`,'error');
     }
   }
 
@@ -245,13 +261,13 @@
     const btn=q('#vision-analyze');if(!btn)return;
     ensureResultHost();btn.addEventListener('click',analyze);
     try{
-      const cr=await fetch(`${CONFIG}?t=${Date.now()}`,{cache:'no-store'});if(!cr.ok)throw new Error('runtime config unavailable');
+      const cr=await timedFetch(`${CONFIG}?t=${Date.now()}`,{cache:'no-store'},CONFIG_TIMEOUT_MS);if(!cr.ok)throw new Error('runtime config unavailable');
       const cfg=await cr.json();
       const supabase=httpsUrl(cfg.supabase_url), fn=httpsUrl(cfg.vision_function_url), key=String(cfg.supabase_publishable_key||'').trim();
       if(cfg.enabled!==true||!supabase||!fn||!key){setVisionState('BACKEND NEEDED',false);btn.disabled=true;btn.textContent='Secure AI analysis · backend required';return}
       runtime={supabase,fn,key,health:null};
       await refreshVisionHealth(false);
-    }catch(e){runtime=null;setVisionState('DEGRADED',false);btn.disabled=true;btn.textContent='Secure AI analysis · temporarily unavailable';status('Secure runtime configuration could not be loaded.','error')}
+    }catch(e){runtime=null;setVisionState('DEGRADED',false);btn.disabled=true;btn.textContent='Secure AI analysis · temporarily unavailable';status((e.message||e)==='REQUEST_TIMEOUT'?'Secure runtime configuration timed out. Try again when connectivity is stable.':'Secure runtime configuration could not be loaded.','error')}
   }
 
   document.addEventListener('DOMContentLoaded',()=>setTimeout(init,0));
