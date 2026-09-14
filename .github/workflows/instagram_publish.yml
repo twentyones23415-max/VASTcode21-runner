@@ -13,8 +13,9 @@ on:
         required: false
         default: false
         type: boolean
-  # Run hourly; instagram_publisher.py itself gates on the configured local
-  # publish hour, max 1 post/local day and minimum 20-hour spacing.
+  # Run hourly. Normal cadence publishes at the configured local hour. While
+  # the account is below 10 followers, a zero-to-ten rescue guard allows the
+  # first eligible hourly run after the 20-hour spacing rule to publish.
   schedule:
     - cron: '7 * * * *'
 
@@ -36,13 +37,38 @@ jobs:
         with:
           python-version: '3.12'
 
+      - name: Enable zero-to-ten growth rescue cadence
+        if: ${{ github.event_name == 'schedule' }}
+        shell: bash
+        run: |
+          followers=$(python - <<'PY'
+          import json
+          from pathlib import Path
+          p = Path('marketing/growth_metrics.json')
+          data = json.loads(p.read_text(encoding='utf-8')) if p.exists() else {}
+          print(int(data.get('followers_count', 0) or 0))
+          PY
+          )
+          if [ "$followers" -lt 10 ]; then
+            echo 'GROWTH_RESCUE_FORCE_PUBLISH=true' >> "$GITHUB_ENV"
+            echo "Zero-to-ten rescue active at ${followers} followers: next eligible hourly run may publish."
+          else
+            echo 'GROWTH_RESCUE_FORCE_PUBLISH=false' >> "$GITHUB_ENV"
+          fi
+
       - name: Validate or publish Instagram content
         env:
           INSTAGRAM_ACCESS_TOKEN: ${{ secrets.INSTAGRAM_ACCESS_TOKEN }}
           VALIDATE_ONLY: ${{ github.event_name == 'workflow_dispatch' && inputs.validate_only || false }}
-          FORCE_PUBLISH: ${{ github.event_name == 'workflow_dispatch' && inputs.force_publish || false }}
+          REQUEST_FORCE_PUBLISH: ${{ github.event_name == 'workflow_dispatch' && inputs.force_publish || false }}
         shell: bash
         run: |
+          if [ "$REQUEST_FORCE_PUBLISH" = 'true' ] || [ "${GROWTH_RESCUE_FORCE_PUBLISH:-false}" = 'true' ]; then
+            export FORCE_PUBLISH=true
+          else
+            export FORCE_PUBLISH=false
+          fi
+
           set +e
           python tools/instagram_publisher.py 2>&1 | tee /tmp/instagram-publisher.log
           publisher_status=${PIPESTATUS[0]}
