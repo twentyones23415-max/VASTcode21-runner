@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-09-14T06:42:26.975207+00:00",
-  "mode": "zero_to_ten_growth_sprint",
+  "generated_at": "2026-09-14T12:41:24.630317+00:00",
+  "mode": "zero_to_ten_rescue",
   "followers_count": 0,
   "growth_goal_followers": 100,
   "paid_ads": false,
   "live_trading": false,
   "source_status": {
-    "experiments": 156,
+    "experiments": 180,
     "generation": 5,
     "mt5_validation_passed": 1,
     "mt5_validation_rejected": 6,
@@ -19,56 +19,6 @@
     "event_risk_active": true
   },
   "items": [
-    {
-      "id": "growth-xauusd-mistakes-v1",
-      "pillar": "education",
-      "hook": "3 XAUUSD mistakes before high-impact news.",
-      "caption": "Fast news moves can punish rushed decisions. Three common mistakes to avoid: chasing the first spike, ignoring spread/liquidity, and assuming the first move is the final move.",
-      "creative_brief": "Dynamic 9:16 GOLD Reel with animated chart motion, kinetic typography, fast cuts and original electronic background music.",
-      "format": "reel",
-      "platforms": [
-        "Instagram"
-      ],
-      "priority": 520,
-      "status": "ready_for_design",
-      "hashtags": [
-        "#XAUUSD",
-        "#GoldTrading",
-        "#MT5",
-        "#TradingEducation",
-        "#RiskManagement",
-        "#VASTcode21"
-      ],
-      "cta": "Save this and follow @vast.code21 for practical GOLD / BTC / MT5 research.",
-      "disclaimer": "Educational context only. Trading involves risk.",
-      "audio": "embedded_original_electronic",
-      "growth_hypothesis": "fast_hook_saveable_news_risk_education"
-    },
-    {
-      "id": "growth-build-public-v1",
-      "pillar": "build_in_public",
-      "hook": "Most trading systems show the win. We show the rejects too.",
-      "caption": "VASTcode21 is being built in public: test, reject weak evidence, improve, and retest. The goal is a stronger process—not hype.",
-      "creative_brief": "9:16 engineering/terminal Reel with code-style visuals, test/reject stamps, glitch motion and original industrial-electronic music. Visually distinct from the GOLD Reel.",
-      "format": "reel",
-      "platforms": [
-        "Instagram"
-      ],
-      "priority": 510,
-      "status": "ready_for_design",
-      "hashtags": [
-        "#VASTcode21",
-        "#MetaTrader5",
-        "#QuantTrading",
-        "#SystematicTrading",
-        "#TradingResearch",
-        "#AlgoTrading"
-      ],
-      "cta": "Follow @vast.code21 to watch the build—not the hype.",
-      "disclaimer": "Research and education only. Trading involves risk.",
-      "audio": "embedded_original_industrial",
-      "growth_hypothesis": "transparent_build_in_public_follow_conversion"
-    },
     {
       "id": "event-risk-20260914",
       "pillar": "market_risk",
@@ -104,7 +54,7 @@
       "id": "growth-20260914",
       "pillar": "build_in_public",
       "hook": "We are building VASTcode21 from zero—in public.",
-      "caption": "Current state: 156 experiments, generation 5, 1 MT5 pass result(s), 6 MT5 reject result(s). We will publish the process, including failures, without turning a backtest into a profit promise.",
+      "caption": "Current state: 180 experiments, generation 5, 1 MT5 pass result(s), 6 MT5 reject result(s). We will publish the process, including failures, without turning a backtest into a profit promise.",
       "creative_brief": "9:16 build-in-public Reel: ZERO → TEST → REJECT → IMPROVE. Large numeric counters.",
       "format": "reel",
       "platforms": [
@@ -124,7 +74,7 @@
       "disclaimer": "Trading involves risk. Historical or backtested results do not guarantee future performance.",
       "reel_script": [
         "BUILDING FROM ZERO",
-        "156 EXPERIMENTS\nGEN 5",
+        "180 EXPERIMENTS\nGEN 5",
         "FOLLOW THE BUILD\nNOT THE HYPE"
       ]
     },
@@ -225,14 +175,7 @@
   ],
   "growth_strategy": {
     "stage": "zero_to_ten",
-    "principle": "discovery_saves_shares_and_follow_conversion_before_sales",
-    "evidence": "0 followers and 0 measured likes/comments across current media",
-    "creative_rotation": "do_not_repeat_same_visual_style_on_consecutive_posts",
-    "reel_audio_required": true,
-    "next_focus": [
-      "XAUUSD risk education",
-      "build in public",
-      "MT5 practical education"
-    ]
+    "principle": "discovery_and_saves_before_sales",
+    "evidence": "0 followers and 0 measured likes/comments across current media"
   }
 }

@@ -1,13 +1,24 @@
 {
   "version": "1.0.0",
-  "updated_at": "2026-09-14T06:42:26.266841+00:00",
+  "updated_at": "2026-09-14T12:41:24.108744+00:00",
   "account": "vast.code21",
   "followers_count": 0,
-  "media_count": 3,
+  "media_count": 4,
   "followers_delta_24h": 0,
-  "best_format": "image",
+  "best_format": "reel",
   "best_format_avg_engagement": 0.0,
   "recent_media": [
+    {
+      "media_id": "18334949947275107",
+      "published_at": "2026-09-14T07:23:39+0000",
+      "format": "reel",
+      "likes": 0,
+      "comments": 0,
+      "engagement_score": 0,
+      "queue_id": "event-risk-20260914",
+      "pillar": "market_risk",
+      "permalink": "https://www.instagram.com/reel/DdQly1HCVe3/"
+    },
     {
       "media_id": "18113547598825870",
       "published_at": "2026-09-13T10:29:16+0000",
