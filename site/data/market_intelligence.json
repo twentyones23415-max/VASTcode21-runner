@@ -1,7 +1,7 @@
 {
   "version": "1.6",
   "status": "active",
-  "updated_at": "2026-09-14T01:04:33.715351+00:00",
+  "updated_at": "2026-09-14T01:31:36.602113+00:00",
   "scope": [
     "XAUUSD",
     "BTCUSD",
@@ -14,15 +14,15 @@
       "source": "The Motley Fool",
       "category": "bitcoin / crypto",
       "published_at": "2026-09-14T00:33:37+00:00",
-      "age": "30m ago"
+      "age": "57m ago"
     },
     {
-      "title": "Gold rises on dip-buying even as Fed rate hike bets rise after U.S. inflation data - cnbc.com",
-      "link": "https://news.google.com/rss/articles/CBMioAFBVV95cUxQZDVOa1pBNW14c2JSQVN3RmdwLU9YSV9ieVhiN1NoOHV5RWhXRjlubXFVVFlZeHJubkI3Vm9qTC1GZUdvWlZmVEpVT3hKUXcwendGcjcwaDZDQmU0aXZrQzNZWVU3d0Z0V01ZbTktUTRaM2luVzRvd1NINUtMYkE0d2NNU2VEUnljNXozSkdiLUZIdlM5VmZVSHdheUhZM3dO0gGmAUFVX3lxTE9maXlxNFZRSXBfeUgwbm5rd1oyamlPcVB3akFhMUd1cF9GN1lQdEUwVHpudnNCY05iLWpBaDN1TlF2cGo2NWkyVnFweXVsUXpnWDBvYmlLMUQ0Rm9oSmVQa1pwbGlyUDJBaW0xY0w1eEJSMDRvd3JEd3FLMURsM1dtWm5oaG5yaFFGSjV4NFR5N1Btc2w2WHEyLWhiOUluUkhmejZHeFE?oc=5",
-      "source": "cnbc.com",
+      "title": "Gold Edges Lower as Hot US Inflation Bolsters Fed Rate-Hike Bets - Bloomberg.com",
+      "link": "https://news.google.com/rss/articles/CBMitgFBVV95cUxPU1UwdktIS01fNkIyUThhdTRMc0M3bW01SWVlQ3cxVnZZMldOMjJwYXFudHFIWVdZTFJDQUxzaEFjNkVOMW9qX2FVT20tc1dLNk1naS05UDE1X2JIM0V6X0V0MUs0b3lHeFBvXzl0b3YyNEE5YVJGdFZIZ1RMMGtUcmdHbXV4eGNLNzRaaXo0ajRBbFo0NTBqcmt1SW1HTVJpZ2F2WXJWV3lxREFSSFVlSjBXcHZYZw?oc=5",
+      "source": "Bloomberg.com",
       "category": "gold / macro",
-      "published_at": "2026-09-11T05:11:09+00:00",
-      "age": "2d ago"
+      "published_at": "2026-09-14T00:33:00+00:00",
+      "age": "58m ago"
     },
     {
       "title": "Waller, The Economic Outlook and Some Comments on My Policy Communication",
@@ -31,6 +31,30 @@
       "category": "fed / macro",
       "published_at": "2026-09-03T12:30:00+00:00",
       "age": "10d ago"
+    },
+    {
+      "title": "Democrats meet ahead of Tuesday's crucial Clarity Act vote; BTC, ETH implications. - investingLive",
+      "link": "https://news.google.com/rss/articles/CBMixwFBVV95cUxPTUswWFRCdW5abU15NmotMXUzbEZNR1RjaHRQd2ZWelZLTWxlcjhWWUlTUWYxbnNESDAzbDI4RmtjWTNFUndnQ3FzbkhGcDNfOHc1blVvY2ZfeXN4b293Q1BUenowRU9CbVlPb0pjUm5MY2Zkb2dKV1d1ZzdqM2tVTGRmSG4xamp2M0VPZWE4VXdfMzh1SWsxeUZhQ2RIczBSVGcxVXY1YXBUUUxyb0dqcG81NzNqdERFREFJWjVjTUJmSVBtTGFN?oc=5",
+      "source": "investingLive",
+      "category": "bitcoin / crypto",
+      "published_at": "2026-09-13T21:13:12+00:00",
+      "age": "4h ago"
+    },
+    {
+      "title": "Gold rises on dip-buying even as Fed rate hike bets rise after U.S. inflation data - CNBC",
+      "link": "https://news.google.com/rss/articles/CBMioAFBVV95cUxQZDVOa1pBNW14c2JSQVN3RmdwLU9YSV9ieVhiN1NoOHV5RWhXRjlubXFVVFlZeHJubkI3Vm9qTC1GZUdvWlZmVEpVT3hKUXcwendGcjcwaDZDQmU0aXZrQzNZWVU3d0Z0V01ZbTktUTRaM2luVzRvd1NINUtMYkE0d2NNU2VEUnljNXozSkdiLUZIdlM5VmZVSHdheUhZM3dO0gGmAUFVX3lxTE9maXlxNFZRSXBfeUgwbm5rd1oyamlPcVB3akFhMUd1cF9GN1lQdEUwVHpudnNCY05iLWpBaDN1TlF2cGo2NWkyVnFweXVsUXpnWDBvYmlLMUQ0Rm9oSmVQa1pwbGlyUDJBaW0xY0w1eEJSMDRvd3JEd3FLMURsM1dtWm5oaG5yaFFGSjV4NFR5N1Btc2w2WHEyLWhiOUluUkhmejZHeFE?oc=5",
+      "source": "CNBC",
+      "category": "gold / macro",
+      "published_at": "2026-09-11T05:11:09+00:00",
+      "age": "2d ago"
+    },
+    {
+      "title": "Minutes of the Federal Open Market Committee, July 28–29, 2026",
+      "link": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20260819a.htm",
+      "source": "Fed Press All",
+      "category": "fed / macro",
+      "published_at": "2026-08-19T18:00:00+00:00",
+      "age": "25d ago"
     },
     {
       "title": "Kevin O'Leary's New Investment Is Not Bitcoin or Stocks - Yahoo Finance",
@@ -49,12 +73,12 @@
       "age": "3d ago"
     },
     {
-      "title": "Minutes of the Federal Open Market Committee, July 28–29, 2026",
-      "link": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20260819a.htm",
+      "title": "Federal Reserve issues FOMC statement",
+      "link": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20260729a.htm",
       "source": "Fed Press All",
       "category": "fed / macro",
-      "published_at": "2026-08-19T18:00:00+00:00",
-      "age": "25d ago"
+      "published_at": "2026-07-29T18:00:00+00:00",
+      "age": "46d ago"
     },
     {
       "title": "Analysts Think Bitcoin is Less Than $5,000 Away From a Bull Market - Yahoo Finance",
@@ -62,23 +86,23 @@
       "source": "Yahoo Finance",
       "category": "bitcoin / crypto",
       "published_at": "2026-09-13T17:05:11+00:00",
-      "age": "7h ago"
+      "age": "8h ago"
     },
     {
-      "title": "Gold climbs on subdued U.S. dollar as inflation data awaited amid oil rally - cnbc.com",
+      "title": "Gold climbs on subdued U.S. dollar as inflation data awaited amid oil rally - CNBC",
       "link": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxPUjlfa2dYcDFfLUs5aHBldm92Y2stdXZDMDdrSXlqNzl0Mm4zRmlCcXRBNWZXLWdWWThQY2Y2OFltUFozVE00Tll6alRZT3B6RTZINmtXbGRIczBaQVFRNnI3WFBON3JCX0wtbTVaOTFReko4dDJzYmhIN2NWa0c1d0J4X3JQQUw1Zkxham5CREdlc3Y3ZWxpYlpyXy0tSDNtNjRvZmZUVkNQQdIBrwFBVV95cUxQYW5RTFFQS050TzluSDNCXzJGSVBncklzbUFpUTFncWZibktVNVhhVzUxUndQbnBFd2F3MkFHM1VPMU5kN2VRa1RDekFVRkZFbzRLcUtxaTRMZERLaFZSanlDUGpjZVo0UXRueldfb2I4T0twNFF1Q2hjQW9xTGF1QjVRTnRRdlJEdlprM3llQVg0RUd0X29XLTNpdnNsTVpkOS1nbGlLdVdwTmpKT3Jj?oc=5",
-      "source": "cnbc.com",
+      "source": "CNBC",
       "category": "gold / macro",
       "published_at": "2026-09-09T03:37:00+00:00",
       "age": "4d ago"
     },
     {
-      "title": "Federal Reserve issues FOMC statement",
-      "link": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20260729a.htm",
-      "source": "Fed Press All",
+      "title": "Jefferson, Navigating Economic Shocks: A Monetary Policymaker’s Perspective",
+      "link": "https://www.federalreserve.gov/newsevents/speech/jefferson20260716a.htm",
+      "source": "Fed Speeches",
       "category": "fed / macro",
-      "published_at": "2026-07-29T18:00:00+00:00",
-      "age": "46d ago"
+      "published_at": "2026-07-16T23:00:00+00:00",
+      "age": "59d ago"
     },
     {
       "title": "Jordi Visser Puts Bitcoin In The Same Bucket As SpaceX, Anthropic And OpenAI, Says ‘None Of Them Make Money’ - Yahoo Finance",
@@ -97,30 +121,6 @@
       "age": "103d ago"
     },
     {
-      "title": "Jefferson, Navigating Economic Shocks: A Monetary Policymaker’s Perspective",
-      "link": "https://www.federalreserve.gov/newsevents/speech/jefferson20260716a.htm",
-      "source": "Fed Speeches",
-      "category": "fed / macro",
-      "published_at": "2026-07-16T23:00:00+00:00",
-      "age": "59d ago"
-    },
-    {
-      "title": "Shock Leak Reveals An 'Extraordinary' Fed Earthquake Could Be About To Hit The Bitcoin Price - Forbes",
-      "link": "https://news.google.com/rss/articles/CBMiugFBVV95cUxONGhfeDMzeGxRdDYxSkx6T1oyUXQ4MnZzUEtDVHB0WFU4aEJBTkh4ZV95UFZTWFl3N0NYMjVyR0lNaXlXZ182ZWtiTVgyRFN3bldPYkpVM0FwMWNvVldpd1NWMlRSWUtZRGpKTVg1bnJjVWxDWWhPdW1DNmUyY1FSbDUwSENSbnRQQlBHNVAxakM0NEU2Y3RqWjMtRnVwdm9nOVk4c3RXa0N5TEU4andaTVRDUlZya3VXSWc?oc=5",
-      "source": "Forbes",
-      "category": "bitcoin / crypto",
-      "published_at": "2026-09-13T11:30:57+00:00",
-      "age": "13h ago"
-    },
-    {
-      "title": "Working Paper: Estimating the carbon footprint of gold as a long‑term investment and reserve asset",
-      "link": "https://www.gold.org/esg/gold-and-climate-change/working-paper-estimating-the-carbon-footprint-of-gold",
-      "source": "Gold World Gold Council",
-      "category": "gold / macro",
-      "published_at": "2026-04-09T09:07:10+00:00",
-      "age": "157d ago"
-    },
-    {
       "title": "Cook, Economic Outlook",
       "link": "https://www.federalreserve.gov/newsevents/speech/cook20260715a.htm",
       "source": "Fed Speeches",
@@ -129,14 +129,14 @@
       "age": "60d ago"
     },
     {
-      "title": "MicroStrategy's Bitcoin Guide Issues a 93% Crash Warning to Investors - Yahoo Finance",
-      "link": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQb2xibmc2QUVoYmhGS0N3N0p2YlI0M01FV1FBYmtSTGE1aUgzekROT0FQZTFlQkRnM2NZVWlHNmFjOGVudjBWU0hab2IyNVJGY1hkSjdHVVQ0ZHg4eTd6SlhST3gzOGJfdUxBazM2alp1MmYyZUxLdnpIS2FTT3k1NnJDNjlfV25xWklWU2N3ai1IMERvem8zdTRybFREZjU5R2lHaEZn?oc=5",
-      "source": "Yahoo Finance",
+      "title": "Shock Leak Reveals An 'Extraordinary' Fed Earthquake Could Be About To Hit The Bitcoin Price - Forbes",
+      "link": "https://news.google.com/rss/articles/CBMiugFBVV95cUxONGhfeDMzeGxRdDYxSkx6T1oyUXQ4MnZzUEtDVHB0WFU4aEJBTkh4ZV95UFZTWFl3N0NYMjVyR0lNaXlXZ182ZWtiTVgyRFN3bldPYkpVM0FwMWNvVldpd1NWMlRSWUtZRGpKTVg1bnJjVWxDWWhPdW1DNmUyY1FSbDUwSENSbnRQQlBHNVAxakM0NEU2Y3RqWjMtRnVwdm9nOVk4c3RXa0N5TEU4andaTVRDUlZya3VXSWc?oc=5",
+      "source": "Forbes",
       "category": "bitcoin / crypto",
-      "published_at": "2026-09-13T10:15:01+00:00",
+      "published_at": "2026-09-13T11:30:57+00:00",
       "age": "14h ago"
     }
   ],
   "feed_errors": [],
-  "quality_filtered": 4
+  "quality_filtered": 5
 }
