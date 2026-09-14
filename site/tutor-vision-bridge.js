@@ -9,6 +9,9 @@
   function writeFocus(value){
     try{sessionStorage.setItem(KEY,JSON.stringify(value))}catch{}
   }
+  function clearFocus(){
+    try{sessionStorage.removeItem(KEY)}catch{}
+  }
   function cleanLabel(text,label){return String(text||'').replace(label,'').trim()}
 
   function chooseLesson(text){
@@ -54,6 +57,12 @@
   function captureVisionResult(){
     const host=q('#vision-runtime-result');
     if(!host||host.style.display==='none')return;
+    const text=host.textContent||'';
+    if(/VAST Tutor Beta · secure sign in/i.test(text)||/Sign in to use secure Vision analysis/i.test(text)){
+      clearFocus();
+      renderTutorFocus();
+      return;
+    }
     if(captureLiveVisionResult(host)||capturePrivateHistory(host))renderTutorFocus();
   }
 
