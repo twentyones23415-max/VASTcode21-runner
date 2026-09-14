@@ -39,6 +39,23 @@
     return id==='foundation-risk'?'Risk before prediction':id==='foundation-review'?'Prediction → outcome review':'Evidence layers';
   }
 
+  function revealLesson(lessonId,attempt=0){
+    const lesson=q(`[data-lesson="${CSS.escape(lessonId)}"]`);
+    if(lesson){
+      lesson.scrollIntoView({behavior:'smooth',block:'center'});
+      lesson.animate?.([{outline:'2px solid rgba(114,217,237,.7)'},{outline:'2px solid transparent'}],{duration:1400});
+      return;
+    }
+    if(attempt<8)setTimeout(()=>revealLesson(lessonId,attempt+1),120);
+  }
+
+  function openTutorLesson(lessonId){
+    const tutorNav=q('[data-page="tutor"]');
+    if(tutorNav)tutorNav.click();
+    else if(location.hash!=='#tutor')location.hash='tutor';
+    requestAnimationFrame(()=>revealLesson(lessonId));
+  }
+
   function renderTutorFocus(){
     const slot=q('#tutor-slot');
     if(!slot)return;
@@ -55,10 +72,7 @@
       <div style="font-weight:800;font-size:16px;margin-top:7px">Suggested lesson: ${esc(lessonTitle(focus.lessonId))}</div>
       <div style="color:#9cb0bd;font-size:12px;line-height:1.5;margin-top:6px">${esc(focus.takeaway||focus.uncertainty||'Use the latest chart review as your learning focus.')}</div>
       <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:10px"><button type="button" class="btn secondary" id="vision-focus-open">Open suggested lesson</button><span style="color:#647d8d;font-size:10px">This recommendation is deterministic from the returned educational review; it is not a trade signal.</span></div>`;
-    q('#vision-focus-open',card)?.addEventListener('click',()=>{
-      const lesson=q(`[data-lesson="${CSS.escape(focus.lessonId)}"]`);
-      if(lesson){lesson.scrollIntoView({behavior:'smooth',block:'center'});lesson.animate?.([{outline:'2px solid rgba(114,217,237,.7)'},{outline:'2px solid transparent'}],{duration:1400});}
-    });
+    q('#vision-focus-open',card)?.addEventListener('click',()=>openTutorLesson(focus.lessonId));
   }
 
   function observeVision(){
