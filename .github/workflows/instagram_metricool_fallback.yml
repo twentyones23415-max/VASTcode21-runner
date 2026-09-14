@@ -1,0 +1,107 @@
+name: VASTcode21 Instagram Metricool fallback
+
+on:
+  workflow_dispatch:
+    inputs:
+      validate_only:
+        description: 'Validate fallback configuration only; do not schedule'
+        required: false
+        default: true
+        type: boolean
+      force_publish:
+        description: 'Use the next safe slot regardless of configured publish hour'
+        required: false
+        default: false
+        type: boolean
+  # Runs ten minutes after the direct Instagram publisher. Both workflows share
+  # the same concurrency group and publish_state guard, so this path only acts
+  # when the direct route did not already reserve/publish the queue item.
+  schedule:
+    - cron: '17 * * * *'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: vastcode21-instagram-publisher
+  cancel-in-progress: false
+
+jobs:
+  fallback:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+
+      - name: Enable zero-to-ten rescue cadence
+        if: ${{ github.event_name == 'schedule' }}
+        shell: bash
+        run: |
+          followers=$(python - <<'PY'
+          import json
+          from pathlib import Path
+          p = Path('marketing/growth_metrics.json')
+          data = json.loads(p.read_text(encoding='utf-8')) if p.exists() else {}
+          print(int(data.get('followers_count', 0) or 0))
+          PY
+          )
+          if [ "$followers" -lt 10 ]; then
+            echo 'GROWTH_RESCUE_FORCE_PUBLISH=true' >> "$GITHUB_ENV"
+            echo "Metricool zero-to-ten rescue active at ${followers} followers."
+          else
+            echo 'GROWTH_RESCUE_FORCE_PUBLISH=false' >> "$GITHUB_ENV"
+          fi
+
+      - name: Schedule through Metricool fallback
+        env:
+          METRICOOL_USER_TOKEN: ${{ secrets.METRICOOL_USER_TOKEN }}
+          METRICOOL_USER_ID: ${{ secrets.METRICOOL_USER_ID }}
+          METRICOOL_BLOG_ID: ${{ secrets.METRICOOL_BLOG_ID }}
+          VALIDATE_ONLY: ${{ github.event_name == 'workflow_dispatch' && inputs.validate_only || false }}
+          REQUEST_FORCE_PUBLISH: ${{ github.event_name == 'workflow_dispatch' && inputs.force_publish || false }}
+        shell: bash
+        run: |
+          if [ "$REQUEST_FORCE_PUBLISH" = 'true' ] || [ "${GROWTH_RESCUE_FORCE_PUBLISH:-false}" = 'true' ]; then
+            export FORCE_PUBLISH=true
+          else
+            export FORCE_PUBLISH=false
+          fi
+
+          set +e
+          python tools/instagram_metricool_fallback.py 2>&1 | tee /tmp/metricool-fallback.log
+          status=${PIPESTATUS[0]}
+          set -e
+
+          if [ "$status" -eq 0 ]; then
+            exit 0
+          fi
+          if [ "$status" -eq 3 ]; then
+            echo '::warning title=Metricool fallback not connected::Add the three Metricool repository secrets to activate automatic failover.'
+            exit 0
+          fi
+          exit "$status"
+
+      - name: Commit fallback publish state when changed
+        if: ${{ always() && github.event_name != 'workflow_dispatch' || (github.event_name == 'workflow_dispatch' && !inputs.validate_only) }}
+        shell: bash
+        run: |
+          git config user.name 'VASTcode21 Instagram Bot'
+          git config user.email 'vastcode21-bot@users.noreply.github.com'
+          git add marketing/publish_state.json
+          if git diff --cached --quiet; then
+            echo 'No Metricool publish state change.'
+          else
+            git commit -m 'chore: record Metricool Instagram scheduling'
+            for attempt in 1 2 3; do
+              git pull --rebase origin main && git push && break
+              if [ "$attempt" -eq 3 ]; then
+                echo 'Could not persist Metricool scheduling state after retries' >&2
+                exit 1
+              fi
+              sleep 3
+            done
+          fi
