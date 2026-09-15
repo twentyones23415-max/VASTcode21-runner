@@ -1,7 +1,7 @@
 {
   "version": "1.6",
   "status": "active",
-  "updated_at": "2026-09-15T02:34:10.309275+00:00",
+  "updated_at": "2026-09-15T03:34:25.677889+00:00",
   "scope": [
     "XAUUSD",
     "BTCUSD",
@@ -9,12 +9,12 @@
   ],
   "items": [
     {
-      "title": "Bitcoin Rally Stalls as Optimism About US Crypto Bill Wanes - Bloomberg.com",
-      "link": "https://news.google.com/rss/articles/CBMirwFBVV95cUxNUmZMSzVFeWhfc1M5dnJnVkh0dlhqNTRUbFVvOUZCQzItb1lyOThLMFhOc0VISkpGUm0xQTZvWk1OOXZjYzlxQy0xV2ZfNHNQcUhsVGM5YjlNV3dDVUwyaV9SX3dwU3hRVWpmQm5hbThtWXkzb2h1LXU0V1pqYllwQzZEYkkxR0F0YVZoQVQ2aFBxTGRibnhHQmJPV0VrSGd6NS1xQXp5VUpUdnVXSUdB?oc=5",
-      "source": "Bloomberg.com",
+      "title": "Bitcoin slips to $77,800 as Senate Clarity Act vote nears and oil prices climb",
+      "link": "https://www.coindesk.com/markets/2026/09/15/bitcoin-slips-to-usd77-800-as-senate-clarity-act-vote-nears-and-oil-prices-climb",
+      "source": "Bitcoin Coindesk",
       "category": "bitcoin / crypto",
-      "published_at": "2026-09-15T01:16:00+00:00",
-      "age": "1h ago"
+      "published_at": "2026-09-15T03:23:28+00:00",
+      "age": "10m ago"
     },
     {
       "title": "What a Fed rate hike could mean for gold and silver prices - CBS News",
@@ -22,7 +22,7 @@
       "source": "CBS News",
       "category": "gold / macro",
       "published_at": "2026-09-14T17:07:02+00:00",
-      "age": "9h ago"
+      "age": "10h ago"
     },
     {
       "title": "Waller, The Economic Outlook and Some Comments on My Policy Communication",
@@ -33,19 +33,19 @@
       "age": "11d ago"
     },
     {
-      "title": "Spot Bitcoin ETFs Lose $463M Amid ‘Difficult’ Time for Markets - Yahoo Finance",
-      "link": "https://news.google.com/rss/articles/CBMilwFBVV95cUxQM01RYVQwcG1fa1hnR2RvM05ma3BBVWNGSGwxb3JFTzN6ZlNzZU92S0xzSzFac1Y1bUxUb0R2d2haZG1sQjRhRXVidExkTEN4YklzTHZnVFZ4WE5DYXJUamtDWEVnR1lpSmxpVWtFTDVjT0dzVTNSNWg3bjRBNGZUTTIwV1pENlBEd3VaU2tGd2NEbk4wdk13?oc=5",
-      "source": "Yahoo Finance",
+      "title": "Bitcoin Rally Stalls as Optimism About US Crypto Bill Wanes - Bloomberg.com",
+      "link": "https://news.google.com/rss/articles/CBMirwFBVV95cUxNUmZMSzVFeWhfc1M5dnJnVkh0dlhqNTRUbFVvOUZCQzItb1lyOThLMFhOc0VISkpGUm0xQTZvWk1OOXZjYzlxQy0xV2ZfNHNQcUhsVGM5YjlNV3dDVUwyaV9SX3dwU3hRVWpmQm5hbThtWXkzb2h1LXU0V1pqYllwQzZEYkkxR0F0YVZoQVQ2aFBxTGRibnhHQmJPV0VrSGd6NS1xQXp5VUpUdnVXSUdB?oc=5",
+      "source": "Bloomberg.com",
       "category": "bitcoin / crypto",
-      "published_at": "2026-09-14T17:05:00+00:00",
-      "age": "9h ago"
+      "published_at": "2026-09-15T01:16:00+00:00",
+      "age": "2h ago"
     },
     {
       "title": "Gold price fall nearly 2% as oil surge and near-5% Treasury yields bolster Fed rate-hike expectations - Kitco AM Report - KITCO",
       "link": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxOdHhTNWdPX1Y1X1FSLUVIU0d3NHNCYmpXMG9jZ1NDWmdUVERDeGhuM21rSTJRMDVHaHozeW4xZ3lfLU9oRU9UMVZzNDh2R1FyVE9oRFhuX2lERnllYXlnWFlmWHdQSFdNUjh1MXAzbkQ3al8yMHVWZzBkZGRnbHZJTUhkd2Y3Mm5qbk1yc1R5VjdmSU9jRG9ibFlJc2gyQXgwdkE0ODZma012WHJ3eEpNQW1palhzRHhkM05N?oc=5",
       "source": "KITCO",
       "category": "gold / macro",
-      "published_at": "2026-09-14T13:51:39+00:00",
+      "published_at": "2026-09-14T14:51:39+00:00",
       "age": "12h ago"
     },
     {
@@ -57,11 +57,11 @@
       "age": "26d ago"
     },
     {
-      "title": "Bitcoin's late summer rally set to face off against the Fed, Congress - Reuters",
-      "link": "https://news.google.com/rss/articles/CBMiswFBVV95cUxQZEV1dXlZWDh3VTJpMHVvclNtOWY1WVZXSGFIM3JZa1h0bDYyNVUzd0lvcUFpdVJtVjFZemVZSGotMnJmR3Q5aDN5MzVaenluWUhseElqVEltb2RBQU8zTnktd3hOaWZnQ20yTG5OY3ltMjlXZU9ta0tvTkpnTlhncW1DcEg0bl9BNWdnVEdJOFc5THpPZmZYNjFNZEhPdEVvU1ZtWW5vWUlVMFp5VDd2RXpBcw?oc=5",
-      "source": "Reuters",
+      "title": "Spot Bitcoin ETFs Lose $463M Amid ‘Difficult’ Time for Markets - Yahoo Finance",
+      "link": "https://news.google.com/rss/articles/CBMilwFBVV95cUxQM01RYVQwcG1fa1hnR2RvM05ma3BBVWNGSGwxb3JFTzN6ZlNzZU92S0xzSzFac1Y1bUxUb0R2d2haZG1sQjRhRXVidExkTEN4YklzTHZnVFZ4WE5DYXJUamtDWEVnR1lpSmxpVWtFTDVjT0dzVTNSNWg3bjRBNGZUTTIwV1pENlBEd3VaU2tGd2NEbk4wdk13?oc=5",
+      "source": "Yahoo Finance",
       "category": "bitcoin / crypto",
-      "published_at": "2026-09-14T15:45:30+00:00",
+      "published_at": "2026-09-14T17:05:00+00:00",
       "age": "10h ago"
     },
     {
@@ -70,7 +70,7 @@
       "source": "Yahoo Finance",
       "category": "gold / macro",
       "published_at": "2026-09-14T11:18:25+00:00",
-      "age": "15h ago"
+      "age": "16h ago"
     },
     {
       "title": "Federal Reserve issues FOMC statement",
@@ -81,20 +81,20 @@
       "age": "47d ago"
     },
     {
-      "title": "Has the Bitcoin Rally Fizzled Out? - WSJ",
-      "link": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxOcTNWeEpyNUF1d0FaTG1rNFk0NlVmQ1F5QWExRk9yc21BWTBPb0xGSU0wdkEzZnhsSTdOS0cwNGVCZUstOFBKblR3RTU4clJmSFZWaG05akRYRGhuMmNhMzg3bE5zRTAtYTVZOGFPeE56TzU3MEVzTEVvdDVUQlJwXzNfX0pkXzBn?oc=5",
-      "source": "WSJ",
+      "title": "Bitcoin's late summer rally set to face off against the Fed, Congress - reuters.com",
+      "link": "https://news.google.com/rss/articles/CBMiswFBVV95cUxQZEV1dXlZWDh3VTJpMHVvclNtOWY1WVZXSGFIM3JZa1h0bDYyNVUzd0lvcUFpdVJtVjFZemVZSGotMnJmR3Q5aDN5MzVaenluWUhseElqVEltb2RBQU8zTnktd3hOaWZnQ20yTG5OY3ltMjlXZU9ta0tvTkpnTlhncW1DcEg0bl9BNWdnVEdJOFc5THpPZmZYNjFNZEhPdEVvU1ZtWW5vWUlVMFp5VDd2RXpBcw?oc=5",
+      "source": "reuters.com",
       "category": "bitcoin / crypto",
-      "published_at": "2026-09-14T14:12:00+00:00",
-      "age": "12h ago"
+      "published_at": "2026-09-14T15:45:30+00:00",
+      "age": "11h ago"
     },
     {
-      "title": "Gold falls to over one-month low as oil rally, inflation data boost rate-hike bets - Reuters",
+      "title": "Gold falls to over one-month low as oil rally, inflation data boost rate-hike bets - reuters.com",
       "link": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxQNmx1T0lGQjE3MEJmVkdNRXl5eXpxRzNrQk0zQUJzdGNqcXhEWTA3TW5iZVFIVDBuTVZ3ZU5EWHVRektNVVlXUFpfV29tNmlPcHZtVXQzOF9Oa055ZEloY3p6UEpvMTAtNWtHekV1MTVUbzNnZVhqU25aZjQ2aW1UZDB4aktQdjI0MGlZRnZueUN4eGRJWEdreWJXdF9fMTNhTVNOVTdKQ1JKQQ?oc=5",
-      "source": "Reuters",
+      "source": "reuters.com",
       "category": "gold / macro",
       "published_at": "2026-09-14T03:48:00+00:00",
-      "age": "22h ago"
+      "age": "23h ago"
     },
     {
       "title": "Jefferson, Navigating Economic Shocks: A Monetary Policymaker’s Perspective",
@@ -105,17 +105,17 @@
       "age": "60d ago"
     },
     {
-      "title": "‘Buckle Up’—Bitcoin Is Suddenly Braced For An ‘Extraordinary’ Fed Price Earthquake - Forbes",
-      "link": "https://news.google.com/rss/articles/CBMiugFBVV95cUxOR3RROEdvZnMwYmcyZjJvTUM3X1pEcl9kYmFHOThjRjl1Rk1zUXZVZWRTVDBIVkJfYnBNQi1iRFRzb3Q5QzVUbHF4ZXpuR0xsekg5NFJzSUozdmc2NDhtZ3IwWG04VjFkdnJSdktSd3RTVEVHMGYwaXAzN1U5Nkl5S3hudGRmOTlRcEl5b3JaM2JpS1FEVlpXcEF6Q09DQldKY2g1Y1d4aFhnZExNTEJYcU5XNWQyWmVSbUE?oc=5",
-      "source": "Forbes",
+      "title": "Has the Bitcoin Rally Fizzled Out? - WSJ",
+      "link": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxOcTNWeEpyNUF1d0FaTG1rNFk0NlVmQ1F5QWExRk9yc21BWTBPb0xGSU0wdkEzZnhsSTdOS0cwNGVCZUstOFBKblR3RTU4clJmSFZWaG05akRYRGhuMmNhMzg3bE5zRTAtYTVZOGFPeE56TzU3MEVzTEVvdDVUQlJwXzNfX0pkXzBn?oc=5",
+      "source": "WSJ",
       "category": "bitcoin / crypto",
-      "published_at": "2026-09-14T14:09:00+00:00",
-      "age": "12h ago"
+      "published_at": "2026-09-14T14:12:00+00:00",
+      "age": "13h ago"
     },
     {
-      "title": "Gold rises on dip-buying even as Fed rate hike bets rise after US inflation data - Reuters",
+      "title": "Gold rises on dip-buying even as Fed rate hike bets rise after US inflation data - reuters.com",
       "link": "https://news.google.com/rss/articles/CBMiogFBVV95cUxOMk9xQnh0dkJvU0VUbjhfa0E5ZHhmb21sU1k4RWktNC0tdERMUlFyb05jamhUa0p0dUEwejVJbHlUaWp6VnZuUEJrc0ZmYzBMM1RwaUp0SUdWWXBiU2pRVUF4ZlRsQk1fVmY2MUlTcTFFV3RjSnQzSE5UUHdKWHJYcV9YaUVmZ01PVnVUWHI0MzU4dnJja25CTmpxc3N4STVOb1E?oc=5",
-      "source": "Reuters",
+      "source": "reuters.com",
       "category": "gold / macro",
       "published_at": "2026-09-11T23:53:51+00:00",
       "age": "3d ago"
@@ -129,12 +129,12 @@
       "age": "61d ago"
     },
     {
-      "title": "Live updates: Bitcoin climbs near $79,000 as stocks narrow declines",
-      "link": "https://www.coindesk.com/tech/2026/09/14/live-updates-bitcoin-manages-small-gains-as-stocks-drop-on-ai-concern-oil-surges",
-      "source": "Bitcoin Coindesk",
+      "title": "‘Buckle Up’—Bitcoin Is Suddenly Braced For An ‘Extraordinary’ Fed Price Earthquake - Forbes",
+      "link": "https://news.google.com/rss/articles/CBMiugFBVV95cUxOR3RROEdvZnMwYmcyZjJvTUM3X1pEcl9kYmFHOThjRjl1Rk1zUXZVZWRTVDBIVkJfYnBNQi1iRFRzb3Q5QzVUbHF4ZXpuR0xsekg5NFJzSUozdmc2NDhtZ3IwWG04VjFkdnJSdktSd3RTVEVHMGYwaXAzN1U5Nkl5S3hudGRmOTlRcEl5b3JaM2JpS1FEVlpXcEF6Q09DQldKY2g1Y1d4aFhnZExNTEJYcU5XNWQyWmVSbUE?oc=5",
+      "source": "Forbes",
       "category": "bitcoin / crypto",
-      "published_at": "2026-09-14T11:44:21+00:00",
-      "age": "14h ago"
+      "published_at": "2026-09-14T14:09:00+00:00",
+      "age": "13h ago"
     }
   ],
   "feed_errors": [],
