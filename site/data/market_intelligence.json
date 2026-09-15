@@ -1,7 +1,7 @@
 {
   "version": "1.6",
   "status": "active",
-  "updated_at": "2026-09-15T07:34:39.928131+00:00",
+  "updated_at": "2026-09-15T08:35:42.874783+00:00",
   "scope": [
     "XAUUSD",
     "BTCUSD",
@@ -9,12 +9,12 @@
   ],
   "items": [
     {
-      "title": "Live updates: Bitcoin slides from nearly $80,000 as Senate votes on Clarity Act",
-      "link": "https://www.coindesk.com/business/2026/09/15/live-updates-bitcoin-slides-from-nearly-usd80-000-as-senate-votes-on-clarity-act",
-      "source": "Bitcoin Coindesk",
+      "title": "Bitcoin Rally Stalls as Optimism About US Crypto Bill Wanes - Bloomberg.com",
+      "link": "https://news.google.com/rss/articles/CBMirwFBVV95cUxNUmZMSzVFeWhfc1M5dnJnVkh0dlhqNTRUbFVvOUZCQzItb1lyOThLMFhOc0VISkpGUm0xQTZvWk1OOXZjYzlxQy0xV2ZfNHNQcUhsVGM5YjlNV3dDVUwyaV9SX3dwU3hRVWpmQm5hbThtWXkzb2h1LXU0V1pqYllwQzZEYkkxR0F0YVZoQVQ2aFBxTGRibnhHQmJPV0VrSGd6NS1xQXp5VUpUdnVXSUdB?oc=5",
+      "source": "Bloomberg.com",
       "category": "bitcoin / crypto",
-      "published_at": "2026-09-15T06:37:24+00:00",
-      "age": "57m ago"
+      "published_at": "2026-09-15T07:03:18+00:00",
+      "age": "1h ago"
     },
     {
       "title": "Gold holds ground as investors await Fed policy cues - Reuters",
@@ -22,7 +22,7 @@
       "source": "Reuters",
       "category": "gold / macro",
       "published_at": "2026-09-15T05:29:00+00:00",
-      "age": "2h ago"
+      "age": "3h ago"
     },
     {
       "title": "Waller, The Economic Outlook and Some Comments on My Policy Communication",
@@ -33,11 +33,11 @@
       "age": "11d ago"
     },
     {
-      "title": "Ethiopia Cuts Bitcoin Miners’ Power Supply as El Niño Hurts Dams - Bloomberg.com",
-      "link": "https://news.google.com/rss/articles/CBMivwFBVV95cUxQWDRKMXhITjNtbzZnUWhyWEVycmNJcHlEbmRGaWxydmttVTFQOXBxeS16VGJOR21GSktVdHY5akYwdHRTWUM3bnhVRTk5dVhoek8zaTBuTDQwZXQxVlIxY3Jkb0hvNTFmVllxWTlVcmxKTjZhakdKamdZVDJWMllWY1BMajhSRWJTV3VBaFRvR1d6alRMREJ3MUZ1LUJLeXAwY19MMTAwbEc3M01GaXlBb3ZTZFhqTVptRXVlNTcwaw?oc=5",
-      "source": "Bloomberg.com",
+      "title": "Live updates: Bitcoin slides from nearly $80,000 as Senate votes on Clarity Act",
+      "link": "https://www.coindesk.com/business/2026/09/15/live-updates-bitcoin-slides-from-nearly-usd80-000-as-senate-votes-on-clarity-act",
+      "source": "Bitcoin Coindesk",
       "category": "bitcoin / crypto",
-      "published_at": "2026-09-15T05:50:50+00:00",
+      "published_at": "2026-09-15T06:37:24+00:00",
       "age": "1h ago"
     },
     {
@@ -46,7 +46,7 @@
       "source": "アラブニュース",
       "category": "gold / macro",
       "published_at": "2026-09-15T04:23:44+00:00",
-      "age": "3h ago"
+      "age": "4h ago"
     },
     {
       "title": "Minutes of the Federal Open Market Committee, July 28–29, 2026",
@@ -57,12 +57,12 @@
       "age": "26d ago"
     },
     {
-      "title": "Bitcoin Rally Stalls as Optimism About US Crypto Bill Wanes - Bloomberg.com",
-      "link": "https://news.google.com/rss/articles/CBMirwFBVV95cUxNUmZMSzVFeWhfc1M5dnJnVkh0dlhqNTRUbFVvOUZCQzItb1lyOThLMFhOc0VISkpGUm0xQTZvWk1OOXZjYzlxQy0xV2ZfNHNQcUhsVGM5YjlNV3dDVUwyaV9SX3dwU3hRVWpmQm5hbThtWXkzb2h1LXU0V1pqYllwQzZEYkkxR0F0YVZoQVQ2aFBxTGRibnhHQmJPV0VrSGd6NS1xQXp5VUpUdnVXSUdB?oc=5",
+      "title": "Ethiopia Cuts Bitcoin Miners’ Power Supply as El Niño Hurts Dams - Bloomberg.com",
+      "link": "https://news.google.com/rss/articles/CBMivwFBVV95cUxQWDRKMXhITjNtbzZnUWhyWEVycmNJcHlEbmRGaWxydmttVTFQOXBxeS16VGJOR21GSktVdHY5akYwdHRTWUM3bnhVRTk5dVhoek8zaTBuTDQwZXQxVlIxY3Jkb0hvNTFmVllxWTlVcmxKTjZhakdKamdZVDJWMllWY1BMajhSRWJTV3VBaFRvR1d6alRMREJ3MUZ1LUJLeXAwY19MMTAwbEc3M01GaXlBb3ZTZFhqTVptRXVlNTcwaw?oc=5",
       "source": "Bloomberg.com",
       "category": "bitcoin / crypto",
-      "published_at": "2026-09-15T04:32:00+00:00",
-      "age": "3h ago"
+      "published_at": "2026-09-15T05:50:50+00:00",
+      "age": "2h ago"
     },
     {
       "title": "Gold faces rising yield threat as 10-year Treasury approaches 5%, but debasement demand provides support - KITCO",
@@ -70,7 +70,7 @@
       "source": "KITCO",
       "category": "gold / macro",
       "published_at": "2026-09-14T19:15:14+00:00",
-      "age": "12h ago"
+      "age": "13h ago"
     },
     {
       "title": "Federal Reserve issues FOMC statement",
@@ -86,7 +86,7 @@
       "source": "CoinDesk",
       "category": "bitcoin / crypto",
       "published_at": "2026-09-15T03:23:28+00:00",
-      "age": "4h ago"
+      "age": "5h ago"
     },
     {
       "title": "What a Fed rate hike could mean for gold and silver prices - CBS News",
@@ -94,7 +94,7 @@
       "source": "CBS News",
       "category": "gold / macro",
       "published_at": "2026-09-14T17:07:02+00:00",
-      "age": "14h ago"
+      "age": "15h ago"
     },
     {
       "title": "Jefferson, Navigating Economic Shocks: A Monetary Policymaker’s Perspective",
@@ -110,7 +110,7 @@
       "source": "Bitcoin Coindesk",
       "category": "bitcoin / crypto",
       "published_at": "2026-09-15T03:23:28+00:00",
-      "age": "4h ago"
+      "age": "5h ago"
     },
     {
       "title": "Gold prices today, Monday, September 14, 2026: Gold sinks following new attacks on Saudi pipeline and more - Yahoo Finance",
@@ -118,7 +118,7 @@
       "source": "Yahoo Finance",
       "category": "gold / macro",
       "published_at": "2026-09-14T11:18:25+00:00",
-      "age": "20h ago"
+      "age": "21h ago"
     },
     {
       "title": "Cook, Economic Outlook",
@@ -134,7 +134,7 @@
       "source": "Reuters",
       "category": "bitcoin / crypto",
       "published_at": "2026-09-14T15:45:30+00:00",
-      "age": "15h ago"
+      "age": "16h ago"
     }
   ],
   "feed_errors": [],
