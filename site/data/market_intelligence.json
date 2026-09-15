@@ -1,7 +1,7 @@
 {
   "version": "1.6",
   "status": "active",
-  "updated_at": "2026-09-15T17:29:51.463460+00:00",
+  "updated_at": "2026-09-15T18:33:45.215991+00:00",
   "scope": [
     "XAUUSD",
     "BTCUSD",
@@ -14,15 +14,15 @@
       "source": "CoinShares",
       "category": "bitcoin / crypto",
       "published_at": "2026-09-15T16:14:33+00:00",
-      "age": "1h ago"
+      "age": "2h ago"
     },
     {
-      "title": "Gold price struggling to catch a bid as New York Fed's Empire State survey drops to 7.6 - KITCO",
-      "link": "https://news.google.com/rss/articles/CBMivAFBVV95cUxPbUFhZ0N3N0ZBRkpLVlJSdVhyeFMyQWFka05zQUNRM0R3Y2h0T1JZWnVWWElPbW92c29iWm9fYm93NFZRMHpDbmlSU3ltd2ZKaERFbWNwWU5lSTc5S0tWWUdWbUNIcUdLM3o3b25LOUxtbUlkdnVUZmJ2aUhCWGx5blByNllna3N2TXBGS0ZsSVo3UXFtbFFPcnp4ZGxtWkh1YkJaWThwdE9XOUFrSjFEMVpnd3BJTHBCa2N4Qg?oc=5",
-      "source": "KITCO",
+      "title": "Opinion: Gold is starting to move on something a lot bigger than inflation - marketwatch.com",
+      "link": "https://news.google.com/rss/articles/CBMirAFBVV95cUxQMmQ5ZTVvWFhsel91LWphV3hPRHVmR0huV3QxVnhtYWNkdjVTdWw3cDAzQzJFenRFd1dKMHNZMlBUdGxCcWFsSHRnLTJ4c09tcmZYckVJWnIxLXRzZnNBQ2JsN2g1TDVKaGdJUU5CUVZ0QWtDdVhrX3hSRTdUZW9HaGFEcUFhVEZ0ZlNMSVl5eWVQclg5VzM0eFlYa3BYamtiSWNHbUlQT1p3YWhW?oc=5",
+      "source": "marketwatch.com",
       "category": "gold / macro",
-      "published_at": "2026-09-15T16:07:30+00:00",
-      "age": "1h ago"
+      "published_at": "2026-09-15T16:21:00+00:00",
+      "age": "2h ago"
     },
     {
       "title": "Waller, The Economic Outlook and Some Comments on My Policy Communication",
@@ -38,7 +38,7 @@
       "source": "Yahoo Finance",
       "category": "bitcoin / crypto",
       "published_at": "2026-09-15T15:31:54+00:00",
-      "age": "1h ago"
+      "age": "3h ago"
     },
     {
       "title": "The price of gold today, Sept. 15, 2026 — and the best places to buy - CNBC",
@@ -46,7 +46,7 @@
       "source": "CNBC",
       "category": "gold / macro",
       "published_at": "2026-09-15T14:05:51+00:00",
-      "age": "3h ago"
+      "age": "4h ago"
     },
     {
       "title": "Minutes of the Federal Open Market Committee, July 28–29, 2026",
@@ -54,15 +54,15 @@
       "source": "Fed Press All",
       "category": "fed / macro",
       "published_at": "2026-08-19T18:00:00+00:00",
-      "age": "26d ago"
+      "age": "27d ago"
     },
     {
-      "title": "Bitcoin tumbles 3% to $76,000 as hopes of CLARITY Act passage this year fade - Yahoo Finance",
-      "link": "https://news.google.com/rss/articles/CBMiygFBVV95cUxQRjBvR3VucDJlZ1JiVktNTGdoNVMzSVVwbUZxZFdhTHRYZk45M2JoVF9QOEhyWkNWb3JMRUtWbHlFYXlmeU5BLVNza1FjbktLZFZneDlidGlIS0Z3RVk0ZkhLWHotNnBOaXl0LW1DVUVCX20xcEtGR2N6R1BTN2gzcncxd213NktYSHFNNTVNV3RXMFZSbWlvYVd2ay1fX2hEM1p0d0RIMnNkVnhoMjNSQWwzMGtqZ0hRQkZ1elBwTTJYajdqR3JFdGFR?oc=5",
-      "source": "Yahoo Finance",
+      "title": "Current price of Bitcoin for Sept. 15, 2026 - Fortune",
+      "link": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE9GYi10RWVRejA1MTJXa1BObC01ck1iNC00YkwwaWtMSXdUdnkxZVpZY0I0ZE83czItSkllYkFvQ1hyY1pLa2JLcFdXRlpXS0JDNVBQdnBHU21PdFZfcW1aNWI2M25NSDQ?oc=5",
+      "source": "Fortune",
       "category": "bitcoin / crypto",
-      "published_at": "2026-09-15T15:31:27+00:00",
-      "age": "1h ago"
+      "published_at": "2026-09-15T15:31:43+00:00",
+      "age": "3h ago"
     },
     {
       "title": "Gold Sub-$4300 as Western Bond Yields Soar, China Builds Bullion Reserves - BullionVault",
@@ -70,7 +70,7 @@
       "source": "BullionVault",
       "category": "gold / macro",
       "published_at": "2026-09-15T13:51:56+00:00",
-      "age": "3h ago"
+      "age": "4h ago"
     },
     {
       "title": "Federal Reserve issues FOMC statement",
@@ -78,15 +78,15 @@
       "source": "Fed Press All",
       "category": "fed / macro",
       "published_at": "2026-07-29T18:00:00+00:00",
-      "age": "47d ago"
+      "age": "48d ago"
     },
     {
-      "title": "Bitcoin Falls Ahead of Clarity Act Vote. Why Cathie Wood’s Dumping Crypto Stocks. - Barron's",
-      "link": "https://news.google.com/rss/articles/CBMijwFBVV95cUxPcVQ0SVUyMkxrN3R6RXh3MEFDN3dWQlQ2YmN6aE9RdWRmalhjMExjRGNKM1pfbzhKT1JJOVYyQ1R2RnlxMEdseGlsUGxfLXdGUFlBSkJkS0U1WVpaMlhLcTZ1ZnZTUngwS0xnY3dZY2QzeUJxYlQxNHZoM3ZjUFMzbTNzcDVrekRYRWlvcU5UVQ?oc=5",
-      "source": "Barron's",
+      "title": "Bitcoin tumbles 3% to $76,000 as hopes of CLARITY Act passage this year fade - Yahoo Finance",
+      "link": "https://news.google.com/rss/articles/CBMiygFBVV95cUxQRjBvR3VucDJlZ1JiVktNTGdoNVMzSVVwbUZxZFdhTHRYZk45M2JoVF9QOEhyWkNWb3JMRUtWbHlFYXlmeU5BLVNza1FjbktLZFZneDlidGlIS0Z3RVk0ZkhLWHotNnBOaXl0LW1DVUVCX20xcEtGR2N6R1BTN2gzcncxd213NktYSHFNNTVNV3RXMFZSbWlvYVd2ay1fX2hEM1p0d0RIMnNkVnhoMjNSQWwzMGtqZ0hRQkZ1elBwTTJYajdqR3JFdGFR?oc=5",
+      "source": "Yahoo Finance",
       "category": "bitcoin / crypto",
-      "published_at": "2026-09-15T15:29:00+00:00",
-      "age": "2h ago"
+      "published_at": "2026-09-15T15:31:27+00:00",
+      "age": "3h ago"
     },
     {
       "title": "Current price of gold as of September 15, 2026 - Fortune",
@@ -94,7 +94,7 @@
       "source": "Fortune",
       "category": "gold / macro",
       "published_at": "2026-09-15T12:53:00+00:00",
-      "age": "4h ago"
+      "age": "5h ago"
     },
     {
       "title": "Jefferson, Navigating Economic Shocks: A Monetary Policymaker’s Perspective",
@@ -105,20 +105,20 @@
       "age": "60d ago"
     },
     {
-      "title": "Bitcoin on Fire: Frenzy Intensifies as $6.8 Billion Floods Into Crypto ETFs in Just 6 Weeks - Yahoo Finance",
-      "link": "https://news.google.com/rss/articles/CBMinwFBVV95cUxQRE9ENmpieGxfSGtObXYtUjJ6OUlucFdlNFc2eDRYTFNlUVNpZHoyUWVMVnFhMzk2aVlCUmhIdEYydEt3NWk0eHozdmtNU0NHWkJWak50VFhKRU5uTUlDSnVUZk5UTVVoUXFqMXhZdThHdnNZT0piWVNXYVRLdFBuZE9pUlZZZ2VOOU5DenVkMjExRkRfVWEyMVYzX0ROOUk?oc=5",
-      "source": "Yahoo Finance",
+      "title": "Bitcoin Falls Ahead of Clarity Act Vote. Why Cathie Wood’s Dumping Crypto Stocks. - Barron's",
+      "link": "https://news.google.com/rss/articles/CBMijwFBVV95cUxPcVQ0SVUyMkxrN3R6RXh3MEFDN3dWQlQ2YmN6aE9RdWRmalhjMExjRGNKM1pfbzhKT1JJOVYyQ1R2RnlxMEdseGlsUGxfLXdGUFlBSkJkS0U1WVpaMlhLcTZ1ZnZTUngwS0xnY3dZY2QzeUJxYlQxNHZoM3ZjUFMzbTNzcDVrekRYRWlvcU5UVQ?oc=5",
+      "source": "Barron's",
       "category": "bitcoin / crypto",
-      "published_at": "2026-09-15T15:26:37+00:00",
-      "age": "2h ago"
+      "published_at": "2026-09-15T15:29:00+00:00",
+      "age": "3h ago"
     },
     {
-      "title": "Gold prices today, Tuesday, September 15, 2026: Gold sees lowest open in weeks as Treasury yields keep rising - Yahoo Finance",
-      "link": "https://news.google.com/rss/articles/CBMijgJBVV95cUxNcFRMajdvMUE5SFhrZTRHa0k3NDhqRE1iLXk5WFFyRWtJRnpJVk16eEp6Vmgtd0RNOEVtV2l5UlVnT3dkOXFlTnItQmZ0b1JTMkMzcExBWnZxNVlVYzBiSGREN3NvTUlsUnh4bzJCcWh4aWEtUE5FQU9wNy1ELTZvQk1PX2ctNXEwOGZRVlZsVThjTjhoSXlDbzh0dUJvTTh1eVVVRFQ1MzY3QW45REVZMENlc0NBV290SlJRMWx6OVpoSXA4QWZaSXVDaEFMV3JtV3hlZFE5MHRhVnNFbkpZUGF0X2VvUXFiZ2NwTVNBeU5FOEhzZUJXVllvd3dHRnJHRjlRYUxBX3lwMlAxZEE?oc=5",
-      "source": "Yahoo Finance",
+      "title": "Gold edges down as oil-driven inflation fears lift rate-hike bets - Reuters",
+      "link": "https://news.google.com/rss/articles/CBMingFBVV95cUxNVUtaVGZLb1VLWXI1QlhvSGNHeThxbkxfa3NIdk1SZFA3LWZta2JmdnBUTEtKV0dUSGg4OGVQSHYyV0w5RGY1QXEwaG02OVVoVlJmRG9xc3VwQ2RZSFh2V25neWVqS01jVm9pTFg0U29TcXdueHBXbnRuTmRuOFA0TzlyNEppVUJldE9KVFE4c3FlS04zRXRsaXNCQWhqQQ?oc=5",
+      "source": "Reuters",
       "category": "gold / macro",
-      "published_at": "2026-09-15T11:14:54+00:00",
-      "age": "6h ago"
+      "published_at": "2026-09-15T05:29:00+00:00",
+      "age": "13h ago"
     },
     {
       "title": "Cook, Economic Outlook",
@@ -129,12 +129,12 @@
       "age": "62d ago"
     },
     {
-      "title": "Bitcoin Rally Stalls as Optimism About US Crypto Bill Wanes - Bloomberg.com",
-      "link": "https://news.google.com/rss/articles/CBMirwFBVV95cUxNUmZMSzVFeWhfc1M5dnJnVkh0dlhqNTRUbFVvOUZCQzItb1lyOThLMFhOc0VISkpGUm0xQTZvWk1OOXZjYzlxQy0xV2ZfNHNQcUhsVGM5YjlNV3dDVUwyaV9SX3dwU3hRVWpmQm5hbThtWXkzb2h1LXU0V1pqYllwQzZEYkkxR0F0YVZoQVQ2aFBxTGRibnhHQmJPV0VrSGd6NS1xQXp5VUpUdnVXSUdB?oc=5",
-      "source": "Bloomberg.com",
+      "title": "Bitcoin on Fire: Frenzy Intensifies as $6.8 Billion Floods Into Crypto ETFs in Just 6 Weeks - Yahoo Finance",
+      "link": "https://news.google.com/rss/articles/CBMinwFBVV95cUxQRE9ENmpieGxfSGtObXYtUjJ6OUlucFdlNFc2eDRYTFNlUVNpZHoyUWVMVnFhMzk2aVlCUmhIdEYydEt3NWk0eHozdmtNU0NHWkJWak50VFhKRU5uTUlDSnVUZk5UTVVoUXFqMXhZdThHdnNZT0piWVNXYVRLdFBuZE9pUlZZZ2VOOU5DenVkMjExRkRfVWEyMVYzX0ROOUk?oc=5",
+      "source": "Yahoo Finance",
       "category": "bitcoin / crypto",
-      "published_at": "2026-09-15T15:23:42+00:00",
-      "age": "2h ago"
+      "published_at": "2026-09-15T15:26:37+00:00",
+      "age": "3h ago"
     }
   ],
   "feed_errors": [],
