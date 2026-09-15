@@ -12,7 +12,7 @@
     "rates_fx"
   ],
   "context_intelligence_status": "signals_detected",
-  "context_signal_count": 85,
+  "context_signal_count": 86,
   "explicit_restriction_signal_count": 4,
   "freedom_status": "review_required",
   "information_scope": "unbounded_relevant",
