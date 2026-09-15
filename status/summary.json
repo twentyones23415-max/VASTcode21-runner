@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-15T15:28:39.097894+00:00",
+  "updated_at": "2026-09-15T18:30:27.539629+00:00",
   "scope": [
     "GOLD",
     "BITCOIN"
@@ -7,23 +7,24 @@
   "live_trading": false,
   "paid_services": false,
   "mode": "persistent_evolution_mt5_handoff",
-  "experiments": 288,
-  "cloud_pass": 2,
-  "rejected": 274,
-  "pending_mt5_validation": 2,
+  "experiments": 300,
+  "cloud_pass": 6,
+  "rejected": 282,
+  "pending_mt5_validation": 6,
   "mt5_validation_passed": 1,
   "mt5_validation_rejected": 11,
   "max_generation": 7,
   "origins": {
-    "mutation": 138,
-    "exploration": 97,
-    "crossover": 41,
+    "mutation": 141,
+    "exploration": 101,
+    "crossover": 46,
     "legacy": 12
   },
   "best_score": 0.8137,
   "best_cloud_pass_score": 0.8137,
   "best_mt5_pass_score": 0.8066,
   "pending_mt5_by_asset": {
-    "GOLD": 2
+    "BITCOIN": 1,
+    "GOLD": 5
   }
 }
