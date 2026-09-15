@@ -1,15 +1,15 @@
 {
-  "generated_at": "2026-09-14T18:38:37.929016+00:00",
+  "generated_at": "2026-09-15T00:41:44.555007+00:00",
   "mode": "zero_to_ten_rescue",
   "followers_count": 0,
   "growth_goal_followers": 100,
   "paid_ads": false,
   "live_trading": false,
   "source_status": {
-    "experiments": 204,
-    "generation": 5,
+    "experiments": 228,
+    "generation": 6,
     "mt5_validation_passed": 1,
-    "mt5_validation_rejected": 7,
+    "mt5_validation_rejected": 9,
     "robustness_passed": 1,
     "forward_collecting": 1,
     "forward_passed": 0,
@@ -20,7 +20,7 @@
   },
   "items": [
     {
-      "id": "event-risk-20260914",
+      "id": "event-risk-20260915",
       "pillar": "market_risk",
       "hook": "FOMC Wednesday 21:00: 3 things to check before XAUUSD or BTCUSD moves.",
       "caption": "FOMC decision: Wednesday 16 Sep at 21:00 local time; press conference follows at 21:30. For XAUUSD and BTCUSD, watch three things instead of guessing direction: 1) spread/liquidity conditions around the release, 2) the first reaction versus the reaction after the statement is digested, and 3) whether the press conference changes the market's interpretation. This is event-risk context, not a trade call. Verify the Federal Reserve schedule before acting.",
@@ -51,12 +51,12 @@
       "growth_hypothesis": "timely_saveable_search_intent_reel"
     },
     {
-      "id": "growth-20260914",
-      "pillar": "build_in_public",
-      "hook": "We are building VASTcode21 from zero—in public.",
-      "caption": "Current state: 204 experiments, generation 5, 1 MT5 pass result(s), 7 MT5 reject result(s). We will publish the process, including failures, without turning a backtest into a profit promise.",
-      "creative_brief": "9:16 build-in-public Reel: ZERO → TEST → REJECT → IMPROVE. Large numeric counters.",
-      "format": "reel",
+      "id": "growth-20260915",
+      "pillar": "education",
+      "hook": "3 reasons an MT5 strategy can fail after a good backtest.",
+      "caption": "1) execution assumptions were too clean, 2) the market regime changed, 3) the strategy was overfit to historical noise. Robustness and forward observation exist to expose exactly this.",
+      "creative_brief": "Three-slide carousel: EXECUTION / REGIME / OVERFIT. End with a save CTA.",
+      "format": "carousel",
       "platforms": [
         "Instagram"
       ],
@@ -64,19 +64,14 @@
       "status": "ready_for_design",
       "hashtags": [
         "#VASTcode21",
-        "#Bitcoin",
-        "#MetaTrader5",
-        "#QuantTrading",
-        "#SystematicTrading",
-        "#TradingResearch"
+        "#GoldTrading",
+        "#BTCUSD",
+        "#MT5Trading",
+        "#TradingSystems",
+        "#RiskManagement"
       ],
-      "cta": "Save this and follow @vast.code21 for practical MT5, GOLD and BITCOIN research.",
-      "disclaimer": "Trading involves risk. Historical or backtested results do not guarantee future performance.",
-      "reel_script": [
-        "BUILDING FROM ZERO",
-        "204 EXPERIMENTS\nGEN 5",
-        "FOLLOW THE BUILD\nNOT THE HYPE"
-      ]
+      "cta": "Follow @vast.code21 for the next validation result, market-risk alert and MT5 lesson.",
+      "disclaimer": "Trading involves risk. Historical or backtested results do not guarantee future performance."
     },
     {
       "id": "evergreen-validation-stack",
