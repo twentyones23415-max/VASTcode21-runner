@@ -1,15 +1,15 @@
 {
-  "generated_at": "2026-09-15T06:41:43.141918+00:00",
+  "generated_at": "2026-09-15T18:35:58.809408+00:00",
   "mode": "zero_to_ten_rescue",
   "followers_count": 0,
   "growth_goal_followers": 100,
   "paid_ads": false,
   "live_trading": false,
   "source_status": {
-    "experiments": 252,
+    "experiments": 300,
     "generation": 7,
     "mt5_validation_passed": 1,
-    "mt5_validation_rejected": 9,
+    "mt5_validation_rejected": 11,
     "robustness_passed": 1,
     "forward_collecting": 1,
     "forward_passed": 0,
