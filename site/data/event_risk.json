@@ -1,7 +1,7 @@
 {
   "version": "1.2",
   "status": "active",
-  "updated_at": "2026-09-15T15:32:00.990217+00:00",
+  "updated_at": "2026-09-15T16:33:19.263130+00:00",
   "horizon_days": 14,
   "sources": [
     "U.S. Bureau of Labor Statistics",
@@ -23,9 +23,9 @@
       "XAUUSD",
       "BTCUSD"
     ],
-    "minutes_from_now": 1257,
+    "minutes_from_now": 1196,
     "risk_state": "WATCH",
-    "countdown": "20h 57m"
+    "countdown": "19h 56m"
   },
   "events": [
     {
@@ -39,9 +39,9 @@
         "XAUUSD",
         "BTCUSD"
       ],
-      "minutes_from_now": 1257,
+      "minutes_from_now": 1196,
       "risk_state": "WATCH",
-      "countdown": "20h 57m"
+      "countdown": "19h 56m"
     },
     {
       "title": "FOMC Meeting",
@@ -54,9 +54,9 @@
         "XAUUSD",
         "BTCUSD"
       ],
-      "minutes_from_now": 1587,
+      "minutes_from_now": 1526,
       "risk_state": "SCHEDULED",
-      "countdown": "1d 2h"
+      "countdown": "1d 1h"
     },
     {
       "title": "FOMC Press Conference",
@@ -69,9 +69,9 @@
         "XAUUSD",
         "BTCUSD"
       ],
-      "minutes_from_now": 1617,
+      "minutes_from_now": 1556,
       "risk_state": "SCHEDULED",
-      "countdown": "1d 2h"
+      "countdown": "1d 1h"
     },
     {
       "title": "Speech - Vice Chair for Supervision Michelle W. Bowman",
@@ -84,9 +84,9 @@
         "XAUUSD",
         "BTCUSD"
       ],
-      "minutes_from_now": 4197,
+      "minutes_from_now": 4136,
       "risk_state": "SCHEDULED",
-      "countdown": "2d 21h"
+      "countdown": "2d 20h"
     },
     {
       "title": "Job Openings and Labor Turnover Survey for August 2026",
@@ -99,9 +99,9 @@
         "XAUUSD",
         "BTCUSD"
       ],
-      "minutes_from_now": 20067,
+      "minutes_from_now": 20006,
       "risk_state": "SCHEDULED",
-      "countdown": "13d 22h"
+      "countdown": "13d 21h"
     }
   ],
   "source_errors": [],
