@@ -6,12 +6,12 @@
   "information_scope": "unbounded_relevant",
   "live_trading": false,
   "mode": "persistent_zero_cost_context_intelligence",
-  "news_rows_persistent": 2284,
+  "news_rows_persistent": 2374,
   "observation_rows_persistent": 30002,
   "paid_data": false,
   "paid_services": false,
   "private_context_history": true,
-  "rows_written_this_cycle": 120475,
+  "rows_written_this_cycle": 120438,
   "series_count": 13,
   "source_health": {
     "binance": {
@@ -81,6 +81,6 @@
   "sources_attempted": 21,
   "sources_failed": 1,
   "sources_succeeded": 20,
-  "updated_at": "2026-09-15T21:26:21.979437+00:00",
+  "updated_at": "2026-09-16T00:34:36.994511+00:00",
   "version": "1.2.1"
 }
